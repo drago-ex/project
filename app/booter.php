@@ -4,7 +4,7 @@
  * This file is part of the Drago Framework
  * Copyright (c) 2015, Zdeněk Papučík
  */
-if (@!include __DIR__ . '/vendor/autoload.php') {
+if (@!include __DIR__ . '/../vendor/autoload.php') {
 	die('Use the Composer.');
 }
 
@@ -12,10 +12,10 @@ if (@!include __DIR__ . '/vendor/autoload.php') {
 $app = new Drago\Configurator();
 
 // Enable debagger bar.
-$app->enableDebugger(__DIR__ . '/log');
+$app->enableDebugger(__DIR__ . '/../log');
 
 // Temporary directory.
-$app->setTempDirectory(__DIR__ . '/storage');
+$app->setTempDirectory(__DIR__ . '/../storage');
 
 // Enabled autoload classes.
 $app->addAutoload(__DIR__);
