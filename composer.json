@@ -1,0 +1,18 @@
+{
+	"name": "drago-fw/skeleton",
+	"type": "project",
+	"description": "The basic skeleton for applications based on Drago Framework",
+	"license": ["MIT"],
+	"authors": [
+		{
+			"name": "Zdeněk Papučík",
+			"homepage": "https://github.com/accgit"
+		}
+	],
+	"require": {
+		"php": ">=5.6.0",
+		"nette/nette": "~2.3",
+		"drago-fw/drago": "dev-master",
+		"drago-fw/database": "dev-master"
+	}
+}
