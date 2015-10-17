@@ -4,7 +4,9 @@
  * This file is part of the Drago Framework
  * Copyright (c) 2015, Zdeněk Papučík
  */
-require __DIR__ . '/libs/Drago/loader.php';
+if (@!include __DIR__ . '/vendor/autoload.php') {
+	die('Use the Composer.');
+}
 
 // Configure application.
 $app = new Drago\Configurator();
