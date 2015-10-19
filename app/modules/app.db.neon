@@ -6,6 +6,7 @@ extensions:
 # Credentials to the database
 dibi:
 	host:
+	driver: mysql
 	username:
 	password:
 	database:
