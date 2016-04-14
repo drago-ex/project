@@ -22,12 +22,12 @@
 	# RewriteBase /
 
 	# prevents files starting with dot to be viewed by browser
-	RewriteRule /\.|^\. - [F]
+	RewriteRule /\.|^\.(?!well-known/) - [F]
 
 	# front controller
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
+	RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz|map)$ index.php [L]
 </IfModule>
 
 # enable gzip compression
