@@ -3,26 +3,10 @@
 php:
 	date.timezone: Europe/Prague
 
-# parameters for application
-parameters:
-
-	# default translation
-	locale: 'cs'
-
-	# list of available translations
-	locales: 'cs'
-
 # parameters for sessions
 session:
 	expiration: 14 days
 	savePath: '%tempDir%/sessions'
-
-# settings for application
-application:
-
-	# mapping application
-	mapping:
-		*: *\Module\*Presenter
 
 # enable the system container in the debugger bar
 di:
