@@ -15,7 +15,6 @@ $app->setTempDirectory(__DIR__ . '/../storage');
 $app->addAutoload(__DIR__);
 
 // Create DI container from configuration files.
-$app->addFindConfig(__DIR__ . '/modules');
 $app->addConfig(__DIR__ . '/app.neon');
 
 // Run application.
