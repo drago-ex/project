@@ -11,12 +11,6 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
-		"nette/nette": "~2.3"
-	},
-	"require-dev": {
-		"drago-fw/drago": "dev-master",
-		"drago-fw/database": "dev-master",
-		"drago-fw/dirs": "dev-master",
-		"drago-fw/translator": "dev-master"
+		"nette/nette": "^2.4"
 	}
 }
