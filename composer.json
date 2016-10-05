@@ -14,9 +14,9 @@
 		"nette/nette": "~2.4.0"
 	},
 	"require-dev": {		
- -		"drago-fw/drago": "dev-master",		
- -		"drago-fw/database": "dev-master",		
- -		"drago-fw/dirs": "dev-master",		
- -		"drago-fw/translator": "dev-master"		
+		"drago-fw/drago": "dev-master",		
+		"drago-fw/database": "dev-master",		
+		"drago-fw/dirs": "dev-master",		
+		"drago-fw/translator": "dev-master"		
   	}
 }
