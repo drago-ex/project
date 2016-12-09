@@ -1,5 +1,5 @@
 {
-	"name": "drago-fw/skeleton",
+	"name": "drago-ex/skeleton",
 	"type": "project",
 	"description": "The basic skeleton for applications based on Drago",
 	"license": ["MIT"],
