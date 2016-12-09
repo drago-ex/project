@@ -1,7 +1,7 @@
 {
 	"name": "drago-fw/skeleton",
 	"type": "project",
-	"description": "The basic skeleton for applications based on Drago Framework",
+	"description": "The basic skeleton for applications based on Drago",
 	"license": ["MIT"],
 	"authors": [
 		{
