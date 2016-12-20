@@ -14,9 +14,6 @@
 		"nette/nette": "~2.4.0"
 	},
 	"require-dev": {
-		"drago-ex/drago": "dev-master",
-		"drago-ex/database": "dev-master",
-		"drago-ex/dirs": "dev-master",
-		"drago-ex/translator": "dev-master"
+		"drago-ex/drago": "dev-master"
 	}
 }
