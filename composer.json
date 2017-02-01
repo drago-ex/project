@@ -11,9 +11,7 @@
 	],
 	"require": {
 		"php": ">=5.6.0",
-		"nette/nette": "~2.4.0"
-	},
-	"require-dev": {
-		"drago-ex/drago": "dev-master"
+		"nette/nette": "~2.4.0",
+		"drago-ex/drago": "~1.0.0"
 	}
 }
