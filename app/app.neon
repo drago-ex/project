@@ -1,13 +1,13 @@
 
-# settings for php
+# Settings for php.
 php:
 	date.timezone: Europe/Prague
 
-# parameters for sessions
+# Parameters for sessions.
 session:
 	expiration: 14 days
 	savePath: '%tempDir%/sessions'
 
-# enable the system container in the debugger bar
+# Enable the system container in the debugger bar.
 di:
 	debugger: yes
