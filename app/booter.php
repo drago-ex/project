@@ -3,7 +3,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 // Configure application.
-$app = new Drago\Configurator();
+$app = new Drago\Configurator;
 
 // Enable debagger bar.
 $app->enableDebugger(__DIR__ . '/../log');
