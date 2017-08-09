@@ -38,19 +38,19 @@
 </IfModule>
 
 # caching files
-#<IfModule mod_expires.c>
-#
-#	# setting expiration
-#	ExpiresActive On
-#	ExpiresDefault A600
-#
-#	# expiration files
-#	ExpiresByType text/javascript A31536000
-#	ExpiresByType application/javascript A31536000
-#	ExpiresByType text/css A1209600
-#	ExpiresByType image/gif A1209600
-#	ExpiresByType image/png A1209600
-#	ExpiresByType image/jpeg A1209600
-#	ExpiresByType image/x-icon A1209600
-#	ExpiresByType text/html A1
-#</IfModule>
+<IfModule mod_expires.c>
+
+	# setting expiration
+	ExpiresActive On
+	ExpiresDefault A600
+
+	# expiration files
+	ExpiresByType text/javascript A31536000
+	ExpiresByType application/javascript A31536000
+	ExpiresByType text/css A1209600
+	ExpiresByType image/gif A1209600
+	ExpiresByType image/png A1209600
+	ExpiresByType image/jpeg A1209600
+	ExpiresByType image/x-icon A1209600
+	ExpiresByType text/html A1
+</IfModule>
