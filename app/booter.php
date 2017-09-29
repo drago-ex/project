@@ -2,20 +2,23 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// Configure application.
+// Konfigurace aplikace.
 $app = new Drago\Configurator;
 
-// Enable debagger bar.
-$app->enableDebugger(__DIR__ . '/../log');
+// Povolení Tracy nástroje.
+$app->enableTracy(__DIR__ . '/../log');
 
-// Temporary directory.
+// Nastavení časové zóny.
+$app->setTimeZone('Europe/Prague');
+
+// Adresář dočasných souborů.
 $app->setTempDirectory(__DIR__ . '/../storage');
 
-// Enabled autoload classes.
+// Povolení automatického vyhledávání tříd.
 $app->addAutoload(__DIR__);
 
-// Create DI container from configuration files.
+// Vytvoření systémového kontejneru.
 $app->addConfig(__DIR__ . '/app.neon');
 
-// Run application.
+// Spuštění aplikace.
 $app->run();
