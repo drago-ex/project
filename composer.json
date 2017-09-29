@@ -1,7 +1,7 @@
 {
 	"name": "drago-ex/skeleton",
 	"type": "project",
-	"description": "The basic skeleton for applications based on Drago",
+	"description": "Předpřipravený základ pro aplikace.",
 	"license": ["MIT"],
 	"authors": [
 		{
@@ -11,7 +11,6 @@
 	],
 	"require": {
 		"php": ">=7.0.8",
-		"latte/latte": "~2.4.0",
-		"drago-ex/drago": "~1.0.0"
+		"drago-ex/bootstrap": "~1.0.0"
 	}
 }
