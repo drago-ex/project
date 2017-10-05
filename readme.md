@@ -1,3 +1,3 @@
 ## Drago Skeleton
 
-Předpřipravený základ pro aplikace.
+Základ pro aplikace.
