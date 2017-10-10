@@ -1,6 +1,6 @@
 ## Drago Project
 
-Základní konfigurace.
+Základ pro aplikace.
 
 ## Požadavky
 
