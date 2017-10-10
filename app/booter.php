@@ -14,7 +14,7 @@ $app->setTimeZone('Europe/Prague');
 // Adresář dočasných souborů.
 $app->setTempDirectory(__DIR__ . '/../storage');
 
-// Povolení automatického vyhledávání tříd.
+// Automatické vyhledávání tříd.
 $app->addAutoload(__DIR__);
 
 // Vytvoření systémového kontejneru.
