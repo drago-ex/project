@@ -10,5 +10,5 @@ Základ pro aplikace.
 ## Instalace
 
 ```
-composer create-project drago-ex/skeleton
+composer create-project drago-ex/project
 ```
