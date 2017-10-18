@@ -1,13 +1,13 @@
 ## Drago Project
 
-The basis for new projects.
+Základ pro nové projekty.
 
-## Requirements
+## Požadavky
 
-- PHP 7.0.8 or higher
+- PHP 7.0.8 nebo vyšší
 - composer
 
-## Installation
+## Instalace
 
 ```
 composer create-project drago-ex/project

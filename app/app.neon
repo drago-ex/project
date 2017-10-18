@@ -1,9 +1,9 @@
 
-# Nastavení parametrů pro sessions.
+# Parameters for sessions.
 session:
 	expiration: 14 days
 	savePath: '%tempDir%/sessions'
 
-# Povolení systémového kontejneru v Tracy.
+# Enabling the Tracy System Container.
 di:
 	debugger: yes

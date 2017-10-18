@@ -1,7 +1,7 @@
 {
 	"name": "drago-ex/project",
 	"type": "project",
-	"description": "Základ pro aplikace.",
+	"description": "The basis for new projects.",
 	"license": ["MIT"],
 	"authors": [
 		{
