@@ -4,7 +4,7 @@ The basis for new projects.
 
 ## Requirements
 
-- PHP 7.0.8 or higher
+- PHP 7.1 or higher
 - composer
 
 ## Installation

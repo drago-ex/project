@@ -1,9 +1,9 @@
 
-# Parameters for sessions.
+# parameters for sessions
 session:
 	expiration: 14 days
 	savePath: '%tempDir%/sessions'
 
-# Enabling the Tracy System Container.
+# enabling system container for Tracy bar
 di:
 	debugger: yes
