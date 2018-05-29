@@ -16,10 +16,5 @@
 		"tracy/tracy": "^2.4",
 		"drago-ex/bootstrap": "^2.0"
 	},
-	"minimum-stability": "dev",
-	"extra": {
-		"branch-alias": {
-			"dev-master": "2.0.x-dev"
-		}
-	}
+	"minimum-stability": "dev"
 }
