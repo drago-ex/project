@@ -12,9 +12,11 @@
 	"require": {
 		"php": ">=7.1",
 		"nette/robot-loader": "^3.0",
+		"nette/forms": "^3.0",
 		"latte/latte": "^2.5",
 		"tracy/tracy": "^2.6",
-		"drago-ex/bootstrap": "^2.0"
+		"drago-ex/bootstrap": "^2.0",
+		"drago-ex/application": "^2.0"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]
