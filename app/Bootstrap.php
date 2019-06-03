@@ -2,23 +2,15 @@
 
 declare(strict_types = 1);
 
-/**
- * Drago Project
- * Package built on Nette Framework
- */
 namespace App;
 
 use Drago\Configurator;
 
 /**
  * Configure the application.
- * @package App
  */
 class Bootstrap
 {
-	/**
-	 * Setup configuration.
-	 */
 	public static function boot(): Configurator
 	{
 		$app = new Configurator();
@@ -38,7 +30,6 @@ class Bootstrap
 		// Create DI container from configuration files.
 		$app->addFindConfig(__DIR__);
 
-		// Run application.
-		$app->run();
+		return $app;
 	}
 }

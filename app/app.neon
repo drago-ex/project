@@ -1,8 +1,21 @@
 
-# parameters for sessions
+# default parameters
+parameters:
+
+
+# settings for sessions
 session:
 	expiration: 14 days
-	savePath: '%tempDir%/sessions'
+
+
+# settings for application
+application:
+
+
+	# mapping application
+	mapping:
+		*: Module\*\*Presenter
+
 
 # enabling system container for Tracy bar
 di:
