@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="style.min.css">
+    <!-- build:css style.min.css -->
+    <link rel="stylesheet" href="{$basePath}/">
+    <!-- /build -->
 
     <title>Title &bull; {include subtitle|stripHtml|firstUpper}</title>
 </head>
@@ -17,7 +19,9 @@
     {* content block *}
     {include content|indent:1}
 
-    <script src="app.min.js"></script>
+    <!-- build:js app.min.js -->
+    <script src="{$basePath}/"></script>
+    <!-- /build -->
 
 </body>
 </html>

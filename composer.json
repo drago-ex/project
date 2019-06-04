@@ -16,7 +16,8 @@
 		"latte/latte": "^2.5",
 		"tracy/tracy": "^2.6",
 		"drago-ex/bootstrap": "^2.0",
-		"drago-ex/application": "^2.0"
+		"drago-ex/application": "^2.0",
+		"drago-ex/dirs": "^2.0"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]
