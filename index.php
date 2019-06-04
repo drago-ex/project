@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-// Add composer autoload.
+// Composer autoload.
 require __DIR__ . '/vendor/autoload.php';
 
 // Run application.
