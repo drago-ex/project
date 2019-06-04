@@ -4,22 +4,22 @@ module.exports = function (grunt) {
         concat: {
             css: {
                 src: ['node_modules/bootstrap/dist/css/bootstrap.css'],
-                dest: 'assets/combine/css/style.css'
+                dest: 'assets/combined/css/style.css'
             },
             js: {
                 src: ['vendor/nette/forms/src/assets/netteForms.js'],
-                dest: 'assets/combine/js/app.js'
+                dest: 'assets/combined/js/app.js'
             }
         },
         uglify: {
             js: {
-                src: 'assets/combine/js/app.js',
+                src: 'assets/combined/js/app.js',
                 dest: 'www/js/app.min.js'
             }
         },
         cssmin: {
             css: {
-                src: 'assets/combine/css/style.css',
+                src: 'assets/combined/css/style.css',
                 dest: 'www/css/style.min.css'
             }
         },
