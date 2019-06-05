@@ -15,7 +15,7 @@ final class Router
 		$router = new Routers\RouteList;
 		$router
 			->withModule('Web')
-			->addRoute('<presenter>/<action>', 'Web:default');
+			->addRoute('[<lang=cs cs|en>/]<presenter>/<action>', 'Web:default');
 
 		return $router;
 	}

@@ -4,22 +4,13 @@ declare(strict_types = 1);
 
 namespace Module\Web;
 
-use Base;
-use Nette\Application\UI\Presenter;
+use App\FrontPresenter;
 
 /**
  * Class WebPresenter
  * @package Module\Web
  */
-final class WebPresenter extends Presenter
+final class WebPresenter extends FrontPresenter
 {
-	use Base;
 
-	protected function startup(): void
-	{
-		parent::startup();
-		$this->environment->isProduction()
-			? $this->setLayout('layout')
-			: $this->setLayout('dev');
-	}
 }
