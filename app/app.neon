@@ -8,11 +8,11 @@ session:
 	expiration: 14 days
 
 
-# settings for application
+# application settings
 application:
 
 
-	# mapping application
+	# application mapping
 	mapping:
 		*: Module\*\*Presenter
 
@@ -25,5 +25,5 @@ di:
 # application services
 services:
 
-    # Environment in application
-    - App\Environment(%productionMode%)
+	# Environment in application
+	- App\Environment(%productionMode%)
