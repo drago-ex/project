@@ -37,7 +37,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-processhtml');
-    grunt.registerTask('grunt-go', [
+    grunt.registerTask('grunt-run', [
         'concat', 'uglify', 'cssmin', 'processhtml'
     ]);
 };
