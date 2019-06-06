@@ -13,7 +13,10 @@ use Nette\Application\UI\Presenter;
  */
 abstract class BasePresenter extends Presenter
 {
-	/** @var Environment @inject */
+	/**
+	 * @var Environment
+	 * @inject
+	 */
 	public $environment;
 
 
