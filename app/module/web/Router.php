@@ -11,7 +11,7 @@ final class Router
 	use Nette\StaticClass;
 
 
-	public static function create(): Routers\RouteList
+	public static function create(): Nette\Routing\Router
 	{
 		$router = new Routers\RouteList;
 		$router
