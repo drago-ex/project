@@ -22,8 +22,6 @@ di:
 	debugger: yes
 
 
-# application services
-services:
-
-	# Environment in application
-	- App\Environment(%productionMode%)
+# application extension
+extensions:
+	- Drago\Parameters\ParametersExtension

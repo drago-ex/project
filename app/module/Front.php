@@ -9,7 +9,7 @@ use Drago\Localization\Translator;
 
 
 /**
- * Base class for frontend modules.
+ * Base class for frontend module.
  */
 class FrontPresenter extends BasePresenter
 {
@@ -24,7 +24,6 @@ class FrontPresenter extends BasePresenter
 
 		// Translation for Templates.
 		$this->template->setTranslator($this->getTranslator());
-
 	}
 
 
