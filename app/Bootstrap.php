@@ -6,6 +6,7 @@ namespace App;
 
 use Drago\Configurator;
 
+
 /**
  * Configure the application.
  */

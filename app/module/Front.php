@@ -6,27 +6,14 @@ namespace App;
 
 use Drago\Localization\Locale;
 use Drago\Localization\Translator;
-use Nette\Application\UI\Presenter;
+
 
 /**
- * Class BasePresenter
- * @package App
+ * Base class for frontend modules.
  */
-abstract class FrontPresenter extends Presenter
+class FrontPresenter extends BasePresenter
 {
 	use Locale;
-
-	/** @var Environment @inject */
-	public $environment;
-
-
-	protected function startup(): void
-	{
-		parent::startup();
-		$mode = $this->environment->isProduction();
-		$mode ? $this->setLayout('layout') : $this->setLayout('dev');
-	}
-
 
 	protected function beforeRender()
 	{

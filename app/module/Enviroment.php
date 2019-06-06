@@ -6,9 +6,9 @@ namespace App;
 
 use Nette\SmartObject;
 
+
 /**
  * Environment in application.
- * @package App
  */
 class Environment
 {

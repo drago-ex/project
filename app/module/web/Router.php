@@ -5,6 +5,7 @@ namespace Module\Web;
 use Nette;
 use Nette\Application\Routers;
 
+
 final class Router
 {
 	use Nette\StaticClass;
