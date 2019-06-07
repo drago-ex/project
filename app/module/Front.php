@@ -22,7 +22,7 @@ class FrontPresenter extends BasePresenter
 		// The current language parameter.
 		$this->template->lang = $this->lang;
 
-		// Translation for Templates.
+		// Translation for templates.
 		$this->template->setTranslator($this->getTranslator());
 	}
 
