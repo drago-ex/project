@@ -15,7 +15,7 @@ class FrontPresenter extends BasePresenter
 {
 	use Locale;
 
-	protected function beforeRender()
+	protected function beforeRender(): void
 	{
 		parent::beforeRender();
 
