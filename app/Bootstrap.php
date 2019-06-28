@@ -15,6 +15,9 @@ class Bootstrap
 	public static function boot(): Configurator
 	{
 		$app = new Configurator();
+		
+		// Enable debug mode.
+		//$configurator->setDebugMode('127.0.0.1');
 
 		// Enable Tracy tool.
 		$app->enableTracy(__DIR__ . '/../log');
