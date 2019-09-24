@@ -11,6 +11,7 @@ The basis for new projects.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/drago-ex/project/master/license.md)
 [![PHP version](https://badge.fury.io/ph/drago-ex%2Fproject.svg)](https://badge.fury.io/ph/drago-ex%2Fproject)
+[![Build Status](https://travis-ci.org/drago-ex/project.svg?branch=master)](https://travis-ci.org/drago-ex/project)
 [![CodeFactor](https://www.codefactor.io/repository/github/drago-ex/project/badge)](https://www.codefactor.io/repository/github/drago-ex/project)
 
 ## Requirements
