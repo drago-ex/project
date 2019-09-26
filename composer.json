@@ -19,6 +19,6 @@
 		"dg/composer-cleaner": "^2.0"
 	},
 	"autoload": {
-		"classmap": ["app/Bootstrap.php"]
+		"classmap": ["app/ExtraBootstrap.php"]
 	}
 }
