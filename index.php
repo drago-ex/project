@@ -7,4 +7,4 @@ require __DIR__ . '/vendor/autoload.php';
 
 // Run application.
 $app = App\Bootstrap::boot();
-$app->run();
+$app->running();

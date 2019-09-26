@@ -9,6 +9,6 @@ before_install:
 
 install:
   - composer install
-  
+
 script:
   - echo "skipping tests"

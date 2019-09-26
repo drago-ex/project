@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App;
 
-use Drago\Configurator;
+use Drago\ExtraConfigurator;
 
 
 /**
@@ -12,12 +12,12 @@ use Drago\Configurator;
  */
 class Bootstrap
 {
-	public static function boot(): Configurator
+	public static function boot(): ExtraConfigurator
 	{
-		$app = new Configurator();
-		
+		$app = new ExtraConfigurator();
+
 		// Enable debug mode.
-		//$configurator->setDebugMode('127.0.0.1');
+		//$app->setDebugMode('127.0.0.1');
 
 		// Enable Tracy tool.
 		$app->enableTracy(__DIR__ . '/../log');
