@@ -6,7 +6,6 @@
 <p align="center">Simple packages built on Nette Framework</p>
 
 ## Info
-
 The basis for new projects.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/drago-ex/project/master/license.md)
@@ -15,12 +14,10 @@ The basis for new projects.
 [![CodeFactor](https://www.codefactor.io/repository/github/drago-ex/project/badge)](https://www.codefactor.io/repository/github/drago-ex/project)
 
 ## Requirements
-
 - PHP 7.1 or higher
 - composer
 
 ## Installation
-
 ```
 composer create-project drago-ex/project
 ```
