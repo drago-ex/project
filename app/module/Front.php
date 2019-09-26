@@ -27,6 +27,9 @@ class FrontPresenter extends BasePresenter
 	}
 
 
+	/**
+	 * @throws \Exception
+	 */
 	public function getTranslator(): Translator
 	{
 		$file = __DIR__ . '/web/locale/' . $this->lang . '.ini';
