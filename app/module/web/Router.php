@@ -2,18 +2,19 @@
 
 namespace Module\Web;
 
-use Nette;
-use Nette\Application\Routers;
+use Nette\Application\Routers\RouteList;
+use Nette\Routing\Router;
+use Nette\StaticClass;
 
 
-final class Router
+final class RouterFactory
 {
-	use Nette\StaticClass;
+	use StaticClass;
 
 
-	public static function create(): Nette\Routing\Router
+	public static function create(): Router
 	{
-		$router = new Routers\RouteList;
+		$router = new RouteList;
 		$router
 			->withModule('Web')
 			->addRoute('[<lang=cs cs|en>/]<presenter>/<action>', 'Web:default');

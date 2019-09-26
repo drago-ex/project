@@ -29,7 +29,7 @@ class Bootstrap
 		$app->setTempDirectory(__DIR__ . '/../storage');
 
 		// Auto-loading classes.
-		$app->addAutoload(__DIR__);
+		$app->addRobotLoader(__DIR__);
 
 		// Create DI container from configuration files.
 		$app->addFindConfig(__DIR__);

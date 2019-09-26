@@ -1,4 +1,4 @@
 services:
 
 	router: {setup: {offsetSet(null, @router.web)}}
-	router.web: {factory: Module\Web\Router::create, autowired: no}
+	router.web: {factory: Module\Web\RouterFactory::create, autowired: no}
