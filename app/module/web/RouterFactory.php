@@ -8,7 +8,7 @@ use Nette\Routing\Router;
 use Nette\StaticClass;
 
 
-final class Router
+final class RouterFactory
 {
 	use StaticClass;
 

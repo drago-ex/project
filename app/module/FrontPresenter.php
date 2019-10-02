@@ -11,7 +11,7 @@ use Drago\Localization\Translator;
 /**
  * Base class for frontend module.
  */
-class Front extends BasePresenter
+class FrontPresenter extends BasePresenter
 {
 	use Locale;
 
