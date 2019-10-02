@@ -7,7 +7,6 @@ namespace Module\Web;
 use App\FrontPresenter;
 
 
-final class WebPresenter extends FrontPresenter
+final class Web extends FrontPresenter
 {
-
 }

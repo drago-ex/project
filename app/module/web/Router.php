@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Module\Web;
 
@@ -7,10 +8,9 @@ use Nette\Routing\Router;
 use Nette\StaticClass;
 
 
-final class RouterFactory
+final class Router
 {
 	use StaticClass;
-
 
 	public static function create(): Router
 	{

@@ -10,4 +10,6 @@ use Nette\Application\UI\Presenter;
 /**
  * Base class for all modules.
  */
-abstract class BasePresenter extends Presenter {}
+abstract class Base extends Presenter
+{
+}
