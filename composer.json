@@ -14,8 +14,8 @@
 		"nette/robot-loader": "^3.0",
 		"latte/latte": "^2.5",
 		"tracy/tracy": "^2.6",
-		"drago-ex/bootstrap": "^2.0",
-		"drago-ex/translator": "^2.0",
+		"drago-ex/bootstrap": "^1.0",
+		"drago-ex/translator": "^1.0",
 		"dg/composer-cleaner": "^2.0"
 	},
 	"autoload": {

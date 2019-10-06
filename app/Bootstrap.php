@@ -14,7 +14,7 @@ class Bootstrap
 {
 	public static function boot(): ExtraConfigurator
 	{
-		$app = new ExtraConfigurator();
+		$app = new ExtraConfigurator;
 
 		// Enable debug mode.
 		//$app->setDebugMode('127.0.0.1');
@@ -29,7 +29,9 @@ class Bootstrap
 		$app->setTempDirectory(__DIR__ . '/../storage');
 
 		// Auto-loading classes.
-		$app->addRobotLoader(__DIR__);
+		$app->createRobotLoader()
+			->addDirectory(__DIR__)
+			->register();
 
 		// Create DI container from configuration files.
 		$app->addFindConfig(__DIR__);
