@@ -11,12 +11,12 @@
 	],
 	"require": {
 		"php": ">=7.1",
-		"nette/robot-loader": "^3.0",
+		"nette/robot-loader": "^3.2",
 		"latte/latte": "^2.5",
-		"tracy/tracy": "^2.6",
+		"tracy/tracy": "^2.7",
 		"drago-ex/bootstrap": "^1.0",
 		"drago-ex/translator": "^1.0",
-		"dg/composer-cleaner": "^2.0"
+		"dg/composer-cleaner": "^2.1"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]
