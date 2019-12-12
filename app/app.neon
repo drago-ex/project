@@ -19,3 +19,8 @@ application:
 # enabling system container for Tracy bar
 di:
 	debugger: yes
+
+
+# registration and service settings
+services:
+	- Drago\Localization\Translator
