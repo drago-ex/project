@@ -18,10 +18,10 @@ trait Base
 	use Locale;
 
 	/** @var string */
-	private $translateFile;
+	public $translateFile;
 
 
-	public function injectOnRender()
+	public function injectOnRender(): void
 	{
 		$this->presenter->onRender[] = function () {
 			$template = $this->presenter->template;
