@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Module\Web;
 
-use App\Base;;
+use App\Base;
 use Drago\Parameters\Parameters;
 use Nette\Application\UI\Presenter;
 
