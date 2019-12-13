@@ -14,17 +14,10 @@ use stdClass;
  */
 trait Front
 {
-	/**
-	 * @var Parameters
-	 * @inject
-	 */
-	public $parameters;
-
-
-	public function injectOnStartup(): void
+	public function injectOnStartup(Parameters $parameters): void
 	{
-		$this->presenter->onStartup[] = function () {
-			$locale = $this->parameters->getAppDir();
+		$this->presenter->onStartup[] = function () use ($parameters) {
+			$locale = $parameters->getAppDir();
 			$this->translateFile = $locale . '/locale/';
 		};
 	}
