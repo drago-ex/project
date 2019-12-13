@@ -16,6 +16,7 @@
 		"tracy/tracy": "^2.7",
 		"drago-ex/bootstrap": "^1.0",
 		"drago-ex/translator": "^1.0",
+		"drago-ex/parameters": "^1.0",
 		"dg/composer-cleaner": "^2.1"
 	},
 	"autoload": {

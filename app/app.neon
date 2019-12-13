@@ -24,3 +24,8 @@ di:
 # registration and service settings
 services:
 	- Drago\Localization\Translator
+
+
+# application extensions
+extensions:
+	- Drago\Parameters\DI\ParametersExtension(%appDir%, %wwwDir%, %tempDir%)
