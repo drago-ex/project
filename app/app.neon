@@ -29,3 +29,12 @@ services:
 # application extensions
 extensions:
 	- Drago\Parameters\DI\ParametersExtension(%appDir%, %wwwDir%, %tempDir%)
+
+
+# automatic class registration
+search:
+	section:
+		in: %appDir%/src
+		classes:
+			- *Entity
+			- *Repository
