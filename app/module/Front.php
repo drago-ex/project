@@ -6,17 +6,13 @@ namespace App;
 
 use Drago\Parameters\Parameters;
 use Nette\Application\UI\Presenter;
-use stdClass;
 
 
-/**
- * @property-read  Presenter|stdClass  $presenter
- */
 trait Front
 {
-	public function injectOnStartup(Parameters $parameters): void
+	public function injectOnStartup(Parameters $parameters, Presenter $presenter): void
 	{
-		$this->presenter->onStartup[] = function () use ($parameters) {
+		$presenter->onStartup[] = function () use ($parameters) {
 			$locale = $parameters->getAppDir();
 			$this->translateFile = $locale . '/locale/';
 		};
