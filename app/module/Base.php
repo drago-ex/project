@@ -6,9 +6,12 @@ namespace App;
 
 use Drago\Localization\Locale;
 use Drago\Localization\Translator;
-use Nette\Application\UI\Presenter;
+use Nette\Bridges\ApplicationLatte\Template;
+use stdClass;
 
-
+/**
+ * @property-read Template|stdClass $template
+ */
 trait Base
 {
 	use Locale;
@@ -17,12 +20,11 @@ trait Base
 	public $translateFile;
 
 
-	public function injectOnRender(Presenter $presenter): void
+	public function injectOnRender(): void
 	{
-		$presenter->onRender[] = function () use ($presenter) {
-			$template = $presenter->template;
-			$template->lang = $this->lang;
-			$template->setTranslator($this->getTranslator());
+		$this->onRender[] = function () {
+			$this->template->lang = $this->lang;
+			$this->template->setTranslator($this->getTranslator());
 		};
 	}
 
