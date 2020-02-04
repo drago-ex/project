@@ -6,10 +6,10 @@ namespace Module\Web;
 
 use App\Base;
 use App\Front;
-use Nette\Application\UI\Presenter;
+use Nette\Application\UI;
 
 
-final class WebPresenter extends Presenter
+final class WebPresenter extends UI\Presenter
 {
 	use Base;
 }
