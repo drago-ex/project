@@ -12,5 +12,4 @@ use Nette\Application\UI\Presenter;
 final class WebPresenter extends Presenter
 {
 	use Base;
-	use Front;
 }
