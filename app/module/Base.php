@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace App;
 
-use Drago\Localization\TranslatorAdapter;
+use Drago;
 
 
 trait Base
 {
-	use TranslatorAdapter;
+	use Drago\Localization\TranslatorAdapter;
 }

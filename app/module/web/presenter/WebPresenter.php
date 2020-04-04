@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace Module\Web;
 
-use App\Base;
-use Nette\Application\UI\Presenter;
+use App;
+use Nette;
 
 
-final class WebPresenter extends Presenter
+final class WebPresenter extends Nette\Application\UI\Presenter
 {
-	use Base;
+	use App\Base;
 }
