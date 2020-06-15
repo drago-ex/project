@@ -4,11 +4,11 @@ declare(strict_types = 1);
 
 namespace Module\Web;
 
-use Drago;
-use Nette;
+use Drago\Localization\TranslatorAdapter;
+use Nette\Application\UI\Presenter;
 
 
-final class WebPresenter extends Nette\Application\UI\Presenter
+final class WebPresenter extends Presenter
 {
-	use Drago\Localization\TranslatorAdapter;
+	use TranslatorAdapter;
 }
