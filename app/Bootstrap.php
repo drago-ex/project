@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace App;
 
-use Drago\ExtraConfigurator;
+use Drago\Bootstrap\ExtraConfigurator;
 
 
 /**
