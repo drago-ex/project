@@ -12,7 +12,7 @@
 	"require": {
 		"php": ">=7.1",
 		"nette/robot-loader": "^3.2",
-		"latte/latte": "^2.5",
+		"latte/latte": "^2.8",
 		"tracy/tracy": "^2.7",
 		"drago-ex/bootstrap": "^1.0",
 		"drago-ex/translator": "^1.0",
