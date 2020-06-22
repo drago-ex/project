@@ -18,3 +18,8 @@ jobs:
         - travis_retry composer create-project nette/code-checker temp/code-checker ^3 --no-progress
       script:
         - php temp/code-checker/code-checker --strict-types
+
+
+    - name: Static Analysis
+      script:
+        - composer run-script phpstan

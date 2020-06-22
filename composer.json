@@ -23,5 +23,8 @@
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]
+	},
+	"scripts": {
+		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app"
 	}
 }
