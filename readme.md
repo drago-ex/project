@@ -6,7 +6,7 @@
 <p align="center">Extension for Nette Framework</p>
 
 ## Drago Project
-The basis for new projects.
+Basis for new projects on Drago Extension
 
 [![PHP version](https://badge.fury.io/ph/drago-ex%2Fproject.svg)](https://badge.fury.io/ph/drago-ex%2Fproject)
 [![Build Status](https://travis-ci.org/drago-ex/project.svg?branch=master)](https://travis-ci.org/drago-ex/project)
