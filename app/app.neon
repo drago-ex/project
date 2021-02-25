@@ -32,5 +32,4 @@ search:
 	section:
 		in: %appDir%/src
 		classes:
-			- *Entity
 			- *Repository
