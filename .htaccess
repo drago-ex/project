@@ -1,0 +1,21 @@
+# disable directory listing
+<IfModule mod_autoindex.c>
+	Options -Indexes
+</IfModule>
+
+# disable listing configuration files
+<Files ~ '\.(neon|latte|log|html)$'>
+	order allow,deny
+	deny from all
+</Files>
+
+# redirection of requests to www
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+	RewriteRule ^$ www/ [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_URI} !^/www/
+	RewriteRule ^(.*)$ www/$1
+</IfModule>
