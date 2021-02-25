@@ -6,18 +6,6 @@ Require all granted
 	Options -Indexes
 </IfModule>
 
-# disable listing configuration files
-<Files ~ '\.(neon)$'>
-	order allow,deny
-	deny from all
-</Files>
-
-# disable listing latte templates
-<Files ~ '\.(latte)$'>
-	order allow,deny
-	deny from all
-</Files>
-
 # enable cool URL
 <IfModule mod_rewrite.c>
 	RewriteEngine On
