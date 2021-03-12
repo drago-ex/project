@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"php": ">=7.4",
+		"php": ">=8.0",
 		"nette/robot-loader": "^3.2",
 		"latte/latte": "^2.8",
 		"tracy/tracy": "^2.7",
