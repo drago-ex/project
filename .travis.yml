@@ -20,6 +20,13 @@ jobs:
         - php temp/code-checker/code-checker --strict-types
 
 
+    - name: Nette Coding Standard
+      install:
+        - travis_retry composer create-project nette/coding-standard temp/coding-standard ^3 --no-progress
+      script:
+        - php temp/coding-standard/ecs check src tests --preset php71
+
+
     - name: Static Analysis
       script:
         - composer run-script phpstan
