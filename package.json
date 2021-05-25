@@ -1,0 +1,17 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "dependencies": {
+    "nette-forms": "^3.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0"
+  },
+  "scripts": {
+    "postinstall": "npm run composer:i && concurrently -n=nette -c=blue \"docker-compose up --build\"",
+    "docker:up": "concurrently -n=nette -c=blue \"docker-compose up\"",
+    "docker:down": "docker-compose down",
+    "composer:i": "composer i",
+    "composer:u": "composer u"
+  }
+}
