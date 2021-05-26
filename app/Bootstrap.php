@@ -18,7 +18,9 @@ class Bootstrap
 		$appDir = dirname(__DIR__);
 
 		// Enable debug mode.
-		//$app->setDebugMode('127.0.0.1');
+		if (getenv('NETTE_DEBUG') === '1') {
+			$app->setDebugMode(true);
+		}
 
 		// Enable Tracy tool.
 		$app->enableTracy($appDir . '/log');
