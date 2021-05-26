@@ -9,6 +9,8 @@ services:
   php:
     build: ./
     container_name: php
+    environment:
+      - NETTE_DEBUG=${NETTE_DEBUG}
     volumes:
       - ./:/var/www/html/
       - ./log/apache/:/var/log/apache2
