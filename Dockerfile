@@ -21,7 +21,7 @@ RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
 COPY /php.ini /etc/php/8.0/apache2/php.ini/
 
 # the ports
-EXPOSE 80 443
+EXPOSE 80
 
 # reboot apache
 CMD  /usr/sbin/apache2ctl -D FOREGROUND
