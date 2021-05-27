@@ -16,7 +16,6 @@ services:
       - ./:/var/www/html/
     ports:
       - 8000:80
-      - 443:443
 
 
   # database
