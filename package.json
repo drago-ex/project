@@ -10,7 +10,7 @@
   "scripts": {
     "postinstall": "composer install && npm run docker:build",
     "docker:build": "concurrently -n=nette -c=blue \"docker-compose up --build\"",
-    "docker:dev": "concurrently -n=nette -c=blue \"docker-compose --env-file ./.env.dev up\"",
+    "docker:run": "concurrently -n=nette -c=blue \"docker-compose --env-file ./.env.dev up\"",
     "docker:off": "docker-compose down"
   }
 }
