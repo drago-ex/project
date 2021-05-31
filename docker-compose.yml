@@ -7,7 +7,7 @@ services:
 
   # php server
   php:
-    build: ./
+    build: docker/
     container_name: php
     restart: always
     environment:
@@ -16,6 +16,7 @@ services:
       - ./:/var/www/html/
     ports:
       - 8000:80
+      - 443:443
 
 
   # database
@@ -30,7 +31,7 @@ services:
       MYSQL_USER: super
       MYSQL_PASSWORD: pass
     volumes:
-      - ./datadir/:/var/lib/mysql
+      - ./docker/datadir/:/var/lib/mysql
     ports:
       - 6033:3306
 
