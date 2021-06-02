@@ -35,8 +35,8 @@ RUN chmod 777 /var/www/html/web/storage \
 	&& chmod 777 /var/www/html/web/storage/sessions \
 	&& chmod 777 /var/www/html/web/log
 
+# add script for php info
+RUN echo "<?php echo phpinfo(); ?>" > /var/www/html/web/www/info.php
+
 # the ports
 EXPOSE 80 443
-
-# reboot apache
-CMD  /usr/sbin/apache2ctl -D FOREGROUND
