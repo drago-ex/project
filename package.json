@@ -9,8 +9,8 @@
   },
   "scripts": {
     "postinstall": "composer install && npm run docker:build",
-    "docker:build": "concurrently -n=nette -c=blue \\\"docker-compose --env-file docker/env.dev up --build\\\"",
-    "docker:up": "concurrently -n=nette -c=blue \\\"docker-compose --env-file docker/env.dev up\\\"",
+    "docker:build": "concurrently -n=nette -c=blue \"docker-compose --env-file docker/env.dev up --build\"",
+    "docker:up": "concurrently -n=nette -c=blue \"docker-compose --env-file docker/env.dev up\"",
     "docker:down": "docker-compose down"
   }
 }

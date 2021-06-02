@@ -21,7 +21,7 @@ RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && docker-php-ext-enable mysqli
 
 # copy certificate to container
-COPY cert/* /etc/apache2/ssl/
+COPY docker/cert/* /etc/apache2/ssl/
 
 # php configuration
 COPY docker/conf/php.ini/ /etc/php/8.0/apache2/php.ini/
@@ -29,7 +29,6 @@ COPY docker/conf/000-default.conf/ /etc/apache2/sites-available/
 
 # copy files and directory
 COPY web/ /var/www/html/web/
-#COPY vendor/../ /var/www/html/vendor/
 
 # permission settings
 RUN chmod 777 /var/www/html/web/storage \

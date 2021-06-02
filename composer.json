@@ -10,7 +10,7 @@
 		}
 	],
 	"config": {
-		"vendor-dir": "/web/vendor/"
+		"vendor-dir": "web/vendor/"
 	},
 	"require": {
 		"php": ">=8.0",
