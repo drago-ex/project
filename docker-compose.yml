@@ -7,13 +7,11 @@ services:
 
   # php server
   php:
-    build: docker/
+    build: .
     container_name: php
     restart: always
     environment:
       - NETTE_DEBUG=${NETTE_DEBUG}
-    volumes:
-      - ./:/var/www/html/
     ports:
       - 8000:80
       - 443:443
@@ -31,7 +29,7 @@ services:
       MYSQL_USER: super
       MYSQL_PASSWORD: pass
     volumes:
-      - ./docker/datadir/:/var/lib/mysql
+      - ./docker/mysql/:/var/lib/mysql
     ports:
       - 6033:3306
 
