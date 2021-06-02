@@ -24,14 +24,17 @@ RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
 COPY cert/* /etc/apache2/ssl/
 
 # php configuration
-COPY php.ini/ /etc/php/8.0/apache2/php.ini/
-COPY 000-default.conf/ /etc/apache2/sites-available/
+COPY docker/conf/php.ini/ /etc/php/8.0/apache2/php.ini/
+COPY docker/conf/000-default.conf/ /etc/apache2/sites-available/
 
 # copy files and directory
-COPY /../project/ /var/www/html/project/
+COPY web/ /var/www/html/web/
+#COPY vendor/../ /var/www/html/vendor/
 
 # permission settings
-RUN chmod 777 /var/www/html/project/temp/ && chmod 777 /var/www/html/project/log/
+RUN chmod 777 /var/www/html/web/storage \
+	&& chmod 777 /var/www/html/web/storage/sessions \
+	&& chmod 777 /var/www/html/web/log
 
 # the ports
 EXPOSE 80 443
