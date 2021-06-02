@@ -1,33 +1,33 @@
 {
-	"name": "drago-ex/project",
-	"type": "project",
-	"description": "Basis for new projects on Drago Extension",
-	"license": ["MIT"],
-	"authors": [
-		{
-			"name": "Zdeněk Papučík",
-			"homepage": "https://github.com/accgit"
-		}
-	],
-	"config": {
-		"vendor-dir": "web/vendor/"
-	},
-	"require": {
-		"php": ">=8.0",
-		"nette/robot-loader": "^3.2",
-		"latte/latte": "^2.8",
-		"tracy/tracy": "^2.7",
-		"drago-ex/bootstrap": "^1.0",
-		"drago-ex/translator": "^1.0",
-		"dg/composer-cleaner": "^2.1"
-	},
-	"require-dev": {
-		"phpstan/phpstan-nette": "^0.12"
-	},
-	"autoload": {
-		"psr-4": {"App\\": "web/app/"}
-	},
-	"scripts": {
-		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app"
+  "name": "drago-ex/project",
+  "type": "project",
+  "description": "Basis for new projects on Drago Extension",
+  "license": ["MIT"],
+  "authors": [
+	{
+	  "name": "Zdeněk Papučík",
+	  "homepage": "https://github.com/accgit"
 	}
+  ],
+  "config": {
+	"vendor-dir": "web/vendor/"
+  },
+  "require": {
+	"php": ">=8.0",
+	"nette/robot-loader": "^3.2",
+	"latte/latte": "^2.8",
+	"tracy/tracy": "^2.7",
+	"drago-ex/bootstrap": "^1.0",
+	"drago-ex/translator": "^1.0",
+	"dg/composer-cleaner": "^2.1"
+  },
+  "require-dev": {
+	"phpstan/phpstan-nette": "^0.12"
+  },
+  "autoload": {
+	"psr-4": {"App\\": "web/app/"}
+  },
+  "scripts": {
+	"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon web/app"
+  }
 }
