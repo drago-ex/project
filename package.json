@@ -8,9 +8,12 @@
     "concurrently": "^6.2.0"
   },
   "scripts": {
-    "postinstall": "composer install && npm run docker:build",
-    "docker:build": "concurrently -n=nette -c=blue \"docker-compose --env-file docker/env.dev up --build\"",
-    "docker:up": "concurrently -n=nette -c=blue \"docker-compose --env-file docker/env.dev up\"",
-    "docker:down": "docker-compose down"
+    "postinstall": "npm run composer:i && npm run docker:build && npm run docker:dev",
+    "docker:build": "concurrently -n=build -c=green \"docker-compose build\"",
+    "docker:dev": "concurrently -n=dev -c=blue \"docker-compose --env-file .env.dev up\"",
+    "docker:pro": "concurrently -n=pro -c=blue \"docker-compose up\"",
+    "docker:off": "docker-compose down",
+    "composer:i": "docker-compose run composer i",
+    "composer:u": "docker-compose run composer u"
   }
 }

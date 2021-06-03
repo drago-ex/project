@@ -5,9 +5,6 @@ MAINTAINER Zdeněk Papučík <zdenek.papucik@gmail.com>
 # build-time customization
 ARG DEBIAN_FRONTEND=noninteractive
 
-# default state nette debugger
-ENV NETTE_DEBUG=0
-
 # run commands
 RUN apt-get update && apt-get upgrade -y && a2enmod ssl && a2enmod rewrite
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev

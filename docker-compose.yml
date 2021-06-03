@@ -17,6 +17,16 @@ services:
       - 443:443
 
 
+  # php composer
+  composer:
+    image: library/composer:2.0.14
+    container_name: composer
+    working_dir: /app
+    command: composer install --no-interaction
+    volumes:
+      - ./:/app
+
+
   # database
   db:
     image: library/mariadb:10.6.1
