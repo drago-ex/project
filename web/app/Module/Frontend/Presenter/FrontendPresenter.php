@@ -9,5 +9,4 @@ use App\Module\BasePresenter;
 
 final class FrontendPresenter extends BasePresenter
 {
-
 }
