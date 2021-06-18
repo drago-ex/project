@@ -25,7 +25,7 @@
 		"phpstan/phpstan-nette": "^0.12"
 	},
 	"autoload": {
-		"psr-4": ["App\\": "web/app/"]
+		"psr-4": {"App\\": "web/app/"}
 	},
 	"scripts": {
 		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon web/app"
