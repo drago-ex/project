@@ -24,16 +24,5 @@ COPY docker/cert/* /etc/apache2/ssl/
 COPY docker/conf/php.ini/ /etc/php/8.0/apache2/php.ini/
 COPY docker/conf/000-default.conf/ /etc/apache2/sites-available/
 
-# copy files and directory
-COPY web/ /var/www/html/web/
-
-# permission settings
-RUN chmod 777 /var/www/html/web/storage \
-	&& chmod 777 /var/www/html/web/storage/sessions \
-	&& chmod 777 /var/www/html/web/log
-
-# add script for php info
-RUN echo "<?php echo phpinfo(); ?>" > /var/www/html/web/www/info.php
-
 # the ports
 EXPOSE 80 443
