@@ -15,8 +15,14 @@ Basis for new projects on Drago Extension
 ## Technology
 - PHP 8.0 or higher
 - composer
+- docker
 
 ## Installation
 ```
 composer create-project drago-ex/project
+```
+
+## npm
+```
+npm install
 ```
