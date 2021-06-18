@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Module\Web;
+namespace App\Module;
 
 use Drago\Localization\TranslatorAdapter;
 use Nette\Application\UI\Presenter;
 
 
-final class WebPresenter extends Presenter
+abstract class BasePresenter extends Presenter
 {
 	use TranslatorAdapter;
 }

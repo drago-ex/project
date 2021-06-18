@@ -29,7 +29,7 @@ class Bootstrap
 		$app->setTimeZone('Europe/Prague');
 
 		// Directory of temporary files.
-		$app->setTempDirectory($appDir . '/storage');
+		$app->setTempDirectory($appDir . '/temp');
 
 		// Auto-loading classes.
 		$app->createRobotLoader()

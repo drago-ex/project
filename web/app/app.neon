@@ -14,7 +14,7 @@ application:
 
 	# application mapping
 	mapping:
-		*: Module\*\*Presenter
+		*: ['App\Module', '*', 'Presenter\*Presenter']
 
 
 # enabling system container for Tracy bar
@@ -24,12 +24,12 @@ di:
 
 # application extensions
 extensions:
-	- Drago\Localization\DI\TranslatorExtension(%appDir%/locale)
+	- Drago\Localization\DI\TranslatorExtension(%appDir%/Locale)
 
 
 # automatic class registration
 search:
 	section:
-		in: %appDir%/src
+		in: %appDir%/Service/Repository
 		classes:
 			- *Repository
