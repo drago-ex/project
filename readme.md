@@ -16,6 +16,7 @@ Basis for new projects on Drago Extension
 - PHP 8.0 or higher
 - composer
 - docker
+- nodejs
 
 ## Installation
 ```
