@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Module\Web;
+namespace App\Module\Frontend;
 
 use Nette;
 use Nette\Application\Routers\RouteList;
