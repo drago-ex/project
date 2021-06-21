@@ -28,6 +28,7 @@
 		"psr-4": {"App\\": "web/app"}
 	},
 	"scripts": {
+		"phpstan-travis": "phpstan analyse --level 5 --configuration phpstan.neon web/app",
 		"phpstan": "/web/vendor/bin/phpstan analyse --level 5 --configuration phpstan.neon web/app"
 	}
 }
