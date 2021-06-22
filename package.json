@@ -23,7 +23,7 @@
     "docker:pro": "concurrently -n=pro -c=blue \"docker-compose up --no-deps php\"",
     "docker:off": "docker-compose down",
 
-    "composer:install": "docker-compose run composer i",
-    "composer:update": "docker-compose run composer u"
+    "composer:i": "docker-compose run composer i",
+    "composer:u": "docker-compose run composer u"
   }
 }
