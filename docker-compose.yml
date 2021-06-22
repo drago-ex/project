@@ -11,7 +11,7 @@ services:
     container_name: php
     restart: always
     volumes:
-      - ./web/:/var/www/html/web/
+      - ./:/var/www/html/
     ports:
       - 8000:80
       - 443:443

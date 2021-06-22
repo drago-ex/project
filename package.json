@@ -9,11 +9,21 @@
   },
   "scripts": {
     "postinstall": "npm run composer:i && npm run docker:build && npm run docker:dev",
+
+    "coding-standard-install": "docker-compose run composer create-project nette/coding-standard temp/coding-standard",
+    "coding-standard-check": "docker-compose run php temp/coding-standard/ecs check --preset php80",
+
+    "code-checker-install": "docker-compose run composer create-project nette/code-checker temp/code-checker",
+    "code-checker-check": "docker-compose run php temp/code-checker/code-checker --strict-types",
+
+    "phpstan": "docker-compose run php vendor/bin/phpstan analyse --level 5 --configuration phpstan.neon app",
+
     "docker:build": "concurrently -n=build -c=green \"docker-compose build\"",
     "docker:dev": "concurrently -n=dev -c=blue \"docker-compose -f docker-compose.yml -f docker-compose.dev.yml up\"",
     "docker:pro": "concurrently -n=pro -c=blue \"docker-compose up --no-deps php\"",
     "docker:off": "docker-compose down",
-    "composer:i": "docker-compose run composer i",
-    "composer:u": "docker-compose run composer u"
+
+    "composer:install": "docker-compose run composer i",
+    "composer:update": "docker-compose run composer u"
   }
 }

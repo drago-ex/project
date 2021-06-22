@@ -6,15 +6,16 @@ MAINTAINER Zdeněk Papučík <zdenek.papucik@gmail.com>
 ARG DEBIAN_FRONTEND=noninteractive
 
 # run commands
-RUN apt-get update && apt-get upgrade -y && a2enmod ssl && a2enmod rewrite
-RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
+RUN apt update && apt upgrade -y && a2enmod ssl && a2enmod rewrite
+RUN apt install libfreetype6-dev libjpeg62-turbo-dev libpng-dev libicu-dev -y
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # php extensions
 RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd pdo pdo_mysql mysqli \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install gd pdo pdo_mysql mysqli intl \
     && docker-php-ext-enable mysqli
 
 # copy certificate to container
