@@ -14,7 +14,7 @@ application:
 
 	# application mapping
 	mapping:
-		*: ['App\Module', '*', 'Presenter\*Presenter']
+		*: [App, Module\*, Presenters\*Presenter]
 
 
 # enabling system container for Tracy bar
