@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Frontend\Presenter;
+namespace App\Modules\Frontend\Presenters;
 
-use App\Module\BasePresenter;
+use App\Modules\BasePresenter;
 
 
 final class FrontendPresenter extends BasePresenter
