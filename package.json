@@ -8,14 +8,10 @@
     "concurrently": "^6.2.0"
   },
   "scripts": {
-    "postinstall": "npm run composer:i && npm run docker:build && npm run docker:dev",
-
+    "postinstall": "npm run docker:build && npm run docker:dev",
     "docker:build": "concurrently -n=build -c=green \"docker-compose build\"",
     "docker:dev": "concurrently -n=dev -c=blue \"docker-compose -f docker-compose.yml -f docker-compose.dev.yml up\"",
     "docker:pro": "concurrently -n=pro -c=blue \"docker-compose up --no-deps php\"",
-    "docker:off": "docker-compose down",
-
-    "composer:i": "docker-compose run composer i",
-    "composer:u": "docker-compose run composer u"
+    "docker:off": "docker-compose down"
   }
 }
