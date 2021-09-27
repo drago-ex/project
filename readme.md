@@ -9,7 +9,7 @@
 Basis for new projects on Drago Extension
 
 [![PHP version](https://badge.fury.io/ph/drago-ex%2Fproject.svg)](https://badge.fury.io/ph/drago-ex%2Fproject)
-[![Build Status](https://travis-ci.com/drago-ex/project.svg?branch=master)](https://travis-ci.com/drago-ex/project)
+[![Coding Style](https://github.com/drago-ex/project/actions/workflows/coding-style.yml/badge.svg)](https://github.com/drago-ex/project/actions/workflows/coding-style.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/drago-ex/project/badge)](https://www.codefactor.io/repository/github/drago-ex/project)
 
 ## Technology
