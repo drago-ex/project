@@ -1,11 +1,11 @@
 {
   "name": "project",
-  "version": "1.0.0",
+  "version": "1.0.11",
   "dependencies": {
-    "nette-forms": "^3.2.0"
+    "nette-forms": "^3.3.1"
   },
   "devDependencies": {
-    "concurrently": "^6.2.0"
+    "concurrently": "^6.4.0"
   },
   "scripts": {
     "postinstall": "npm run docker:build && npm run docker:dev",

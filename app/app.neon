@@ -24,7 +24,7 @@ di:
 
 # application extensions
 extensions:
-	- Drago\Localization\DI\TranslatorExtension(%appDir%/Locales)
+	- Drago\Localization\DI\TranslatorExtension(translateDir: %appDir%/Locales)
 
 
 # automatic class registration
