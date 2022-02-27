@@ -9,9 +9,6 @@ services:
   php:
     build: .
     restart: always
-    container_name: php8
-    depends_on:
-      - db
     volumes:
       - ./:/var/www/html/
     ports:
@@ -21,10 +18,9 @@ services:
 
   # database
   db:
-    image: library/mariadb:10.6.1
+    image: library/mariadb:10.6.2
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always
-    container_name: mysql10
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: app
@@ -34,12 +30,3 @@ services:
       - ./docker/mysql/:/var/lib/mysql
     ports:
       - 6033:3306
-
-
-  # database management
-  adminer:
-    image: library/adminer:4.8.0
-    restart: always
-    container_name: adminer4
-    ports:
-      - 8080:8080
