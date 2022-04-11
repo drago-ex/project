@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use Drago\Bootstrap\ExtraConfigurator;
+use Throwable;
 
 
 /**
@@ -12,6 +13,9 @@ use Drago\Bootstrap\ExtraConfigurator;
  */
 class Bootstrap
 {
+	/**
+	 * @throws Throwable
+	 */
 	public static function boot(): ExtraConfigurator
 	{
 		$app = new ExtraConfigurator;
@@ -37,7 +41,7 @@ class Bootstrap
 			->register();
 
 		// Create DI container from configuration files.
-		$app->addFindConfig(__DIR__);
+		$app->addFindConfig(__DIR__, exclude: 'Locales');
 
 		return $app;
 	}
