@@ -11,9 +11,9 @@
 	],
 	"require": {
 		"php": ">=8.0",
-		"nette/robot-loader": "^3.2",
-		"latte/latte": "^2.8",
-		"tracy/tracy": "^2.7",
+		"nette/robot-loader": "^3.4",
+		"latte/latte": "^3.0",
+		"tracy/tracy": "^2.9",
 		"drago-ex/bootstrap": "^1.0",
 		"drago-ex/translator": "^1.0"
 	},
