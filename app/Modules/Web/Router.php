@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Frontend;
+namespace App\Modules\Web;
 
 use Nette;
 use Nette\Application\Routers\RouteList;
@@ -15,8 +15,8 @@ final class Router
 	public static function create(): RouteList
 	{
 		$router = new RouteList;
-		$router->withModule('Frontend')
-			->addRoute('[<lang=cs cs|en>/]<presenter>/<action>', 'Frontend:default');
+		$router->withModule('Web')
+			->addRoute('[<lang=cs cs|en>/]<presenter>/<action>', 'Web:default');
 
 		return $router;
 	}
