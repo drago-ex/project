@@ -12,5 +12,4 @@ use App\Modules\BaseTemplate;
  */
 class HomeTemplate extends BaseTemplate
 {
-
 }

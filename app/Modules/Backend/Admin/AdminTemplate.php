@@ -9,5 +9,4 @@ use App\Modules\BaseTemplate;
 
 class AdminTemplate extends BaseTemplate
 {
-
 }
