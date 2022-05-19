@@ -26,16 +26,9 @@ final class Bootstrap
 			$app->setDebugMode(true);
 		}
 
-		// Enable Tracy tool.
 		$app->enableTracy($appDir . '/var/log');
-
-		// Set the time zone.
 		$app->setTimeZone('Europe/Prague');
-
-		// Directory of temporary files.
 		$app->setTempDirectory($appDir . '/var');
-
-		// Auto-loading classes.
 		$app->createRobotLoader()
 			->addDirectory(__DIR__)
 			->register();
