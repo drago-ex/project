@@ -7,7 +7,6 @@ namespace App\Modules;
 use Drago\Localization\TranslatorAdapter;
 use Nette\Application\UI\Presenter;
 
-
 /**
  * @property-read BaseTemplate $template
  */
