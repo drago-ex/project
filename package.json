@@ -1,6 +1,5 @@
 {
   "name": "project",
-  "version": "1.0.13",
   "dependencies": {
     "nette-forms": "^3.3.1"
   },
