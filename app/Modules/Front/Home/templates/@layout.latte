@@ -17,7 +17,7 @@
 <div n:foreach="$flashes as $flash" n:class="'flash', $flash->type">{$flash->message}</div>
 
 {* content block *}
-{include content|indent:1}
+{include content}
 <p>Module: {$module}</p>
 
 {* language switching *}
