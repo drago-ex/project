@@ -28,6 +28,11 @@ composer create-project drago-ex/project
 npm install
 ```
 
+## composer
+```
+composer i
+```
+
 ## docker build
 ```
 docker-compose build
