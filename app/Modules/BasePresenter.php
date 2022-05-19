@@ -15,7 +15,6 @@ abstract class BasePresenter extends Presenter
 {
 	use TranslatorAdapter;
 
-
 	protected function beforeRender(): void
 	{
 		$this->template->module = $this->getName() . ':' . $this->getView();
