@@ -11,7 +11,7 @@ use Throwable;
 /**
  * Configure the application.
  */
-class Bootstrap
+final class Bootstrap
 {
 	/**
 	 * @throws Throwable
@@ -27,13 +27,13 @@ class Bootstrap
 		}
 
 		// Enable Tracy tool.
-		$app->enableTracy($appDir . '/log');
+		$app->enableTracy($appDir . '/var/log');
 
 		// Set the time zone.
 		$app->setTimeZone('Europe/Prague');
 
 		// Directory of temporary files.
-		$app->setTempDirectory($appDir . '/temp');
+		$app->setTempDirectory($appDir . '/var');
 
 		// Auto-loading classes.
 		$app->createRobotLoader()
