@@ -25,7 +25,7 @@ composer create-project drago-ex/project
 
 ## npm
 ```
-npm install
+npm i
 ```
 
 ## composer
