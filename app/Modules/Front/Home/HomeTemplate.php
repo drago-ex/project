@@ -7,9 +7,6 @@ namespace App\Modules\Front\Home;
 use App\Modules\BaseTemplate;
 
 
-/**
- * @property-read HomeTemplate $template
- */
 class HomeTemplate extends BaseTemplate
 {
 }

@@ -7,6 +7,9 @@ namespace App\Modules\Front\Home;
 use App\Modules\BasePresenter;
 
 
+/**
+ * @property-read HomeTemplate $template
+ */
 final class HomePresenter extends BasePresenter
 {
 }
