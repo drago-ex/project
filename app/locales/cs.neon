@@ -1,7 +1,7 @@
 'Page subtitle': 'Podtitulek'
 'Hello, world!': 'Ahoj, světě!'
 
-# forms
+# default form messages
 'Please enter %s.': 'Zadejte %s.'
 'This value should not be %s.': 'Tato hodnota by neměla být %s.'
 'This field is required.': 'Toto pole je povinné.'
