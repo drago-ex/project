@@ -14,7 +14,7 @@
 <body>
 
 {* flash message *}
-<div n:foreach="$flashes as $flash" n:class="'flash', $flash->type">{$flash->message|translate}</div>
+<div n:foreach="$flashes as $flash" n:class="'flash', $flash->type">{_$flash->message}</div>
 
 {* content block *}
 {include content}
