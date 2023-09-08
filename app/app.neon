@@ -26,6 +26,7 @@ di:
 		tags: no
 
 
+# strict parser mode
 latte:
 	strictParsing: true
 
