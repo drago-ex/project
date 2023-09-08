@@ -26,6 +26,10 @@ di:
 		tags: no
 
 
+latte:
+	strictParsing: true
+
+
 # application extensions
 extensions:
 	- Drago\Localization\DI\TranslatorExtension(translateDir: %appDir%/locales)
