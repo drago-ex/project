@@ -6,7 +6,7 @@ Basis for new projects on Drago Extension
 [![CodeFactor](https://www.codefactor.io/repository/github/drago-ex/project/badge)](https://www.codefactor.io/repository/github/drago-ex/project)
 
 ## Technology
-- PHP 8.0 or higher
+- PHP 8.1 or higher
 - composer
 - docker
 - node.js
