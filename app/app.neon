@@ -28,7 +28,7 @@ di:
 
 # strict parser mode
 latte:
-	strictParsing: true
+	strictTypes: yes
 
 
 # application extensions

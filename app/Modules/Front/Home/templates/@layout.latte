@@ -1,5 +1,6 @@
 {templateType App\Modules\Front\Home\HomeTemplate}
 {varType Drago\Application\UI\Flashes[] $flashes}
+{import '../../../../UI/@lang.switch.latte'}
 
 <!doctype html>
 <html lang="{$lang}">
@@ -18,10 +19,11 @@
 
 {* content block *}
 {include content}
-<p>Module: {$module}</p>
 
 {* language switching *}
-<a n:href="this, 'lang' => 'cs'" n:class="$presenter->linkCurrent ? 'current'">Czech</a>
-<a n:href="this, 'lang' => 'en'" n:class="$presenter->linkCurrent ? 'current'">English</a>
+{include language-link, lang: 'cs', name: 'Czech'}<span>&#124;</span>
+{include language-link, lang: 'en', name: 'English'}
+
+<script src="{$basePath}/netteForms.js"></script>
 </body>
 </html>

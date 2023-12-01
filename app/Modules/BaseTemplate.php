@@ -10,5 +10,4 @@ use Drago\Application\UI\ExtraTemplate;
 class BaseTemplate extends ExtraTemplate
 {
 	public string $lang;
-	public string $module;
 }

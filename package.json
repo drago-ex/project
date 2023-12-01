@@ -1,11 +1,11 @@
 {
   "name": "project",
   "dependencies": {
-    "nette-forms": "^3.3.1",
-	"bootstrap": "^5.3.1"
+    "nette-forms": "^3.3.5",
+	"bootstrap": "^5.3.2"
   },
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "concurrently": "^8.2.2"
   },
   "scripts": {
     "docker:build": "concurrently -n=build -c=green \"docker-compose build\"",
