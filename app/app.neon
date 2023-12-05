@@ -34,3 +34,12 @@ latte:
 # application extensions
 extensions:
 	- Drago\Localization\DI\TranslatorExtension(translateDir: %appDir%/locales)
+
+
+# automatic class registration
+search:
+	-
+		in: %appDir%
+		classes:
+			- *Repository
+			- *Factory
