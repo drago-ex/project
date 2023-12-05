@@ -1,7 +1,0 @@
-# application services
-search:
-	-
-		in: %appDir%
-		classes:
-			- *Repository
-			- *Factory
