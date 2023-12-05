@@ -18,7 +18,7 @@
 		"drago-ex/translator": "dev-master",
 		"drago-ex/application": "dev-master"
 	},
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
 	"require-dev": {
 		"phpstan/phpstan-nette": "^1.2.9"
 	},
