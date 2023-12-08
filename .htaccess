@@ -3,7 +3,7 @@
 	Options -Indexes
 </IfModule>
 
-# Disable listing configuration files
+# Disable listing files
 <Files ~ "\.(neon|latte|log|html)$">
 	order allow,deny
 	deny from all
