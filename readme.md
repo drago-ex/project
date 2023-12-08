@@ -15,18 +15,3 @@ Basis for new modules projects on Drago Extension
 ```
 composer create-project drago-ex/project
 ```
-
-## npm
-```
-npm i
-```
-
-## docker build
-```
-docker-compose build
-```
-
-## docker dev up
-```
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
-```
