@@ -4,18 +4,7 @@
 </IfModule>
 
 # Disable listing configuration files
-<Files ~ '\.(neon|latte|log|html)$'>
+<Files ~ "\.(neon|latte|log|html)$">
 	order allow,deny
 	deny from all
 </Files>
-
-# Redirection of requests to www
-<IfModule mod_rewrite.c>
-	RewriteEngine On
-
-	RewriteRule ^$ www/ [L]
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteCond %{REQUEST_URI} !^/www/
-	RewriteRule ^(.*)$ www/$1
-</IfModule>
