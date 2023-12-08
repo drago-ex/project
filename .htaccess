@@ -1,15 +1,15 @@
-# disable directory listing
+# Disable directory listing for security reasons
 <IfModule mod_autoindex.c>
 	Options -Indexes
 </IfModule>
 
-# disable listing configuration files
+# Disable listing configuration files
 <Files ~ '\.(neon|latte|log|html)$'>
 	order allow,deny
 	deny from all
 </Files>
 
-# redirection of requests to www
+# Redirection of requests to www
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 
