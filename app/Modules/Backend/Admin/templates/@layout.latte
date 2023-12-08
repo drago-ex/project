@@ -9,13 +9,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<title>{include subtitle|stripHtml|firstUpper} &bull; Admin</title>
+	<title>{ifset title}{include title|stripHtml|firstUpper} &bull;{/ifset} Backend</title>
 </head>
 
 <body>
 
 {* flash message *}
-<div n:foreach="$flashes as $flash" n:class="'flash', $flash->type">{_$flash->message}</div>
+<div n:foreach="$flashes as $flash" n:class="'flash', $flash->type">{$flash->message|translate}</div>
 
 {* content block *}
 {include content}
