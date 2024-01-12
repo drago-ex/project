@@ -14,9 +14,9 @@
 		"nette/robot-loader": "^4.0",
 		"latte/latte": "^3.0",
 		"tracy/tracy": "^2.9",
-		"drago-ex/bootstrap": "dev-master",
-		"drago-ex/translator": "dev-master",
-		"drago-ex/application": "dev-master"
+		"drago-ex/bootstrap": "^1.0",
+		"drago-ex/translator": "^1.0",
+		"drago-ex/application": "^1.0"
 	},
 	"minimum-stability": "stable",
 	"require-dev": {
