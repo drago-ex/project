@@ -1,0 +1,6 @@
+{var string $lang, string $name}
+{define translateSwitch, $lang, $name}
+	<a n:href="this, 'lang' => $lang">
+		{$name}
+	</a>
+{/define}

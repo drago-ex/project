@@ -11,11 +11,12 @@ session:
 
 # application settings
 application:
-	errorPresenter: Error
+	errorPresenter:
+		4xx: Error:Error4xx
+		5xx: Error:Error5xx
 
 	# application mapping
-	mapping:
-		*: ['App\Modules', '*', '*\*Presenter']
+	mapping: App\UI\*\**Presenter
 
 
 # enabling system container for Tracy bar
@@ -29,11 +30,12 @@ di:
 # strict parser mode
 latte:
 	strictTypes: yes
+	strictParsing: yes
 
 
 # application extensions
 extensions:
-	- Drago\Localization\DI\TranslatorExtension(translateDir: %appDir%/locales)
+	- Drago\Localization\DI\TranslatorExtension(translateDir: %appDir%/Translate)
 
 
 # automatic class registration
