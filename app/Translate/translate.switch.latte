@@ -1,6 +1,6 @@
 {var string $lang, string $name}
 {define translateSwitch, $lang, $name}
-	<a n:href="this, 'lang' => $lang">
+	<a n:href="this, 'lang' => $lang" n:class="'isLinkCurrent() ? 'fw-bolder'">
 		{$name}
 	</a>
 {/define}
