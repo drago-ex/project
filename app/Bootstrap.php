@@ -27,14 +27,13 @@ final class Bootstrap
 		}
 
 		$app->enableTracy($appDir . '/var/log');
-		$app->setTimeZone('Europe/Prague');
 		$app->setTempDirectory($appDir . '/var');
 		$app->createRobotLoader()
 			->addDirectory(__DIR__)
 			->register();
 
 		// Create DI container from configuration files.
-		$app->addFindConfig(__DIR__, exclude: 'Translate');
+		$app->addFindConfig(paths: __DIR__, exclude: 'Translate');
 
 		return $app;
 	}
