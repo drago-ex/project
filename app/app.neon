@@ -4,7 +4,7 @@ parameters:
 
 # settings for sessions
 session:
-	name: drago-project
+	name: project
 	expiration: 14 days
 	savePath: '%tempDir%/sessions'
 
