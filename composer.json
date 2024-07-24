@@ -16,7 +16,8 @@
 		"tracy/tracy": "^2.9",
 		"drago-ex/bootstrap": "^1.0",
 		"drago-ex/translator": "^1.0",
-		"drago-ex/application": "^1.0"
+		"drago-ex/application": "^1.0",
+		"drago-ex/database": "^1.2"
 	},
 	"minimum-stability": "stable",
 	"require-dev": {
