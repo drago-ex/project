@@ -26,6 +26,8 @@
 		"psr-4": {"App\\": "app"}
 	},
 	"scripts": {
-		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app"
+		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app",
+		"generator-entity": "generator make:entity",
+		"generator-data-class": "generator make:dataClass"
 	}
 }
