@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace App\UI;
 
 use Drago\Localization\TranslatorAdapter;
-use Nette\Application\UI\Presenter;
 
 
 /**
- * @property BaseTemplate $template
+ * @property Template $template
  */
-abstract class BasePresenter extends Presenter
+abstract class Presenter extends \Nette\Application\UI\Presenter
 {
 	use TranslatorAdapter;
 }
