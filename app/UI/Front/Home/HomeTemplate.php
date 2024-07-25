@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Home;
 
-use App\UI\BaseTemplate;
+use App\UI\Template;
 
 
-class HomeTemplate extends BaseTemplate
+class HomeTemplate extends Template
 {
 }
