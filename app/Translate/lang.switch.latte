@@ -1,6 +1,6 @@
 {var string $lang, string $name}
 {var Nette\Application\UI\Presenter $presenter}
-{define translateSwitch, $lang, $name}
+{define LangSwitch, $lang, $name}
 	<a n:href="this, 'lang' => $lang" n:class="$presenter->isLinkCurrent() ? 'fw-bolder'">
 		{$name}
 	</a>
