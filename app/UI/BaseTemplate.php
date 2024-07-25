@@ -7,7 +7,7 @@ namespace App\UI;
 use Drago\Application\UI\ExtraTemplate;
 
 
-class BaseTemplate extends ExtraTemplate
+class Template extends ExtraTemplate
 {
 	public string $lang;
 }
