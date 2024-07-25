@@ -8,7 +8,7 @@ use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 
 
-class BaseFactory
+class Factory
 {
 	public function __construct(
 		private readonly Translator $translator,
