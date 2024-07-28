@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Factory;
+namespace App\Core;
 
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
