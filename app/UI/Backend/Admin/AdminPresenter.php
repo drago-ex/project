@@ -8,7 +8,7 @@ use App\UI\Presenter;
 
 
 /**
- * @property AdminTemplate $template
+ * @property-read AdminTemplate $template
  */
 final class AdminPresenter extends Presenter
 {
