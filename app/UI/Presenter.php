@@ -8,7 +8,7 @@ use Drago\Localization\TranslatorAdapter;
 
 
 /**
- * @property Template $template
+ * @property-read Template $template
  */
 abstract class Presenter extends \Nette\Application\UI\Presenter
 {
