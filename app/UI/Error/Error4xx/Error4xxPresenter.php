@@ -10,7 +10,7 @@ use Nette\Application\Attributes\Requires;
 
 /**
  * Handles 4xx HTTP error responses.
- * @property Error4xxTemplate $template
+ * @property-read Error4xxTemplate $template
  */
 #[Requires(methods: '*')]
 final class Error4xxPresenter extends Nette\Application\UI\Presenter
