@@ -1,0 +1,31 @@
+{var string $class = ''}
+{varType string $name}
+{varType Nette\Application\UI\Form $form}
+
+<form n:name="$name" n:class="'row g-3', $class" data-naja-history="off">
+	<ul class="errors" n:ifcontent>
+		<li n:foreach="$form->getOwnErrors() as $error">{_$error}</li>
+	</ul>
+
+	{* Block for form rendering *}
+	{block form}{/block}
+</form>
+
+{* General form field definition (input, select, textarea, submit) using switch *}
+{define input, string $type, string $name, int $columns = 12, string $class = '', int $rows = 3}
+	<div class="col-md-{$columns}">
+
+		{* Bootstrap classes for form elements *}
+		{var $text = 'form-control'}
+		{var $select = 'form-select'}
+		{var $submit = 'btn btn-primary'}
+
+		{label $name, class: 'form-label' /}
+		{switch $type}
+			{case 'text'}{input $name, class: $class ? "$text $class" : $text}
+			{case 'select'}{input $name, class: $class ? "$select $class" : $select}
+			{case 'textarea'}{input $name, class: $class ? "$text $class" : $text, rows: $rows}
+			{case 'submit'}{input $name, class: $class ? "$submit $class" : $submit}
+		{/switch}
+	</div>
+{/define}

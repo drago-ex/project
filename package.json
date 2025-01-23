@@ -1,7 +1,9 @@
 {
   "name": "project",
   "dependencies": {
-    "nette-forms": "^3.4.1"
+    "bootstrap": "^5.3.3",
+    "nette-forms": "^3.5.3",
+    "naja": "^3.2.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
