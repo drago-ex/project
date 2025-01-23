@@ -42,7 +42,7 @@ class ApplicationRunner
 			echo 'Application service not found: ' . $e->getMessage();
 			exit;
 
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			// Handle any other general exceptions
 			echo 'Error: ' . $e->getMessage();
 			exit;
