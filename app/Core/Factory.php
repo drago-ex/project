@@ -22,8 +22,7 @@ class Factory
 	 */
 	public function __construct(
 		private readonly Translator $translator,
-		// Translator for form translation
-		private readonly User $user, // User object to check login status
+		private readonly User $user,
 	) {
 	}
 
