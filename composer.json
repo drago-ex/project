@@ -1,7 +1,7 @@
 {
 	"name": "drago-ex/project",
 	"type": "project",
-	"description": "The basis for new projects on Drago Extension",
+	"description": "The basis for new projects on Drago Extension.",
 	"license": ["MIT"],
 	"authors": [
 		{
