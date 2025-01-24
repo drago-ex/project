@@ -12,7 +12,7 @@ use Nette\Security\User;
 /**
  * Factory class to create forms with optional protection based on user login status.
  */
-class Factory
+readonly class Factory
 {
 	/**
 	 * Constructor to initialize dependencies.
@@ -21,8 +21,8 @@ class Factory
 	 * @param User $user User object to check login status.
 	 */
 	public function __construct(
-		private readonly Translator $translator,
-		private readonly User $user,
+		private Translator $translator,
+		private User $user,
 	) {
 	}
 
