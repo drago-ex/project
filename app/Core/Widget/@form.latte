@@ -11,7 +11,7 @@
 	{block form}{/block}
 </form>
 
-{* General form field definition (input, select, textarea, submit) using switch *}
+{* General form field definition (input, select, textarea) using switch *}
 {define input, string $type, string $name, int $columns = 12, string $class, int $rows = 3}
 	<div class="col-md-{$columns}">
 		{label $name, class: 'form-label' /}
