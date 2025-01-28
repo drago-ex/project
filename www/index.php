@@ -26,27 +26,16 @@ class ApplicationRunner
 
 	/**
 	 * Run the Nette application.
+	 * @throws Throwable
 	 */
 	public function run(): void
 	{
-		try {
-			// Create the container and get the application service
-			$container = $this->bootstrap->createContainer();
-			$app = $container->getByType(Nette\Application\Application::class);
+		// Create the container and get the application service
+		$container = $this->bootstrap->createContainer();
+		$app = $container->getByType(Nette\Application\Application::class);
 
-			// Run the application
-			$app->run();
-
-		} catch (ServiceCreationException $e) {
-			// Handle case when the application service is not found
-			echo 'Application service not found: ' . $e->getMessage();
-			exit;
-
-		} catch (Throwable $e) {
-			// Handle any other general exceptions
-			echo 'Error: ' . $e->getMessage();
-			exit;
-		}
+		// Run the application
+		$app->run();
 	}
 }
 
