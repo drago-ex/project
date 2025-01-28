@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Bootstrap;
-use Nette\DI\ServiceCreationException;
 
 // Composer autoload
 require __DIR__ . '/../vendor/autoload.php';
