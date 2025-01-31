@@ -36,7 +36,7 @@
 {/define}
 
 {define submit, string $name, string $class}
-	{do $inputClass = "btn btn-primary text-white"}
+	{do $inputClass = "btn btn-primary"}
 	{input $name, class => $class
 		? "$inputClass $class"
 		: "$inputClass"}
