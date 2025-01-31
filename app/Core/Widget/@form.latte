@@ -14,15 +14,30 @@
 {* General form field definition (input, select, textarea) using switch *}
 {define input, string $type, string $name, int $columns = 12, string $class, int $rows = 3}
 	<div class="col-md-{$columns}">
-		{label $name, class: 'form-label' /}
-		{switch $type}
-			{case 'text'}<input n:name="$name" n:class="'form-control', $class">
-			{case 'select'}<select n:name="$name" n:class="'form-select', $class"></select>
-			{case 'textarea'}<textarea n:name="$name" n:class="'form-control', $class" rows="{$rows}"></textarea>
-		{/switch}
+		{label $name, class => "form-label" /}
+		{do $inputClass = "form-control"}
+			{if $type in [text, datetime, file]}
+				{input $name, class => $class
+					? "$inputClass $class"
+					: "$inputClass"}
+
+			{elseif $type === 'select'}
+				{do $inputClass = "form-select"}
+				{input $name, class => $class
+					? "$inputClass $class"
+					: "$inputClass"}
+
+			{elseif $type === 'textarea'}
+				{input $name, rows => $rows, class => $class
+				? "$inputClass $class"
+				: "$inputClass"}
+			{/if}
 	</div>
 {/define}
 
 {define submit, string $name, string $class}
-	<input n:name="$name" n:class="'btn btn-primary text-white', $class">
+	{do $inputClass = "btn btn-primary text-white"}
+	{input $name, class => $class
+		? "$inputClass $class"
+		: "$inputClass"}
 {/define}
