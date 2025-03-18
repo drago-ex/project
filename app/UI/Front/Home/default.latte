@@ -1,3 +1,27 @@
 {block content}
-	<h1 n:block="title">{_'Hello, world!'}</h1>
+	<div class="border-bottom pb-3">
+		<div class="row">
+			<div class="col-md-8">
+				<h1 n:block="title" class="fw-normal">
+					{_'Drago project'}
+				</h1>
+			</div>
+			<div class="col-md-4 pt-4 text-end">
+				{include LangSwitch, lang: 'cs', name: 'Czech'}<span>&#124;</span>
+				{include LangSwitch, lang: 'en', name: 'English'}
+			</div>
+		</div>
+	</div>
+
+	{snippet factory}
+		{embed '../../../Core/Widget/@form.latte', name: 'add', class: 'ajax mt-3'}
+			{block form}
+				{include input, type: text, name: 'name', columns: 6}
+				{include input, type: text, name: 'age', columns: 6}
+				<div class="d-block">
+					{include submit, name: 'send'}
+				</div>
+			{/block}
+		{/embed}
+	{/snippet}
 {/block}
