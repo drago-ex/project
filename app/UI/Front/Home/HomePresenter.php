@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Home;
 
+use App\Core\Factory;
 use App\UI\Presenter;
+use Drago\Application\UI\Alert;
+use Nette\Application\UI\Form;
+use Tracy\Debugger;
 
 
 /**
@@ -14,5 +18,33 @@ use App\UI\Presenter;
  */
 final class HomePresenter extends Presenter
 {
-	// The class doesn't have additional logic yet, it extends the base Presenter class.
+	public function __construct(
+		private readonly Factory $factory,
+	) {
+		parent::__construct();
+	}
+
+
+	protected function createComponentAdd(): Form
+	{
+		$form = $this->factory->create();
+		$form->addText('name', 'Name')
+			->setRequired('Name is required.');
+
+		$form->addInteger('age', 'Age')
+			->setRequired('Age is required.');
+
+		$form->addSubmit('send', 'Send');
+		$form->onSuccess[] = $this->success(...);
+		return $form;
+	}
+
+
+	public function success(Form $form): void {
+		Debugger::barDump($form->getValues());
+		$this->flashMessage('The form has been submitted.', Alert::Info);
+		$this->redrawControl('factory');
+		$this->redrawControl('message');
+		$form->reset();
+	}
 }
