@@ -3,15 +3,20 @@
   "dependencies": {
     "bootstrap": "^5.3.3",
     "nette-forms": "^3.5.3",
-    "naja": "^3.2.1"
+    "naja": "^3.2.1",
+    "live-form-validation": "^1.10.1"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "sass": "^1.83.4",
+    "vite": "^6.0.11"
   },
   "scripts": {
     "docker:build": "concurrently -n=build -c=green \"docker-compose build\"",
     "docker:dev": "concurrently -n=dev -c=blue \"docker-compose -f docker-compose.yml -f docker-compose.dev.yml up\"",
     "docker:pro": "concurrently -n=pro -c=blue \"docker-compose up --no-deps php\"",
-    "docker:off": "docker-compose down"
+    "docker:off": "docker-compose down",
+    "watch": "vite build --watch --mode=development",
+    "build": "vite build --mode=production"
   }
 }
