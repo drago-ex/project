@@ -1,5 +1,3 @@
-"Hello, world!": "Ahoj, světě!"
-
 # default form messages
 "Please enter %s.": "Zadejte %s."
 "This value should not be %s.": "Tato hodnota by neměla být %s."
@@ -22,3 +20,12 @@
 "Please select a valid option.": "Vyberte prosím platnou možnost."
 "An error occurred during file upload.": "Při nahrávání souboru došlo k chybě."
 "Your session has expired. Please return to the home page and try again.": "Vaše relace vypršela. Vraťte se na domovskou stránku a zkuste to znovu."
+
+# form translate
+"Name": "Jméno"
+"Age": "Věk"
+"Send": "Odeslat"
+"Name is required.": "Jméno je povinné."
+"Age is required.": "Věk je povinný."
+"Translation": "Překlad"
+"The form has been submitted.": "Formulář byl odeslán."
