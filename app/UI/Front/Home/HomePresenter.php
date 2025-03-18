@@ -40,7 +40,8 @@ final class HomePresenter extends Presenter
 	}
 
 
-	public function success(Form $form): void {
+	public function success(Form $form): void
+	{
 		Debugger::barDump($form->getValues());
 		$this->flashMessage('The form has been submitted.', Alert::Info);
 		$this->redrawControl('factory');
