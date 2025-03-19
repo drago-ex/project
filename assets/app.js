@@ -34,6 +34,7 @@ function initAlerts(selector) {
 /* Function to register all extensions */
 function registerExtensions() {
 	const extensions = [
+		new ErrorsExtension(),
 		new SubmitButtonDisable(),
 		new SpinnerExtension(),
 	];
