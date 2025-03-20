@@ -13,10 +13,10 @@
 	<title>{ifset title}{include title|stripHtml|firstUpper} &bull;{/ifset} Frontend</title>
 </head>
 
-<body class="container w-25">
+<body class="container w-25 bg-light">
 
 <!-- content -->
-<main role="main">
+<main role="main" class="bg-white p-4 mt-2 rounded">
 	{snippet message}
 		<div style="z-index: 1030" n:foreach="$flashes as $flash" n:class="'alert mt-2 alert-dismissible fade show border-0 rounded', 'alert-' . $flash->type" role="alert">{$flash->message|translate}
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
