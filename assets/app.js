@@ -4,6 +4,7 @@ import naja from "naja";
 import { Alert } from "bootstrap";
 import SubmitButtonDisable from "./naja.button";
 import SpinnerExtension from "./naja.spinner";
+import ErrorsExtension from "./naja.errors";
 import "./app.scss"
 
 window.LiveForm = LiveForm;
