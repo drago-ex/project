@@ -4,19 +4,21 @@ export default class SubmitButtonDisable {
 		let submitButton = null;
 
 		// Function to set the submitButton based on the clicked button
-		const setSubmitButton = (doc) => {
-			const submit = doc.querySelector('[data-btn-submit]:not([disabled])');
+		const submitDisable = (doc) => {
+			const submit = doc.querySelectorAll('[data-btn-submit]');
 			if (submit) {
-				submitButton = submit;
+				submit.forEach(function (button) {
+					button.addEventListener('click', () => submitButton = button);
+				});
 			}
 		};
 
 		// Initialize for the original document and after every snippet update
-		setSubmitButton(document);
-		naja.snippetHandler.addEventListener('afterUpdate', (e) => setSubmitButton(e.detail.snippet));
+		submitDisable(document);
+		naja.snippetHandler.addEventListener('afterUpdate', (e) => submitDisable(e.detail.snippet));
 
 		// Disable the button before submission
-		naja.addEventListener('start', () => {
+		naja.addEventListener('start', (e) => {
 			if (submitButton) {
 				if (reqCnt === 0) {
 					submitButton.disabled = true;
