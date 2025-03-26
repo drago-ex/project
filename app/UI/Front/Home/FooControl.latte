@@ -1,0 +1,30 @@
+{templateType App\UI\Front\Home\FooControlTemplate}
+
+<a n:href="openOffcanvas!" class="btn btn-sm btn-secondary ajax" data-naja-history="off">
+	{_'Open Offcanvas'}
+</a>
+
+{embed '../../../../vendor/drago-ex/components/src/Drago/assets/@offcanvas.latte', offcanvasId: $offcanvasId}
+	{block title}{_'Offcanvas'}{/block}
+	{block body}
+		{snippet offcanvas}
+			{$random}
+		{/snippet}
+	{/block}
+{/embed}
+
+<a n:href="openModal!" class="btn btn-sm btn-secondary ajax" data-naja-history="off">
+	{_'Open Modal'}
+</a>
+
+{embed '../../../../vendor/drago-ex/components/src/Drago/assets/@modal.latte', modalId: $modalId}
+	{block title}{_'Modal'}{/block}
+	{block body}
+		{snippet modal}
+			{$random}
+		{/snippet}
+	{/block}
+	{block footer}
+		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{_'Close'}</button>
+	{/block}
+{/embed}
