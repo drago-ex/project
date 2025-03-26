@@ -45,3 +45,4 @@ search:
 		classes:
 			- *Repository
 			- *Factory
+			- *Control
