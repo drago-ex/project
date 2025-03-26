@@ -2,9 +2,11 @@
 import { LiveForm, Nette } from "live-form-validation";
 import naja from "naja";
 import { Alert } from "bootstrap";
+import "../vendor/drago-ex/components/src/Drago/assets/naja.components"
 import SubmitButtonDisable from "./naja.button";
 import SpinnerExtension from "./naja.spinner";
 import ErrorsExtension from "./naja.errors";
+import HyperlinkDisable from "./naja.hyperlink";
 import "./app.scss"
 
 window.LiveForm = LiveForm;
@@ -38,6 +40,7 @@ function registerExtensions() {
 		new ErrorsExtension(),
 		new SubmitButtonDisable(),
 		new SpinnerExtension(),
+		new HyperlinkDisable()
 	];
 
 	// Register each extension with Naja
