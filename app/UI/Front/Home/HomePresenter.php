@@ -20,8 +20,15 @@ final class HomePresenter extends Presenter
 {
 	public function __construct(
 		private readonly Factory $factory,
+		private readonly FooControl $fooControl,
 	) {
 		parent::__construct();
+	}
+
+
+	protected function createComponentFooControl(): FooControl
+	{
+		return $this->fooControl;
 	}
 
 
