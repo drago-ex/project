@@ -58,6 +58,8 @@ composer require drago-ex/generator
 
 The configuration is very simple, just copy from the [Drago\Generator](https://github.com/drago-ex/generator) package:  `config.neon`,  `bin\generator` and  `Bootstrap.php` and put it all in the bin folder in the project.
 
-you can use the copy command: `copy vendor/drago-ex/generator/Bootstrap.php, vendor/drago-ex/generator/bin/generator, vendor/drago-ex/generator/config.neon bin`
+You can use the copy command: 
+
+`copy vendor/drago-ex/generator/Bootstrap.php, vendor/drago-ex/generator/bin/generator, vendor/drago-ex/generator/config.neon bin`
 
 And run the command: `php .\bin\generator app:entity`
