@@ -10,19 +10,3 @@ services:
       - ./:/var/www/html/
     ports:
       - '8090:80'
-
-
-  # database
-  db:
-    image: library/mariadb:latest
-    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: app
-      MYSQL_USER: super
-      MYSQL_PASSWORD: pass
-    volumes:
-      - ./docker/mysql/:/var/lib/mysql
-    ports:
-      - '6033:3306'
