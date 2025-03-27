@@ -47,3 +47,4 @@ db:
     ports:
       - '6033:3306'
 ```
+As for further configuration on Docker, you can find it in the documentation.
