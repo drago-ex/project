@@ -54,4 +54,8 @@ As for further configuration on Docker, you can find it in the documentation.
 composer require drago-ex/generator
 ```
 
-https://github.com/drago-ex/generator
+The configuration is very simple, just copy from the [Drago\Generator](https://github.com/drago-ex/generator) package: config.neon, from the bin directory the generator and Bootstrap class and put it all in the bin folder in the project.
+
+Then, just correct the path in the generator to the Bootstrap class, Set up a database connection.
+
+And run the command.
