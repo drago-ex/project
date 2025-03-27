@@ -31,7 +31,7 @@ RUN docker-php-ext-enable mysqli
 ```
 
 And add these lines to  `docker-compose.yml ` to configure the MySQL server as needed:
-```
+```yml
 # database
 db:
   image: library/mariadb:latest
