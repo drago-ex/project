@@ -56,7 +56,7 @@ As for further configuration on Docker, you can find it in the documentation.
 composer require drago-ex/generator
 ```
 
-The configuration is very simple, just copy the contents of the folder from the [Drago\Generator](https://github.com/drago-ex/generator) bin to bin in the project.
+The configuration is very simple, just copy the contents of the folder from the package bin to bin in the project.
 
 You can use the copy command: `copy vendor/drago-ex/generator/bin/* bin`
 
