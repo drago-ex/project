@@ -20,6 +20,8 @@ composer create-project drago-ex/project
 Basic package for applications where the basis for Bootstrap, Vite, Docker, Naja is already prepared.
 You can find all commands in `package.json` like running Docker or Vite.
 
+*First, run npm install*
+
 ## Docker
 Docker is set to the minimum configuration for running the project.
 
