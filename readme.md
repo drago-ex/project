@@ -55,4 +55,3 @@ composer require drago-ex/generator
 ```
 
 https://github.com/drago-ex/generator
-
