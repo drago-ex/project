@@ -58,6 +58,6 @@ composer require drago-ex/generator
 
 Use the command to copy the necessary files: `copy vendor/drago-ex/generator/bin/* bin`
 
-Then edit the database configuration and settings in `bin/config.neon`
+Then edit the configuration including the database in `bin/config.neon`
 
 And run the command: `php .\bin\generator app:entity`
