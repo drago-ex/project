@@ -56,6 +56,6 @@ As for further configuration on Docker, you can find it in the documentation.
 composer require drago-ex/generator
 ```
 
-Use the command to copy the necessary files.: `copy vendor/drago-ex/generator/bin/* bin`
+Use the command to copy the necessary files: `copy vendor/drago-ex/generator/bin/* bin`
 
 And run the command: `php .\bin\generator app:entity`
