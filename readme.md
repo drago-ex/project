@@ -24,7 +24,7 @@ You can find all commands in `package.json` like running Docker or Vite.
 Docker is set to the minimum configuration for running the project.
 
 If we want to add, for example, MySQL, we add these lines to the dockerfile:
-```
+```dockerfile
 # php extensions
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-enable mysqli
