@@ -53,3 +53,6 @@ As for further configuration on Docker, you can find it in the documentation.
 ```
 composer require drago-ex/generator
 ```
+
+https://github.com/drago-ex/generator
+
