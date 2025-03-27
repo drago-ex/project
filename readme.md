@@ -51,5 +51,5 @@ As for further configuration on Docker, you can find it in the documentation.
 
 ## If we use a MySQL or Oracle database, we can use Entity generation
 ```
-composer require-dev drago-ex/generator
+composer require drago-ex/generator
 ```
