@@ -30,7 +30,7 @@ RUN docker-php-ext-install mysqli
 RUN docker-php-ext-enable mysqli
 ```
 
-And add these lines to docker-compose.yml to configure the MySQL server as needed:
+And add these lines to  `docker-compose.yml ` to configure the MySQL server as needed:
 ```
 # database
 db:
