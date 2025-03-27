@@ -18,4 +18,4 @@ composer create-project drago-ex/project
 
 ## Basic information
 Basic package for applications where the basis for Bootstrap, Vite, Docker, Naja is already prepared.
-You can find all commands in ´package.json´ like running Docker or Vite.
+You can find all commands in `package.json` like running Docker or Vite.
