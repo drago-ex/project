@@ -49,7 +49,7 @@ db:
 ```
 As for further configuration on Docker, you can find it in the documentation.
 
-## If we use a MySQL or Oracle database, we can use Entity generation
+## If we use database, we can use Entity generation
 ```
 composer require drago-ex/generator
 ```
