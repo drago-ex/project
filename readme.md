@@ -56,6 +56,6 @@ composer require drago-ex/generator
 
 The configuration is very simple, just copy from the [Drago\Generator](https://github.com/drago-ex/generator) package: config.neon, from the bin directory the generator and Bootstrap class and put it all in the bin folder in the project.
 
-Then, just correct the path in the generator to the Bootstrap class, Set up a database connection.
+Then, just correct the path in the generator to the Bootstrap class, set up a database connection in config.neon
 
-And run the command.
+And run the command: `php .\bin\generator app:entity`
