@@ -1,7 +1,7 @@
 export default class HyperlinkDisable {
 	initialize(naja) {
 		const hyperlinkDisable = (doc) => {
-			const links = doc.querySelectorAll('a.btn');
+			const links = doc.querySelectorAll('a.btn.ajax');
 			links.forEach((link) => {
 				link.addEventListener('click', (event) => {
 					event.preventDefault();
