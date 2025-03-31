@@ -1,0 +1,20 @@
+{* subtitle sites *}
+<p n:block="title" class="m-0 fw-semibold">
+    {_'New user registration'}
+</p>
+
+{* website content *}
+{block content}
+	{embed '../../../Core/Widget/@form.latte', name: 'signUp'}
+		{block form}
+			{include input, type: text, name: 'username'}
+			{include input, type: text, name: 'email'}
+			{include input, type: text, name: 'password'}
+			{include input, type: text, name: 'verify'}
+			<div class="d-grid gap-1">
+				{include submit, name: 'send'}
+				<a n:href="in" class="btn btn-link text-start">{_'Back to sign in'}</a>
+			</div>
+		{/block}
+	{/embed}
+{/block}
