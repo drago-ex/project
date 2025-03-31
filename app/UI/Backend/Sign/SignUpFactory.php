@@ -18,7 +18,7 @@ readonly class SignUpFactory
 {
 	public function __construct(
 		private Passwords $password,
-		private Factory   $factory,
+		private Factory $factory,
 	) {
 	}
 
