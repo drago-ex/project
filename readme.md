@@ -21,3 +21,18 @@ Basic package for applications where the basis for Bootstrap, Vite, Docker, Naja
 You can find all commands in `package.json` like running Docker or Vite.
 
 First, run `npm install`
+
+## Database connection
+The project is ready for a MySQL database on dibi, so all you need to do is set up a database connection.
+```neon
+extensions:
+	dibi: Dibi\Bridges\Nette\DibiExtension22
+
+dibi:
+	host: localhost
+	username:
+	password:
+	database:
+	driver: mysqli
+	lazy: true
+```
