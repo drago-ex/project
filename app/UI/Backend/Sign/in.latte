@@ -1,0 +1,16 @@
+<p n:block="title" class="m-0 fw-semibold">
+    {_'Login to the system'}
+</p>
+
+{block content}
+	{embed '../../../Core/Widget/@form.latte', name: 'signIn'}
+		{block form}
+			{include input, type: text, name: 'email'}
+			{include input, type: text, name: 'password'}
+			<div class="d-grid">
+				{include submit, name: 'send'}
+				<a href="" class="btn btn-link text-end">{_'Sign up'}</a>
+			</div>
+		{/block}
+	{/embed}
+{/block}

@@ -29,6 +29,7 @@ export default defineConfig(({ mode }) => {
 				},
 				input: {
 					app: './assets/app.js',
+					signIn: './assets/sign.in.js',
 				}
 			}
 		},

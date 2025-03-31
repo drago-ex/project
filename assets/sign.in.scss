@@ -1,0 +1,26 @@
+@import "bootstrap";
+
+//
+// sign in style
+//
+
+html,
+body {
+  height: 85%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  background-color: $light;
+}
+
+.sign-in {
+  width: 100%;
+  max-width: 25rem;
+  margin: auto;
+}
+
+.text-separate {
+  color: #ccc;
+}
