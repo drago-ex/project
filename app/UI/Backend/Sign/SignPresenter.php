@@ -7,7 +7,6 @@ namespace App\UI\Backend\Sign;
 use App\Core\Factory;
 use Drago\Localization\TranslatorAdapter;
 use Exception;
-use JetBrains\PhpStorm\NoReturn;
 use Nette\Application\AbortException;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
@@ -94,7 +93,7 @@ final class SignPresenter extends Presenter
 	 * Logout user from application.
 	 * @throws AbortException
 	 */
-	#[NoReturn] public function actionUserOut(): void
+	public function actionUserOut(): void
 	{
 		$this->getUser()->logout();
 		$this->redirect('in');
