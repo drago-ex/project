@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\UI\Backend\Sign;
 
 use App\Core\Factory;
-use Drago\Localization\TranslatorAdapter;
+use App\UI\Presenter;
+use Drago\Application\UI\Alert;
 use Exception;
 use Nette\Application\AbortException;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
-use Nette\Application\UI\Presenter;
 use Nette\Security\AuthenticationException;
 
 
@@ -20,14 +20,13 @@ use Nette\Security\AuthenticationException;
  */
 final class SignPresenter extends Presenter
 {
-	use TranslatorAdapter;
-
 	#[Persistent]
 	public string $backlink = '';
 
 
 	public function __construct(
 		private readonly Factory $factory,
+		private readonly SignUpFactory $signUpFactory,
 	) {
 		parent::__construct();
 	}
@@ -86,6 +85,20 @@ final class SignPresenter extends Presenter
 			};
 			$form->addError($message);
 		}
+	}
+
+
+	/**
+	 * Create the sign-up form.
+	 */
+	protected function createComponentSignUp(): Form
+	{
+		$form = $this->signUpFactory->create();
+		$form->onSuccess[] = function () {
+			$this->flashMessage('Registration was successful.', Alert::Info);
+			$this->redirect('in');
+		};
+		return $form;
 	}
 
 
