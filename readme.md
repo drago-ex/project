@@ -24,7 +24,7 @@ First, run `npm install`
 
 ## Database connection
 The project is ready for a MySQL database on dibi, so all you need to do is set up a database connection.
-```
+```neon
 extensions:
 	dibi: Dibi\Bridges\Nette\DibiExtension22
 
