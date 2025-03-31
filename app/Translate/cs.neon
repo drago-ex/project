@@ -29,3 +29,13 @@
 "Age is required.": "Věk je povinný."
 "Translation": "Překlad"
 "The form has been submitted.": "Formulář byl odeslán."
+
+# sign in
+"Login to the system": "Přihlášení do systému"
+"Email address": "Emailová adresa"
+"Please enter your email address.": "Zadejte prosím svou e-mailovou adresu."
+"Password": "Heslo"
+"Your password": "Vaše heslo"
+"Please enter your password.": "Zadejte prosím své heslo."
+"Sign in": "Přihlásit se"
+"Sign up": "Registrovat se"
