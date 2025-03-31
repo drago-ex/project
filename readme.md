@@ -61,3 +61,6 @@ Use the command to copy the necessary files: `copy vendor/drago-ex/generator/bin
 Then edit the configuration including the database in `bin/config.neon`
 
 And run the command: `php .\bin\generator app:entity`
+
+## Info
+The project with the database set up in this way is in the `database-project` branch.
