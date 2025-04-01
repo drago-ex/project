@@ -85,6 +85,7 @@ class UserRepository implements Authenticator, IdentityHandler
 			return null;
 		}
 
+		$user->offsetUnset('password');
 		return new SimpleIdentity(id: $user->id, data: $user);
 	}
 
