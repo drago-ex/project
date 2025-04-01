@@ -93,7 +93,7 @@ final class SignPresenter extends Presenter
 	 * Logout user from application.
 	 * @throws AbortException
 	 */
-	public function actionUserOut(): void
+	public function actionOut(): void
 	{
 		$this->getUser()->logout();
 	}
