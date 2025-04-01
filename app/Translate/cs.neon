@@ -40,9 +40,17 @@
 "Sign in": "Přihlásit se"
 "Sign up": "Registrovat se"
 
-# sugn up
+# sign up
 "New user registration": "Registrace nového uživatele"
 "Username": "Uživatelské jméno"
 "Full name": "Celé jméno"
 "Password to check": "Heslo ke kontrole"
 "Back to sign in": "Zpět k přihlášení"
+
+# sign out
+"You have been signed out": "Byli jste odhlášeni"
+
+# admininstration
+"Administration": "Administrace"
+"Sign out": "Odhlásit se"
+"If you see this page, it means you have successfully logged in.": "Pokud vidíte tuto stránku, znamená to, že jste se úspěšně přihlásili."

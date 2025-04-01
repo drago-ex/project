@@ -7,7 +7,6 @@ namespace App\UI\Backend\Sign;
 use App\Core\Factory;
 use App\UI\Presenter;
 use Drago\Application\UI\Alert;
-use Exception;
 use Nette\Application\AbortException;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
@@ -29,18 +28,6 @@ final class SignPresenter extends Presenter
 		private readonly SignUpFactory $signUpFactory,
 	) {
 		parent::__construct();
-	}
-
-
-	/**
-	 * @throws Exception
-	 */
-	protected function beforeRender(): void
-	{
-		parent::beforeRender();
-		if ($this->getUser()->isLoggedIn()) {
-			$this->redirect(':Backend:Admin:');
-		}
 	}
 
 
@@ -109,6 +96,5 @@ final class SignPresenter extends Presenter
 	public function actionUserOut(): void
 	{
 		$this->getUser()->logout();
-		$this->redirect('in');
 	}
 }

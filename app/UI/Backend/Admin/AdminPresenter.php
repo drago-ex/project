@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Backend\Admin;
 
+use App\Core\User\UserRequireLogged;
 use App\UI\Presenter;
 
 
@@ -15,6 +16,5 @@ use App\UI\Presenter;
  */
 final class AdminPresenter extends Presenter
 {
-	// The logic for handling admin-specific actions can be added here.
-	// This class can contain methods for rendering and processing requests related to the admin section.
+	use UserRequireLogged;
 }

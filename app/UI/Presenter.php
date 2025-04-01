@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\UI;
 
+use App\Core\User\User;
 use Drago\Localization\TranslatorAdapter;
-use Nette\Application\UI\Template;
+use Nette\DI\Attributes\Inject;
 
 
 /**
@@ -17,4 +18,19 @@ use Nette\Application\UI\Template;
 abstract class Presenter extends \Nette\Application\UI\Presenter
 {
 	use TranslatorAdapter;
+
+	#[Inject]
+	public User $user;
+
+
+	/**
+	 * Runs before rendering the page.
+	 */
+	protected function beforeRender(): void
+	{
+		parent::beforeRender();
+
+		// Ensure the user is set and accessible in the template
+		$this->template->user = $this->user;
+	}
 }

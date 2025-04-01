@@ -46,3 +46,8 @@ search:
 			- *Repository
 			- *Factory
 			- *Control
+
+
+# application services
+services:
+	user: App\Core\User\User

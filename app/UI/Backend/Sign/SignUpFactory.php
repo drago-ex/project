@@ -71,7 +71,7 @@ readonly class SignUpFactory
 		$data->password = $this->password->hash($data->password);
 
 		// Generate a token
-		$data->token = Random::generate(60);
+		$data->token = Random::generate(32);
 
 		// Remove the password confirmation field
 		$data->offsetUnset(SignUpData::Verify);

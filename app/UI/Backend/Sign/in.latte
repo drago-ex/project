@@ -7,9 +7,9 @@
 		{block form}
 			{include input, type: text, name: 'email'}
 			{include input, type: text, name: 'password'}
-			<div class="d-grid">
+			<div class="d-grid gap-1">
 				{include submit, name: 'send'}
-				<a href="" class="btn btn-link text-end">{_'Sign up'}</a>
+				<a n:href="Sign:up" class="btn btn-link text-end">{_'Sign up'}</a>
 			</div>
 		{/block}
 	{/embed}

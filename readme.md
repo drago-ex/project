@@ -22,17 +22,15 @@ You can find all commands in `package.json` like running Docker or Vite.
 
 First, run `npm install`
 
-## Database connection
-The project is ready for a MySQL database on dibi, so all you need to do is set up a database connection.
-```neon
-extensions:
-	dibi: Dibi\Bridges\Nette\DibiExtension22
-
-dibi:
-	host: localhost
-	username:
-	password:
-	database:
-	driver: mysqli
-	lazy: true
+## Database
+```sql
+CREATE TABLE `users` (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `username` varchar(50) NOT NULL,
+    `email` varchar(50) NOT NULL,
+    `password` varchar(60) NOT NULL,
+    `token` varchar(32) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
