@@ -14,11 +14,14 @@
 
 <body>
 
-{* flash message *}
-<div n:foreach="$flashes as $flash" n:class="'flash', $flash->type">{$flash->message|translate}</div>
+<div class="container">
 
-{* content block *}
-{include content}
+	{* flash message *}
+	<div n:foreach="$flashes as $flash" n:class="'flash', $flash->type">{$flash->message|translate}</div>
+
+	{* content block *}
+	{include content}
+</div>
 
 <script type="module" src="{$basePath}/dist/app.js"></script>
 
