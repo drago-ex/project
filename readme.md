@@ -53,7 +53,7 @@ As for further configuration on Docker, you can find it in the documentation.
 
 ## If we use database, we can use Entity generation
 ```
-composer require drago-ex/generator
+composer require drago-ex/generator --dev
 ```
 
 Use the command to copy the necessary files: `copy vendor/drago-ex/generator/bin/* bin`
