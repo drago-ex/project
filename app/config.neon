@@ -43,6 +43,5 @@ search:
 	-
 		in: %appDir%
 		classes:
-			- *Repository
 			- *Factory
 			- *Control
