@@ -1,0 +1,41 @@
+# nette extensions
+extensions:
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+	generator: Drago\Generator\DI\GeneratorExtension
+
+# generator
+generator:
+	# base (typical of Oracle)
+	lower: false
+
+	# generator entity
+	path: %appDir%/Entity
+	tableName: 'Table'
+	primaryKey: 'ColumnId'
+	columnInfo: false
+	constant: true
+	constantSize: false
+	constantPrefix: 'Column'
+	references: false
+	suffix: Entity
+	extendsOn: true
+	extends: Drago\Database\Entity
+	final: false
+	namespace: App\Entity
+
+	# generator data class
+	pathDataClass: %appDir%/DataClass
+	constantDataClass: true
+	constantSizeDataClass: true
+	constantDataPrefix: 'Form'
+	referencesDataClass: false
+	suffixDataClass: Data
+	extendsDataClass: Drago\Utils\ExtraArrayHash
+	finalDataClass: false
+	namespaceDataClass: App\Data
+
+
+# symfony console
+console:
+	name: Symfony Console
+	version: '1.0'

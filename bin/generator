@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+use bin\Console;
+
+require __DIR__ . '/Console.php';
+
+if (
+	!(is_file($file = __DIR__ . '/../vendor/autoload.php') && include $file) &&
+	!(is_file($file = __DIR__ . '/../../../autoload.php') && include $file)
+) {
+	fwrite(STDERR, "Install packages using Composer.\n");
+	exit(1);
+}
+
+exit(Console::console());
