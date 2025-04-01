@@ -1,0 +1,34 @@
+{* https://getbootstrap.com/docs/5.3/components/modal/ *}
+{varType string $modalId}
+<div class="modal fade" id="{$modalId}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			{* modal header *}
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="staticBackdropLabel">
+
+					{* the title for the modal is inserted here *}
+					{block title}{/block}
+				</h1>
+
+				{* modal close button *}
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+
+			{* modal body *}
+			<div class="modal-body">
+
+				{* content for the modal is inserted here *}
+				{block body}{/block}
+			</div>
+
+			{* modal footer *}
+			<div class="modal-footer">
+
+				{* content for the footer is inserted here *}
+				{block footer}{/block}
+			</div>
+		</div>
+	</div>
+</div>
