@@ -51,7 +51,7 @@ final class Bootstrap
 	/**
 	 * @throws Throwable
 	 */
-	public function configure(): void
+	private function configure(): void
 	{
 		// Adding configuration files from the current directory excluding the 'Translate' directory.
 		$this->configurator->addFindConfig(__DIR__, 'Translate');
