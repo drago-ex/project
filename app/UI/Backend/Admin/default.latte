@@ -3,5 +3,5 @@
 {block content}
 	<h1 n:block="title" class="border-bottom pb-3 fw-normal">{_'Administration'}</h1>
 	<p>{_'If you see this page, it means you have successfully logged in.'}</p>
-	<p>{$user->getUserIdentity()->username} (<a n:href="Sign:out">{_'Sign out'}</a>)</p>
+	<p>{$user->getUserIdentity()->username} (<a n:href=":Backend:Sign:out">{_'Sign out'}</a>)</p>
 {/block}
