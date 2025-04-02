@@ -1,20 +1,23 @@
 export default class HyperlinkDisable {
 	initialize(naja) {
 		const hyperlinkDisable = (doc) => {
-			const links = doc.querySelectorAll('a.btn.ajax');
+			const links = doc.querySelectorAll('[data-link-disable]');
 			links.forEach((link) => {
 				link.addEventListener('click', (event) => {
 					event.preventDefault();
 					link.classList.add('disabled');
 				});
 			});
+			return links;
 		};
 
-		hyperlinkDisable(document);
-		naja.snippetHandler.addEventListener('afterUpdate', (e) => hyperlinkDisable(e.detail.snippet));
+		const initialLinks = hyperlinkDisable(document);
+		naja.snippetHandler.addEventListener('afterUpdate', (e) => {
+			hyperlinkDisable(e.detail.snippet);
+		});
+
 		naja.addEventListener('complete', () => {
-			const disabledLinks = document.querySelectorAll('a.btn.disabled');
-			disabledLinks.forEach((link) => {
+			initialLinks.forEach((link) => {
 				link.classList.remove('disabled');
 			});
 		});
