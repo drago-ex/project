@@ -42,6 +42,7 @@
 "User not found.": "Uživatel nenalezen."
 "The password is incorrect.": "Heslo je nesprávné."
 "Unknown error occurred.": "Došlo k neznámé chybě."
+"You are already logged in, go back to the administration or you can log out.": "Jste již přihlášeni, vraťte se do administrace nebo se můžete odhlásit."
 
 # sign up
 "New user registration": "Registrace nového uživatele"
