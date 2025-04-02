@@ -9,16 +9,14 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="{$basePath}/dist/signIn.css">
-	<title>
-		{ifset title}{include title|stripHtml|firstUpper} &bull; Project{/ifset}
-		{ifset $settings}{$settings->website}{/ifset}
-	</title>
+	<script src="{$basePath}/dist/signIn.js" type="module" async></script>
+	<title n:snippet="title">{ifset title}{include title|stripHtml|firstUpper} &bull;{/ifset} Project</title>
 </head>
 
 <body>
 
 {* content *}
-<div class="sign-in mt-5 bg-white shadow-sm rounded-3">
+<div class="sign-in mt-5 bg-white shadow-sm rounded-3" n:snippet="body">
 	<div class="bg-light p-3 mb-2">
 		<div class="d-flex">
 			<div class="ps-1 pe-1 flex-grow-1 text-primary">
@@ -32,6 +30,11 @@
 		</div>
 	</div>
 	<div class="p-3">
+		{foreach $flashes as $flash}
+			<div n:class="'alert fade show border-0 rounded', 'alert-' . $flash->type" role="alert">
+				{$flash->message|translate}
+			</div>
+		{/foreach}
 		{include content}
 	</div>
 </div>
@@ -40,8 +43,6 @@
 <footer class="fixed-bottom bg-white pt-3 pb-1 text-muted">
 	<p class="text-center font-weight-bold">&copy {=date('Y')}</p>
 </footer>
-
-<script type="module" src="{$basePath}/dist/signIn.js" defer></script>
 
 </body>
 </html>
