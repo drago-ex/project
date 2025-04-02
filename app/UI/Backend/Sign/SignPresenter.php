@@ -26,6 +26,7 @@ final class SignPresenter extends Presenter
 	public function __construct(
 		private readonly Factory $factory,
 		private readonly SignUpFactory $signUpFactory,
+		private readonly SignRecoveryFactory $signRecoveryFactory,
 	) {
 		parent::__construct();
 	}
@@ -47,6 +48,14 @@ final class SignPresenter extends Presenter
 
 
 	public function renderUp(): void
+	{
+		if ($this->isAjax()) {
+			$this->redraw();
+		}
+	}
+
+
+	public function renderRecovery(): void
 	{
 		if ($this->isAjax()) {
 			$this->redraw();
@@ -107,6 +116,20 @@ final class SignPresenter extends Presenter
 		$form->onSuccess[] = function () {
 			$this->flashMessage('Your registration has been successfully completed, you can now log in.', Alert::Info);
 			$this->redirect('in');
+		};
+		return $form;
+	}
+
+
+	/**
+	 * Create recovery lost password.
+	 */
+	protected function createComponentSignRecovery(): Form
+	{
+		$form = $this->signRecoveryFactory->create();
+		$form->onSuccess[] = function () {
+			//$this->flashMessage('Your recovery request has been successfully sent.', Alert::Info);
+			//$this->redirect('in');
 		};
 		return $form;
 	}
