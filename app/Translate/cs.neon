@@ -39,7 +39,9 @@
 "Please enter your password.": "Zadejte prosím své heslo."
 "Sign in": "Přihlásit se"
 "Sign up": "Registrovat se"
-"You are already logged in, go back to the administration or you can log out.": "Jste již přihlášeni, vraťte se do administrace nebo se můžete odhlásit."
+"User not found.": "Uživatel nenalezen."
+"The password is incorrect.": "Heslo je nesprávné."
+"Unknown error occurred.": "Došlo k neznámé chybě."
 
 # sign up
 "New user registration": "Registrace nového uživatele"
@@ -47,6 +49,7 @@
 "Full name": "Celé jméno"
 "Password to check": "Heslo ke kontrole"
 "Back to sign in": "Zpět k přihlášení"
+"Your registration has been successfully completed, you can now log in.": "Vaše registrace byla úspěšně dokončena, nyní se můžete přihlásit."
 
 # sign out
 "You have been signed out": "Byli jste odhlášeni"
