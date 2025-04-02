@@ -19,7 +19,8 @@ export default class SubmitButtonDisable {
 
 		// Disable the button before submission
 		naja.addEventListener('start', (e) => {
-			if (submitButton) {
+			console.log(e.detail);
+			if (submitButton && e.detail.request.method === 'POST') {
 				if (reqCnt === 0) {
 					submitButton.disabled = true;
 				}
@@ -28,8 +29,8 @@ export default class SubmitButtonDisable {
 		});
 
 		// Re-enable the button after the request completes
-		naja.addEventListener('complete', () => {
-			if (submitButton) {
+		naja.addEventListener('complete', (e) => {
+			if (submitButton && e.detail.request.method === 'POST') {
 				if (--reqCnt === 0) {
 					submitButton.disabled = false;
 				}
