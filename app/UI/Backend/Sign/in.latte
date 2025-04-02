@@ -10,7 +10,8 @@
                 {include input, type: text, name: 'password'}
                 <div class="d-grid gap-1">
                     {include submit, name: 'send'}
-                    <a n:href="Sign:up" class="btn btn-link text-end ajax">{_'Sign up'}</a>
+                    <a n:href="Sign:up" class="btn btn-link p-0 text-end ajax" data-link-disable>{_'Sign up'}</a>
+                    <a n:href="Sign:recovery" class="btn btn-link p-0 text-end ajax" data-link-disable>{_'Lost your password?'}</a>
                 </div>
             {/block}
         {/embed}
@@ -18,7 +19,7 @@
         <p>{_'You are already logged in, go back to the administration or you can log out.'}</p>
         <ul>
             <li><a n:href=":Backend:Admin:">{_'Administration'}</a></li>
-            <li><a n:href=":Backend:Sign:out" class="ajax">{_'Sign out'}</a></li>
+            <li><a n:href=":Backend:Sign:out" class="btn btn-link p-0 ajax" data-link-disable>{_'Sign out'}</a></li>
         </ul>
     {/if}
 {/block}
