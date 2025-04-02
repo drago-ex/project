@@ -30,7 +30,7 @@
 "Translation": "Překlad"
 "The form has been submitted.": "Formulář byl odeslán."
 
-# sign in
+# sign
 "Login to the system": "Přihlášení do systému"
 "Email address": "Emailová adresa"
 "Please enter your email address.": "Zadejte prosím svou e-mailovou adresu."
@@ -43,8 +43,8 @@
 "The password is incorrect.": "Heslo je nesprávné."
 "Unknown error occurred.": "Došlo k neznámé chybě."
 "You are already logged in, go back to the administration or you can log out.": "Jste již přihlášeni, vraťte se do administrace nebo se můžete odhlásit."
-
-# sign up
+"Lost your password?": "Zapomněli jste heslo?"
+"Reset password": "Resetovat heslo"
 "New user registration": "Registrace nového uživatele"
 "Username": "Uživatelské jméno"
 "Full name": "Celé jméno"
@@ -53,9 +53,8 @@
 "Your registration has been successfully completed, you can now log in.": "Vaše registrace byla úspěšně dokončena, nyní se můžete přihlásit."
 "Please enter your full name.": "Zadejte prosím své celé jméno."
 "Please enter your password to check.": "Zadejte prosím své heslo pro kontrolu."
-
-# sign out
 "You have been signed out": "Byli jste odhlášeni"
+"Forgot password": "Zapomenuté heslo"
 
 # admininstration
 "Administration": "Administrace"
