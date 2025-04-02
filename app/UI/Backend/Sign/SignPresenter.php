@@ -31,6 +31,29 @@ final class SignPresenter extends Presenter
 	}
 
 
+	private function redraw(): void
+	{
+		$this->redrawControl('title');
+		$this->redrawControl('body');
+	}
+
+
+	public function renderIn(): void
+	{
+		if ($this->isAjax()) {
+			$this->redraw();
+		}
+	}
+
+
+	public function renderUp(): void
+	{
+		if ($this->isAjax()) {
+			$this->redraw();
+		}
+	}
+
+
 	/**
 	 * Create the sign-in form.
 	 */
@@ -82,7 +105,7 @@ final class SignPresenter extends Presenter
 	{
 		$form = $this->signUpFactory->create();
 		$form->onSuccess[] = function () {
-			$this->flashMessage('Registration was successful.', Alert::Info);
+			$this->flashMessage('Your registration has been successfully completed, you can now log in.', Alert::Info);
 			$this->redirect('in');
 		};
 		return $form;
@@ -96,5 +119,8 @@ final class SignPresenter extends Presenter
 	public function actionOut(): void
 	{
 		$this->getUser()->logout();
+		if ($this->isAjax()) {
+			$this->redraw();
+		}
 	}
 }
