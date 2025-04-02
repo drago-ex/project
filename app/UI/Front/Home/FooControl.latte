@@ -1,9 +1,6 @@
 {templateType App\UI\Front\Home\FooControlTemplate}
 
-<a n:href="openOffcanvas!" class="btn btn-sm btn-secondary ajax" data-naja-history="off">
-	{_'Open Offcanvas'}
-</a>
-
+<a n:href="openOffcanvas!" class="btn btn-sm btn-secondary ajax" data-naja-history="off" data-link-disable>{_'Open Offcanvas'}</a>
 {embed '../../../../app/Core/Widget/@offcanvas.latte', offcanvasId: $offcanvasId}
 	{block title}{_'Offcanvas'}{/block}
 	{block body}
@@ -13,10 +10,7 @@
 	{/block}
 {/embed}
 
-<a n:href="openModal!" class="btn btn-sm btn-secondary ajax" data-naja-history="off">
-	{_'Open Modal'}
-</a>
-
+<a n:href="openModal!" class="btn btn-sm btn-secondary ajax" data-naja-history="off" data-link-disable>{_'Open Modal'}</a>
 {embed '../../../../app/Core/Widget/@modal.latte', modalId: $modalId}
 	{block title}{_'Modal'}{/block}
 	{block body}
