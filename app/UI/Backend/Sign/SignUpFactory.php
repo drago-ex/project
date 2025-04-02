@@ -32,24 +32,24 @@ readonly class SignUpFactory
 
 		$form->addText(SignUpData::Username, 'Username')
 			->setHtmlAttribute('placeholder', 'Full name')
-			->setRequired();
+			->setRequired('Please enter your full name.');
 
 		$form->addText(SignUpData::Email, 'Email address')
 			->setHtmlAttribute('placeholder', 'Email address')
 			->setDefaultValue('@')
 			->setHtmlType('email')
 			->addRule($form::Email)
-			->setRequired();
+			->setRequired('Please enter your email address.');
 
 		$form->addPassword(SignUpData::Password, 'Password')
 			->setHtmlAttribute('placeholder', 'Your password')
 			->addRule($form::MinLength, 'Password must be at least %d characters long.', 6)
-			->setRequired();
+			->setRequired('Please enter your password.');
 
 		$form->addPassword(SignUpData::Verify, 'Password to check')
 			->setHtmlAttribute('placeholder', 'Your password')
 			->addRule($form::Equal, 'Passwords do not match.', $form['password'])
-			->setRequired();
+			->setRequired('Please enter your password to check.');
 
 		$form->addSubmit('send', 'Sign up');
 		$form->onSuccess[] = $this->success(...);
