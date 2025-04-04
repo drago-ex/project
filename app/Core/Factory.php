@@ -7,6 +7,7 @@ namespace App\Core;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Nette\Security\User;
+use Stringable;
 
 
 /**
@@ -46,6 +47,39 @@ readonly class Factory
 
 		// Set the translator for form
 		$form->setTranslator($this->translator);
+
+		return $form;
+	}
+
+
+	public function addReadyEmail(form $form): Form
+	{
+		$form->addText('email', 'Email')
+			->setHtmlAttribute('email')
+			->setHtmlAttribute('placeholder', 'Email address')
+			->addRule($form::Email, 'Please enter a valid email address.')
+			->setRequired('Please enter your email address.');
+
+		return $form;
+	}
+
+
+	public function addReadyPassword(Form $form): Form
+	{
+		$form->addPassword('password', 'Password')
+			->setHtmlAttribute('placeholder', 'Your password')
+			->setRequired('Please enter your password.');
+
+		return $form;
+	}
+
+
+	public function addReadyPasswordCheck(Form $form, string $checkValue): Form
+	{
+		$form->addPassword('verify', 'Password to check')
+			->setHtmlAttribute('placeholder', 'Your password')
+			->addRule($form::Equal, 'Passwords do not match.', $checkValue)
+			->setRequired('Please enter your password to check.');
 
 		return $form;
 	}
