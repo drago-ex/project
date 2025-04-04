@@ -57,6 +57,9 @@ final class SignPresenter extends Presenter
 
 	public function renderRecovery(): void
 	{
+		$token = $this->signRecoveryFactory->getToken();
+		$this->template->signRecoveryToken = $token;
+
 		if ($this->isAjax()) {
 			$this->redraw();
 		}
@@ -121,15 +124,31 @@ final class SignPresenter extends Presenter
 	}
 
 
-	/**
-	 * Create recovery lost password.
-	 */
-	protected function createComponentSignRecovery(): Form
+	protected function createComponentSignRecoveryRequest(): Form
 	{
-		$form = $this->signRecoveryFactory->create();
+		$form = $this->signRecoveryFactory->createRequest();
 		$form->onSuccess[] = function () {
-			//$this->flashMessage('Your recovery request has been successfully sent.', Alert::Info);
-			//$this->redirect('in');
+			$this->flashMessage('Your password change request has been sent to your email.', Alert::Info);
+		};
+		return $form;
+	}
+
+
+	protected function createComponentSignRecoveryCheckToken(): Form
+	{
+		$form = $this->signRecoveryFactory->createCheckToken();
+		$form->onSuccess[] = function () {
+			$this->flashMessage('Token check was successful.', Alert::Info);
+		};
+		return $form;
+	}
+
+
+	protected function createComponentSignRecoveryChangePassword(): Form
+	{
+		$form = $this->signRecoveryFactory->creatChangePassword();
+		$form->onSuccess[] = function () {
+			$this->flashMessage('Password change was successful.', Alert::Info);
 		};
 		return $form;
 	}
