@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace App\UI\Backend\Sign;
 
 use App\Core\Factory;
+use App\Core\User\UsersEntity;
+use Dibi\Connection;
+use Dibi\UniqueConstraintViolationException;
 use Exception;
 use Nette\Application\UI\Form;
 use Nette\Security\Passwords;
 use Nette\Utils\AssertionException;
 use Nette\Utils\Random;
 use Nette\Utils\Validators;
-use Tracy\Debugger;
 
 
 readonly class SignUpFactory
@@ -19,6 +21,7 @@ readonly class SignUpFactory
 	public function __construct(
 		private Passwords $password,
 		private Factory $factory,
+		private Connection $connection,
 	) {
 	}
 
@@ -62,7 +65,6 @@ readonly class SignUpFactory
 	 * Hashes the password, generates a token, and inserts the user into the database.
 	 *
 	 * @throws Exception
-	 * @throws SignUpDuplicateEmailException
 	 * @throws AssertionException
 	 */
 	public function success(Form $form, SignUpData $data): void
@@ -81,11 +83,15 @@ readonly class SignUpFactory
 
 		try {
 			// Insert the user data into the database
-			Debugger::barDump($data);
+			$this->connection->insert(UsersEntity::Table, $data->toArray())
+				->execute();
 
-		} catch (SignUpDuplicateEmailException $e) {
-			// If a unique constraint violation occurs (duplicate email), throw an exception
-			throw new SignUpDuplicateEmailException();
+		} catch (UniqueConstraintViolationException $e) {
+			$message = match ($e->getCode()) {
+				1062 => "We're sorry, but an account with this email address already exists.",
+				default => 'Unknown status code.',
+			};
+			$form->addError($message);
 		}
 	}
 }
