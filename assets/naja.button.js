@@ -1,37 +1,38 @@
 let reqCnt = 0;
+
 export default class SubmitButtonDisable {
 	initialize(naja) {
 		let submitButton = null;
 
-		// Function to set the submitButton based on the clicked button
 		const submitDisable = (doc) => {
-			const submit = doc.querySelectorAll('[data-btn-submit]');
-			if (submit) {
-				submit.forEach(function (button) {
-					button.addEventListener('click', () => submitButton = button);
+			doc.querySelectorAll('form').forEach(form => {
+				const submits = form.querySelectorAll('[data-btn-submit]');
+				submits.forEach(submit => {
+					submit.addEventListener('click', () => {
+						if (form && form.checkValidity()) {
+							submitButton = submit;
+						}
+					});
 				});
-			}
+			});
 		};
 
-		// Initialize for the original document and after every snippet update
 		submitDisable(document);
-		naja.snippetHandler.addEventListener('afterUpdate', (e) => submitDisable(e.detail.snippet));
+		naja.snippetHandler.addEventListener('afterUpdate', (e) => {
+			submitDisable(e.detail.snippet);
+		});
 
-		// Disable the button before submission
-		naja.addEventListener('start', (e) => {
-			console.log(e.detail);
-			if (submitButton && e.detail.request.method === 'POST') {
-				if (reqCnt === 0) {
-					submitButton.disabled = true;
-				}
+		naja.addEventListener('start', () => {
+			if (submitButton) {
 				reqCnt++;
+				submitButton.disabled = true;
 			}
 		});
 
-		// Re-enable the button after the request completes
-		naja.addEventListener('complete', (e) => {
-			if (submitButton && e.detail.request.method === 'POST') {
-				if (--reqCnt === 0) {
+		naja.addEventListener('complete', () => {
+			if (submitButton) {
+				reqCnt--;
+				if (reqCnt === 0) {
 					submitButton.disabled = false;
 				}
 			}
