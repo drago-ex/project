@@ -1,11 +1,12 @@
+let reqCnt = 0;
 export default class HyperlinkDisable {
 	initialize(naja) {
 		const hyperlinkDisable = (doc) => {
 			const links = doc.querySelectorAll('[data-link-disable]');
 			links.forEach((link) => {
 				link.addEventListener('click', (event) => {
-					event.preventDefault();
 					link.classList.add('disabled');
+					reqCnt++;
 				});
 			});
 			return links;
@@ -17,9 +18,11 @@ export default class HyperlinkDisable {
 		});
 
 		naja.addEventListener('complete', () => {
-			initialLinks.forEach((link) => {
-				link.classList.remove('disabled');
-			});
+			if (--reqCnt === 0) {
+				initialLinks.forEach((link) => {
+					link.classList.remove('disabled');
+				});
+			}
 		});
 	}
 }
