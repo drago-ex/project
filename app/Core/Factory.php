@@ -65,9 +65,9 @@ readonly class Factory
 	{
 		return $this->addTextInput(
 			$form,
-			name:'password',
-			label:'Password',
-			type:'password',
+			name: 'password',
+			label: 'Password',
+			type: 'password',
 			placeholder: 'Your password',
 			required: 'Please enter your password.',
 			rule: $form::MinLength,
