@@ -1,9 +1,12 @@
+{varType App\UI\Backend\Sign\SignRecoveryToken $signRecoveryToken}
+
 <p n:block="title" class="m-0 fw-semibold">
     {_'Forgot password'}
 </p>
 
 {block content}
-        {embed '../../../Core/Widget/@form.latte', name: 'signRecovery', class: 'ajax'}
+    {if !$signRecoveryToken->token}
+        {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryRequest', class: 'ajax'}
             {block form}
                 {include input, type: text, name: 'email'}
                 <div class="d-grid gap-1">
@@ -12,4 +15,27 @@
                 </div>
             {/block}
         {/embed}
+    {elseif !$signRecoveryToken->tokenCheck}
+        {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryCheckToken', class: 'ajax'}
+            {block form}
+                {include input, type: text, name: 'token'}
+                <div class="d-grid gap-1">
+                    {include submit, name: 'send'}
+                    <a n:href="in" class="btn btn-link p-0 text-start ajax" data-link-disable>{_'Back to sign in'}</a>
+                </div>
+            {/block}
+        {/embed}
+    {else}
+        {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryChangePassword', class: 'ajax'}
+            {block form}
+                {include input, type: text, name: 'password'}
+                {include input, type: text, name: 'verify'}
+                <div class="d-grid gap-1">
+                    {include submit, name: 'send'}
+                    <a n:href="in" class="btn btn-link p-0 text-start ajax" data-link-disable>{_'Back to sign in'}</a>
+                </div>
+            {/block}
+        {/embed}
+    {/if}
 {/block}
+
