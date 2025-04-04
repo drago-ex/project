@@ -15,4 +15,5 @@ final class SignTemplate extends Template
 	 * This can be either the Nette User or a custom User class from App\Core\User.
 	 */
 	public \Nette\Security\User|User $user;
+	public SignRecoveryToken $signRecoveryToken;
 }
