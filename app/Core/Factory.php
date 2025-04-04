@@ -55,8 +55,9 @@ readonly class Factory
 
 	/**
 	 * Adds a password input field to the form.
-	 * This method uses the `addTextInput` helper method to add a password input field 
+	 * This method uses the `addTextInput` helper method to add a password input field
 	 * with a minimum length validation rule (6 characters by default).
+	 *
 	 * @param Form $form The form to add the password input field to.
 	 * @return TextInput The created password input field.
 	 */
@@ -127,7 +128,7 @@ readonly class Factory
 	/**
 	 * Generic method to add a text input field to the form.
 	 * This method can be used to create text, password, or email input fields with optional validation rules.
-	 * 
+	 *
 	 * @param Form $form The form to add the input field to.
 	 * @param string $name The name of the input field.
 	 * @param string $label The label for the input field.
@@ -137,7 +138,7 @@ readonly class Factory
 	 * @param string|null $rule The validation rule (optional).
 	 * @param string|null $ruleMessage The error message for the validation rule (optional).
 	 * @param string|int|null $ruleValue The value for the validation rule (optional).
-	 * 
+	 *
 	 * @return TextInput The created input field.
 	 */
 	public function addTextInput(
