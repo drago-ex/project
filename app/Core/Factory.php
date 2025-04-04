@@ -12,8 +12,8 @@ use Nette\Security\User;
 /**
  * Factory class to create forms with optional protection based on user login status.
  *
- * This class provides methods to create different types of form fields such as text, password, and email inputs,
- * with support for validation rules, placeholders, and other attributes.
+ * This class provides methods for creating and adding various form inputs (text, password, email, etc.)
+ * with optional validation rules and messages.
  */
 readonly class Factory
 {
@@ -56,20 +56,19 @@ readonly class Factory
 
     /**
      * Adds a password input field to the form.
+     * This method uses the `addTextInput` helper method to add a password input field
+     * with a minimum length validation rule (6 characters by default).
      *
-     * This method adds a password input field with an optional minimum length validation.
-     * It uses the addTextInput method with type 'password'.
-     *
-     * @param Form $form The form to which the input field will be added.
+     * @param Form $form The form to add the password input field to.
      * @return TextInput The created password input field.
      */
     public function addPassword(Form $form): TextInput
     {
         return $this->addTextInput(
             $form,
-            name: 'password',
-            label: 'Password',
-            type: 'password',
+            name:'password',
+            label:'Password',
+            type:'password',
             placeholder: 'Your password',
             required: 'Please enter your password.',
             rule: $form::MinLength,
@@ -81,11 +80,11 @@ readonly class Factory
 
     /**
      * Adds a password verification input field to the form.
+     * This method uses the `addTextInput` helper method to add a second password input field
+     * and validates if the entered passwords match.
      *
-     * This method adds a password confirmation field to check if the entered passwords match.
-     *
-     * @param Form $form The form to which the input field will be added.
-     * @param string $ruleValue The name of the password field to compare against.
+     * @param Form $form The form to add the password verification input field to.
+     * @param string $ruleValue The value of the password input field to check against.
      * @return TextInput The created password verification input field.
      */
     public function addPasswordVerification(Form $form, string $ruleValue): TextInput
@@ -99,7 +98,6 @@ readonly class Factory
             required: 'Please enter the password to check.',
         );
 
-        // Add a rule to check if the passwords match
         $passwordField->addRule($form::Equal, 'Passwords do not match.', $ruleValue);
         return $passwordField;
     }
@@ -107,10 +105,10 @@ readonly class Factory
 
     /**
      * Adds an email input field to the form.
+     * This method uses the `addTextInput` helper method to add an email input field
+     * with an email format validation rule.
      *
-     * This method adds an email input field with email validation.
-     *
-     * @param Form $form The form to which the input field will be added.
+     * @param Form $form The form to add the email input field to.
      * @return TextInput The created email input field.
      */
     public function addEmail(Form $form): TextInput
@@ -130,19 +128,18 @@ readonly class Factory
 
     /**
      * Generic method to add a text input field to the form.
+     * This method can be used to create text, password, or email input fields with optional validation rules.
      *
-     * This method creates an input field based on the type provided. It supports text, password, and email fields.
-     * It also allows setting optional placeholders, required fields, validation rules, and custom validation messages.
-     *
-     * @param Form $form The form to which the input field will be added.
+     * @param Form $form The form to add the input field to.
      * @param string $name The name of the input field.
      * @param string $label The label for the input field.
-     * @param string|null $type The type of the input field (e.g., 'text', 'password', 'email'). Default is 'text'.
+     * @param string|null $type The type of the input field (e.g., 'text', 'password', 'email').
      * @param string|null $placeholder The placeholder text for the input field.
-     * @param string|null $required A message that will be displayed if the field is required.
-     * @param string|null $rule The validation rule to apply (e.g., $form::Email, $form::MinLength).
-     * @param string|null $ruleMessage The message to display for the validation rule.
-     * @param string|int|null $ruleValue The value for the validation rule (optional, depending on the rule).
+     * @param string|null $required The error message if the field is required.
+     * @param string|null $rule The validation rule (optional).
+     * @param string|null $ruleMessage The error message for the validation rule (optional).
+     * @param string|int|null $ruleValue The value for the validation rule (optional).
+     *
      * @return TextInput The created input field.
      */
     public function addTextInput(
@@ -156,8 +153,6 @@ readonly class Factory
         ?string $ruleMessage = null,
         string|int|null $ruleValue = null,
     ): TextInput {
-
-        // Create the appropriate input field based on the type
         $input = match ($type) {
             'password' => $form->addPassword($name, $label),
             'email' => $form->addText($name, $label)
