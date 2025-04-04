@@ -57,7 +57,6 @@ readonly class Factory
 	 * Adds a password input field to the form.
 	 * This method uses the `addTextInput` helper method to add a password input field 
 	 * with a minimum length validation rule (6 characters by default).
-	 *
 	 * @param Form $form The form to add the password input field to.
 	 * @return TextInput The created password input field.
 	 */
