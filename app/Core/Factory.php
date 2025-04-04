@@ -11,7 +11,6 @@ use Nette\Security\User;
 
 /**
  * Factory class to create forms with optional protection based on user login status.
- * 
  * This class provides methods for creating and adding various form inputs (text, password, email, etc.)
  * with optional validation rules and messages.
  */
