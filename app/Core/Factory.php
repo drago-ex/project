@@ -17,8 +17,11 @@ use Nette\Security\User;
  * This class provides methods for creating and adding various form inputs (text, password, email, etc.)
  * with optional validation rules and messages.
  */
-readonly class Factory
+class Factory
 {
+	private ?Form $form = null;
+
+
 	/**
 	 * Constructor to initialize dependencies.
 	 *
@@ -26,8 +29,8 @@ readonly class Factory
 	 * @param User $user User object to check login status.
 	 */
 	public function __construct(
-		private Translator $translator,
-		private User $user,
+		private readonly Translator $translator,
+		private readonly User $user,
 	) {
 	}
 
@@ -42,17 +45,19 @@ readonly class Factory
 	 */
 	public function create(): Form
 	{
-		$form = new Form();
+		if ($this->form === null) {
+			$this->form = new Form();
 
-		// Add form protection if the user is logged in
-		if ($this->user->isLoggedIn()) {
-			$form->addProtection();
+			// Add form protection if the user is logged in
+			if ($this->user->isLoggedIn()) {
+				$this->form->addProtection();
+			}
+
+			// Set the translator for form
+			$this->form->setTranslator($this->translator);
 		}
 
-		// Set the translator for form
-		$form->setTranslator($this->translator);
-
-		return $form;
+		return $this->form;
 	}
 
 
@@ -60,7 +65,6 @@ readonly class Factory
 	 * Generic method to add a text input field to the form.
 	 * This method can be used to create text, password, or email input fields with optional validation rules.
 	 *
-	 * @param Form $form The form to add the input field to.
 	 * @param string $name The name of the input field.
 	 * @param string $label The label for the input field.
 	 * @param string|null $type The type of the input field (e.g., 'text', 'password', 'email').
@@ -73,7 +77,6 @@ readonly class Factory
 	 * @return TextInput The created input field.
 	 */
 	public function addTextInput(
-		Form $form,
 		string $name,
 		string $label,
 		?string $type = 'text',
@@ -84,6 +87,7 @@ readonly class Factory
 		string|int|null $ruleValue = null,
 	): TextInput
 	{
+		$form = $this->create();
 		$input = match ($type) {
 			'password' => $form->addPassword($name, $label),
 			'email' => $form->addText($name, $label)
@@ -115,13 +119,12 @@ readonly class Factory
 	 * This method uses the `addTextInput` helper method to add a password input field
 	 * with a minimum length validation rule (6 characters by default).
 	 *
-	 * @param Form $form The form to add the password input field to.
 	 * @return TextInput The created password input field.
 	 */
-	public function addPassword(Form $form): TextInput
+	public function addPassword(): TextInput
 	{
+		$form = $this->create();
 		return $this->addTextInput(
-			$form,
 			name: 'password',
 			label: 'Password',
 			type: 'password',
@@ -141,16 +144,14 @@ readonly class Factory
 	 * is applied only if the `$ruleValue` is provided or if a 'password' input field exists in the form.
 	 * If neither is available, an exception is thrown.
 	 *
-	 * @param Form $form The form to add the password verification input field to.
 	 * @param string|null $ruleValue The value of the password input field to check against.
 	 * @return TextInput The created password verification input field.
 	 * @throws InvalidArgumentException If no password field is found in the form and no rule value is provided.
 	 */
-	public function addPasswordVerification(Form $form, ?string $ruleValue = null): TextInput
+	public function addPasswordVerification(?string $ruleValue = null): TextInput
 	{
-		// Create the password verification field
+		$form = $this->create();
 		$passwordField = $this->addTextInput(
-			$form,
 			name: 'verify',
 			label: 'Password to check',
 			type: 'password',
@@ -178,13 +179,12 @@ readonly class Factory
 	 * This method uses the `addTextInput` helper method to add an email input field
 	 * with an email format validation rule.
 	 *
-	 * @param Form $form The form to add the email input field to.
 	 * @return TextInput The created email input field.
 	 */
-	public function addEmail(Form $form): TextInput
+	public function addEmail(): TextInput
 	{
+		$form = $this->create();
 		return $this->addTextInput(
-			$form,
 			name: 'email',
 			label: 'Email',
 			type: 'email',
