@@ -55,6 +55,60 @@ readonly class Factory
 
 
 	/**
+	 * Generic method to add a text input field to the form.
+	 * This method can be used to create text, password, or email input fields with optional validation rules.
+	 *
+	 * @param Form $form The form to add the input field to.
+	 * @param string $name The name of the input field.
+	 * @param string $label The label for the input field.
+	 * @param string|null $type The type of the input field (e.g., 'text', 'password', 'email').
+	 * @param string|null $placeholder The placeholder text for the input field.
+	 * @param string|null $required The error message if the field is required.
+	 * @param string|null $rule The validation rule (optional).
+	 * @param string|null $ruleMessage The error message for the validation rule (optional).
+	 * @param string|int|null $ruleValue The value for the validation rule (optional).
+	 *
+	 * @return TextInput The created input field.
+	 */
+	public function addTextInput(
+		Form $form,
+		string $name,
+		string $label,
+		?string $type = 'text',
+		?string $placeholder = null,
+		?string $required = null,
+		?string $rule = null,
+		?string $ruleMessage = null,
+		string|int|null $ruleValue = null,
+	): TextInput
+	{
+		$input = match ($type) {
+			'password' => $form->addPassword($name, $label),
+			'email' => $form->addText($name, $label)
+				->setHtmlAttribute('type', 'email'),
+
+			default => $form->addText($name, $label),
+		};
+
+		// Set optional attributes if provided
+		if ($placeholder !== null) {
+			$input->setHtmlAttribute('placeholder', $placeholder);
+		}
+
+		if ($required !== null) {
+			$input->setRequired($required);
+		}
+
+		// Apply validation rule if provided
+		if ($rule) {
+			$input->addRule($rule, $ruleMessage, $ruleValue);
+		}
+
+		return $input;
+	}
+
+
+	/**
 	 * Adds a password input field to the form.
 	 * This method uses the `addTextInput` helper method to add a password input field
 	 * with a minimum length validation rule (6 characters by default).
@@ -123,59 +177,5 @@ readonly class Factory
 			rule: $form::Email,
 			ruleMessage: 'Please enter a valid email address.',
 		);
-	}
-
-
-	/**
-	 * Generic method to add a text input field to the form.
-	 * This method can be used to create text, password, or email input fields with optional validation rules.
-	 *
-	 * @param Form $form The form to add the input field to.
-	 * @param string $name The name of the input field.
-	 * @param string $label The label for the input field.
-	 * @param string|null $type The type of the input field (e.g., 'text', 'password', 'email').
-	 * @param string|null $placeholder The placeholder text for the input field.
-	 * @param string|null $required The error message if the field is required.
-	 * @param string|null $rule The validation rule (optional).
-	 * @param string|null $ruleMessage The error message for the validation rule (optional).
-	 * @param string|int|null $ruleValue The value for the validation rule (optional).
-	 *
-	 * @return TextInput The created input field.
-	 */
-	public function addTextInput(
-		Form $form,
-		string $name,
-		string $label,
-		?string $type = 'text',
-		?string $placeholder = null,
-		?string $required = null,
-		?string $rule = null,
-		?string $ruleMessage = null,
-		string|int|null $ruleValue = null,
-	): TextInput
-	{
-		$input = match ($type) {
-			'password' => $form->addPassword($name, $label),
-			'email' => $form->addText($name, $label)
-				->setHtmlAttribute('type', 'email'),
-
-			default => $form->addText($name, $label),
-		};
-
-		// Set optional attributes if provided
-		if ($placeholder !== null) {
-			$input->setHtmlAttribute('placeholder', $placeholder);
-		}
-
-		if ($required !== null) {
-			$input->setRequired($required);
-		}
-
-		// Apply validation rule if provided
-		if ($rule) {
-			$input->addRule($rule, $ruleMessage, $ruleValue);
-		}
-
-		return $input;
 	}
 }
