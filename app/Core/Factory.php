@@ -11,6 +11,7 @@ use Nette\Security\User;
 
 /**
  * Factory class to create forms with optional protection based on user login status.
+ *
  * This class provides methods for creating and adding various form inputs (text, password, email, etc.)
  * with optional validation rules and messages.
  */
@@ -151,7 +152,8 @@ readonly class Factory
 		?string $rule = null,
 		?string $ruleMessage = null,
 		string|int|null $ruleValue = null,
-	): TextInput {
+	): TextInput
+	{
 		$input = match ($type) {
 			'password' => $form->addPassword($name, $label),
 			'email' => $form->addText($name, $label)
