@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use InvalidArgumentException;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
 use Nette\Localization\Translator;
 use Nette\Security\User;
+
 
 /**
  * Factory class to create forms with optional protection based on user login status.
@@ -135,14 +137,18 @@ readonly class Factory
 	/**
 	 * Adds a password verification input field to the form.
 	 * This method uses the `addTextInput` helper method to add a second password input field
-	 * and validates if the entered passwords match.
+	 * and validates if the entered passwords match. The password matching validation rule
+	 * is applied only if the `$ruleValue` is provided or if a 'password' input field exists in the form.
+	 * If neither is available, an exception is thrown.
 	 *
 	 * @param Form $form The form to add the password verification input field to.
-	 * @param string $ruleValue The value of the password input field to check against.
+	 * @param string|null $ruleValue The value of the password input field to check against.
 	 * @return TextInput The created password verification input field.
+	 * @throws InvalidArgumentException If no password field is found in the form and no rule value is provided.
 	 */
-	public function addPasswordVerification(Form $form, string $ruleValue): TextInput
+	public function addPasswordVerification(Form $form, ?string $ruleValue = null): TextInput
 	{
+		// Create the password verification field
 		$passwordField = $this->addTextInput(
 			$form,
 			name: 'verify',
@@ -152,7 +158,17 @@ readonly class Factory
 			required: 'Please enter the password to check.',
 		);
 
+		// If $ruleValue is null, attempt to get the value from the 'password' field
+		$ruleValue ??= ($form['password']->getValue() ?? null);
+
+		// If neither $ruleValue nor the 'password' field exists, throw an exception
+		if ($ruleValue === null) {
+			throw new \InvalidArgumentException('Password field or ruleValue is required for password verification.');
+		}
+
+		// Add the rule for password matching
 		$passwordField->addRule($form::Equal, 'Passwords do not match.', $ruleValue);
+
 		return $passwordField;
 	}
 
