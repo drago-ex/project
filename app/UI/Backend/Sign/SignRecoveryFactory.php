@@ -8,10 +8,10 @@ use App\Core\Factory;
 use App\Core\User\UsersEntity;
 use Dibi\Connection;
 use Nette\Application\UI\Form;
+use Nette\Forms\Controls\TextInput;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
 use Nette\Utils\Random;
-use Tracy\Debugger;
 
 
 readonly class SignRecoveryFactory
@@ -78,12 +78,18 @@ readonly class SignRecoveryFactory
 		$form = $this->factory->create();
 		$form->addText('token', 'Code')
 			->setHtmlAttribute('placeholder', 'Enter the code from the email')
-			->addRule($form::Equal, 'The code entered is invalid.', $this->getToken()->token)
-			->setRequired('Please enter the code from the email.');
+			->setRequired('Please enter the code from the email.')
+			->addRule([$this, 'tokenCheck'], 'The code entered is invalid.');
 
 		$form->addSubmit('send', 'Continue password recovery');
 		$form->onSuccess[] = $this->checkToken(...);
 		return $form;
+	}
+
+
+	public function tokenCheck(TextInput $input): bool
+	{
+		return $input->getValue() === $this->getToken()->token;
 	}
 
 
@@ -108,7 +114,6 @@ readonly class SignRecoveryFactory
 
 		if ($findEmail) {
 			$this->setToken();
-			Debugger::barDump($this->getToken());
 
 		} else {
 			$form->addError("We're sorry, but we don't know such an email address.");
