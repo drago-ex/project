@@ -155,8 +155,8 @@ class Factory
 			name: 'verify',
 			label: 'Password to check',
 			type: 'password',
-			placeholder: 'Please re-enter your password',
-			required: 'Please enter the password to check.',
+			placeholder: 'Re-enter password',
+			required: 'Please enter your password to check.',
 		);
 
 		// Check if 'password' field exists in the form
@@ -185,7 +185,7 @@ class Factory
 			name: 'email',
 			label: 'Email',
 			type: 'email',
-			placeholder: 'Your email address',
+			placeholder: 'Email address',
 			required: 'Please enter your email address.',
 			rule: $form::Email,
 			ruleMessage: 'Please enter a valid email address.',
