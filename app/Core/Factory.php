@@ -165,7 +165,7 @@ class Factory
 		}
 
 		// Add the rule to check if the 'verify' field matches the 'password' field
-		$passwordField->addRule($form::Equal, 'Passwords do not match.');
+		$passwordField->addRule($form::Equal, 'Passwords do not match.', $form['password']);
 
 		return $passwordField;
 	}
