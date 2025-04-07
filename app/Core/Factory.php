@@ -18,7 +18,7 @@ use Nette\Security\User;
  */
 class Factory
 {
-	private ?Form $form = null;
+	private array $forms = [];
 
 
 	/**
@@ -44,19 +44,18 @@ class Factory
 	 */
 	public function create(): Form
 	{
-		if ($this->form === null) {
-			$this->form = new Form();
+		$form = new Form();
 
-			// Add form protection if the user is logged in
-			if ($this->user->isLoggedIn()) {
-				$this->form->addProtection();
-			}
-
-			// Set the translator for form
-			$this->form->setTranslator($this->translator);
+		// Add form protection if the user is logged in
+		if ($this->user->isLoggedIn()) {
+			$form->addProtection();
 		}
 
-		return $this->form;
+		// Set the translator for form
+		$form->setTranslator($this->translator);
+		$this->forms[] = $form;
+
+		return $form;
 	}
 
 
@@ -86,7 +85,7 @@ class Factory
 		string|int|null $ruleValue = null,
 	): TextInput
 	{
-		$form = $this->create();
+		$form = end($this->forms);
 		$input = match ($type) {
 			'password' => $form->addPassword($name, $label),
 			'integer' => $form->addInteger($name, $label),
