@@ -37,7 +37,7 @@ readonly class SignUpFactory
 			->setHtmlAttribute('placeholder', 'Full name')
 			->setRequired('Please enter your full name.');
 
-		$form->addText(SignUpData::Email, 'Email address')
+		$form->addText(SignUpData::Email, 'Email')
 			->setHtmlAttribute('placeholder', 'Email address')
 			->setDefaultValue('@')
 			->setHtmlType('email')
@@ -50,7 +50,7 @@ readonly class SignUpFactory
 			->setRequired('Please enter your password.');
 
 		$form->addPassword(SignUpData::Verify, 'Password to check')
-			->setHtmlAttribute('placeholder', 'Your password')
+			->setHtmlAttribute('placeholder', 'Re-enter password')
 			->addRule($form::Equal, 'Passwords do not match.', $form['password'])
 			->setRequired('Please enter your password to check.');
 
