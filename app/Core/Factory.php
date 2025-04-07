@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use InvalidArgumentException;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
 use Nette\Localization\Translator;
