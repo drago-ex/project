@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use InvalidArgumentException;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
 use Nette\Localization\Translator;
@@ -60,6 +61,22 @@ class Factory
 
 
 	/**
+	 * Retrieves the latest form and ensures it's an instance of the Form class.
+	 *
+	 * @return Form The created form instance.
+	 */
+	private function getForm(): Form
+	{
+		$form = end($this->forms);
+
+		// Only check the type during development (assert will be ignored in production if turned off)
+		assert($form instanceof Form);
+
+		return $form;
+	}
+
+
+	/**
 	 * Generic method to add a text input field to the form.
 	 * This method can be used to create text, password, or email input fields with optional validation rules.
 	 *
@@ -85,7 +102,7 @@ class Factory
 		string|int|null $ruleValue = null,
 	): TextInput
 	{
-		$form = end($this->forms);
+		$form = $this->getForm();
 		$input = match ($type) {
 			'password' => $form->addPassword($name, $label),
 			'integer' => $form->addInteger($name, $label),
