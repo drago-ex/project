@@ -3,8 +3,8 @@
 {varType Nette\Application\UI\Form $form}
 
 <form n:name="$name" n:class="'row g-3', $class ?? null" data-naja-history="off">
-	<ul class="errors" n:ifcontent>
-		<li n:foreach="$form->getOwnErrors() as $error">{_$error}</li>
+	<ul n:if="$form->hasErrors()" class="errors">
+		<li n:foreach="$form->errors as $error">{_$error}</li>
 	</ul>
 
 	{* Block for form rendering *}
