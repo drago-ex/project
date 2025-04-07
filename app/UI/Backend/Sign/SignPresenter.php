@@ -138,7 +138,7 @@ final class SignPresenter extends Presenter
 	{
 		$form = $this->signRecoveryFactory->createCheckToken();
 		$form->onSuccess[] = function () {
-			$this->flashMessage('Token check was successful.', Alert::Info);
+			$this->flashMessage('Code check was successful.', Alert::Info);
 		};
 		return $form;
 	}
