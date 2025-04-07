@@ -90,7 +90,7 @@ class Factory
 			'password' => $form->addPassword($name, $label),
 			'integer' => $form->addInteger($name, $label),
 			'email' => $form->addText($name, $label)
-				->setHtmlAttribute('type', 'email'),
+				->setHtmlType('email'),
 
 			default => $form->addText($name, $label),
 		};
