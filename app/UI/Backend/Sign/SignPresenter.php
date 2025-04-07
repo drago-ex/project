@@ -72,16 +72,8 @@ final class SignPresenter extends Presenter
 	protected function createComponentSignIn(): Form
 	{
 		$form = $this->factory->create();
-		$form->addText(SignData::Email, 'Email')
-			->setHtmlAttribute('email')
-			->setHtmlAttribute('placeholder', 'Email address')
-			->addRule($form::Email, 'Please enter a valid email address.')
-			->setRequired('Please enter your email address.');
-
-		$form->addPassword(SignData::Password, 'Password')
-			->setHtmlAttribute('placeholder', 'Your password')
-			->setRequired('Please enter your password.');
-
+		$this->factory->addEmail();
+		$this->factory->addPassword();
 		$form->addSubmit('send', 'Sign in');
 		$form->onSuccess[] = $this->success(...);
 		return $form;
@@ -128,7 +120,7 @@ final class SignPresenter extends Presenter
 	{
 		$form = $this->signRecoveryFactory->createRequest();
 		$form->onSuccess[] = function () {
-			$this->flashMessage('Your password change request has been sent to your email.', Alert::Info);
+			$this->flashMessage('A password recovery code has been sent to your email.', Alert::Info);
 		};
 		return $form;
 	}
