@@ -19,7 +19,7 @@ use Nette\Security\User;
  */
 class Factory
 {
-	private ?Form $form = null;
+	private array $forms = [];
 
 
 	/**
@@ -45,19 +45,18 @@ class Factory
 	 */
 	public function create(): Form
 	{
-		if ($this->form === null) {
-			$this->form = new Form();
+		$form = new Form();
 
-			// Add form protection if the user is logged in
-			if ($this->user->isLoggedIn()) {
-				$this->form->addProtection();
-			}
-
-			// Set the translator for form
-			$this->form->setTranslator($this->translator);
+		// Add form protection if the user is logged in
+		if ($this->user->isLoggedIn()) {
+			$form->addProtection();
 		}
 
-		return $this->form;
+		// Set the translator for form
+		$form->setTranslator($this->translator);
+		$this->forms[] = $form;
+
+		return $form;
 	}
 
 
@@ -87,7 +86,7 @@ class Factory
 		string|int|null $ruleValue = null,
 	): TextInput
 	{
-		$form = $this->create();
+		$form = end($this->forms);
 		$input = match ($type) {
 			'password' => $form->addPassword($name, $label),
 			'integer' => $form->addInteger($name, $label),
@@ -124,7 +123,7 @@ class Factory
 	 */
 	public function addPassword(): TextInput
 	{
-		$form = $this->create();
+		$form = end($this->forms);
 		return $this->addTextInput(
 			name: 'password',
 			label: 'Password',
@@ -140,36 +139,33 @@ class Factory
 
 	/**
 	 * Adds a password verification input field to the form.
-	 * This method uses the `addTextInput` helper method to add a second password input field
-	 * and validates if the entered passwords match. The password matching validation rule
-	 * is applied only if the `$ruleValue` is provided or if a 'password' input field exists in the form.
-	 * If neither is available, an exception is thrown.
+	 * This method adds a password verification field and automatically validates
+	 * that the entered password matches the 'password' field.
+	 * If the 'password' field does not exist, an exception is thrown.
 	 *
-	 * @param string|null $ruleValue The value of the password input field to check against.
 	 * @return TextInput The created password verification input field.
-	 * @throws InvalidArgumentException If no password field is found in the form and no rule value is provided.
+	 * @throws InvalidArgumentException If no 'password' field is found in the form.
 	 */
-	public function addPasswordVerification(?string $ruleValue = null): TextInput
+	public function addPasswordVerification(): TextInput
 	{
-		$form = $this->create();
+		$form = end($this->forms);
+
+		// Add the verification password input field
 		$passwordField = $this->addTextInput(
 			name: 'verify',
 			label: 'Password to check',
 			type: 'password',
-			placeholder: 'Your password to check',
+			placeholder: 'Please re-enter your password',
 			required: 'Please enter the password to check.',
 		);
 
-		// If $ruleValue is null, attempt to get the value from the 'password' field
-		$ruleValue ??= ($form['password']->getValue() ?? null);
-
-		// If neither $ruleValue nor the 'password' field exists, throw an exception
-		if ($ruleValue === null) {
-			throw new \InvalidArgumentException('Password field or ruleValue is required for password verification.');
+		// Check if 'password' field exists in the form
+		if (!isset($form['password'])) {
+			throw new InvalidArgumentException('Password field is required for password verification.');
 		}
 
-		// Add the rule for password matching
-		$passwordField->addRule($form::Equal, 'Passwords do not match.', $ruleValue);
+		// Add the rule to check if the 'verify' field matches the 'password' field
+		$passwordField->addRule($form::Equal, 'Passwords do not match.');
 
 		return $passwordField;
 	}
@@ -184,7 +180,7 @@ class Factory
 	 */
 	public function addEmail(): TextInput
 	{
-		$form = $this->create();
+		$form = end($this->forms);
 		return $this->addTextInput(
 			name: 'email',
 			label: 'Email',
