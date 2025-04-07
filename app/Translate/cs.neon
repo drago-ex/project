@@ -60,7 +60,7 @@
 "Forgot password": "Zapomenuté heslo"
 "Reset password": "Obnovit heslo"
 "We're sorry, but we don't know such an email address.": "Je nám líto, ale takovou e-mailovou adresu neznáme."
-"Your password change request has been sent to your email.": "Vaše žádost o změnu hesla byla odeslána na váš e-mail."
+"A password recovery code has been sent to your email.": "Kód pro obnovu hesla byl zaslán na email."
 "Code": "Kód"
 "Enter the code from the email": "Zadejte kód z e-mailu"
 "The code entered is invalid.": "Zadaný kód je neplatný."
