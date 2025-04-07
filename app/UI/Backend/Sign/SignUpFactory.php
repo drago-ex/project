@@ -32,27 +32,15 @@ readonly class SignUpFactory
 	public function create(): Form
 	{
 		$form = $this->factory->create();
-
 		$form->addText(SignUpData::Username, 'Username')
 			->setHtmlAttribute('placeholder', 'Full name')
 			->setRequired('Please enter your full name.');
 
-		$form->addText(SignUpData::Email, 'Email')
-			->setHtmlAttribute('placeholder', 'Email address')
-			->setDefaultValue('@')
-			->setHtmlType('email')
-			->addRule($form::Email)
-			->setRequired('Please enter your email address.');
+		$this->factory->addEmail()
+			->setDefaultValue('@');
 
-		$form->addPassword(SignUpData::Password, 'Password')
-			->setHtmlAttribute('placeholder', 'Your password')
-			->addRule($form::MinLength, 'Password must be at least %d characters long.', 6)
-			->setRequired('Please enter your password.');
-
-		$form->addPassword(SignUpData::Verify, 'Password to check')
-			->setHtmlAttribute('placeholder', 'Re-enter password')
-			->addRule($form::Equal, 'Passwords do not match.', $form['password'])
-			->setRequired('Please enter your password to check.');
+		$this->factory->addPassword();
+		$this->factory->addPasswordVerification();
 
 		$form->addSubmit('send', 'Sign up');
 		$form->onSuccess[] = $this->success(...);
