@@ -66,12 +66,7 @@ readonly class SignRecoveryFactory
 	public function createRequest(): Form
 	{
 		$form = $this->factory->create();
-		$form->addText('email', 'Email')
-			->setHtmlAttribute('email')
-			->setHtmlAttribute('placeholder', 'Email address')
-			->addRule($form::Email, 'Please enter a valid email address.')
-			->setRequired('Please enter your email address.');
-
+		$this->factory->addEmail();
 		$form->addSubmit('send', 'Reset password');
 		$form->onSuccess[] = $this->request(...);
 		return $form;
@@ -95,16 +90,8 @@ readonly class SignRecoveryFactory
 	public function creatChangePassword(): Form
 	{
 		$form = $this->factory->create();
-		$form->addPassword(SignUpData::Password, 'New password')
-			->setHtmlAttribute('placeholder', 'Your password')
-			->addRule($form::MinLength, 'Password must be at least %d characters long.', 6)
-			->setRequired('Please enter your password.');
-
-		$form->addPassword(SignUpData::Verify, 'Password to check')
-			->setHtmlAttribute('placeholder', 'Re-enter password')
-			->addRule($form::Equal, 'Passwords do not match.', $form['password'])
-			->setRequired('Please enter your password to check.');
-
+		$this->factory->addPassword();
+		$this->factory->addPasswordVerification();
 		$form->addSubmit('send', 'Change your password');
 		$form->onSuccess[] = $this->changePassword(...);
 		return $form;
