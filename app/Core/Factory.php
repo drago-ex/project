@@ -89,6 +89,7 @@ class Factory
 		$form = $this->create();
 		$input = match ($type) {
 			'password' => $form->addPassword($name, $label),
+			'integer' => $form->addInteger($name, $label),
 			'email' => $form->addText($name, $label)
 				->setHtmlAttribute('type', 'email'),
 
