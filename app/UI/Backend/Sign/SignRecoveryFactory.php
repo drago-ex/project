@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace App\UI\Backend\Sign;
 
 use App\Core\Factory;
+use App\Core\User\UsersEntity;
+use Dibi\Connection;
 use Nette\Application\UI\Form;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
 use Nette\Utils\Random;
+use Tracy\Debugger;
 
 
 readonly class SignRecoveryFactory
@@ -16,6 +19,7 @@ readonly class SignRecoveryFactory
 	public function __construct(
 		private Factory $factory,
 		private Session $session,
+		private Connection $connection,
 	) {
 	}
 
@@ -77,12 +81,12 @@ readonly class SignRecoveryFactory
 	public function createCheckToken(): Form
 	{
 		$form = $this->factory->create();
-		$form->addText('token', 'Token check')
-			->setHtmlAttribute('placeholder', 'Enter a token to check')
-			->addRule($form::Equal, 'Token check failed.', $this->getToken()->token)
-			->setRequired('Please enter the token from the email.');
+		$form->addText('token', 'Code')
+			->setHtmlAttribute('placeholder', 'Enter the code from the email')
+			->addRule($form::Equal, 'The code entered is invalid.', $this->getToken()->token)
+			->setRequired('Please enter the code from the email.');
 
-		$form->addSubmit('send', 'Token check');
+		$form->addSubmit('send', 'Continue password recovery');
 		$form->onSuccess[] = $this->checkToken(...);
 		return $form;
 	}
@@ -97,11 +101,11 @@ readonly class SignRecoveryFactory
 			->setRequired('Please enter your password.');
 
 		$form->addPassword(SignUpData::Verify, 'Password to check')
-			->setHtmlAttribute('placeholder', 'Your password')
+			->setHtmlAttribute('placeholder', 'Re-enter password')
 			->addRule($form::Equal, 'Passwords do not match.', $form['password'])
 			->setRequired('Please enter your password to check.');
 
-		$form->addSubmit('send', 'Change password');
+		$form->addSubmit('send', 'Change your password');
 		$form->onSuccess[] = $this->changePassword(...);
 		return $form;
 	}
@@ -109,7 +113,19 @@ readonly class SignRecoveryFactory
 
 	public function request(Form $form): void
 	{
-		$this->setToken();
+		$findEmail = $this->connection
+			->select('email')
+			->from(UsersEntity::Table)
+			->where('email = ?', $form->getValues()['email'])
+			->fetch();
+
+		if ($findEmail) {
+			$this->setToken();
+			Debugger::barDump($this->getToken());
+
+		} else {
+			$form->addError("We're sorry, but we don't know such an email address.");
+		}
 	}
 
 
