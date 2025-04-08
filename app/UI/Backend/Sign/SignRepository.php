@@ -7,10 +7,13 @@ namespace App\UI\Backend\Sign;
 use App\Core\Exception\EmailNotFoundException;
 use App\Core\User\UsersEntity;
 use Dibi\Connection;
+use Dibi\Exception;
+use Dibi\Result;
 use Dibi\Row;
 use Drago\Attr\AttributeDetectionException;
 use Drago\Attr\Table;
 use Drago\Database\Database;
+use Nette\Security\Passwords;
 
 
 /**
@@ -24,6 +27,7 @@ class SignRepository
 
 	public function __construct(
 		private readonly Connection $connection,
+		private readonly Passwords $passwords,
 	) {
 	}
 
@@ -35,18 +39,31 @@ class SignRepository
 	 * @throws AttributeDetectionException If there is an error detecting attributes.
 	 * @throws EmailNotFoundException If no user is found with the provided email.
 	 */
-	public function findUserByEmail(string $email): array|Row|null
+	public function findEmail(string $email): array|Row|null
 	{
 		// Attempt to fetch the user based on the provided email.
-		$user = $this->find(UsersEntity::ColumnEmail, $email)
+		$email = $this->find(UsersEntity::ColumnEmail, $email)
 			->fetch();
 
-		// If no user is found, throw an exception.
-		if (!$user) {
+		// If no email is found, throw an exception.
+		if (!$email) {
 			throw new EmailNotFoundException('Email not found.', 1);
 		}
 
-		// Return the user data if found.
-		return $user;
+		// Return the email data if found.
+		return $email;
+	}
+
+
+	/**
+	 * Updates the user's password in the database by email.
+	 *
+	 * @throws Exception If the update fails.
+	 */
+	public function updatePassword(string $email, string $password): int|null|Result
+	{
+		return $this->connection->update(UsersEntity::Table, [
+			UsersEntity::ColumnPassword => $this->passwords->hash($password),
+		])->where(UsersEntity::ColumnEmail, '=?', $email)->execute();
 	}
 }
