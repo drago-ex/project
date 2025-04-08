@@ -33,4 +33,25 @@ abstract class Presenter extends \Nette\Application\UI\Presenter
 		// Ensure the user is set and accessible in the template
 		$this->template->user = $this->user;
 	}
+
+
+	/**
+	 * Adds a success callback to the form.
+	 * Displays a flash message and executes an optional additional action.
+	 *
+	 * @param Form $form The form to which the callback is added
+	 * @param string $message The success message to display
+	 * @param callable|null $additionalAction Optional additional action (e.g., redirect)
+	 * @return Form The form with added callback
+	 */
+	protected function addSuccessCallback(Form $form, string $message, ?callable $additionalAction = null): Form
+	{
+		$form->onSuccess[] = function () use ($message, $additionalAction) {
+			$this->flashMessage($message, Alert::Info);
+			if ($additionalAction) {
+				$additionalAction();
+			}
+		};
+		return $form;
+	}
 }
