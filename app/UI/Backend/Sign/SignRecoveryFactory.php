@@ -89,8 +89,7 @@ readonly class SignRecoveryFactory
 		try {
 			$requestEmail = $form->getValues()['email'];
 			$email = $this->signRepository->findUserByEmail($requestEmail);
-
-			if ($email === null) {
+			if ($email) {
 				$this->signRecoverySession->setToken();
 			}
 
