@@ -7,7 +7,6 @@ namespace App\UI\Backend\Sign;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
 use Nette\Utils\Random;
-use Tracy\Debugger;
 
 
 /**
