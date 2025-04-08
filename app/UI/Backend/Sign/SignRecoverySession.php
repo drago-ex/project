@@ -7,6 +7,7 @@ namespace App\UI\Backend\Sign;
 use Nette\Http\Session;
 use Nette\Http\SessionSection;
 use Nette\Utils\Random;
+use Tracy\Debugger;
 
 
 /**
@@ -30,13 +31,25 @@ readonly class SignRecoverySession
 
 
 	/**
-	 * Sets a new token for password recovery in the session.
-	 * Generates a random 6-character token and stores it.
+	 * Sets a new token and email for password recovery in the session.
+	 * Generates a random 6-character token and stores it along with the provided email.
 	 */
-	public function setToken(): void
+	public function setToken(string $email): void
 	{
-		$this->getSection()
-			->set('token', Random::generate(6));
+		$section = $this->getSection();
+		$section->set('token', Random::generate(6));
+		$section->set('email', $email);
+	}
+
+
+	/**
+	 * Retrieves the stored email address for password recovery from the session.
+	 * If no email is stored, returns null.
+	 */
+	public function getEmail(): ?string
+	{
+		return $this->getSection()
+			->get('email');
 	}
 
 
@@ -66,7 +79,7 @@ readonly class SignRecoverySession
 	public function removeToken(): void
 	{
 		$this->getSection()
-			->remove(['token', 'tokenCheck']);
+			->remove(['token', 'tokenCheck', 'email']);
 	}
 
 
