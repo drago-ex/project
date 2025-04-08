@@ -43,15 +43,15 @@ abstract class Presenter extends \Nette\Application\UI\Presenter
 	 *
 	 * @param Form $form The form to which the callback is added
 	 * @param string $message The success message to display
-	 * @param callable|null $additionalAction Optional additional action (e.g., redirect)
+	 * @param callable|null $callable Optional additional action (e.g., redirect)
 	 * @return Form The form with added callback
 	 */
-	protected function addSuccessCallback(Form $form, string $message, ?callable $additionalAction = null): Form
+	protected function setOnSuccess(Form $form, string $message, ?callable $callable = null): Form
 	{
-		$form->onSuccess[] = function () use ($message, $additionalAction) {
+		$form->onSuccess[] = function () use ($message, $callable) {
 			$this->flashMessage($message, Alert::Info);
-			if ($additionalAction) {
-				$additionalAction();
+			if ($callable) {
+				$callable();
 			}
 		};
 		return $form;
