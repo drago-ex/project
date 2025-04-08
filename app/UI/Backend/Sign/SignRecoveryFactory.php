@@ -87,9 +87,9 @@ readonly class SignRecoveryFactory
 	public function request(Form $form): void
 	{
 		try {
-			$requestEmail = $form->getValues()['email'];
-			$this->signRepository->findUserByEmail($requestEmail);
-			$this->signRecoverySession->setToken();
+			$email = $form->getValues()['email'];
+			$this->signRepository->findEmail($email);
+			$this->signRecoverySession->setToken($email);
 
 		} catch (\Throwable $e) {
 			if ($e->getCode()) {
@@ -117,9 +117,16 @@ readonly class SignRecoveryFactory
 	 * Handles the password change form submission.
 	 * Removes the token from the session after the password is successfully changed.
 	 */
-	public function changePassword(): void
+	public function changePassword(Form $form): void
 	{
-		$this->signRecoverySession
-			->removeToken();
+		try {
+			$password = $form->getValues()['password'];
+			$email = $this->signRecoverySession->getEmail();
+			$this->signRepository->updatePassword($email, $password);
+			$this->signRecoverySession->removeToken();
+
+		} catch (\Throwable $e) {
+			$form->addError('An error occurred during password change.');
+		}
 	}
 }
