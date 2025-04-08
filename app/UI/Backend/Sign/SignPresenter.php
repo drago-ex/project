@@ -125,9 +125,7 @@ final class SignPresenter extends Presenter
 		$this->setOnSuccess(
 			$form,
 			'Your registration has been successfully completed, you can now log in.',
-			function () {
-				$this->redirect('in');
-			},
+			fn () => $this->redirect('in'),
 		);
 		return $form;
 	}
@@ -169,9 +167,7 @@ final class SignPresenter extends Presenter
 		$this->setOnSuccess(
 			$form,
 			'Password change was successful.',
-			function () {
-				$this->redirect('in');
-			},
+			fn () => $this->redirect('in'),
 		);
 		return $form;
 	}
