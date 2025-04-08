@@ -9,60 +9,25 @@ use App\Core\User\UsersEntity;
 use Dibi\Connection;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
-use Nette\Http\Session;
-use Nette\Http\SessionSection;
-use Nette\Utils\Random;
 
 
+/**
+ * Factory for creating password recovery forms and handling password recovery logic.
+ * Provides methods for creating forms related to password recovery: request form, token check, and password change.
+ */
 readonly class SignRecoveryFactory
 {
 	public function __construct(
 		private Factory $factory,
-		private Session $session,
 		private Connection $connection,
+		private SignRecoverySession $signRecoverySession,
 	) {
 	}
 
 
-	private function getRecoverySection(): SessionSection
-	{
-		return $this->session
-			->getSection('recovery');
-	}
-
-
-	private function setToken(): void
-	{
-		$session = $this->getRecoverySection();
-		$session->set('token', Random::generate(6));
-		$session->setExpiration('30 minutes');
-	}
-
-
-	private function setTokenCheck(): void
-	{
-		$this->getRecoverySection()
-			->set('tokenCheck', true);
-	}
-
-
-	private function removeToken(): void
-	{
-		$this->getRecoverySection()
-			->remove(['token', 'tokenCheck']);
-	}
-
-
-	public function getToken(): SignRecoveryToken
-	{
-		$session = $this->getRecoverySection();
-		return new SignRecoveryToken(
-			token: $session->get('token'),
-			tokenCheck: $session->get('tokenCheck'),
-		);
-	}
-
-
+	/**
+	 * Creates the password recovery request form.
+	 */
 	public function createRequest(): Form
 	{
 		$form = $this->factory->create();
@@ -73,6 +38,9 @@ readonly class SignRecoveryFactory
 	}
 
 
+	/**
+	 * Creates the form for checking the recovery token.
+	 */
 	public function createCheckToken(): Form
 	{
 		$form = $this->factory->create();
@@ -87,12 +55,22 @@ readonly class SignRecoveryFactory
 	}
 
 
+	/**
+	 * Checks if the entered token is valid.
+	 *
+	 * @param TextInput $input The input field for the token.
+	 * @return bool True if the token is valid, false otherwise.
+	 */
 	public function tokenCheck(TextInput $input): bool
 	{
-		return $input->getValue() === $this->getToken()->token;
+		return $this->signRecoverySession
+			->isTokenValid($input->getValue());
 	}
 
 
+	/**
+	 * Creates the form for changing the password.
+	 */
 	public function creatChangePassword(): Form
 	{
 		$form = $this->factory->create();
@@ -104,6 +82,10 @@ readonly class SignRecoveryFactory
 	}
 
 
+	/**
+	 * Handles the password recovery request form submission.
+	 * Generates a recovery token if the email exists in the database.
+	 */
 	public function request(Form $form): void
 	{
 		$findEmail = $this->connection
@@ -113,22 +95,31 @@ readonly class SignRecoveryFactory
 			->fetch();
 
 		if ($findEmail) {
-			$this->setToken();
-
+			$this->signRecoverySession
+				->setToken();
 		} else {
 			$form->addError("We're sorry, but we don't know such an email address.");
 		}
 	}
 
 
-	public function checkToken(Form $form): void
+	/**
+	 * Handles the token check form submission.
+	 */
+	public function checkToken(): void
 	{
-		$this->setTokenCheck();
+		$this->signRecoverySession
+			->setTokenCheck();
 	}
 
 
+	/**
+	 * Handles the password change form submission.
+	 * Removes the token from the session after the password is successfully changed.
+	 */
 	public function changePassword(): void
 	{
-		$this->removeToken();
+		$this->signRecoverySession
+			->removeToken();
 	}
 }
