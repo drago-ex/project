@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\UI\Backend\Sign;
 
 use App\Core\Factory;
-use App\Core\User\UsersEntity;
-use Dibi\Connection;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
 
@@ -19,8 +17,8 @@ readonly class SignRecoveryFactory
 {
 	public function __construct(
 		private Factory $factory,
-		private Connection $connection,
 		private SignRecoverySession $signRecoverySession,
+		private SignRepository $signRepository,
 	) {
 	}
 
@@ -88,17 +86,22 @@ readonly class SignRecoveryFactory
 	 */
 	public function request(Form $form): void
 	{
-		$findEmail = $this->connection
-			->select('email')
-			->from(UsersEntity::Table)
-			->where('email = ?', $form->getValues()['email'])
-			->fetch();
+		try {
+			$requestEmail = $form->getValues()['email'];
+			$email = $this->signRepository->findUserByEmail($requestEmail);
 
-		if ($findEmail) {
-			$this->signRecoverySession
-				->setToken();
-		} else {
-			$form->addError("We're sorry, but we don't know such an email address.");
+			if ($email === null) {
+				$this->signRecoverySession->setToken();
+			}
+
+		} catch (\Throwable $e) {
+			if ($e->getCode()) {
+				$message = match ($e->getCode()) {
+					1 => "We're sorry, but we don't know such an email address.",
+					default => 'Unknown status code.',
+				};
+				$form->addError($message);
+			}
 		}
 	}
 
