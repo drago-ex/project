@@ -9,6 +9,7 @@ use App\UI\Presenter;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
+use Tracy\Debugger;
 
 
 /**
@@ -121,7 +122,7 @@ final class SignPresenter extends Presenter
 	protected function createComponentSignUp(): Form
 	{
 		$form = $this->signUpFactory->create();
-		$this->addSuccessCallback(
+		$this->setOnSuccess(
 			$form,
 			'Your registration has been successfully completed, you can now log in.',
 			function () {
@@ -138,7 +139,12 @@ final class SignPresenter extends Presenter
 	protected function createComponentSignRecoveryRequest(): Form
 	{
 		$form = $this->signRecoveryFactory->createRequest();
-		$this->addSuccessCallback($form, 'A password recovery code has been sent to your email.');
+		$this->setOnSuccess($form, 'A password recovery code has been sent to your email.');
+		$form->onError[] = function (Form $form) {
+			foreach ($form->getErrors() as $error) {
+				Debugger::barDump($error);
+			}
+		};
 		return $form;
 	}
 
@@ -149,7 +155,7 @@ final class SignPresenter extends Presenter
 	protected function createComponentSignRecoveryCheckToken(): Form
 	{
 		$form = $this->signRecoveryFactory->createCheckToken();
-		$this->addSuccessCallback($form, 'Code check was successful.');
+		$this->setOnSuccess($form, 'Code check was successful.');
 		return $form;
 	}
 
@@ -160,7 +166,7 @@ final class SignPresenter extends Presenter
 	protected function createComponentSignRecoveryChangePassword(): Form
 	{
 		$form = $this->signRecoveryFactory->creatChangePassword();
-		$this->addSuccessCallback(
+		$this->setOnSuccess(
 			$form,
 			'Password change was successful.',
 			function () {
