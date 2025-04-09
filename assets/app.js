@@ -14,20 +14,25 @@ window.Nette = Nette;
 window.naja = naja;
 
 /* Initialize Nette (handles AJAX and form submission) */
+/* https://doc.nette.org/en/forms */
 Nette.initOnLoad();
 
 /* Initialize Naja */
+/* https://naja.js.org/#/quick-start */
 naja.initialize();
 
 /* Set options for LiveForm (error handling, form error styling, etc.) */
+/* https://contributte.org/packages/contributte/live-form-validation.html#content */
 LiveForm.setOptions({
-	messageErrorClass: 'errors-live',
-	messageParentClass: 'form-error',
-	messageErrorPrefix: '',
 	wait: 500,
+	showMessageClassOnParent: true,
+	messageErrorClass: 'invalid-feedback',
+	messageParentClass: 'validation',
+	showAllErrors: false,
 });
 
 /* Function to initialize alerts */
+/* https://getbootstrap.com/docs/5.3/getting-started/introduction/*/
 function initAlerts(selector) {
 	document.querySelectorAll(selector).forEach((element) => {
 		new Alert(element);
