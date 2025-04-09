@@ -54,3 +54,39 @@
 	100% {left: 100%; transform: translateX(0%)}
   }
 }
+
+//
+// password hide/show
+//
+
+.password-toggle {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  input {
+    padding-right: 2.1875rem;
+    font-size: 1rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  .show-hide-btn {
+    position: absolute;
+    top: 50%;
+    right: 0.625rem;
+    z-index: 1;
+    color: #f36c01;
+    margin-top: -0.625rem;
+    cursor: pointer;
+    transition: .3s ease all;
+
+    &:hover {
+      color: #333333;
+    }
+  }
+
+  input[type="text"] {
+    background-color: #f0f0f0;
+  }
+}
