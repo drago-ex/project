@@ -19,6 +19,12 @@
 			{block form}
 				{include input, type: text, name: 'name', columns: 6}
 				{include input, type: text, name: 'age', columns: 6}
+				<div class="validation">
+					<label n:name="password" class="form-label" />
+					<div class="password-toggle">
+						<input n:name="password" class="form-control">
+					</div>
+				</div>
 				<div class="d-block">
 					{include submit, name: 'send'}
 				</div>
