@@ -7,6 +7,7 @@ import SubmitButtonDisable from "./naja.button";
 import SpinnerExtension from "./naja.spinner";
 import ErrorsExtension from "./naja.errors";
 import HyperlinkDisable from "./naja.hyperlink";
+import PasswordToggle from "./naja.password";
 import "./app.scss"
 
 window.LiveForm = LiveForm;
@@ -45,7 +46,8 @@ function registerExtensions() {
 		new ErrorsExtension(),
 		new SubmitButtonDisable(),
 		new SpinnerExtension(),
-		new HyperlinkDisable()
+		new HyperlinkDisable(),
+		new PasswordToggle(),
 	];
 
 	// Register each extension with Naja
