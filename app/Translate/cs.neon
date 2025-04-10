@@ -54,6 +54,7 @@
 "Password to check": "Heslo ke kontrole"
 "Re-enter password": "Znovu zadejte heslo"
 "Password must be at least %d characters long.": "Heslo musí mít alespoň %d znaků."
+"Password must contain a capital letter, a number and a special character.": "Heslo musí obsahovat velké písmeno, číslici a speciální znak."
 "Passwords do not match.": "Hesla se neshodují."
 "Please enter your password to check.": "Pro kontrolu zadejte své heslo."
 "We're sorry, but an account with this email address already exists.": "Je nám líto, ale účet s touto e-mailovou adresou již existuje."
