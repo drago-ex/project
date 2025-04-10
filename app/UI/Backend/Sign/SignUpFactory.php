@@ -39,8 +39,15 @@ readonly class SignUpFactory
 		$this->factory->addEmail()
 			->setDefaultValue('@');
 
-		$this->factory->addPassword();
-		$this->factory->addPasswordVerification();
+		$this->factory->addPassword()
+			->setHtmlAttribute('autocomplete', 'new-password')
+			->addRule($form::MinLength, 'Password must be at least %d characters long.', 8)
+			->addRule($form::Pattern, 'Password must contain a capital letter, a number and a special character.',
+				'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:\'",<>\./?]).+$',
+			);
+
+		$this->factory->addPasswordVerification()
+			->setHtmlAttribute('autocomplete', 'new-password');
 
 		$form->addSubmit('send', 'Sign up');
 		$form->onSuccess[] = $this->success(...);
