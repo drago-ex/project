@@ -23,7 +23,7 @@ class FormBase extends Form
 	 *
 	 * @param string $name The name of the input field.
 	 * @param string $label The label for the input field.
-	 * @param string|null $type The type of the input field (e.g., 'text', 'email').
+	 * @param string|null $type The type of the input field (e.g., 'text', 'password', 'email').
 	 * @param string|null $placeholder The placeholder text for the input field.
 	 * @param string|null $required The error message if the field is required (optional).
 	 * @param string|null $rule The validation rule (optional).
@@ -45,6 +45,7 @@ class FormBase extends Form
 	{
 		// Determine the input type and call the appropriate Nette Form method
 		$input = match ($type) {
+			'password' => parent::addPassword($name, $label),
 			'email' => parent::addEmail($name, $label)
 				->setHtmlType('email'),
 
