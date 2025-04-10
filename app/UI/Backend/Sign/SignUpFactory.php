@@ -36,10 +36,10 @@ readonly class SignUpFactory
 			->setHtmlAttribute('placeholder', 'Full name')
 			->setRequired('Please enter your full name.');
 
-		$this->factory->addEmail()
+		$form->addEmailField()
 			->setDefaultValue('@');
 
-		$this->factory->addPassword()
+		$form->addPasswordField()
 			->setHtmlAttribute('autocomplete', 'new-password')
 			->addRule($form::MinLength, 'Password must be at least %d characters long.', 8)
 			->addRule(
@@ -48,7 +48,7 @@ readonly class SignUpFactory
 				'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:\'",<>\./?]).+$',
 			);
 
-		$this->factory->addPasswordVerification()
+		$form->addPasswordConfirmationField()
 			->setHtmlAttribute('autocomplete', 'new-password');
 
 		$form->addSubmit('send', 'Sign up');
