@@ -72,8 +72,12 @@ readonly class SignRecoveryFactory
 	public function creatChangePassword(): Form
 	{
 		$form = $this->factory->create();
-		$form->addPasswordField();
-		$form->addPasswordConfirmationField();
+		$form->addPasswordField()
+			->setHtmlAttribute('autocomplete', 'new-password');
+
+		$form->addPasswordConfirmationField()
+			->setHtmlAttribute('autocomplete', 'new-password');
+
 		$form->addSubmit('send', 'Change your password');
 		$form->onSuccess[] = $this->changePassword(...);
 		return $form;
