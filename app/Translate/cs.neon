@@ -29,6 +29,8 @@
 "Age is required.": "Věk je povinný."
 "Translation": "Překlad"
 "The form has been submitted.": "Formulář byl odeslán."
+"Password": "Heslo"
+"Password is required.": "Je vyžadováno heslo."
 
 # admin
 "Administration": "Administrace"
