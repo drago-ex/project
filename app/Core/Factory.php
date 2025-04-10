@@ -139,16 +139,12 @@ class Factory
 	 */
 	public function addPassword(): TextInput
 	{
-		$form = $this->getForm();
 		return $this->addTextInput(
 			name: 'password',
 			label: 'Password',
 			type: 'password',
 			placeholder: 'Your password',
 			required: 'Please enter your password.',
-			rule: $form::MinLength,
-			ruleMessage: 'Password must be at least %d characters long.',
-			ruleValue: 6,
 		);
 	}
 
