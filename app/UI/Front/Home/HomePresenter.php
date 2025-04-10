@@ -41,6 +41,9 @@ final class HomePresenter extends Presenter
 		$form->addInteger('age', 'Age')
 			->setRequired('Age is required.');
 
+		$form->addPassword('password', 'Password')
+			->setRequired('Password is required.');
+
 		$form->addSubmit('send', 'Send');
 		$form->onSuccess[] = $this->success(...);
 		return $form;
