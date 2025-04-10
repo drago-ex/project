@@ -2,34 +2,36 @@ let reqCnt = 0;
 
 export default class PasswordToggle {
 	initialize(naja) {
-		const toggleClass = (element, removeClass, addClass) => {
-			element.classList.remove(removeClass);
-			element.classList.add(addClass);
+		const getPasswordElements = (element) => {
+			const input = element.querySelector('.input-password');
+			const button = element.querySelector('.toggle-password');
+			return { input, button };
 		};
 
-		const togglePassword = (input, span) => {
+		const togglePassword = (input) => {
 			input.type = input.type === 'password' ? 'text' : 'password';
-			if (span.classList.contains('hide')) {
-				toggleClass(span, 'hide', 'show');
+		};
+
+		const toggleButtonVisibility = (button, isVisible) => {
+			if (isVisible) {
+				button.classList.remove('d-none');
 			} else {
-				toggleClass(span, 'show', 'hide');
+				button.classList.add('d-none');
 			}
 		};
 
 		const addPasswordToggle = (doc) => {
-			doc.querySelectorAll('.password-toggle').forEach((element) => {
-				let span = element.querySelector('.show-hide-ico');
-				let input = element.querySelector('input');
+			doc.querySelectorAll('.input-group').forEach((element) => {
+				const { input, button } = getPasswordElements(element);
+				if (input) {
+					const isPasswordVisible = input.type === 'password';
+					toggleButtonVisibility(button, isPasswordVisible);  // Toggle button visibility based on input type
 
-				if (!span) {
-					span = document.createElement('span');
-					span.className = 'show-hide-ico show';
-					element.appendChild(span);
-				}
-
-				if (!span._isListenerAdded) {
-					span.addEventListener('click', () => togglePassword(input, span));
-					span._isListenerAdded = true;
+					if (button && !button._isListenerAdded) {
+						button.addEventListener('click', () => togglePassword(input));
+						button._isListenerAdded = true;
+					}
+					reqCnt++;
 				}
 			});
 		};
@@ -41,12 +43,11 @@ export default class PasswordToggle {
 
 		naja.addEventListener('complete', () => {
 			if (--reqCnt === 0) {
-				document.querySelectorAll('.password-toggle').forEach((element) => {
-					const span = element.querySelector('.show-hide-ico');
-					const input = element.querySelector('input');
-					if (span.classList.contains('hide')) {
-						input.type = 'password';
-						toggleClass(span, 'hide', 'show');
+				document.querySelectorAll('.input-group').forEach((element) => {
+					const { input, button } = getPasswordElements(element);
+					if (input && button) {
+						const isPasswordVisible = input.type === 'password';
+						toggleButtonVisibility(button, isPasswordVisible);
 					}
 				});
 			}
