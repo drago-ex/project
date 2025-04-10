@@ -35,6 +35,20 @@
 	</div>
 {/define}
 
+{define password-toggle, string $name, int $columns = 12, string $class}
+	<div class="col-md-{$columns}">
+		<div class="validation">
+			{label $name, class => "form-label fw-semibold" /}
+			<div class="password-toggle">
+				{do $inputClass = "form-control"}
+				{input $name, class => $class
+				? "$inputClass $class"
+				: "$inputClass"}
+			</div>
+		</div>
+	</div>
+{/define}
+
 {define submit, string $name, string $class}
 	{do $inputClass = "btn btn-primary"}
 	{input $name, data-btn-submit => true, class => $class
