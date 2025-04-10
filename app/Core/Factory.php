@@ -4,48 +4,25 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use InvalidArgumentException;
-use Nette\Application\UI\Form;
-use Nette\Forms\Controls\TextInput;
 use Nette\Localization\Translator;
 use Nette\Security\User;
 
 
 /**
- * Factory class to create forms with optional protection based on user login status.
- *
- * This class provides methods for creating and adding various form inputs (text, password, email, etc.)
- * with optional validation rules and messages.
+ * Factory class for creating instances of FormBase with necessary configurations.
  */
-class Factory
+readonly class Factory
 {
-	private array $forms = [];
-
-
-	/**
-	 * Constructor to initialize dependencies.
-	 *
-	 * @param Translator $translator Translator for form translation.
-	 * @param User $user User object to check login status.
-	 */
 	public function __construct(
-		private readonly Translator $translator,
-		private readonly User $user,
+		private Translator $translator,
+		private User $user,
 	) {
 	}
 
 
-	/**
-	 * Creates and returns a form instance.
-	 *
-	 * If the user is logged in, adds protection to the form.
-	 * Sets the translator for form elements.
-	 *
-	 * @return Form The created form instance.
-	 */
-	public function create(): Form
+	public function create(): FormBase
 	{
-		$form = new Form();
+		$form = new FormBase();
 
 		// Add form protection if the user is logged in
 		if ($this->user->isLoggedIn()) {
@@ -54,153 +31,7 @@ class Factory
 
 		// Set the translator for form
 		$form->setTranslator($this->translator);
-		$this->forms[] = $form;
 
 		return $form;
-	}
-
-
-	/**
-	 * Retrieves the latest form and ensures it's an instance of the Form class.
-	 *
-	 * @return Form The created form instance.
-	 */
-	private function getForm(): Form
-	{
-		$form = end($this->forms);
-
-		// Only check the type during development (assert will be ignored in production if turned off)
-		assert($form instanceof Form);
-
-		return $form;
-	}
-
-
-	/**
-	 * Generic method to add a text input field to the form.
-	 * This method can be used to create text, password, or email input fields with optional validation rules.
-	 *
-	 * @param string $name The name of the input field.
-	 * @param string $label The label for the input field.
-	 * @param string|null $type The type of the input field (e.g., 'text', 'password', 'email').
-	 * @param string|null $placeholder The placeholder text for the input field.
-	 * @param string|null $required The error message if the field is required.
-	 * @param string|null $rule The validation rule (optional).
-	 * @param string|null $ruleMessage The error message for the validation rule (optional).
-	 * @param string|int|null $ruleValue The value for the validation rule (optional).
-	 *
-	 * @return TextInput The created input field.
-	 */
-	public function addTextInput(
-		string $name,
-		string $label,
-		?string $type = 'text',
-		?string $placeholder = null,
-		?string $required = null,
-		?string $rule = null,
-		?string $ruleMessage = null,
-		string|int|null $ruleValue = null,
-	): TextInput
-	{
-		$form = $this->getForm();
-		$input = match ($type) {
-			'password' => $form->addPassword($name, $label),
-			'integer' => $form->addInteger($name, $label),
-			'email' => $form->addText($name, $label)
-				->setHtmlType('email'),
-
-			default => $form->addText($name, $label),
-		};
-
-		// Set optional attributes if provided
-		if ($placeholder !== null) {
-			$input->setHtmlAttribute('placeholder', $placeholder);
-		}
-
-		if ($required !== null) {
-			$input->setRequired($required);
-		}
-
-		// Apply validation rule if provided
-		if ($rule) {
-			$input->addRule($rule, $ruleMessage, $ruleValue);
-		}
-
-		return $input;
-	}
-
-
-	/**
-	 * Adds a password input field to the form.
-	 * This method uses the `addTextInput` helper method to add a password input field
-	 * with a minimum length validation rule (6 characters by default).
-	 *
-	 * @return TextInput The created password input field.
-	 */
-	public function addPassword(): TextInput
-	{
-		return $this->addTextInput(
-			name: 'password',
-			label: 'Password',
-			type: 'password',
-			placeholder: 'Your password',
-			required: 'Please enter your password.',
-		);
-	}
-
-
-	/**
-	 * Adds a password verification input field to the form.
-	 * This method adds a password verification field and automatically validates
-	 * that the entered password matches the 'password' field.
-	 * If the 'password' field does not exist, an exception is thrown.
-	 *
-	 * @return TextInput The created password verification input field.
-	 * @throws InvalidArgumentException If no 'password' field is found in the form.
-	 */
-	public function addPasswordVerification(): TextInput
-	{
-		$form = $this->getForm();
-
-		// Add the verification password input field
-		$passwordField = $this->addTextInput(
-			name: 'verify',
-			label: 'Password to check',
-			type: 'password',
-			placeholder: 'Re-enter password',
-			required: 'Please enter your password to check.',
-		);
-
-		// Check if 'password' field exists in the form
-		if (!isset($form['password'])) {
-			throw new InvalidArgumentException('Password field is required for password verification.');
-		}
-
-		// Add the rule to check if the 'verify' field matches the 'password' field
-		$passwordField->addRule($form::Equal, 'Passwords do not match.', $form['password']);
-
-		return $passwordField;
-	}
-
-
-	/**
-	 * Adds an email input field to the form.
-	 * This method uses the `addTextInput` helper method to add an email input field
-	 * with an email format validation rule.
-	 *
-	 * @return TextInput The created email input field.
-	 */
-	public function addEmail(): TextInput
-	{
-		$form = $this->getForm();
-		return $this->addTextInput(
-			name: 'email',
-			label: 'Email',
-			type: 'email',
-			placeholder: 'Email address',
-			required: 'Please enter your email address.',
-			rule: $form::Email,
-			ruleMessage: 'Please enter a valid email address.',
-		);
 	}
 }
