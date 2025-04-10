@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use InvalidArgumentException;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
 
@@ -18,26 +17,23 @@ use Nette\Forms\Controls\TextInput;
 class FormBase extends Form
 {
 	/**
-	 * Generic method to add a text input field to the form.
-	 * This method can be used to create text, password, or email input fields with optional validation rules.
+	 * Adds a text, password, or email input field to the form with optional validation.
 	 *
 	 * @param string $name The name of the input field.
 	 * @param string $label The label for the input field.
-	 * @param string|null $type The type of the input field (e.g., 'text', 'password', 'email').
+	 * @param string|null $type The type of the input ('text', 'password', 'email').
 	 * @param string|null $placeholder The placeholder text for the input field.
-	 * @param string|null $required The error message if the field is required (optional).
+	 * @param string|bool|null $required Defines whether the field is required (true, false, string error message, or null).
 	 * @param string|null $rule The validation rule (optional).
 	 * @param string|null $ruleMessage The error message for the validation rule (optional).
 	 * @param string|int|null $ruleValue The value for the validation rule (optional).
-	 *
-	 * @throws InvalidArgumentException If the input type is not supported.
 	 */
 	public function addTextInput(
 		string $name,
 		string $label,
 		?string $type = 'text',
 		?string $placeholder = null,
-		?string $required = null,
+		string|bool|null $required = null,
 		?string $rule = null,
 		?string $ruleMessage = null,
 		string|int|null $ruleValue = null,
@@ -57,6 +53,7 @@ class FormBase extends Form
 			$input->setHtmlAttribute('placeholder', $placeholder);
 		}
 
+		// Set the required attribute if provided (Nette will handle the logic based on the value)
 		if ($required !== null) {
 			$input->setRequired($required);
 		}
