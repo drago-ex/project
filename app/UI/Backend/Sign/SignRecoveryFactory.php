@@ -29,7 +29,7 @@ readonly class SignRecoveryFactory
 	public function createRequest(): Form
 	{
 		$form = $this->factory->create();
-		$this->factory->addEmail();
+		$form->addEmailField();
 		$form->addSubmit('send', 'Reset password');
 		$form->onSuccess[] = $this->request(...);
 		return $form;
@@ -72,8 +72,8 @@ readonly class SignRecoveryFactory
 	public function creatChangePassword(): Form
 	{
 		$form = $this->factory->create();
-		$this->factory->addPassword();
-		$this->factory->addPasswordVerification();
+		$form->addPasswordField();
+		$form->addPasswordConfirmationField();
 		$form->addSubmit('send', 'Change your password');
 		$form->onSuccess[] = $this->changePassword(...);
 		return $form;
