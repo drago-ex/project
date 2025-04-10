@@ -17,9 +17,9 @@
 	{snippet factory}
 		{embed '../../../Core/Widget/@form.latte', name: 'add', class: 'ajax mt-3'}
 			{block form}
-				{include input, type: text, name: 'name', columns: 6}
-				{include input, type: text, name: 'age', columns: 6}
-				{include password-toggle, type: text, name: 'password', columns: 6}
+				{include input, name: 'name', columns: 6}
+				{include input, name: 'age', columns: 6}
+				{include password-toggle, name: 'password', columns: 6}
 				<div class="d-block">
 					{include submit, name: 'send'}
 				</div>
