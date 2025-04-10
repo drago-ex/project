@@ -87,8 +87,8 @@ final class SignPresenter extends Presenter
 	protected function createComponentSignIn(): Form
 	{
 		$form = $this->factory->create();
-		$this->factory->addEmail();
-		$this->factory->addPassword()
+		$form->addEmailField();
+		$form->addPasswordField()
 			->setHtmlAttribute('autocomplete', 'current-password');
 
 		$form->addSubmit('send', 'Sign in');
