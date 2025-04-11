@@ -28,4 +28,15 @@ class Inputs extends TextInput
 	{
 		return $this->setHtmlAttribute('autocomplete', $autocompleteValue);
 	}
+
+
+	/**
+	 * Set the placeholder attribute for the input field.
+	 *
+	 * @param string $placeholder The placeholder text.
+	 */
+	public function setPlaceholder(string $placeholder): self
+	{
+		return $this->setHtmlAttribute('placeholder', $placeholder);
+	}
 }
