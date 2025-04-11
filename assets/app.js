@@ -25,11 +25,20 @@ naja.initialize();
 /* Set options for LiveForm (error handling, form error styling, etc.) */
 /* https://contributte.org/packages/contributte/live-form-validation.html#content */
 LiveForm.setOptions({
-	wait: 500,
-	showMessageClassOnParent: true,
-	messageErrorClass: 'invalid-feedback',
-	messageParentClass: 'validation',
-	showAllErrors: false,
+	showMessageClassOnParent: false,
+	messageParentClass: false,
+	controlErrorClass: '',
+	controlValidClass: '',
+	messageErrorClass: 'invalid-feedback fw-semibold',
+	enableHiddenMessageClass: 'show-hidden-error',
+	disableLiveValidationClass: 'no-live-validation',
+	disableShowValidClass: 'no-show-valid',
+	messageTag: 'div',
+	messageIdPostfix: '_message',
+	messageErrorPrefix: '',
+	showAllErrors: true,
+	showValid: false,
+	wait: false
 });
 
 /* Function to initialize alerts */
