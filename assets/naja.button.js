@@ -1,5 +1,3 @@
-let reqCnt = 0;
-
 export default class SubmitButtonDisable {
 	initialize(naja) {
 		let submitButton = null;
@@ -24,17 +22,13 @@ export default class SubmitButtonDisable {
 
 		naja.addEventListener('start', () => {
 			if (submitButton) {
-				reqCnt++;
 				submitButton.disabled = true;
 			}
 		});
 
 		naja.addEventListener('complete', () => {
 			if (submitButton) {
-				reqCnt--;
-				if (reqCnt === 0) {
-					submitButton.disabled = false;
-				}
+				submitButton.disabled = false;
 			}
 		});
 	}
