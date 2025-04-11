@@ -1,28 +1,25 @@
 export default class SpinnerExtension {
-	/**
-	 * Initializes the spinner extension for Naja requests.
-	 * @param {Object} naja Naja instance for handling events.
-	 */
 	initialize(naja) {
-		// Prevent adding the spinner multiple times
-		if (document.querySelector('.spinner')) return;
-
-		// Create a spinner element and add a class for styling.
+		let activeRequests = 0;
 		const el = document.createElement('div');
 		el.classList.add('spinner');
 		document.body.appendChild(el);
-
-		// Initially hide the spinner until it's needed.
 		el.style.display = 'none';
 
-		// Show the spinner when a request starts (first request).
+		// Show the spinner when a request starts
 		naja.addEventListener('start', () => {
-			el.style.display = 'block';
+			if (activeRequests === 0) {
+				el.style.display = 'block';
+			}
+			activeRequests++;
 		});
 
-		// Hide the spinner after the last request completes.
+		// Hide the spinner when the last request completes
 		naja.addEventListener('complete', () => {
-			el.style.display = 'none';
+			activeRequests--;
+			if (activeRequests === 0) {
+				el.style.display = 'none';
+			}
 		});
 	}
 }
