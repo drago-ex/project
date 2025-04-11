@@ -1,4 +1,3 @@
-let reqCnt = 0;
 export default class HyperlinkDisable {
 	initialize(naja) {
 		const hyperlinkDisable = (doc) => {
@@ -6,7 +5,6 @@ export default class HyperlinkDisable {
 			links.forEach((link) => {
 				link.addEventListener('click', (event) => {
 					link.classList.add('disabled');
-					reqCnt++;
 				});
 			});
 			return links;
@@ -18,11 +16,9 @@ export default class HyperlinkDisable {
 		});
 
 		naja.addEventListener('complete', () => {
-			if (--reqCnt === 0) {
-				initialLinks.forEach((link) => {
-					link.classList.remove('disabled');
-				});
-			}
+			initialLinks.forEach((link) => {
+				link.classList.remove('disabled');
+			});
 		});
 	}
 }
