@@ -14,14 +14,7 @@
 }
 
 .invalid-feedback {
-  position: relative;
-  color: $red;
   display: block;
-  margin-top: 0.25rem;
-  padding: 0.375rem 0;
-  font-weight: 600;
-  @include font-size($font-size-sm);
-  @include border-radius($border-radius);
 }
 
 //
