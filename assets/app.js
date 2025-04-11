@@ -36,7 +36,7 @@ LiveForm.setOptions({
 	messageTag: 'div',
 	messageIdPostfix: '_message',
 	messageErrorPrefix: '',
-	showAllErrors: true,
+	showAllErrors: false,
 	showValid: false,
 	wait: false
 });
