@@ -44,8 +44,8 @@ readonly class SignUpFactory
 			->addRule($form::MinLength, 'Password must be at least %d characters long.', 8)
 			->addRule(
 				$form::Pattern,
-				'Password must contain a capital letter, a number and a special character.',
-				'^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:\'",<>\./?]).+$',
+				'The password must contain uppercase and lowercase letters, numbers, and a special character.',
+				'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^A-Za-z0-9])$',
 			);
 
 		$form->addPasswordConfirmationField()
