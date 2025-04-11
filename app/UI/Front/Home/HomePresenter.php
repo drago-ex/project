@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Home;
 
-use App\Core\Factory;
+use App\Core\Form\Factory;
 use App\UI\Presenter;
 use Drago\Application\UI\Alert;
 use Nette\Application\UI\Form;
@@ -35,15 +35,19 @@ final class HomePresenter extends Presenter
 	protected function createComponentAdd(): Form
 	{
 		$form = $this->factory->create();
-		$form->addText('name', 'Name')
-			->setRequired('Name is required.');
+        $form->addTextInput(
+            name: 'name',
+            label: 'Name',
+            required: true,
+        )->setPlaceholder('Enter your name');
 
-		$form->addInteger('age', 'Age')
-			->setRequired('Age is required.');
+        $form->addTextInput(
+            name: 'age',
+            label: 'Age',
+            required: true,
+        )->setAutocomplete('off');
 
-		$form->addPassword('password', 'Password')
-			->setRequired('Password is required.');
-
+		$form->addPasswordField();
 		$form->addSubmit('send', 'Send');
 		$form->onSuccess[] = $this->success(...);
 		return $form;
