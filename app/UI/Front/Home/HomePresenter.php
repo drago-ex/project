@@ -40,7 +40,7 @@ final class HomePresenter extends Presenter
 			label: 'Name',
 			required: true,
 		)->setPlaceholder('Enter your name');
-	
+
 		$form->addTextInput(
 			name: 'age',
 			label: 'Age',
