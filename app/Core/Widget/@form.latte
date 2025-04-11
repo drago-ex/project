@@ -38,16 +38,14 @@
 
 {define password-toggle, string $name, int $columns = 12, string $class}
 	<div class="col-md-{$columns}">
-		<div class="validation">
-			{label $name, class => "form-label fw-semibold" /}
-			<div class="input-group">
-				{do $inputClass = "form-control rounded input-password"}
-				{input $name, class => $class
-					? "$inputClass $class"
-					: "$inputClass"}
+		{label $name, class => "form-label fw-semibold" /}
+		<div class="input-group">
+			{do $inputClass = "form-control rounded input-password"}
+			{input $name, class => $class
+				? "$inputClass $class"
+				: "$inputClass"}
 
-				<button type="button" class="d-none toggle-password"></button>
-			</div>
+			<button type="button" class="d-none toggle-password"></button>
 		</div>
 	</div>
 {/define}
