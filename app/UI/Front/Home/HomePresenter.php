@@ -44,8 +44,10 @@ final class HomePresenter extends Presenter
         $form->addTextInput(
             name: 'age',
             label: 'Age',
+            type: 'number',
             required: true,
-        )->setAutocomplete('off');
+        )->setAutocomplete('off')
+            ->setPlaceholder('Enter your age');
 
 		$form->addPasswordField();
 		$form->addSubmit('send', 'Send');
