@@ -92,7 +92,7 @@ class Forms extends Form
 
 		// Set optional attributes if provided
 		if ($placeholder !== null) {
-			$input->setHtmlAttribute('placeholder', $placeholder);
+			$input->setPlaceholder($placeholder);
 		}
 
 		// Set the required attribute if provided
