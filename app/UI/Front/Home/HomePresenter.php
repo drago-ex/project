@@ -34,20 +34,20 @@ final class HomePresenter extends Presenter
 
 	protected function createComponentAdd(): Form
 	{
-	$form = $this->factory->create();
-        $form->addTextInput(
-            name: 'name',
-            label: 'Name',
-            required: true,
-        )->setPlaceholder('Enter your name');
-
-        $form->addTextInput(
-            name: 'age',
-            label: 'Age',
-            type: 'number',
-            required: true,
-        )->setAutocomplete('off')
-            ->setPlaceholder('Enter your age');
+		$form = $this->factory->create();
+		$form->addTextInput(
+			name: 'name',
+			label: 'Name',
+			required: true,
+		)->setPlaceholder('Enter your name');
+	
+		$form->addTextInput(
+			name: 'age',
+			label: 'Age',
+			type: 'number',
+			required: true,
+		)->setAutocomplete('off')
+			->setPlaceholder('Enter your age');
 
 		$form->addPasswordField();
 		$form->addSubmit('send', 'Send');
