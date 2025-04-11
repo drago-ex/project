@@ -34,7 +34,7 @@ final class HomePresenter extends Presenter
 
 	protected function createComponentAdd(): Form
 	{
-		$form = $this->factory->create();
+	$form = $this->factory->create();
         $form->addTextInput(
             name: 'name',
             label: 'Name',
