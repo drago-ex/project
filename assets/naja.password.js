@@ -1,5 +1,3 @@
-let reqCnt = 0;
-
 export default class PasswordToggle {
 	initialize(naja) {
 		const getPasswordElements = (element) => {
@@ -31,7 +29,6 @@ export default class PasswordToggle {
 						button.addEventListener('click', () => togglePassword(input));
 						button._isListenerAdded = true;
 					}
-					reqCnt++;
 				}
 			});
 		};
@@ -42,15 +39,13 @@ export default class PasswordToggle {
 		});
 
 		naja.addEventListener('complete', () => {
-			if (--reqCnt === 0) {
-				document.querySelectorAll('.input-group').forEach((element) => {
-					const { input, button } = getPasswordElements(element);
-					if (input && button) {
-						const isPasswordVisible = input.type === 'password';
-						toggleButtonVisibility(button, isPasswordVisible);
-					}
-				});
-			}
+			document.querySelectorAll('.input-group').forEach((element) => {
+				const { input, button } = getPasswordElements(element);
+				if (input && button) {
+					const isPasswordVisible = input.type === 'password';
+					toggleButtonVisibility(button, isPasswordVisible);
+				}
+			});
 		});
 	}
 }
