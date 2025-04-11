@@ -1,5 +1,3 @@
-let reqCnt = 0;
-
 export default class SpinnerExtension {
 	/**
 	 * Initializes the spinner extension for Naja requests.
@@ -19,17 +17,12 @@ export default class SpinnerExtension {
 
 		// Show the spinner when a request starts (first request).
 		naja.addEventListener('start', () => {
-			if (reqCnt === 0) {
-				el.style.display = 'block';
-			}
-			reqCnt++;
+			el.style.display = 'block';
 		});
 
 		// Hide the spinner after the last request completes.
 		naja.addEventListener('complete', () => {
-			if (--reqCnt === 0) {
-				el.style.display = 'none';
-			}
+			el.style.display = 'none';
 		});
 	}
 }
