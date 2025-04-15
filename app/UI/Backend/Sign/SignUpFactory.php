@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Backend\Sign;
 
-use App\Core\Factory;
+use App\Core\Form\Factory;
 use App\Core\User\UsersEntity;
 use Dibi\Connection;
 use Dibi\UniqueConstraintViolationException;
