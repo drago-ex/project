@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Backend\Sign;
 
-use App\Core\Factory;
+use App\Core\Form\Factory;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
 
