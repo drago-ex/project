@@ -23,10 +23,10 @@
 
 # form translate
 "Name": "Jméno"
+"Enter your name": "Zadejte své jméno"
 "Age": "Věk"
+"Enter your age": "Zadejte svůj věk"
 "Send": "Odeslat"
-"Name is required.": "Jméno je povinné."
-"Age is required.": "Věk je povinný."
 "Translation": "Překlad"
 "The form has been submitted.": "Formulář byl odeslán."
 
