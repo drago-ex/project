@@ -26,6 +26,7 @@ readonly class SignSender
 			->setSubject($subject)
 			->setHtmlBody((new Engine)->renderToString(__DIR__ . '/email.latte', [
 				'user' => $this->user,
+				'subject' => $subject,
 			]));
 
 		try {
