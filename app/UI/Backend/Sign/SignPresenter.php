@@ -99,7 +99,7 @@ final class SignPresenter extends Presenter
 
 	/**
 	 * Handles sign-in form success.
-	 * Logs the user in and redirects to the admin page.
+	 * Logs the user in and redirect to the admin page.
 	 */
 	public function success(Form $form, SignData $data): void
 	{
