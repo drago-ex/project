@@ -12,13 +12,13 @@ use Tracy\Debugger;
 
 class SignSender
 {
-	// User email.
+	/** User email. */
 	public string $email;
 
-	// Email subject.
+	/** Email subject. */
 	public string $subject;
 
-	// Password recovery token.
+	/** Password recovery token. */
 	public string $token;
 
 
