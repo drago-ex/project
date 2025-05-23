@@ -9,7 +9,6 @@ use App\Core\User\UsersEntity;
 use Dibi\Connection;
 use Dibi\Exception;
 use Dibi\Result;
-use Dibi\Row;
 use Drago\Attr\AttributeDetectionException;
 use Drago\Attr\Table;
 use Drago\Database\Database;
@@ -36,27 +35,29 @@ class SignRepository
 	 * Finds a user in the database by their email.
 	 * Throws an exception if the user with the given email is not found.
 	 *
-	 * @throws AttributeDetectionException If there is an error detecting attributes.
+	 * @throws AttributeDetectionException If there are error detecting attributes.
 	 * @throws EmailNotFoundException If no user is found with the provided email.
+	 * @throws Exception
 	 */
-	public function findEmail(string $email): array|Row|null
+	public function findUserByEmail(string $email): array|UsersEntity|null
 	{
 		// Attempt to fetch the user based on the provided email.
-		$email = $this->find(UsersEntity::ColumnEmail, $email)
+		$row = $this->find(UsersEntity::ColumnEmail, $email)->execute()
+			->setRowClass(UsersEntity::class)
 			->fetch();
 
-		// If no email is found, throw an exception.
-		if (!$email) {
-			throw new EmailNotFoundException('Email not found.', 1);
+		// If the user is not found by email.
+		if (!$row) {
+			throw new EmailNotFoundException('User not found by email.', 1);
 		}
 
-		// Return the email data if found.
-		return $email;
+		// We will return the found user data.
+		return $row;
 	}
 
 
 	/**
-	 * Updates the user's password in the database by email.
+	 * Updates the user's password in the data
 	 *
 	 * @throws Exception If the update fails.
 	 */
