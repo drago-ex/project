@@ -19,6 +19,7 @@ readonly class SignRecoveryFactory
 		private Factory $factory,
 		private SignRecoverySession $signRecoverySession,
 		private SignRepository $signRepository,
+		private SignSender $signSender,
 	) {
 	}
 
@@ -92,8 +93,22 @@ readonly class SignRecoveryFactory
 	{
 		try {
 			$email = $form->getValues()['email'];
-			$this->signRepository->findEmail($email);
-			$this->signRecoverySession->setToken($email);
+
+			// We will verify if the user exists by email.
+			$user = $this->signRepository->findUserByEmail($email);
+			if ($user) {
+
+				// We will create a token and save the email.
+				$this->signRecoverySession->setToken($email);
+
+				// We will create a sending email.
+				$post = $this->signSender;
+				$post->email = $email;
+				$post->token = $this->signRecoverySession->getToken();
+				$post->subject = 'Request to reset password.';
+				$post->sendEmail();
+			}
+
 
 		} catch (\Throwable $e) {
 			if ($e->getCode()) {
