@@ -12,13 +12,13 @@ use Tracy\Debugger;
 
 class SignSender
 {
-	/** User email. */
+	// User email.
 	public string $email;
 
-	/** Email subject. */
+	// Email subject.
 	public string $subject;
 
-	/** Password recovery token. */
+	// Password recovery token.
 	public string $token;
 
 
@@ -30,14 +30,17 @@ class SignSender
 
 	public function sendEmail(): void
 	{
+		$latte = new Engine;
+		$params = [
+			'subject' => $this->subject,
+			'token' => $this->token,
+		];
+
 		$message = new Message();
 		$message->setFrom('no-reply@scrs.site')
 			->addTo($this->email)
 			->setSubject($this->subject)
-			->setHtmlBody((new Engine)->renderToString(__DIR__ . '/email.latte', [
-				'subject' => $this->subject,
-				'token' => $this->token,
-			]));
+			->setHtmlBody($latte->renderToString(__DIR__ . '/signEmail.latte', $params));
 
 		try {
 			$this->mailer->send($message);
