@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UI\Backend\Sign;
 
 use App\Core\Form\Factory;
+use Drago\Localization\Translator;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
 
@@ -13,13 +14,16 @@ use Nette\Forms\Controls\TextInput;
  * Factory for creating password recovery forms and handling password recovery logic.
  * Provides methods for creating forms related to password recovery: request form, token check, and password change.
  */
-readonly class SignRecoveryFactory
+class SignRecoveryFactory
 {
+	public Translator $translator;
+
+
 	public function __construct(
-		private Factory $factory,
-		private SignRecoverySession $signRecoverySession,
-		private SignRepository $signRepository,
-		private SignSender $signSender,
+		private readonly Factory $factory,
+		private readonly SignRecoverySession $signRecoverySession,
+		private readonly SignRepository $signRepository,
+		private readonly SignSender $signSender,
 	) {
 	}
 
@@ -95,18 +99,18 @@ readonly class SignRecoveryFactory
 			$email = $form->getValues()['email'];
 
 			// We will verify if the user exists by email.
-			$user = $this->signRepository->findUserByEmail($email);
-			if ($user) {
+			$foundUser = $this->signRepository->findUserByEmail($email);
+			if ($foundUser) {
 
 				// We will create a token and save the email.
 				$this->signRecoverySession->setToken($email);
 
 				// We will create a sending email.
-				$post = $this->signSender;
-				$post->email = $email;
-				$post->token = $this->signRecoverySession->getToken();
-				$post->subject = 'Request to reset password.';
-				$post->sendEmail();
+				$request = $this->signSender;
+				$request->email = $email;
+				$request->token = $this->signRecoverySession->getToken();
+				$request->setTranslator($this->translator);
+				$request->sendEmail();
 			}
 
 
