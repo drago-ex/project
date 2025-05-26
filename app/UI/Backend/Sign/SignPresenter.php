@@ -8,6 +8,7 @@ use App\Core\Form\Factory;
 use App\UI\Presenter;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
+use Nette\Neon\Exception;
 use Nette\Security\AuthenticationException;
 use Tracy\Debugger;
 
@@ -135,10 +136,13 @@ final class SignPresenter extends Presenter
 
 	/**
 	 * Creates and handles the password recovery request form.
+	 * @throws Exception
 	 */
 	protected function createComponentSignRecoveryRequest(): Form
 	{
-		$form = $this->signRecoveryFactory->createRequest();
+		$factory = $this->signRecoveryFactory;
+		$factory->translator = $this->getTranslator();
+		$form = $factory->createRequest();
 		$this->setOnSuccess($form, 'A password recovery code has been sent to your email.');
 		$form->onError[] = function (Form $form) {
 			foreach ($form->getErrors() as $error) {
