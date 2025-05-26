@@ -4,43 +4,44 @@ declare(strict_types=1);
 
 namespace App\UI\Backend\Sign;
 
-use Latte\Engine;
+use Drago\Localization\Translator;
+use Nette\Application\UI\TemplateFactory;
 use Nette\Mail\Mailer;
 use Nette\Mail\Message;
-use Tracy\Debugger;
 
 
 class SignSender
 {
-	/** User email. */
 	public string $email;
-
-	/** Email subject. */
-	public string $subject;
-
-	/** Password recovery token. */
 	public string $token;
+	private Translator $translator;
 
 
 	public function __construct(
 		private readonly Mailer $mailer,
+		private readonly TemplateFactory $templateFactory,
 	) {
+	}
+
+
+	public function setTranslator(Translator $translator): void
+	{
+		$this->translator = $translator;
 	}
 
 
 	public function sendEmail(): void
 	{
-		$latte = new Engine;
-		$params = [
-			'subject' => $this->subject,
-			'token' => $this->token,
-		];
+		$template = $this->templateFactory->createTemplate();
+		$template->setFile(__DIR__ . '/recovery.latte');
+		$template->setTranslator($this->translator);
+		$template->token = $this->token;
 
 		$message = new Message();
 		$message->setFrom('no-reply@scrs.site')
 			->addTo($this->email)
-			->setSubject($this->subject)
-			->setHtmlBody($latte->renderToString(__DIR__ . '/signEmail.latte', $params));
+			->setSubject($this->translator->translate('Request to reset password'))
+			->setHtmlBody($template->__toString());
 
 		try {
 			$this->mailer->send($message);
