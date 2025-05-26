@@ -38,7 +38,7 @@ class SignSender
 		$template->token = $this->token;
 
 		$message = new Message();
-		$message->setFrom('no-reply@scrs.site')
+		$message->setFrom('no-reply@email.com')
 			->addTo($this->email)
 			->setSubject($this->translator->translate('Request to reset password'))
 			->setHtmlBody($template->__toString());
