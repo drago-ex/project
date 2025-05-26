@@ -4,3 +4,4 @@ services:
 	router.backend: {factory: App\UI\Backend\Router::create, autowired: no}
 
 	- App\UI\Backend\Sign\SignRecoverySession
+	- App\UI\Backend\Sign\SignSender
