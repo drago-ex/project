@@ -8,6 +8,7 @@ use Drago\Localization\Translator;
 use Nette\Application\UI\TemplateFactory;
 use Nette\Mail\Mailer;
 use Nette\Mail\Message;
+use Tracy\Debugger;
 
 
 class SignSender
