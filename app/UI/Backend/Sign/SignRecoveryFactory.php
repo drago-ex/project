@@ -95,32 +95,39 @@ class SignRecoveryFactory
 	/**
 	 * Handles the password recovery request form submission.
 	 * Generates a recovery token if the email exists in the database.
-	 *
-	 * @throws EmailNotFoundException
+	 * 
 	 * @throws Exception
 	 * @throws AttributeDetectionException
 	 */
 	public function request(Form $form): void
 	{
-		$values = $form->getValues();
-		$email = $values['email'];
+		try {
+			$values = $form->getValues();
+			$email = $values['email'];
 
-		// We will verify if the user exists by email.
-		$foundUser = $this->signRepository->findUserByEmail($email);
-		if (!$foundUser) {
-			$form->addError("We're sorry, but we don't know such an email address.");
-			return;
+			// We will verify if the user exists by email.
+			$this->signRepository->findUserByEmail($email);
+
+			 // We will create a token and save the email.
+			$this->signRecoverySession->generateToken($email);
+
+			// We will create a sending email.
+			$request = $this->signSender;
+			$request->email = $email;
+			$request->token = $this->signRecoverySession->getToken();
+			$request->setTranslator($this->translator);
+			$request->sendEmail();
+
+
+		} catch (EmailNotFoundException $e) {
+			if ($e->getCode()) {
+				$message = match ($e->getCode()) {
+					1 => "We're sorry, but we don't know such an email address.",
+					default => 'Unknown status code.',
+				};
+				$form->addError($message);
+			}
 		}
-
-		// We will create a token and store the email in the session.
-		$this->signRecoverySession->generateToken($email);
-
-		// We will prepare and send an email with the token.
-		$request = $this->signSender;
-		$request->email = $email;
-		$request->token = $this->signRecoverySession->getToken();
-		$request->setTranslator($this->translator);
-		$request->sendEmail();
 	}
 
 
