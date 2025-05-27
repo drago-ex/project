@@ -169,7 +169,7 @@ final class SignPresenter extends Presenter
 	 */
 	protected function createComponentSignRecoveryChangePassword(): Form
 	{
-		$form = $this->signRecoveryFactory->creatChangePassword();
+		$form = $this->signRecoveryFactory->createChangePassword();
 		$this->setOnSuccess(
 			$form,
 			'Password change was successful.',
