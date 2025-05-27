@@ -32,7 +32,7 @@ try {
 
 	echo "✅ Database import completed successfully.\n";
 
-} catch (\Throwable $e) {
+} catch (Throwable $e) {
 	if ($inTransaction) {
 		$model->rollback();
 	}
