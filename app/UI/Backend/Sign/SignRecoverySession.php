@@ -33,10 +33,11 @@ readonly class SignRecoverySession
 	 * Sets a new token and email for password recovery in the session.
 	 * Generates a random 6-character token and stores it along with the provided email.
 	 */
-	public function setToken(string $email): void
+	public function generateToken(string $email): void
 	{
 		$section = $this->getSection();
-		$section->set('token', Random::generate(6));
+		$token = Random::generate(6);
+		$section->set('token', $token);
 		$section->set('email', $email);
 	}
 
@@ -87,7 +88,14 @@ readonly class SignRecoverySession
 	 */
 	public function isTokenValid(string $token): bool
 	{
-		return $this->getToken() === $token;
+		$section = $this->getSection();
+
+		// If tokenCheck is true, the token must not be reused.
+		if ($section->get('tokenCheck') === true) {
+			return false;
+		}
+
+		return $section->get('token') === $token;
 	}
 
 
@@ -97,8 +105,8 @@ readonly class SignRecoverySession
 	public function createSignRecoveryToken(): SignRecoveryToken
 	{
 		return new SignRecoveryToken(
-			token: $this->getToken() !== null ? true : null,
-			tokenCheck: $this->getSection()->get('tokenCheck') ? true : null,
+			hasToken: $this->getToken() !== null,
+			isTokenChecked: (bool) $this->getSection()->get('tokenCheck'),
 		);
 	}
 }
