@@ -73,3 +73,9 @@
 "New password": "Nové heslo"
 "Change your password": "Změňte si heslo"
 "Password change was successful.": "Změna hesla byla úspěšná."
+"Forgot your password?": "Zapomněli jste heslo?"
+"To reset your password, enter the code you received in this email into the form. The code is valid for 30 minutes.":
+	"Chcete-li obnovit heslo, zadejte do formuláře kód, který jste obdrželi v tomto e-mailu. Platnost kódu je 30 minut."
+"If you do not want to change your password or didn’t request a reset, you can ignore and delete this email.":
+	"Pokud si nechcete změnit heslo nebo jste nepožádali o reset, můžete tento e-mail ignorovat a smazat."
+"Request to reset password": "Žádost o obnovení hesla"
