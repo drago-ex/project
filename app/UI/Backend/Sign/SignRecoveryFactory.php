@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\UI\Backend\Sign;
 
+use App\Core\Exception\EmailNotFoundException;
 use App\Core\Form\Factory;
+use Dibi\Exception;
+use Drago\Attr\AttributeDetectionException;
 use Drago\Localization\Translator;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
@@ -74,7 +77,7 @@ class SignRecoveryFactory
 	/**
 	 * Creates the form for changing the password.
 	 */
-	public function creatChangePassword(): Form
+	public function createChangePassword(): Form
 	{
 		$form = $this->factory->create();
 		$form->addPasswordField()
@@ -92,37 +95,32 @@ class SignRecoveryFactory
 	/**
 	 * Handles the password recovery request form submission.
 	 * Generates a recovery token if the email exists in the database.
+	 *
+	 * @throws EmailNotFoundException
+	 * @throws Exception
+	 * @throws AttributeDetectionException
 	 */
 	public function request(Form $form): void
 	{
-		try {
-			$email = $form->getValues()['email'];
+		$values = $form->getValues();
+		$email = $values['email'];
 
-			// We will verify if the user exists by email.
-			$foundUser = $this->signRepository->findUserByEmail($email);
-			if ($foundUser) {
-
-				// We will create a token and save the email.
-				$this->signRecoverySession->setToken($email);
-
-				// We will create a sending email.
-				$request = $this->signSender;
-				$request->email = $email;
-				$request->token = $this->signRecoverySession->getToken();
-				$request->setTranslator($this->translator);
-				$request->sendEmail();
-			}
-
-
-		} catch (\Throwable $e) {
-			if ($e->getCode()) {
-				$message = match ($e->getCode()) {
-					1 => "We're sorry, but we don't know such an email address.",
-					default => 'Unknown status code.',
-				};
-				$form->addError($message);
-			}
+		// We will verify if the user exists by email.
+		$foundUser = $this->signRepository->findUserByEmail($email);
+		if (!$foundUser) {
+			$form->addError("We're sorry, but we don't know such an email address.");
+			return;
 		}
+
+		// We will create a token and store the email in the session.
+		$this->signRecoverySession->generateToken($email);
+
+		// We will prepare and send an email with the token.
+		$request = $this->signSender;
+		$request->email = $email;
+		$request->token = $this->signRecoverySession->getToken();
+		$request->setTranslator($this->translator);
+		$request->sendEmail();
 	}
 
 
@@ -146,6 +144,8 @@ class SignRecoveryFactory
 			$password = $form->getValues()['password'];
 			$email = $this->signRecoverySession->getEmail();
 			$this->signRepository->updatePassword($email, $password);
+
+			// We delete the token and the control flag.
 			$this->signRecoverySession->removeToken();
 
 		} catch (\Throwable $e) {
