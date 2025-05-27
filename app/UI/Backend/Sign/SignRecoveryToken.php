@@ -12,8 +12,8 @@ namespace App\UI\Backend\Sign;
 class SignRecoveryToken
 {
 	public function __construct(
-		public ?bool $token = null,
-		public ?bool $tokenCheck = null,
+		public bool $hasToken = false,
+		public bool $isTokenChecked = false,
 	) {
 	}
 }
