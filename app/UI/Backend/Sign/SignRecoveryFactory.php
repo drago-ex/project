@@ -95,7 +95,7 @@ class SignRecoveryFactory
 	/**
 	 * Handles the password recovery request form submission.
 	 * Generates a recovery token if the email exists in the database.
-	 * 
+	 *
 	 * @throws Exception
 	 * @throws AttributeDetectionException
 	 */
@@ -108,7 +108,7 @@ class SignRecoveryFactory
 			// We will verify if the user exists by email.
 			$this->signRepository->findUserByEmail($email);
 
-			 // We will create a token and save the email.
+			// We will create a token and save the email.
 			$this->signRecoverySession->generateToken($email);
 
 			// We will create a sending email.
