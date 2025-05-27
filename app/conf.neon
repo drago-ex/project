@@ -1,6 +1,9 @@
 # default parameters
 parameters:
 
+# email settings
+mail:
+
 
 # settings for sessions
 session:
