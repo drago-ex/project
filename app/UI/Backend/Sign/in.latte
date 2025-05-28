@@ -10,11 +10,15 @@
                 {include password-toggle, name: 'password'}
                 <div class="d-grid gap-1">
                     {include submit, name: 'send'}
-                    <a n:href="Sign:up" class="btn btn-link p-0 text-end ajax" data-link-disable>{_'Sign up'}</a>
-                    <a n:href="Sign:recovery" class="btn btn-link p-0 text-end ajax" data-link-disable>{_'Lost your password?'}</a>
                 </div>
             {/block}
         {/embed}
+
+        <div class="text-end">
+            <p class="m-0"><a n:href="Sign:up" class="btn btn-link p-0 ajax" data-link-disable>{_'Sign up'}</a></p>
+            <p class="m-0"><a n:href="Sign:recovery" class="btn btn-link p-0 ajax" data-link-disable>{_'Lost your password?'}</a></p>
+        </div>
+
         {else}
         <p>{_'You are already logged in, go back to the administration or you can log out.'}</p>
         <ul>
