@@ -11,20 +11,28 @@
                 {include input, name: 'email'}
                 <div class="d-grid gap-1">
                     {include submit, name: 'send'}
-                    <a n:href="in" class="btn btn-link p-0 text-start ajax" data-link-disable>{_'Back to sign in'}</a>
                 </div>
             {/block}
         {/embed}
+
+        <p class="m-0">
+            <a n:href="in" class="btn btn-link p-0 text-start ajax" data-link-disable>{_'Back to sign in'}</a>
+        </p>
+
     {elseif !$signRecoveryToken->isTokenChecked}
         {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryCheckToken', class: 'ajax'}
             {block form}
                 {include input, name: 'token'}
                 <div class="d-grid gap-1">
                     {include submit, name: 'send'}
-                    <a n:href="in" class="btn btn-link p-0 text-start ajax" data-link-disable>{_'Back to sign in'}</a>
                 </div>
             {/block}
         {/embed}
+
+        <p class="m-0">
+            <a n:href="in" class="btn btn-link p-0 text-start ajax" data-link-disable>{_'Back to sign in'}</a>
+        </p>
+
     {else}
         {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryChangePassword', class: 'ajax'}
             {block form}
@@ -32,9 +40,13 @@
                 {include password-toggle, name: 'verify'}
                 <div class="d-grid gap-1">
                     {include submit, name: 'send'}
-                    <a n:href="in" class="btn btn-link p-0 text-start ajax" data-link-disable>{_'Back to sign in'}</a>
                 </div>
             {/block}
         {/embed}
+
+        <p class="m-0">
+            <a n:href="in" class="btn btn-link p-0 text-start ajax" data-link-disable>{_'Back to sign in'}</a>
+        </p>
+
     {/if}
 {/block}
