@@ -36,7 +36,7 @@ readonly class SignUpFactory
 			name: SignUpData::Username,
 			label: 'Username',
 			placeholder: 'Full name',
-			required: 'Please enter your full name.'
+			required: 'Please enter your full name.',
 		);
 
 		$form->addEmailField()
