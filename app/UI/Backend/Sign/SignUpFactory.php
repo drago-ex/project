@@ -32,15 +32,18 @@ readonly class SignUpFactory
 	public function create(): Form
 	{
 		$form = $this->factory->create();
-		$form->addText(SignUpData::Username, 'Username')
-			->setHtmlAttribute('placeholder', 'Full name')
-			->setRequired('Please enter your full name.');
+		$form->addTextInput(
+			name: SignUpData::Username,
+			label: 'Username',
+			placeholder: 'Full name',
+			required: 'Please enter your full name.'
+		);
 
 		$form->addEmailField()
 			->setDefaultValue('@');
 
 		$form->addPasswordField()
-			->setHtmlAttribute('autocomplete', 'new-password')
+			->setAutocomplete('new-password')
 			->addRule($form::MinLength, 'Password must be at least %d characters long.', 8)
 			->addRule(
 				$form::Pattern,
@@ -49,7 +52,7 @@ readonly class SignUpFactory
 			);
 
 		$form->addPasswordConfirmationField()
-			->setHtmlAttribute('autocomplete', 'new-password');
+			->setAutocomplete('new-password');
 
 		$form->addSubmit('send', 'Sign up');
 		$form->onSuccess[] = $this->success(...);
