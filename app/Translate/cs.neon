@@ -79,3 +79,6 @@
 "If you do not want to change your password or didn’t request a reset, you can ignore and delete this email.":
 	"Pokud si nechcete změnit heslo nebo jste nepožádali o reset, můžete tento e-mail ignorovat a smazat."
 "Request to reset password": "Žádost o obnovení hesla"
+"You are already logged in. You can return to the administration or log out and switch accounts.":
+	"Již jste přihlášeni. Můžete se vrátit do administrace nebo se odhlásit a přepnout účty."
+"You have been signed out": "Byli jste odhlášeni"
