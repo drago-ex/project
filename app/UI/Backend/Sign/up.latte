@@ -5,7 +5,7 @@
 
 {* website content *}
 {block content}
-    {embed '../../../Core/Widget/@form.latte', name: 'signUp', class: 'ajax'}
+    {embed '../../../Core/Widget/@form.latte', name: 'signUp', class: 'ajax', najaHistory: 'replace'}
         {block form}
             {include input, name: 'username'}
             {include input, name: 'email'}
