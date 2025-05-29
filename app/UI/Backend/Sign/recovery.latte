@@ -6,7 +6,7 @@
 
 {block content}
     {if !$signRecoveryToken->hasToken}
-        {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryRequest', class: 'ajax'}
+        {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryRequest', class: 'ajax', najaHistory: 'off'}
             {block form}
                 {include input, name: 'email'}
                 <div class="d-grid gap-1">
@@ -20,7 +20,7 @@
         </p>
 
     {elseif !$signRecoveryToken->isTokenChecked}
-        {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryCheckToken', class: 'ajax'}
+        {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryCheckToken', class: 'ajax', najaHistory: 'off'}
             {block form}
                 {include input, name: 'token'}
                 <div class="d-grid gap-1">
@@ -34,7 +34,7 @@
         </p>
 
     {else}
-        {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryChangePassword', class: 'ajax'}
+        {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryChangePassword', class: 'ajax', najaHistory: 'off'}
             {block form}
                 {include password-toggle, name: 'password'}
                 {include password-toggle, name: 'verify'}
