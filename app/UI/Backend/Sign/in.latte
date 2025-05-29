@@ -4,7 +4,7 @@
 
 {block content}
     {if !$user->loggedIn}
-        {embed '../../../Core/Widget/@form.latte', name: 'signIn'}
+        {embed '../../../Core/Widget/@form.latte', name: 'signIn', najaHistory: 'replace'}
             {block form}
                 {include input, name: 'email'}
                 {include password-toggle, name: 'password'}
@@ -15,15 +15,15 @@
         {/embed}
 
         <div class="text-end">
-            <p class="m-0"><a n:href="Sign:up" class="btn btn-link p-0 ajax" data-link-disable>{_'Sign up'}</a></p>
-            <p class="m-0"><a n:href="Sign:recovery" class="btn btn-link p-0 ajax" data-link-disable>{_'Lost your password?'}</a></p>
+            <p class="m-0"><a n:href="up" class="btn btn-link p-0 ajax" data-link-disable>{_'Sign up'}</a></p>
+            <p class="m-0"><a n:href="recovery" class="btn btn-link p-0 ajax" data-link-disable>{_'Lost your password?'}</a></p>
         </div>
 
         {else}
-        <p>{_'You are already logged in, go back to the administration or you can log out.'}</p>
+        <p>{_'You are already logged in. You can return to the administration or log out and switch accounts.'}</p>
         <ul>
-            <li><a n:href=":Backend:Admin:">{_'Administration'}</a></li>
-            <li><a n:href=":Backend:Sign:out" class="btn btn-link p-0 ajax" data-link-disable>{_'Sign out'}</a></li>
+            <li><a n:href="Admin:">{_'Administration'}</a></li>
+            <li><a n:href="out" class="btn btn-link p-0 ajax" data-link-disable>{_'Sign out'}</a></li>
         </ul>
     {/if}
 {/block}
