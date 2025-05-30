@@ -37,9 +37,10 @@ final class SignPresenter extends Presenter
 
 
 	/**
-	 * Redraws specific parts of the page.
+	 * Redraws specific parts of the page (title and body).
+	 * Used to update the UI during AJAX requests.
 	 */
-	private function redraw(): void
+	private function redrawSnippets(): void
 	{
 		$this->redrawControl('title');
 		$this->redrawControl('body');
@@ -47,38 +48,20 @@ final class SignPresenter extends Presenter
 
 
 	/**
-	 * Renders the sign-in page.
+	 * Called before rendering the template.
+	 * Sets the recovery token if the current action is 'recovery'.
+	 * If the request is AJAX, redraw snippets to update page parts dynamically.
 	 */
-	public function renderIn(): void
+	protected function beforeRender(): void
 	{
-		if ($this->isAjax()) {
-			$this->redraw();
+		parent::beforeRender();
+
+		if ($this->getAction() === 'recovery') {
+			$this->template->signRecoveryToken = $this->signRecoverySession->createSignRecoveryToken();
 		}
-	}
-
-
-	/**
-	 * Renders the sign-up page.
-	 */
-	public function renderUp(): void
-	{
-		if ($this->isAjax()) {
-			$this->redraw();
-		}
-	}
-
-
-	/**
-	 * Renders the password recovery page.
-	 * Sets the recovery token in the template.
-	 */
-	public function renderRecovery(): void
-	{
-		$this->template->signRecoveryToken = $this->signRecoverySession
-			->createSignRecoveryToken();
 
 		if ($this->isAjax()) {
-			$this->redraw();
+			$this->redrawSnippets();
 		}
 	}
 
@@ -110,12 +93,11 @@ final class SignPresenter extends Presenter
 			$this->restoreRequest($this->backlink);
 			$this->redirect(':Backend:Admin:');
 		} catch (AuthenticationException $e) {
-			$message = match ($e->getCode()) {
+			$messages = [
 				1 => 'User not found.',
 				2 => 'The password is incorrect.',
-				default => 'Unknown error occurred.',
-			};
-			$form->addError($message);
+			];
+			$form->addError($messages[$e->getCode()] ?? 'Unknown error occurred.');
 		}
 	}
 
@@ -185,13 +167,19 @@ final class SignPresenter extends Presenter
 
 
 	/**
-	 * Logs the user out.
+	 * Handles user logout.
+	 * If the request is AJAX, redraw snippets to update UI.
+	 * Otherwise, redirects to the current page.
 	 */
 	public function actionOut(): void
 	{
 		$this->getUser()->logout();
+
 		if ($this->isAjax()) {
-			$this->redraw();
+			$this->redrawSnippets();
+			return;
 		}
+
+		$this->redirect('this');
 	}
 }
