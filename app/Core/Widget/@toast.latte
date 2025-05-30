@@ -1,0 +1,32 @@
+{varType Drago\Application\UI\Flashes[] $flashes}
+{var $toastAttrs = [
+    'id' => 'toastContainer',
+    'class' => 'toast-container position-fixed top-0 end-0 p-3',
+    'aria-live' => 'polite',
+    'aria-atomic' => 'true',
+]}
+
+{var $toastButtonAttrs = [
+    'type' => 'button',
+    'class' => 'btn-close btn-close-white me-2 m-auto',
+    'data-bs-dismiss' => 'toast',
+]}
+
+<div n:attr="$toastAttrs">
+    {foreach $flashes as $flash}
+        {var $toastItemAttrs = [
+            'class' => 'toast text-bg-' . ($flash->type ?? 'info'),
+            'role' => 'alert',
+            'aria-live' => 'assertive',
+            'aria-atomic' => 'true',
+            'data-bs-delay' => '3000',
+            'data-bs-autohide' => 'true',
+        ]}
+        <div n:attr="$toastItemAttrs">
+            <div class="d-flex">
+                <div class="toast-body">{$flash->message}</div>
+                <button n:attr="$toastButtonAttrs" aria-label="{_'Close'}"></button>
+            </div>
+        </div>
+    {/foreach}
+</div>
