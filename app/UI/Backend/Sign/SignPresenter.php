@@ -125,11 +125,10 @@ final class SignPresenter extends Presenter
 	protected function createComponentSignUp(): Form
 	{
 		$form = $this->signUpFactory->create();
-		$this->setOnSuccess(
-			$form,
-			'Your registration has been successfully completed, you can now log in.',
-			fn() => $this->redirect('in'),
-		);
+		$form->onSuccess[] = function () {
+			$this->flashMessage('Your registration has been successfully completed, you can now log in.');
+			$this->redirect('in');
+		};
 		return $form;
 	}
 
@@ -142,8 +141,12 @@ final class SignPresenter extends Presenter
 	{
 		$factory = $this->signRecoveryFactory;
 		$factory->translator = $this->getTranslator();
+
 		$form = $factory->createRequest();
-		$this->setOnSuccess($form, 'A password recovery code has been sent to your email.');
+		$form->onSuccess[] = function () {
+			$this->flashMessage('A password recovery code has been sent to your email.');
+		};
+
 		$form->onError[] = function (Form $form) {
 			foreach ($form->getErrors() as $error) {
 				Debugger::barDump($error);
@@ -159,7 +162,9 @@ final class SignPresenter extends Presenter
 	protected function createComponentSignRecoveryCheckToken(): Form
 	{
 		$form = $this->signRecoveryFactory->createCheckToken();
-		$this->setOnSuccess($form, 'Code check was successful.');
+		$form->onSuccess[] = function () {
+			$this->flashMessage('Code check was successful.');
+		};
 		return $form;
 	}
 
@@ -170,11 +175,10 @@ final class SignPresenter extends Presenter
 	protected function createComponentSignRecoveryChangePassword(): Form
 	{
 		$form = $this->signRecoveryFactory->createChangePassword();
-		$this->setOnSuccess(
-			$form,
-			'Password change was successful.',
-			fn() => $this->redirect('in'),
-		);
+		$form->onSuccess[] = function () {
+			$this->flashMessage('Password change was successful');
+			$this->redirect('in');
+		};
 		return $form;
 	}
 
