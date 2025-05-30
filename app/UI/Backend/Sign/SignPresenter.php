@@ -6,6 +6,7 @@ namespace App\UI\Backend\Sign;
 
 use App\Core\Form\Factory;
 use App\UI\Presenter;
+use Drago\Application\UI\Alert;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
 use Nette\Neon\Exception;
@@ -126,7 +127,7 @@ final class SignPresenter extends Presenter
 	{
 		$form = $this->signUpFactory->create();
 		$form->onSuccess[] = function () {
-			$this->flashMessage('Your registration has been successfully completed, you can now log in.');
+			$this->flashMessage('Your registration has been successfully completed, you can now log in.', Alert::Success);
 			$this->redirect('in');
 		};
 		return $form;
@@ -163,7 +164,7 @@ final class SignPresenter extends Presenter
 	{
 		$form = $this->signRecoveryFactory->createCheckToken();
 		$form->onSuccess[] = function () {
-			$this->flashMessage('Code check was successful.');
+			$this->flashMessage('Code check was successful.', Alert::Success);
 		};
 		return $form;
 	}
@@ -176,7 +177,7 @@ final class SignPresenter extends Presenter
 	{
 		$form = $this->signRecoveryFactory->createChangePassword();
 		$form->onSuccess[] = function () {
-			$this->flashMessage('Password change was successful');
+			$this->flashMessage('Password change was successful', Alert::Success);
 			$this->redirect('in');
 		};
 		return $form;
