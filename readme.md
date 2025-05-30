@@ -22,15 +22,7 @@ You can find all commands in `package.json` like running Docker or Vite.
 
 First, run `npm install`
 
-## Database
-```sql
-CREATE TABLE `users` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `username` varchar(50) NOT NULL,
-    `email` varchar(50) NOT NULL,
-    `password` varchar(60) NOT NULL,
-    `token` varchar(32) NOT NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+## Database install
+```php
+php bin/import-sql.php
 ```
