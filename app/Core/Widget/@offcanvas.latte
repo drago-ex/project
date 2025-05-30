@@ -1,23 +1,30 @@
 {* https://getbootstrap.com/docs/5.3/components/offcanvas/ *}
 {varType string $offcanvasId}
-<div class="offcanvas offcanvas-end" tabindex="-1" id="{$offcanvasId}" aria-labelledby="offcanvasRightLabel">
+{var $offcanvasAttrs = [
+	'class' => 'offcanvas offcanvas-end',
+	'tabindex' => '-1',
+	'id' => $offcanvasId,
+	'aria-labelledby' => 'offcanvasRightLabel',
+]}
 
-	{* offcanvas header *}
+{var $closeBtnAttrs = [
+	'type' => 'button',
+	'class' => 'btn-close text-reset',
+	'data-bs-dismiss' => 'offcanvas',
+]}
+
+<div n:attr="$offcanvasAttrs">
+
 	<div class="offcanvas-header bg-light">
 		<h5 id="offcanvasRightLabel">
-
-			{* the title for the offcanvas is inserted here. *}
 			{block title}{/block}
 		</h5>
 
-		{* offcanvas close button *}
-		<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		<button n:attr="$closeBtnAttrs" aria-label="{_'Close'}"></button>
 	</div>
 
-	{* offcanvas body *}
 	<div class="offcanvas-body">
-
-		{* content for offcanvas is inserted here *}
 		{block body}{/block}
 	</div>
+
 </div>
