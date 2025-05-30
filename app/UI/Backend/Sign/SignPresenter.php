@@ -167,19 +167,11 @@ final class SignPresenter extends Presenter
 
 
 	/**
-	 * Handles user logout.
-	 * If the request is AJAX, redraw snippets to update UI.
-	 * Otherwise, redirects to the current page.
+	 * Logs out the current user.
+	 * After logout, the presenter will render the 'out' view or perform the default rendering.
 	 */
 	public function actionOut(): void
 	{
 		$this->getUser()->logout();
-
-		if ($this->isAjax()) {
-			$this->redrawSnippets();
-			return;
-		}
-
-		$this->redirect('this');
 	}
 }
