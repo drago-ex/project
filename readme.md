@@ -12,7 +12,7 @@ Basis for new modules projects on Drago Extension
 - node.js
 
 ## Installation
-```
+```bash
 composer create-project drago-ex/project
 ```
 
