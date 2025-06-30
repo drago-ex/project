@@ -7,5 +7,4 @@ namespace App\Core\Exception;
 
 class EmailNotFoundException extends \Exception
 {
-
 }
