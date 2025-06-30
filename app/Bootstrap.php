@@ -26,7 +26,7 @@ final class Bootstrap
 		$this->rootDir = dirname(__DIR__);
 
 		// Initialize ExtraConfigurator and set temporary directory.
-		$this->configurator = new ExtraConfigurator();
+		$this->configurator = new ExtraConfigurator;
 		$this->configurator->setTempDirectory($this->rootDir . '/var');
 	}
 

@@ -74,7 +74,7 @@ final class SignPresenter extends Presenter
 		$form = $this->factory->create();
 		$form->addEmailField();
 		$form->addPasswordField()
-			->setHtmlAttribute('autocomplete', 'current-password');
+			->setAutocomplete('current-password');
 
 		$form->addSubmit('send', 'Sign in');
 		$form->onSuccess[] = $this->success(...);
