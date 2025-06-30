@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\UI\Front\Home;
 
-use App\Core\Form\Factory;
+use App\Core\Forms\Factory;
 use App\UI\Presenter;
 use Drago\Application\UI\Alert;
 use Nette\Application\UI\Form;

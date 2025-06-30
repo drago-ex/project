@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Form;
+namespace App\Core\Forms;
 
 use Nette\Localization\Translator;
 use Nette\Security\User;
@@ -20,9 +20,9 @@ readonly class Factory
 	}
 
 
-	public function create(): Forms
+	public function create(): BaseForm
 	{
-		$form = new Forms;
+		$form = new BaseForm;
 
 		// Add form protection if the user is logged in
 		if ($this->user->isLoggedIn()) {
