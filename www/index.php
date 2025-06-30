@@ -19,7 +19,7 @@ class ApplicationRunner
 	public function __construct()
 	{
 		// Initialize the Bootstrap class for app configuration
-		$this->bootstrap = new Bootstrap();
+		$this->bootstrap = new Bootstrap;
 	}
 
 
