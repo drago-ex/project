@@ -6,7 +6,7 @@ use Dibi\Connection;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$bootstrap = new App\Bootstrap();
+$bootstrap = new App\Bootstrap;
 $container = $bootstrap->createContainer();
 
 $model = $container->getByType(Connection::class);
