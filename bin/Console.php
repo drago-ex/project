@@ -13,7 +13,7 @@ class Console
 {
 	public static function boot(): Configurator
 	{
-		$app = new Configurator();
+		$app = new Configurator;
 		$app->setDebugMode(true);
 		$app->setTempDirectory(__DIR__ . '/');
 		$app->addConfig(__DIR__ . '/generator.neon');
