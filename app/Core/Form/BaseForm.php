@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Forms;
+namespace App\Core\Form;
 
 use Drago\Forms\Forms;
 use Drago\Forms\Inputs;
