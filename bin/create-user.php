@@ -10,7 +10,7 @@ use Nette\Utils\Random;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$bootstrap = new App\Bootstrap();
+$bootstrap = new App\Bootstrap;
 $container = $bootstrap->createContainer();
 
 if (!isset($argv[3])) {
