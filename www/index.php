@@ -39,4 +39,4 @@ class ApplicationRunner
 }
 
 // Initialize and run the application
-(new ApplicationRunner())->run();
+(new ApplicationRunner)->run();
