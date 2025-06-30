@@ -62,7 +62,7 @@ class BaseForm extends Forms
 			label: 'Email',
 			type: 'email',
 			placeholder: 'Email address',
-			required: 'Please enter your email address.,
+			required: 'Please enter your email address.',
 			rule: Form::Email,
 		);
 	}
