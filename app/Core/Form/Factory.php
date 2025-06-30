@@ -22,7 +22,7 @@ readonly class Factory
 
 	public function create(): Forms
 	{
-		$form = new Forms();
+		$form = new Forms;
 
 		// Add form protection if the user is logged in
 		if ($this->user->isLoggedIn()) {
