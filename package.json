@@ -9,7 +9,8 @@
   "devDependencies": {
     "concurrently": "^9.1.2",
     "sass": "^1.83.4",
-    "vite": "^6.0.11"
+    "vite": "^6.0.11",
+    "ncp": "^2.0.0"
   },
   "scripts": {
     "docker:build": "concurrently -n=build -c=green \"docker-compose build\"",
@@ -17,6 +18,9 @@
     "docker:pro": "concurrently -n=pro -c=blue \"docker-compose up --no-deps php\"",
     "docker:off": "docker-compose down",
     "watch": "vite build --watch --mode=development",
-    "build": "vite build --mode=production"
+    "build": "vite build --mode=production",
+    "@form.latte": "ncp vendor/drago-ex/form/src/Drago/Form/assets/latte/ app/Core/Widget/",
+    "@component.latte": "ncp vendor/drago-ex/component/src/Drago/assets/latte/ app/Core/Widget/",
+    "postinstall": "npm run @form.latte && npm run @component.latte"
   }
 }
