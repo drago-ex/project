@@ -7,6 +7,7 @@ namespace App\UI\Front\Home;
 use App\Core\Form\Factory;
 use App\UI\Presenter;
 use Drago\Application\UI\Alert;
+use Drago\Form\Autocomplete;
 use Nette\Application\UI\Form;
 use Tracy\Debugger;
 
@@ -46,7 +47,7 @@ final class HomePresenter extends Presenter
 			label: 'Age',
 			type: 'number',
 			required: true,
-		)->setAutocomplete('off')
+		)->setAutocomplete(Autocomplete::Off)
 			->setPlaceholder('Enter your age');
 
 		$form->addPasswordField();
