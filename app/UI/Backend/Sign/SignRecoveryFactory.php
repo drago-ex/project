@@ -8,6 +8,7 @@ use App\Core\Exception\EmailNotFoundException;
 use App\Core\Form\Factory;
 use Dibi\Exception;
 use Drago\Attr\AttributeDetectionException;
+use Drago\Form\Autocomplete;
 use Drago\Localization\Translator;
 use Nette\Application\UI\Form;
 use Nette\Forms\Controls\TextInput;
@@ -50,10 +51,12 @@ class SignRecoveryFactory
 	public function createCheckToken(): Form
 	{
 		$form = $this->factory->create();
-		$form->addText('token', 'Code')
-			->setHtmlAttribute('placeholder', 'Enter the code from the email')
-			->setRequired('Please enter the code from the email.')
-			->addRule([$this, 'tokenCheck'], 'The code entered is invalid.');
+		$form->addTextInput(
+			name: 'token',
+			label: 'Code',
+			placeholder: 'Enter the code from the email',
+			required: 'Please enter the code from the email.',
+		)->addRule([$this, 'tokenCheck'], 'The code entered is invalid.');
 
 		$form->addSubmit('send', 'Continue password recovery');
 		$form->onSuccess[] = $this->checkToken(...);
@@ -81,10 +84,10 @@ class SignRecoveryFactory
 	{
 		$form = $this->factory->create();
 		$form->addPasswordField()
-			->setAutocomplete($form::NewPassword);
+			->setAutocomplete(Autocomplete::NewPassword);
 
 		$form->addPasswordConfirmationField()
-			->setAutocomplete($form::NewPassword);
+			->setAutocomplete(Autocomplete::NewPassword);
 
 		$form->addSubmit('send', 'Change your password');
 		$form->onSuccess[] = $this->changePassword(...);

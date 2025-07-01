@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\UI\Front\Home;
 
 use Drago\Application\UI\ExtraControl;
-use Drago\Components\Components;
-use Drago\Components\ModalHandle;
-use Drago\Components\OffcanvasHandle;
+use Drago\Component\Component;
+use Drago\Component\ModalHandle;
+use Drago\Component\OffcanvasHandle;
 use Nette\Application\Attributes\Requires;
 use Nette\Utils\Random;
 
@@ -17,7 +17,7 @@ use Nette\Utils\Random;
  */
 class FooControl extends ExtraControl implements ModalHandle, OffcanvasHandle
 {
-	use Components;
+	use Component;
 
 	public function render(): void
 	{

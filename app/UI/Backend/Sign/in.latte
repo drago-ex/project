@@ -5,6 +5,7 @@
 {block content}
     {if !$user->loggedIn}
         {embed '../../../Core/Widget/@form.latte', name: 'signIn', najaHistory: 'replace'}
+            {import '../../../Core/Widget/@form-password.latte'}
             {block form}
                 {include input, name: 'email'}
                 {include password-toggle, name: 'password'}

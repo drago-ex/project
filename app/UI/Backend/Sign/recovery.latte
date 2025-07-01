@@ -35,6 +35,7 @@
 
     {else}
         {embed '../../../Core/Widget/@form.latte', name: 'signRecoveryChangePassword', class: 'ajax', najaHistory: 'off'}
+            {import '../../../Core/Widget/@form-password.latte'}
             {block form}
                 {include password-toggle, name: 'password'}
                 {include password-toggle, name: 'verify'}

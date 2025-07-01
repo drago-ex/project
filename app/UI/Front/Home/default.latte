@@ -16,6 +16,7 @@
 
 	{snippet factory}
 		{embed '../../../Core/Widget/@form.latte', name: 'add', class: 'ajax mt-3'}
+			{import '../../../Core/Widget/@form-password.latte'}
 			{block form}
 				{include input, name: 'name', columns: 6}
 				{include input, name: 'age', columns: 6}

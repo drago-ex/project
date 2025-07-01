@@ -8,6 +8,7 @@ use App\Core\Form\Factory;
 use App\Core\User\UsersEntity;
 use Dibi\Connection;
 use Dibi\UniqueConstraintViolationException;
+use Drago\Form\Autocomplete;
 use Exception;
 use Nette\Application\UI\Form;
 use Nette\Security\Passwords;
@@ -43,7 +44,7 @@ readonly class SignUpFactory
 			->setDefaultValue('@');
 
 		$form->addPasswordField()
-			->setAutocomplete('new-password')
+			->setAutocomplete(Autocomplete::NewPassword)
 			->addRule($form::MinLength, 'Password must be at least %d characters long.', 8)
 			->addRule(
 				$form::Pattern,
@@ -52,7 +53,7 @@ readonly class SignUpFactory
 			);
 
 		$form->addPasswordConfirmationField()
-			->setAutocomplete('new-password');
+			->setAutocomplete(Autocomplete::NewPassword);
 
 		$form->addSubmit('send', 'Sign up');
 		$form->onSuccess[] = $this->success(...);

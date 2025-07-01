@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\Form;
 
-use Drago\Forms\Forms;
-use Drago\Forms\Inputs;
-use Nette\Forms\Form;
+use Drago\Form\Forms;
+use Drago\Form\Input;
 
 
 class BaseForm extends Forms
@@ -14,7 +13,7 @@ class BaseForm extends Forms
 	/**
 	 * Adds a password input field to the form.
 	 */
-	public function addPasswordField(): Inputs
+	public function addPasswordField(): Input
 	{
 		return $this->addTextInput(
 			name: 'password',
@@ -29,7 +28,7 @@ class BaseForm extends Forms
 	/**
 	 * Adds a password confirmation input field to the form.
 	 */
-	public function addPasswordConfirmationField(): Inputs
+	public function addPasswordConfirmationField(): Input
 	{
 		// Create a password confirmation input field
 		$passwordField = $this->addTextInput(
@@ -55,7 +54,7 @@ class BaseForm extends Forms
 	/**
 	 * Adds an email input field to the form.
 	 */
-	public function addEmailField(): Inputs
+	public function addEmailField(): Input
 	{
 		return $this->addTextInput(
 			name: 'email',
@@ -63,7 +62,7 @@ class BaseForm extends Forms
 			type: 'email',
 			placeholder: 'Email address',
 			required: 'Please enter your email address.',
-			rule: Form::Email,
+			rule: $this::Email,
 		);
 	}
 }

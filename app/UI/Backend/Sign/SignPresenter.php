@@ -7,6 +7,7 @@ namespace App\UI\Backend\Sign;
 use App\Core\Form\Factory;
 use App\UI\Presenter;
 use Drago\Application\UI\Alert;
+use Drago\Form\Autocomplete;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
 use Nette\Neon\Exception;
@@ -74,7 +75,7 @@ final class SignPresenter extends Presenter
 		$form = $this->factory->create();
 		$form->addEmailField();
 		$form->addPasswordField()
-			->setAutocomplete('current-password');
+			->setAutocomplete(Autocomplete::CurrentPassword);
 
 		$form->addSubmit('send', 'Sign in');
 		$form->onSuccess[] = $this->success(...);
