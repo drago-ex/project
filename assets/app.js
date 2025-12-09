@@ -20,7 +20,9 @@ Nette.initOnLoad();
 
 /* Initialize Naja */
 /* https://naja.js.org/#/quick-start */
-naja.initialize();
+naja.initialize({
+	history: false
+});
 
 /* Set options for LiveForm (error handling, form error styling, etc.) */
 /* https://contributte.org/packages/contributte/live-form-validation.html#content */
