@@ -4,11 +4,12 @@ import naja from "naja";
 import { Alert } from "bootstrap";
 import "../vendor/drago-ex/component/src/Drago/assets/naja.component"
 import SubmitButtonDisable from "../vendor/drago-ex/form/src/Drago/Form/assets/naja.button";
+import PasswordToggle from "../vendor/drago-ex/form/src/Drago/Form/assets/naja.password";
 import SpinnerExtension from "./naja.spinner";
 import ErrorsExtension from "./naja.errors";
 import HyperlinkDisable from "./naja.hyperlink";
-import PasswordToggle from "./naja.password";
 import "./app.scss"
+import "../vendor/drago-ex/form/src/Drago/Form/assets/password.scss"
 
 window.LiveForm = LiveForm;
 window.Nette = Nette;
