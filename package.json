@@ -2,15 +2,16 @@
   "name": "project",
   "dependencies": {
     "bootstrap": "^5.3.3",
-    "nette-forms": "^3.5.3",
+    "drago-form": "file:vendor/drago-ex/form",
+    "live-form-validation": "^1.10.1",
     "naja": "^3.2.1",
-    "live-form-validation": "^1.10.1"
+    "nette-forms": "^3.5.3"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
+    "ncp": "^2.0.0",
     "sass": "^1.83.4",
-    "vite": "^6.0.11",
-    "ncp": "^2.0.0"
+    "vite": "^6.0.11"
   },
   "scripts": {
     "docker:build": "concurrently -n=build -c=green \"docker-compose build\"",
