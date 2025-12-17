@@ -52,21 +52,13 @@ function initAlerts(selector) {
 }
 
 /* Function to register all extensions */
-function registerExtensions() {
-	const extensions = [
-		new ErrorsExtension(),
-		new SubmitButtonDisable(),
-		new SpinnerExtension(),
-		new HyperlinkDisable(),
-		new PasswordToggle(),
-	];
-
-	// Register each extension with Naja
-	extensions.forEach(extension => naja.registerExtension(extension));
-}
-
-/* Register the extensions to Naja */
-registerExtensions();
+[
+	new ErrorsExtension(),
+	new SubmitButtonDisable(),
+	new SpinnerExtension(),
+	new HyperlinkDisable(),
+	new PasswordToggle(),
+].forEach(ext => naja.registerExtension(ext));
 
 /* Initialize components after DOM is loaded */
 document.addEventListener("DOMContentLoaded", () => {
