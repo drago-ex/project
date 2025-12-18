@@ -2,8 +2,7 @@
 import { LiveForm, Nette } from "live-form-validation";
 import naja from "naja";
 import { Alert } from "bootstrap";
-
-import { PasswordToggle } from "drago-form";
+import { PasswordToggle, SubmitButtonDisable } from "drago-form";
 
 import SpinnerExtension from "./naja.spinner";
 import ErrorsExtension from "./naja.errors";
@@ -48,10 +47,10 @@ function initAlerts(selector) {
 /* Register Naja extensions */
 [
 	new ErrorsExtension(),
-	new SubmitButtonDisable(),
 	new SpinnerExtension(),
 	new HyperlinkDisable(),
 	new PasswordToggle(),
+	new SubmitButtonDisable(),
 ].forEach(ext => naja.registerExtension(ext));
 
 /* DOM ready */
