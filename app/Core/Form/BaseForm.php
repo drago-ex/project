@@ -21,6 +21,6 @@ class BaseForm extends Forms
 			type: 'password',
 			placeholder: 'Your password',
 			required: 'Please enter your password.',
-		)->setAutocomplete(Autocomplete::Off);
+		);
 	}
 }
