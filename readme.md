@@ -58,4 +58,3 @@ composer require drago-ex/generator --dev
 
 ## Info
 The project with the database set up in this way is available in the `database-project` branch.
-
