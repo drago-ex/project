@@ -56,11 +56,6 @@ As for further configuration on Docker, you can find it in the documentation.
 composer require drago-ex/generator --dev
 ```
 
-Use the command to copy the necessary files: `copy .\vendor\drago-ex\generator\bin\* bin`
-
-Then edit the configuration including the database in `bin/config.neon`
-
-And run the command: `php .\bin\generator app:entity`
-
 ## Info
 The project with the database set up in this way is available in the `database-project` branch.
+
