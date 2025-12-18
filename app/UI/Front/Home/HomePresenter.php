@@ -51,7 +51,7 @@ final class HomePresenter extends Presenter
 			->setPlaceholder('Enter your age');
 
 		$form->addPasswordField()
-            ->setAutocomplete(Autocomplete::Off);
+			->setAutocomplete(Autocomplete::Off);
 
 		$form->addSubmit('send', 'Send');
 		$form->onSuccess[] = $this->success(...);
