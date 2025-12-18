@@ -29,7 +29,7 @@
 	},
 	"scripts": {
 		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app",
-		"post-install-cmd": ["node npm-install.js"],
-		"post-update-cmd": ["node npm-install.js"]
+		"post-install-cmd": ["node scripts/npm-install.js"],
+		"post-update-cmd": ["node scripts/npm-install.js"]
 	}
 }
