@@ -28,6 +28,8 @@
 		"psr-4": {"App\\": "app"}
 	},
 	"scripts": {
-		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app"
+		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app",
+		"post-install-cmd": ["node npm-install.js"],
+		"post-update-cmd": ["node npm-install.js"]
 	}
 }
