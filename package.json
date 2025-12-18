@@ -1,5 +1,6 @@
 {
   "name": "project",
+  "type": "module",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "drago-form": "file:vendor/drago-ex/form",
@@ -20,8 +21,7 @@
     "docker:off": "docker-compose down",
     "watch": "vite build --watch --mode=development",
     "build": "vite build --mode=production",
-    "@form.latte": "ncp vendor/drago-ex/form/src/Drago/Form/assets/latte/ app/Core/Widget/",
-    "@component.latte": "ncp vendor/drago-ex/component/src/Drago/assets/latte/ app/Core/Widget/",
-    "postinstall": "npm run @form.latte && npm run @component.latte"
+    "copy-latte": "node scripts/copy-latte.js",
+    "postinstall": "npm run copy-latte"
   }
 }
