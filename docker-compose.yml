@@ -3,7 +3,7 @@ services:
 
 
   # php server
-  php:
+  server:
     build: docker
     restart: always
     volumes:
