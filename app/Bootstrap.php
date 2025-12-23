@@ -64,8 +64,8 @@ final class Bootstrap
 	public function bootWebApplication(): Container
 	{
 		// Perform initialization and configuration before creating the container.
-		$this->initialize();
-		$this->configure();
+		$this->initializeEnvironment();
+		$this->setupContainer();
 
 		// Create and return the DI container.
 		return $this->configurator->createContainer();
