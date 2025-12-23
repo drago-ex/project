@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
+    "fast-glob": "^3.3.3",
     "ncp": "^2.0.0",
     "sass": "^1.83.4",
     "vite": "^6.0.11"
