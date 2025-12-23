@@ -30,7 +30,7 @@ class ApplicationRunner
 	public function run(): void
 	{
 		// Create the container and get the application service
-		$container = $this->bootstrap->createContainer();
+		$container = $this->bootstrap->bootWebApplication();
 		$app = $container->getByType(Nette\Application\Application::class);
 
 		// Run the application
