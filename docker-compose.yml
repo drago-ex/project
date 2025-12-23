@@ -1,12 +1,13 @@
 # docker service
 services:
 
-
   # php server
   server:
-    build: docker
+    build:
+      context: docker
+    image: php-server
     restart: always
     volumes:
       - ./:/var/www/html/
     ports:
-      - '8092:80'
+      - "8080:80"
