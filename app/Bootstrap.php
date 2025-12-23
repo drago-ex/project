@@ -31,7 +31,7 @@ final class Bootstrap
 	}
 
 
-	public function initialize(): void
+	public function initializeEnvironment(): void
 	{
 		// Enable debug mode if the environment variable is set.
 		if (getenv('NETTE_DEBUG') === '1') {
@@ -51,7 +51,7 @@ final class Bootstrap
 	/**
 	 * @throws Throwable
 	 */
-	private function configure(): void
+	private function setupContainer(): void
 	{
 		// Adding configuration files from the current directory excluding the 'Translate' directory.
 		$this->configurator->addFindConfig(__DIR__, 'Translate');
@@ -61,7 +61,7 @@ final class Bootstrap
 	/**
 	 * @throws Throwable
 	 */
-	public function createContainer(): Container
+	public function bootWebApplication(): Container
 	{
 		// Perform initialization and configuration before creating the container.
 		$this->initialize();
