@@ -1,7 +1,15 @@
 import { defineConfig } from 'vite';
+import fg from 'fast-glob';
+import path from 'path';
 
 export default defineConfig(({ mode }) => {
 	const DEV = mode === 'development';
+	const jsFiles = fg.sync('assets/*.js');
+	const input = {};
+	jsFiles.forEach(file => {
+		const name = path.basename(file, '.js');
+		input[name] = path.resolve(__dirname, file);
+	});
 
 	return {
 		publicDir: './assets/public',
@@ -11,9 +19,30 @@ export default defineConfig(({ mode }) => {
 			hmr: false,
 		},
 		css: {
-			postcss: [
-				"autoprefixer"
-			]
+			preprocessorOptions: {
+				scss: {
+					api: 'modern-compiler',
+					silenceDeprecations: [
+						'import',
+						'mixed-decls',
+						'color-functions',
+						'global-builtin',
+						'legacy-js-api',
+					],
+					quietDeps: true,
+				},
+				sass: {
+					api: 'modern-compiler',
+					silenceDeprecations: [
+						'import',
+						'mixed-decls',
+						'color-functions',
+						'global-builtin',
+						'legacy-js-api',
+					],
+					quietDeps: true,
+				},
+			},
 		},
 		build: {
 			assetsDir: '',
@@ -27,10 +56,8 @@ export default defineConfig(({ mode }) => {
 					entryFileNames: '[name].js',
 					assetFileNames: '[name].[ext]',
 				},
-				input: {
-					app: './assets/app.js',
-				}
+				input,
 			}
 		},
-	}
+	};
 });
