@@ -5,9 +5,9 @@ import { Alert } from "bootstrap";
 import { PasswordToggle, SubmitButtonDisable } from "drago-form";
 import { BootstrapComponents } from "drago-component";
 
-import SpinnerExtension from "./naja.spinner";
-import ErrorsExtension from "./naja.errors";
-import HyperlinkDisable from "./naja.hyperlink";
+import SpinnerExtension from "./class/naja.spinner";
+import ErrorsExtension from "./class/naja.errors";
+import HyperlinkDisable from ".class//naja.hyperlink";
 
 import "./app.scss";
 
