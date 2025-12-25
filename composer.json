@@ -2,13 +2,6 @@
 	"name": "drago-ex/project",
 	"type": "project",
 	"description": "The basis for new projects on Drago Extension.",
-	"license": ["MIT"],
-	"authors": [
-		{
-			"name": "Zdeněk Papučík",
-			"homepage": "https://github.com/accgit"
-		}
-	],
 	"require": {
 		"php": ">=8.3 <9",
 		"nette/robot-loader": "^4.0",
