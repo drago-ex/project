@@ -7,7 +7,7 @@ import { BootstrapComponents } from "drago-component";
 
 import SpinnerExtension from "./class/naja.spinner";
 import ErrorsExtension from "./class/naja.errors";
-import HyperlinkDisable from ".class//naja.hyperlink";
+import HyperlinkDisable from "./class/naja.hyperlink";
 
 import "./app.scss";
 
