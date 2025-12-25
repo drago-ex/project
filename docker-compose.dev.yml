@@ -3,6 +3,6 @@ services:
 
 
   # php server
-  php:
+  server:
     environment:
       - NETTE_DEBUG=1
