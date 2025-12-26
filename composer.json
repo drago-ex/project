@@ -24,10 +24,10 @@
 	"scripts": {
 		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app",
 		"post-install-cmd": [
-			"php copy.php"
+			"php script.copy.php"
 		],
 		"post-update-cmd": [
-			"php copy.php"
+			"php script.copy.php"
 		]
 	}
 }
