@@ -37,5 +37,6 @@ function deleteDir(string $dir): void
 	rmdir($dir);
 }
 
+
 cleanDragoResources();
 echo "✅ Done.\n";
