@@ -35,6 +35,14 @@ extensions:
 	- Drago\Localization\DI\TranslatorExtension(translateDir: %appDir%/Translate)
 
 
+# nette asset building
+assets:
+	mapping:
+		default:
+			path: dist
+			type: vite
+
+
 # automatic class registration
 search:
 	-
@@ -42,3 +50,4 @@ search:
 		classes:
 			- *Factory
 			- *Control
+			- *Repository

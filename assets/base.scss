@@ -1,0 +1,14 @@
+@use "bootstrap" as *;
+
+.errors {
+  background-color: $danger;
+  color: white;
+  font-weight: 600;
+  list-style: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.188rem;
+}
+
+.invalid-feedback {
+  display: block;
+}

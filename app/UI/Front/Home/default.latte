@@ -1,33 +1,8 @@
 {block content}
-	<div class="border-bottom pb-2">
-		<div class="row">
-			<div class="col-md-8">
-				<h1 n:block="title" class="fw-normal text-primary">
-					{_'Drago project'}
-				</h1>
-			</div>
-			<div class="col-md-4 pt-4 text-end">
-				{include LangSwitch, lang: 'cs', name: 'Czech'}
-				<span class="small ps-1 pe-1 text-secondary">&#124;</span>
-				{include LangSwitch, lang: 'en', name: 'English'}
-			</div>
-		</div>
+	<h1 n:block="title" class="fw-normal fs-4 mb-3">
+		{_'Drago project'}
+	</h1>
+	<div class="alert alert-success p-2">
+		Projekt úspěšně připraven! Všechno funguje jak má.
 	</div>
-
-	{snippet factory}
-		{embed '../../../Core/Widget/@form.latte', name: 'add', class: 'ajax mt-3'}
-			{import '../../../Core/Widget/@form-password.latte'}
-			{block form}
-				{include input, name: 'name', columns: 6}
-				{include input, name: 'age', columns: 6}
-				{include password-toggle, name: 'password', columns: 12}
-				<div class="d-block">
-					{include submit, name: 'send'}
-				</div>
-			{/block}
-		{/embed}
-	{/snippet}
-
-	<h2 class="border-bottom pb-2 mt-4 fw-normal">Bootstrap components</h2>
-	{control fooControl}
 {/block}

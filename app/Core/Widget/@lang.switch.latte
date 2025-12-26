@@ -1,4 +1,4 @@
-{var Nette\Application\UI\Presenter $presenter}
+{varType Nette\Application\UI\Presenter $presenter}
 {define LangSwitch, string $lang, string $name}
 	<a n:href="this, 'lang' => $lang" n:class="$presenter->isLinkCurrent() ? 'fw-semibold'">
 		{$name}

@@ -4,14 +4,13 @@
 	"description": "The basis for new projects on Drago Extension.",
 	"require": {
 		"php": ">=8.3 <9",
-		"nette/robot-loader": "^4.0",
-		"latte/latte": "^3.0",
-		"tracy/tracy": "^2.9",
+		"nette/robot-loader": "^4.1",
+	  	"nette/assets": "^1.0",
+		"latte/latte": "^3.1",
+		"tracy/tracy": "^2.11",
 		"drago-ex/bootstrap": "^1.0",
 		"drago-ex/translator": "^1.0",
-		"drago-ex/application": "^1.0",
-		"drago-ex/component": "^1.0",
-		"drago-ex/form": "@dev"
+		"drago-ex/application": "^1.0"
 	},
 	"minimum-stability": "stable",
 	"require-dev": {
@@ -22,7 +21,7 @@
 	},
 	"scripts": {
 		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app",
-		"post-install-cmd": ["node scripts/npm-install.js"],
-		"post-update-cmd": ["node scripts/npm-install.js"]
+		"post-install-cmd": ["php copy.php"],
+		"post-update-cmd": ["php copy.php"]
 	}
 }

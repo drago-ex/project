@@ -1,26 +1,26 @@
 {
-  "name": "project",
   "type": "module",
   "dependencies": {
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.8",
+    "drago-application": "file:vendor/drago-ex/application",
     "live-form-validation": "^1.10.1",
-    "naja": "^3.2.1",
+    "naja": "^3.3.3",
     "nette-forms": "^3.5.3"
   },
   "devDependencies": {
+    "@nette/vite-plugin": "^1.0.1",
+    "@types/node": "^25.0.3",
     "fast-glob": "^3.3.3",
     "ncp": "^2.0.0",
-    "sass": "^1.83.4",
-    "vite": "^6.0.11"
+    "sass": "^1.97.1",
+    "vite": "^6.4.1"
   },
   "scripts": {
     "docker:build": "docker-compose build",
     "docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
     "docker:pro": "docker-compose up --no-deps php",
     "docker:off": "docker-compose down",
-    "watch": "vite build --watch --mode=development",
-    "build": "vite build --mode=production",
-    "copy-latte": "node scripts/copy-latte.js",
-    "postinstall": "npm run copy-latte"
+    "vite:dev": "vite",
+    "vite:build": "vite build"
   }
 }

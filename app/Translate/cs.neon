@@ -20,21 +20,3 @@
 "Please select a valid option.": "Vyberte prosím platnou možnost."
 "An error occurred during file upload.": "Při nahrávání souboru došlo k chybě."
 "Your session has expired. Please return to the home page and try again.": "Vaše relace vypršela. Vraťte se na domovskou stránku a zkuste to znovu."
-
-# global
-"Close": "Zavřít"
-
-# form translate
-"Name": "Jméno"
-"Enter your name": "Zadejte své jméno"
-"Age": "Věk"
-"Enter your age": "Zadejte svůj věk"
-"Send": "Odeslat"
-"Translation": "Překlad"
-"The form has been submitted.": "Formulář byl odeslán."
-"Password": "Heslo"
-"Your password": "Vaše heslo"
-"Please enter your password.": "Zadejte prosím své heslo."
-
-# admin
-"Administration": "Administrace"

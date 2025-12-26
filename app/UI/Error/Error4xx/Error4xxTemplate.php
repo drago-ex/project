@@ -8,8 +8,8 @@ use Nette\Bridges\ApplicationLatte\Template;
 
 
 /**
- * Template class for handling 4xx errors.
- * This class extends the base Template class and adds an HTTP code property.
+ * BaseTemplate class for handling 4xx errors.
+ * This class extends the base BaseTemplate class and adds an HTTP code property.
  */
 class Error4xxTemplate extends Template
 {
