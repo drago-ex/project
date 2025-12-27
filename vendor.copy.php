@@ -13,7 +13,10 @@ function recursiveCopy(string $source, string $destination): void {
 	$files = new RecursiveIteratorIterator($iterator, RecursiveIteratorIterator::SELF_FIRST);
 
 	foreach ($files as $file) {
-		/** @var SplFileInfo $file */
+		if (!$file instanceof SplFileInfo) {
+			continue;
+		}
+
 		$relativePath = substr($file->getPathname(), strlen($source) + 1);
 		$destPath = $destination . '/' . $relativePath;
 
