@@ -25,12 +25,12 @@ function recursiveCopy(string $source, string $destination): void {
 			continue;
 		}
 
+		@mkdir(dirname($destPath), 0o777, true);
+
 		if (file_exists($destPath)) {
 			echo "⚠️ Skipped (exists): $destPath\n";
 			continue;
 		}
-
-		@mkdir(dirname($destPath), 0o777, true);
 
 		if (copy($file->getPathname(), $destPath)) {
 			echo "✅ Copied: {$file->getPathname()} → {$destPath}\n";
@@ -63,7 +63,15 @@ foreach ($packages as $packageName) {
 
 	foreach ($extra as $sourceRelative => $destinationRelative) {
 		$source = $packagePath . '/' . $sourceRelative;
-		$destination = $projectRoot . '/' . $destinationRelative;
+		if ($destinationRelative === '') {
+			$destination = $projectRoot . '/' . basename($source);
+		} else {
+			$destination = $projectRoot . '/' . $destinationRelative;
+
+			if (is_dir($destination) && is_file($source)) {
+				$destination .= '/' . basename($source);
+			}
+		}
 
 		if (is_dir($source)) {
 			recursiveCopy($source, $destination);
