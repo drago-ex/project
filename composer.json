@@ -23,12 +23,12 @@
 	"scripts": {
 		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app",
 		"post-install-cmd": [
-			"php script.copy.php",
-			"php script.clean.php"
+			"php vendor.copy.php",
+			"php vendor.clean.php"
 		],
 		"post-update-cmd": [
-			"php script.copy.php",
-			"php script.clean.php"
+			"php vendor.copy.php",
+			"php vendor.clean.php"
 		]
 	},
 	"config": {
