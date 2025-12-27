@@ -5,11 +5,12 @@ Basis for new modules projects on Drago Extension
 [![Coding Style](https://github.com/drago-ex/project/actions/workflows/coding-style.yml/badge.svg)](https://github.com/drago-ex/project/actions/workflows/coding-style.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/drago-ex/project/badge)](https://www.codefactor.io/repository/github/drago-ex/project)
 
-## Technology
-- PHP 8.3 or higher
-- composer
-- docker
-- node.js
+## Requirements
+- PHP >= 8.3
+- Nette Framework
+- Composer
+- Docker
+- Node.js
 
 ## Installation
 ```bash
@@ -24,3 +25,4 @@ You can find all commands in `package.json` like running Docker or Vite.
 - https://github.com/drago-ex/project-db
 - https://github.com/drago-ex/project-user
 - https://github.com/drago-ex/project-auth
+
