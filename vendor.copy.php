@@ -1,27 +1,23 @@
 <?php
 declare(strict_types=1);
 
-$projectRoot = __DIR__ . '/..';
-$installedFile = $projectRoot . '/vendor/composer/installed.json';
+use Composer\InstalledVersions;
 
-if (!file_exists($installedFile)) {
-	echo "❌ installed.json not found. Run composer install first.\n";
-	exit(1);
-}
+require __DIR__ . '/vendor/autoload.php';
 
-$installedPackages = json_decode(file_get_contents($installedFile), true, 512, JSON_THROW_ON_ERROR);
+$projectRoot = __DIR__;
 
 
 function recursiveCopy(string $source, string $destination): void {
-	$iterator = new RecursiveIteratorIterator(
-		new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
-		RecursiveIteratorIterator::SELF_FIRST
-	);
+	$iterator = new RecursiveDirectoryIterator($source, \FilesystemIterator::SKIP_DOTS);
+	$files = new RecursiveIteratorIterator($iterator, RecursiveIteratorIterator::SELF_FIRST);
 
-	foreach ($iterator as $item) {
-		$destPath = $destination . '/' . $iterator->getSubPathName();
+	foreach ($files as $file) {
+		/** @var SplFileInfo $file */
+		$relativePath = substr($file->getPathname(), strlen($source) + 1);
+		$destPath = $destination . '/' . $relativePath;
 
-		if ($item->isDir()) {
+		if ($file->isDir()) {
 			@mkdir($destPath, 0o777, true);
 			continue;
 		}
@@ -33,27 +29,37 @@ function recursiveCopy(string $source, string $destination): void {
 
 		@mkdir(dirname($destPath), 0o777, true);
 
-		if (copy($item->getPathname(), $destPath)) {
-			echo "✅ Copied: {$item->getPathname()} → {$destPath}\n";
+		if (copy($file->getPathname(), $destPath)) {
+			echo "✅ Copied: {$file->getPathname()} → {$destPath}\n";
 		} else {
-			echo "❌ Failed: {$item->getPathName()} → {$destPath}\n";
+			echo "❌ Failed: {$file->getPathname()} → {$destPath}\n";
 		}
 	}
 }
 
 
-foreach ($installedPackages['packages'] ?? [] as $package) {
-	if (($package['type'] ?? '') !== 'drago-project-resources') {
+$packages = InstalledVersions::getInstalledPackages();
+
+foreach ($packages as $packageName) {
+	$packagePath = __DIR__ . '/vendor/' . $packageName;
+	$composerJsonFile = $packagePath . '/composer.json';
+	if (!file_exists($composerJsonFile)) {
 		continue;
 	}
 
-	$extra = $package['extra']['drago-project']['install']['copy'] ?? [];
+	$composerData = json_decode(file_get_contents($composerJsonFile), true, 512, JSON_THROW_ON_ERROR);
+
+	if (($composerData['type'] ?? '') !== 'drago-project-resource') {
+		continue;
+	}
+
+	$extra = $composerData['extra']['drago-project']['install']['copy'] ?? [];
 	if (!$extra) {
 		continue;
 	}
 
 	foreach ($extra as $sourceRelative => $destinationRelative) {
-		$source = $projectRoot . '/vendor/' . $package['name'] . '/' . $sourceRelative;
+		$source = $packagePath . '/' . $sourceRelative;
 		$destination = $projectRoot . '/' . $destinationRelative;
 
 		if (is_dir($source)) {
