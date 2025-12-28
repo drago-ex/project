@@ -20,6 +20,11 @@
 			"App\\": "app"
 		}
 	},
+	"extra": {
+		"drago-project": {
+			"allow-library-install": true
+		}
+	},
 	"scripts": {
 		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app",
 		"post-install-cmd": [
