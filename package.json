@@ -20,7 +20,7 @@
     "docker:down": "docker compose down",
     "vite:dev": "vite",
     "vite:build": "vite build",
-    "npm-install": "node npm-install.js",
+    "npm-install": "node npm-loader.js",
     "postinstall": "npm run npm-install"
   }
 }
