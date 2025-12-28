@@ -2,7 +2,6 @@
   "type": "module",
   "dependencies": {
     "bootstrap": "^5.3.8",
-    "drago-application": "file:vendor/drago-ex/application",
     "live-form-validation": "^1.10.1",
     "naja": "^3.3.3",
     "nette-forms": "^3.5.3"
@@ -21,6 +20,8 @@
     "docker:pro": "docker-compose up --no-deps php",
     "docker:off": "docker-compose down",
     "vite:dev": "vite",
-    "vite:build": "vite build"
+    "vite:build": "vite build",
+    "npm-install": "node npm-install.js",
+    "postinstall": "npm run npm-install"
   }
 }
