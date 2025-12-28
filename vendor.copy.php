@@ -8,10 +8,21 @@ require __DIR__ . '/vendor/autoload.php';
 $projectRoot = realpath(__DIR__);
 assert($projectRoot !== false);
 
+// set to true for detailed listing.
+$verbose = false;
+$stats = [
+	'copied' => 0,
+	'skipped' => 0,
+	'errors' => 0,
+];
 
-function message(string $msg, string $icon = ''): void
+
+function message(string $msg, string $icon = '', bool $force = false): void
 {
-	echo $icon . ' ' . $msg . "\n";
+	global $verbose;
+	if ($verbose || $force) {
+		echo $icon . ' ' . $msg . "\n";
+	}
 }
 
 
@@ -29,17 +40,22 @@ function ensureDir(string $dir): void
 
 function copyFile(string $source, string $destination): void
 {
+	global $stats;
+
 	ensureDir(dirname($destination));
 
 	if (file_exists($destination)) {
 		message($destination, '⚠️ Skipped (exists):');
+		$stats['skipped']++;
 		return;
 	}
 
 	if (!copy($source, $destination)) {
+		$stats['errors']++;
 		throw new RuntimeException("Failed copying $source → $destination");
 	}
 
+	$stats['copied']++;
 	message("$source → $destination", '✅ Copied:');
 }
 
@@ -77,38 +93,53 @@ function readComposerJson(string $path): array
 
 function installPackageResources(string $packagePath, string $projectRoot, bool $allowLibraryInstall): void
 {
-	$composerJsonPath = $packagePath . '/composer.json';
-	if (!is_file($composerJsonPath)) return;
+	global $stats, $verbose;
 
-	$composer = readComposerJson($composerJsonPath);
-	$copies = $composer['extra']['drago-project']['install']['copy'] ?? null;
-	if ($copies === null) return;
-
-	$type = $composer['type'] ?? 'library';
-	if ($type === 'library' && !$allowLibraryInstall) {
-		message($composer['name'], '⏭️ Library install disabled by project:');
+	$composerPath = $packagePath . '/composer.json';
+	if (!is_file($composerPath)) {
 		return;
 	}
 
-	foreach ($copies as $sourceRelative => $destinationRelative) {
-		$source = $packagePath . '/' . $sourceRelative;
+	$composer = readComposerJson($composerPath);
+	$copies = $composer['extra']['drago-project']['install']['copy'] ?? null;
+	if (!$copies) {
+		return;
+	}
 
-		if ($destinationRelative === '') {
-			$destination = $projectRoot . '/' . basename($source);
-		} else {
-			$destination = $projectRoot . '/' . $destinationRelative;
-			if (is_dir($destination) && is_file($source)) {
+	$type = $composer['type'] ?? 'library';
+	if ($type === 'library' && !$allowLibraryInstall) {
+		message($composer['name'], '⏭️ Library install disabled:', true);
+		return;
+	}
+
+	foreach ($copies as $srcRel => $dstRel) {
+		$source = $packagePath . '/' . $srcRel;
+
+		if (!file_exists($source)) {
+			message($source, '❌ Source not found:');
+			$stats['errors']++;
+			continue;
+		}
+
+		$destination = $dstRel === '' ? $projectRoot . '/' . basename($source) : $projectRoot . '/' . $dstRel;
+
+		if (is_file($source)) {
+			if (is_dir($destination) || (!pathinfo($destination, PATHINFO_EXTENSION) && !file_exists($destination))) {
+				ensureDir($destination);
 				$destination .= '/' . basename($source);
 			}
+
+			copyFile($source, $destination);
+			continue;
 		}
 
 		if (is_dir($source)) {
 			recursiveCopy($source, $destination);
-		} elseif (is_file($source)) {
-			copyFile($source, $destination);
-		} else {
-			message($source, '❌ Source not found:');
+			continue;
 		}
+
+		$stats['errors']++;
+		message($source, '❌ Invalid source:', true);
 	}
 }
 
@@ -121,4 +152,4 @@ foreach (InstalledVersions::getInstalledPackages() as $packageName) {
 	installPackageResources($packagePath, $projectRoot, $allowLibraryInstall);
 }
 
-message("Done installing project resources 🎉");
+echo "✔️ Installed ({$stats['copied']} copied, {$stats['skipped']} skipped, {$stats['errors']} errors)\n";
