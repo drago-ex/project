@@ -15,10 +15,9 @@
     "vite": "^6.4.1"
   },
   "scripts": {
-    "docker:build": "docker compose build",
-    "docker:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up",
-    "docker:pro": "docker compose up --no-deps php",
-    "docker:off": "docker compose down",
+    "docker:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build -d",
+    "docker:production": "docker compose up -d",
+    "docker:down": "docker compose down",
     "vite:dev": "vite",
     "vite:build": "vite build",
     "npm-install": "node npm-install.js",
