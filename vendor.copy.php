@@ -5,69 +5,98 @@ use Composer\InstalledVersions;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$projectRoot = __DIR__;
+$projectRoot = realpath(__DIR__);
+assert($projectRoot !== false);
 
 
-function recursiveCopy(string $source, string $destination): void {
-	$iterator = new RecursiveDirectoryIterator($source, \FilesystemIterator::SKIP_DOTS);
-	$files = new RecursiveIteratorIterator($iterator, RecursiveIteratorIterator::SELF_FIRST);
+function message(string $msg, string $icon = ''): void
+{
+	echo $icon . ' ' . $msg . "\n";
+}
 
-	foreach ($files as $file) {
-		if (!$file instanceof SplFileInfo) {
-			continue;
-		}
 
-		$relativePath = substr($file->getPathname(), strlen($source) + 1);
-		$destPath = $destination . '/' . $relativePath;
+function ensureDir(string $dir): void
+{
+	if (is_dir($dir)) {
+		return;
+	}
 
-		if ($file->isDir()) {
-			@mkdir($destPath, 0o777, true);
-			continue;
-		}
+	if (!mkdir($dir, 0o777, true) && !is_dir($dir)) {
+		throw new RuntimeException("Cannot create directory: $dir");
+	}
+}
 
-		@mkdir(dirname($destPath), 0o777, true);
 
-		if (file_exists($destPath)) {
-			echo "⚠️ Skipped (exists): $destPath\n";
-			continue;
-		}
+function copyFile(string $source, string $destination): void
+{
+	ensureDir(dirname($destination));
 
-		if (copy($file->getPathname(), $destPath)) {
-			echo "✅ Copied: {$file->getPathname()} → {$destPath}\n";
+	if (file_exists($destination)) {
+		message($destination, '⚠️ Skipped (exists):');
+		return;
+	}
+
+	if (!copy($source, $destination)) {
+		throw new RuntimeException("Failed copying $source → $destination");
+	}
+
+	message("$source → $destination", '✅ Copied:');
+}
+
+
+function recursiveCopy(string $source, string $destination): void
+{
+	$iterator = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator($source, FilesystemIterator::SKIP_DOTS),
+		RecursiveIteratorIterator::SELF_FIRST
+	);
+
+	foreach ($iterator as $item) {
+		if (!$item instanceof SplFileInfo) continue;
+
+		$targetPath = $destination . '/' . substr($item->getPathname(), strlen($source) + 1);
+
+		if ($item->isDir()) {
+			ensureDir($targetPath);
 		} else {
-			echo "❌ Failed: {$file->getPathname()} → {$destPath}\n";
+			copyFile($item->getPathname(), $targetPath);
 		}
 	}
 }
 
 
-$packages = InstalledVersions::getInstalledPackages();
-
-foreach ($packages as $packageName) {
-	$packagePath = __DIR__ . '/vendor/' . $packageName;
-	$composerJsonFile = $packagePath . '/composer.json';
-	if (!file_exists($composerJsonFile)) {
-		continue;
+function readComposerJson(string $path): array
+{
+	if (!is_file($path)) {
+		throw new RuntimeException("composer.json not found: $path");
 	}
 
-	$composerData = json_decode(file_get_contents($composerJsonFile), true, 512, JSON_THROW_ON_ERROR);
+	return json_decode(file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+}
 
-	if (($composerData['type'] ?? '') !== 'drago-project-resource') {
-		continue;
+
+function installPackageResources(string $packagePath, string $projectRoot, bool $allowLibraryInstall): void
+{
+	$composerJsonPath = $packagePath . '/composer.json';
+	if (!is_file($composerJsonPath)) return;
+
+	$composer = readComposerJson($composerJsonPath);
+	$copies = $composer['extra']['drago-project']['install']['copy'] ?? null;
+	if ($copies === null) return;
+
+	$type = $composer['type'] ?? 'library';
+	if ($type === 'library' && !$allowLibraryInstall) {
+		message($composer['name'], '⏭️ Library install disabled by project:');
+		return;
 	}
 
-	$extra = $composerData['extra']['drago-project']['install']['copy'] ?? [];
-	if (!$extra) {
-		continue;
-	}
-
-	foreach ($extra as $sourceRelative => $destinationRelative) {
+	foreach ($copies as $sourceRelative => $destinationRelative) {
 		$source = $packagePath . '/' . $sourceRelative;
+
 		if ($destinationRelative === '') {
 			$destination = $projectRoot . '/' . basename($source);
 		} else {
 			$destination = $projectRoot . '/' . $destinationRelative;
-
 			if (is_dir($destination) && is_file($source)) {
 				$destination .= '/' . basename($source);
 			}
@@ -76,17 +105,20 @@ foreach ($packages as $packageName) {
 		if (is_dir($source)) {
 			recursiveCopy($source, $destination);
 		} elseif (is_file($source)) {
-			@mkdir(dirname($destination), 0o777, true);
-			if (!file_exists($destination)) {
-				copy($source, $destination);
-				echo "✅ Copied: $source → $destination\n";
-			} else {
-				echo "⚠️ Skipped (exists): $destination\n";
-			}
+			copyFile($source, $destination);
 		} else {
-			echo "❌ Source not found: $source\n";
+			message($source, '❌ Source not found:');
 		}
 	}
 }
 
-echo "🎉 Done installing project resources.\n";
+
+$rootComposer = readComposerJson($projectRoot . '/composer.json');
+$allowLibraryInstall = $rootComposer['extra']['drago-project']['allow-library-install'] ?? false;
+
+foreach (InstalledVersions::getInstalledPackages() as $packageName) {
+	$packagePath = __DIR__ . '/vendor/' . $packageName;
+	installPackageResources($packagePath, $projectRoot, $allowLibraryInstall);
+}
+
+message("Done installing project resources 🎉");
