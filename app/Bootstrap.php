@@ -70,4 +70,16 @@ final class Bootstrap
 		// Create and return the DI container.
 		return $this->configurator->createContainer();
 	}
+
+
+	/**
+	 * @throws Throwable
+	 */
+	public function bootConsoleApplication(): Container
+	{
+		$this->configurator->setDebugMode(false);
+		$this->initializeEnvironment();
+		$this->setupContainer();
+		return $this->configurator->createContainer();
+	}
 }
