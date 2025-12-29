@@ -1,8 +1,0 @@
-# docker service
-services:
-
-
-  # php server
-  server:
-    environment:
-      - NETTE_DEBUG=1
