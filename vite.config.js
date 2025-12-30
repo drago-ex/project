@@ -4,7 +4,7 @@ import fg from 'fast-glob';
 import path from 'path';
 
 const files = fg.sync('assets/*.js', {
-	ignore: ['assets/naja.*.js', 'assets/base.js'],
+	ignore: ['assets/core/**', 'assets/naja/**'],
 });
 
 const entries = files.map(
