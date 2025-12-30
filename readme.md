@@ -12,6 +12,7 @@ Basis for new modules projects on Drago Extension
 - Docker
 - Node.js
 - Bootstrap
+- Naja
 
 ## Installation
 ```bash
@@ -38,4 +39,5 @@ You can find all commands in `package.json` like running Docker or Vite.
 ## Useful tools that come in handy during development
 - https://github.com/drago-ex/migration
 - https://github.com/drago-ex/generator
+
 
