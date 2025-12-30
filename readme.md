@@ -23,9 +23,9 @@ You can find all commands in `package.json` like running Docker or Vite.
 
 ## Basic Naja scripts
 - **ErrorsExtension** – Handles Naja AJAX errors by displaying user-friendly alert messages based on HTTP status codes. Shows a dismissible Bootstrap alert in the page element with ID `snippet--message`.
-- 
+
 - **HyperlinkDisable** – Temporarily disables links with the data-link-disable attribute during Naja requests to prevent multiple clicks. Re-enables the links once the request is complete.
-- 
+
 - **SpinnerExtension** – Displays a full-page spinner during active Naja AJAX requests. Shows the spinner when a request starts and hides it once all requests are complete.
 
 ## We can further expand the package with other basic settings
@@ -37,5 +37,6 @@ You can find all commands in `package.json` like running Docker or Vite.
 ## Useful tools that come in handy during development
 - https://github.com/drago-ex/migration
 - https://github.com/drago-ex/generator
+
 
 
