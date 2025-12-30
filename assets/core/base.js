@@ -1,6 +1,6 @@
-import { LiveForm, Nette } from "live-form-validation";
 import naja from "naja";
-import ErrorsExtension from "./naja.errors.js";
+import { LiveForm, Nette } from "live-form-validation";
+import ErrorsExtension from "../naja/naja.errors.js";
 import "./base.scss";
 
 /* Globals */
