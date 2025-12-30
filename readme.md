@@ -45,4 +45,3 @@ docker compose exec server php path/to/script
 ## Useful tools that come in handy during development
 - https://github.com/drago-ex/migration
 - https://github.com/drago-ex/generator
-
