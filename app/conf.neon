@@ -2,6 +2,10 @@
 parameters:
 
 
+# email settings
+mail:
+
+
 # settings for sessions
 session:
 	name: project
