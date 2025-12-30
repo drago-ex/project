@@ -26,3 +26,7 @@ You can find all commands in `package.json` like running Docker or Vite.
 - https://github.com/drago-ex/project-db
 - https://github.com/drago-ex/project-user
 - https://github.com/drago-ex/project-auth
+
+## Useful tools that come in handy during development
+- https://github.com/drago-ex/migration
+- https://github.com/drago-ex/generator
