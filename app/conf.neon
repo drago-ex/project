@@ -3,7 +3,7 @@ parameters:
 
 
 # email settings
-mail:
+# mail:
 
 
 # settings for sessions
@@ -37,6 +37,14 @@ latte:
 # application extensions
 extensions:
 	- Drago\Localization\DI\TranslatorExtension(translateDir: %appDir%/Translate)
+	migration: Drago\Migration\DI\MigrationExtension(%consoleMode%)
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
+
+# symfony console
+console:
+	name: Symfony Console
+	version: '1.0'
 
 
 # nette asset building

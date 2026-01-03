@@ -17,16 +17,22 @@ export default defineConfig({
 	build: {
 		outDir: '../www/dist',
 		emptyOutDir: true,
-
+		cssMinify: false,
 		rollupOptions: {
 			input: entries,
 		},
 	},
 	css: {
-		devSourcemap: true,
 		preprocessorOptions: {
-			scss: { quietDeps: true },
-		},
+			scss: {
+				silenceDeprecations: [
+					'import',
+					'if-function',
+					'global-builtin',
+					'color-functions'
+				]
+			}
+		}
 	},
 	plugins: [
 		nette(),
