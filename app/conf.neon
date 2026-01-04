@@ -36,15 +36,7 @@ latte:
 
 # application extensions
 extensions:
-	- Drago\Localization\DI\TranslatorExtension(translateDir: %appDir%/Translate)
-	migration: Drago\Migration\DI\MigrationExtension(%consoleMode%)
-	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
-
-
-# symfony console
-console:
-	name: Symfony Console
-	version: '1.0'
+	translator: Drago\Localization\DI\TranslatorExtension(translateDir: %appDir%/Core/Translate)
 
 
 # nette asset building
