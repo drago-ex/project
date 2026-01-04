@@ -10,7 +10,7 @@ window.naja = naja;
 
 /* Initialize Nette & Naja */
 Nette.initOnLoad();
-naja.initialize({ history: false });
+naja.initialize();
 
 /* Configure LiveForm */
 LiveForm.setOptions({
