@@ -9,6 +9,7 @@
 		"latte/latte": "^3.1",
 		"tracy/tracy": "^2.11",
 		"drago-ex/bootstrap": "^1.0",
+		"drago-ex/translator": "^2.0.0",
 		"drago-ex/project-front": "^1.0",
 		"drago-ex/project-docker": "^1.0"
 	},
