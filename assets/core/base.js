@@ -22,7 +22,7 @@ LiveForm.setOptions({
 	enableHiddenMessageClass: 'show-hidden-error',
 	disableLiveValidationClass: 'no-live-validation',
 	disableShowValidClass: 'no-show-valid',
-	messageTag: 'div',
+	messageTag: 'span',
 	messageIdPostfix: '_message',
 	messageErrorPrefix: '',
 	showAllErrors: false,
