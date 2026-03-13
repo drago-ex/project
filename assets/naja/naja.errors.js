@@ -36,6 +36,7 @@ export default class ErrorsExtension {
 			// Create new elements to display the error message.
 			const div = document.createElement('div');
 			div.className = 'alert alert-dismissible fade show border-0 rounded alert-danger';
+			// z-index 1030 ensures alert appears above Bootstrap modals (z-index 1055) backdrop (1050)
 			div.style.zIndex = '1030';
 			div.textContent = errorMessage;
 

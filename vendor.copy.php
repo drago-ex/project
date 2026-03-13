@@ -124,9 +124,7 @@ function installPackageResources(string $packagePath, string $projectRoot, bool 
 		$destination = $dstRel === '' ? $projectRoot . '/' . basename($source) : $projectRoot . '/' . $dstRel;
 
 		if (is_file($source)) {
-			// Check if destination is a directory or needs to be treated as one
-			$hasExtension = str_contains(basename($destination), '.');
-			if (is_dir($destination) || (!$hasExtension && !file_exists($destination))) {
+			if (is_dir($destination) || (!pathinfo($destination, PATHINFO_EXTENSION) && !file_exists($destination))) {
 				ensureDir($destination);
 				$destination .= '/' . basename($source);
 			}
