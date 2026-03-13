@@ -1,12 +1,13 @@
 export default class SpinnerExtension {
 	initialize(naja) {
 		let activeRequests = 0;
-		let el = document.querySelector('.spinner');
+		// Use specific selector to avoid conflicts with other spinners
+		let el = document.querySelector('.naja-spinner');
 
 		// Create spinner element only if it doesn't exist
 		if (!el) {
 			el = document.createElement('div');
-			el.classList.add('spinner');
+			el.classList.add('naja-spinner', 'spinner');
 			el.hidden = true;
 			document.body.appendChild(el);
 		}

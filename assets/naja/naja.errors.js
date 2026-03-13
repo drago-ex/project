@@ -47,6 +47,7 @@ export default class ErrorsExtension {
 			div.append(button);
 
 			// Batch DOM update with single operation to minimize reflows
+			// replaceChildren() is supported in all browsers that support Bootstrap 5.3+
 			snippet.replaceChildren(div);
 		});
 	}
