@@ -1,15 +1,20 @@
 export default class SpinnerExtension {
 	initialize(naja) {
 		let activeRequests = 0;
-		const el = document.createElement('div');
-		el.classList.add('spinner');
-		document.body.appendChild(el);
-		el.style.display = 'none';
+		let el = document.querySelector('.spinner');
+
+		// Create spinner element only if it doesn't exist
+		if (!el) {
+			el = document.createElement('div');
+			el.classList.add('spinner');
+			el.hidden = true;
+			document.body.appendChild(el);
+		}
 
 		// Show the spinner when a request starts
 		naja.addEventListener('start', () => {
 			if (activeRequests === 0) {
-				el.style.display = 'block';
+				el.hidden = false;
 			}
 			activeRequests++;
 		});
@@ -18,7 +23,7 @@ export default class SpinnerExtension {
 		naja.addEventListener('complete', () => {
 			activeRequests--;
 			if (activeRequests === 0) {
-				el.style.display = 'none';
+				el.hidden = true;
 			}
 		});
 	}

@@ -25,14 +25,13 @@ function cleanDragoResources(): void
 
 function deleteDir(string $dir): void
 {
-	$files = array_diff(scandir($dir), ['.', '..']);
-	foreach ($files as $file) {
-		$path = $dir . '/' . $file;
-		if (is_dir($path)) {
-			deleteDir($path);
-		} else {
-			unlink($path);
-		}
+	$iterator = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS),
+		RecursiveIteratorIterator::CHILD_FIRST
+	);
+
+	foreach ($iterator as $item) {
+		$item->isDir() ? rmdir($item->getPathname()) : unlink($item->getPathname());
 	}
 	rmdir($dir);
 }

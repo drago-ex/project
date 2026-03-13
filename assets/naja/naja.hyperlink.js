@@ -3,9 +3,13 @@ export default class HyperlinkDisable {
 		const hyperlinkDisable = (doc) => {
 			const links = doc.querySelectorAll('[data-link-disable]');
 			links.forEach((link) => {
-				link.addEventListener('click', (event) => {
-					link.classList.add('disabled');
-				});
+				// Prevent duplicate event listeners
+				if (!link.hasAttribute('data-listener-attached')) {
+					link.addEventListener('click', (event) => {
+						link.classList.add('disabled');
+					});
+					link.setAttribute('data-listener-attached', 'true');
+				}
 			});
 			return links;
 		};
@@ -16,7 +20,8 @@ export default class HyperlinkDisable {
 		});
 
 		naja.addEventListener('complete', () => {
-			initialLinks.forEach((link) => {
+			// Re-enable all links with the data-link-disable attribute
+			document.querySelectorAll('[data-link-disable]').forEach((link) => {
 				link.classList.remove('disabled');
 			});
 		});

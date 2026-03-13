@@ -26,29 +26,27 @@ export default class ErrorsExtension {
 			// Retrieve the error message from the predefined error messages or fallback to the default message.
 			const errorMessage = errorMessages[error.response.status] || 'An unexpected error occurred.';
 
-			// Find the element where the error message will be displayed and clear its current content.
+			// Find the element where the error message will be displayed.
 			const snippet = document.getElementById('snippet--message');
-			if (snippet) {
-				snippet.innerHTML = '';
-			} else {
+			if (!snippet) {
 				console.error('Error: Snippet element with ID "snippet--message" not found.');
 				return;
 			}
 
 			// Create new elements to display the error message.
 			const div = document.createElement('div');
-			const button = document.createElement('button');
-
-			// Set classes and styles for the alert box.
 			div.className = 'alert alert-dismissible fade show border-0 rounded alert-danger';
 			div.style.zIndex = '1030';
 			div.textContent = errorMessage;
-			snippet.append(div);
 
 			// Create a button to close the alert.
+			const button = document.createElement('button');
 			button.className = 'btn-close';
 			button.setAttribute('data-bs-dismiss', 'alert');
 			div.append(button);
+
+			// Batch DOM update with single operation to minimize reflows
+			snippet.replaceChildren(div);
 		});
 	}
 }
