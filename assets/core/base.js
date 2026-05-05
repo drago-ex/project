@@ -1,6 +1,6 @@
 import naja from "naja";
 import { LiveForm, Nette } from "live-form-validation";
-import ErrorsExtension from "../naja/naja.errors.js";
+import ErrorsHandler from "../naja/errors-handler.js";
 import "./base.scss";
 
 /* Globals */
@@ -31,4 +31,4 @@ LiveForm.setOptions({
 });
 
 /* Register Naja extensions */
-naja.registerExtension(new ErrorsExtension());
+naja.registerExtension(new ErrorsHandler());

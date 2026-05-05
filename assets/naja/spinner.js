@@ -1,4 +1,4 @@
-export default class SpinnerExtension {
+export default class Spinner {
 	initialize(naja) {
 		let activeRequests = 0;
 		const el = document.createElement('div');

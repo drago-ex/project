@@ -1,4 +1,4 @@
-export default class ErrorsExtension {
+export default class ErrorsHandler {
 	/**
 	 * Initializes the error handling extension for Naja requests.
 	 * @param {Object} naja Naja instance for handling events.
