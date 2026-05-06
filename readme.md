@@ -35,6 +35,7 @@ You can find all commands in `package.json` like running Docker or Vite.
 - https://github.com/drago-ex/project-db
 - https://github.com/drago-ex/project-user
 - https://github.com/drago-ex/project-auth
+- https://github.com/drago-ex/project-permission
 
 ## Running PHP scripts locally with Docker
 If you are using Docker for local development, all PHP scripts should be executed inside the PHP container.
