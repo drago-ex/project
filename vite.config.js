@@ -8,7 +8,7 @@ const files = fg.sync('assets/*.js', {
 });
 
 const entries = files.map(
-	file => path.relative(process.cwd(), file)
+	file => path.resolve(file)
 );
 
 export default defineConfig({
