@@ -15,9 +15,9 @@
     "vite": "^6.4.1"
   },
   "scripts": {
-    "docker:build": "docker compose build",
-    "docker:dev": "docker compose up -d",
-    "docker:production": "docker compose --env-file docker/.env.production up -d",
+    "docker:build": "docker build -t php-server docker/ && docker compose build --no-cache",
+    "docker:dev": "docker build -t php-server docker/ && docker compose build && docker compose up -d",
+    "docker:production": "docker build -t php-server docker/ && docker compose build && docker compose --env-file docker/.env.production up -d",
     "docker:down": "docker compose down --volumes --remove-orphans",
     "vite:dev": "vite",
     "vite:build": "vite build",
