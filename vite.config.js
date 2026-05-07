@@ -14,6 +14,11 @@ const entries = files.map(
 export default defineConfig({
 	root: 'assets',
 	publicDir: 'public',
+	server: {
+		cors: {
+			origin: true,
+		},
+	},
 	build: {
 		outDir: '../www/dist',
 		emptyOutDir: true,
