@@ -4,6 +4,7 @@
 	"description": "The basis for new projects on Drago Extension.",
 	"require": {
 		"php": ">=8.3 <9",
+		"dg/composer-cleaner": "^2.0",
 		"nette/robot-loader": "^4.1",
 		"nette/assets": "^1.0",
 		"latte/latte": "^3.1",
@@ -25,6 +26,9 @@
 	"extra": {
 		"drago-project": {
 			"allow-library-install": true
+		},
+		"cleaner-ignore": {
+			"mpdf/mpdf": true
 		}
 	},
 	"scripts": {
@@ -37,5 +41,10 @@
 			"php vendor-copy.php",
 			"php vendor-clean.php"
 		]
+	},
+	"config": {
+		"allow-plugins": {
+			"dg/composer-cleaner": true
+		}
 	}
 }
