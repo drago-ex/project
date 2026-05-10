@@ -1,9 +1,11 @@
-## Drago Project
+# Drago Project
+
 Basis for new modules projects on Drago Extension
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/drago-ex/project/blob/main/license)
 
 [![PHP version](https://badge.fury.io/ph/drago-ex%2Fproject.svg)](https://badge.fury.io/ph/drago-ex%2Fproject)
 [![Coding Style](https://github.com/drago-ex/project/actions/workflows/coding-style.yml/badge.svg)](https://github.com/drago-ex/project/actions/workflows/coding-style.yml)
-[![CodeFactor](https://www.codefactor.io/repository/github/drago-ex/project/badge)](https://www.codefactor.io/repository/github/drago-ex/project)
 
 ## Requirements
 - PHP >= 8.3
@@ -24,11 +26,11 @@ Basic package for applications where the basis for Bootstrap, Vite, Docker, Naja
 You can find all commands in `package.json` like running Docker or Vite.
 
 ## Basic Naja scripts
-- **ErrorsHandler** – Handles Naja AJAX errors by displaying user-friendly alert messages based on HTTP status codes. Shows a dismissible Bootstrap alert in the page element with ID `snippet--message`.
+- **ErrorsHandler** - Handles Naja AJAX errors by displaying user-friendly alert messages based on HTTP status codes. Shows a dismissible Bootstrap alert in the page element with ID `snippet--message`.
 
-- **HyperlinkDisable** – Temporarily disables links with the `data-link-disable` attribute during Naja requests to prevent multiple clicks. Re-enables the links once the request is complete.
+- **HyperlinkDisable** - Temporarily disables links with the `data-link-disable` attribute during Naja requests to prevent multiple clicks. Re-enables the links once the request is complete.
 
-- **Spinner** – Displays a full-page spinner during active Naja AJAX requests. Shows the spinner when a request starts and hides it once all requests are complete.
+- **Spinner** - Displays a full-page spinner during active Naja AJAX requests. Shows the spinner when a request starts and hides it once all requests are complete.
 
 ## We can further expand the package with other basic settings
 - https://github.com/drago-ex/project-docker
