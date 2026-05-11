@@ -69,7 +69,7 @@ To make your package compatible with the orchestrator, add the `drago-project` s
 ```
 
 ### Configuration details
-- **`commands`**: A key-value list of commands. 
+- **`commands`**: A key-value list of commands.
     - Use `db:` prefix for database migrations (these are automatically grouped at the top).
     - Use `create:` or other prefixes for code generation or other tasks.
     - *Note: Commands like `create:*-permission` are specialized for generating the base AccessControl permission classes required by the `drago-ex/permission` component.*
@@ -83,7 +83,6 @@ To make your package compatible with the orchestrator, add the `drago-project` s
 - **Intelligent Sorting**: Automatically groups all database migrations at the top while respecting package priorities.
 - **Auto-Initialization**: Detects if the migration system itself needs to be initialized and offers a one-click setup.
 - **Graceful Failure**: If the database is unreachable, it provides a warning but allows non-database tasks to be listed.
-
 
 ## Running PHP scripts locally with Docker
 If you are using Docker for local development, all PHP scripts should be executed inside the PHP container.
