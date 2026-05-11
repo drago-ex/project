@@ -7,7 +7,7 @@ use Dibi\Connection;
 
 /**
  * This script scans installed packages for custom commands defined in:
- * "extra": { "drago-project": { "commands": { ... } } }
+ * "extra": { "drago-project": { "commands": { ... }, "priority": int } }
  */
 
 // Autoloading from the project's vendor directory
@@ -25,8 +25,6 @@ $migrationPackage = 'drago-ex/migration';
 
 /**
  * 1. Database & Migration Table Detection
- * We use the project's Bootstrap to get the DB connection,
- * exactly like the 'migration' binary does.
  */
 $bootstrapFile = __DIR__ . '/../app/Bootstrap.php';
 $db = null;
@@ -55,12 +53,12 @@ if (is_file($bootstrapFile)) {
 					'bin' => "Direct SQL execution via Dibi",
 					'sql' => $sqlFile,
 					'package' => $migrationPackage,
-					'urgent' => true
+					'urgent' => true,
+					'priority' => 0 // Highest priority
 				];
 			}
 		}
 	} catch (\Throwable $e) {
-		// If DB is not reachable or Bootstrap fails, we just skip detection
 		echo "{$yellow}Note: Could not connect to database for migration check.{$reset}\n";
 	}
 }
@@ -73,24 +71,38 @@ foreach (InstalledVersions::getInstalledPackages() as $packageName) {
 
 	if ($path && is_file($path . '/composer.json')) {
 		$composer = json_decode(file_get_contents($path . '/composer.json'), true);
-
-		// Fetch commands from extra.drago-project.commands
-		$cmds = $composer['extra']['drago-project']['commands'] ?? [];
+		$extra = $composer['extra']['drago-project'] ?? [];
+		$cmds = $extra['commands'] ?? [];
+		$priority = (int) ($extra['priority'] ?? 100);
 
 		foreach ($cmds as $label => $bin) {
 			$availableCommands[$label] = [
 				'bin' => $bin,
-				'package' => $packageName
+				'package' => $packageName,
+				'priority' => $priority
 			];
 		}
 	}
 }
 
-// Exit if no commands are found
 if (empty($availableCommands)) {
 	echo "{$yellow}No available commands found in extra.drago-project.commands section.{$reset}\n";
 	exit;
 }
+
+/**
+ * 3. Sorting logic
+ * Sort by priority (asc) and then by label (asc)
+ */
+ukasort($availableCommands, function ($a, $b) use ($availableCommands) {
+	$pA = $availableCommands[$a]['priority'];
+	$pB = $availableCommands[$b]['priority'];
+	
+	if ($pA !== $pB) {
+		return $pA <=> $pB;
+	}
+	return strcmp($a, $b);
+});
 
 // Display UI Header
 echo "Available operations for the current package setup:\n\n";
@@ -114,16 +126,12 @@ echo "------------------------------------------\n";
 
 /**
  * Handle user input
- * Supports both CLI arguments (for read-only IDE windows) and manual input
  */
 $input = '';
-
-// Check if arguments were passed (e.g., composer control 1,2)
 if (isset($argv[1])) {
 	$input = trim((string)$argv[1]);
 	echo "Running with arguments: {$green}$input{$reset}\n";
 } else {
-	// Fallback to manual input
 	echo "Select numbers (e.g., 1,3) or action: ";
 	$handle = fopen("php://stdin", "r");
 	$line = fgets($handle);
@@ -131,13 +139,11 @@ if (isset($argv[1])) {
 	$input = ($line !== false) ? trim((string)$line) : '';
 }
 
-// Quit if requested or empty
 if ($input === 'q' || $input === '') {
 	echo "Exiting...\n";
 	exit;
 }
 
-// Prepare queue of commands to execute
 if ($input === 'a') {
 	$choices = array_keys($map);
 } else {
@@ -145,7 +151,6 @@ if ($input === 'a') {
 }
 
 foreach ($choices as $choice) {
-	// Cast to string to prevent TypeError on PHP 8+ when using array_keys
 	$choice = trim((string)$choice);
 
 	if (is_numeric($choice) && isset($map[(int)$choice])) {
@@ -163,15 +168,11 @@ foreach ($choices as $choice) {
 				$returnCode = 1;
 			}
 		} else {
-			// Execute the command and pipe output to terminal
 			passthru($cmd['bin'], $returnCode);
 		}
 
-		// Error handling for failed commands
 		if ($returnCode !== 0) {
 			echo "{$red}❌ Command failed with exit code $returnCode{$reset}\n";
-
-			// Ask for confirmation to continue (only in interactive mode)
 			if (!isset($argv[1])) {
 				echo "Continue to the next command? (y/n): ";
 				$h = fopen("php://stdin", "r");
