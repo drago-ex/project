@@ -3,9 +3,10 @@
 declare(strict_types=1);
 
 use Composer\InstalledVersions;
+use Dibi\Connection;
 
 /**
- * * This script scans installed packages for custom commands defined in:
+ * This script scans installed packages for custom commands defined in:
  * "extra": { "drago-project": { "commands": { ... } } }
  */
 
@@ -20,32 +21,73 @@ $red    = "\033[31m";
 $reset  = "\033[0m";
 
 $availableCommands = [];
+$migrationPackage = 'drago-ex/migration';
 
 /**
- * Scan all installed packages and collect commands
+ * 1. Database & Migration Table Detection
+ * We use the project's Bootstrap to get the DB connection,
+ * exactly like the 'migration' binary does.
+ */
+$bootstrapFile = __DIR__ . '/../app/Bootstrap.php';
+if (is_file($bootstrapFile)) {
+	try {
+		require_once $bootstrapFile;
+		$bootstrap = new \App\Bootstrap;
+		$container = $bootstrap->bootConsoleApplication();
+
+		/** @var Connection $db */
+		$db = $container->getByType(Connection::class);
+
+		// Check if migrations table exists
+		$tableExists = (bool) $db->select('1')
+			->from('[INFORMATION_SCHEMA].[TABLES]')
+			->where('TABLE_SCHEMA = DATABASE()')
+			->and('TABLE_NAME = %s', 'migrations')
+			->fetchSingle();
+
+		if (!$tableExists) {
+			$migrationPath = InstalledVersions::getInstallPath($migrationPackage);
+			$sqlFile = $migrationPath . '/migrations/001_migrations.sql';
+
+			if (is_file($sqlFile)) {
+				$availableCommands['db:initialize-migrations'] = [
+					'bin' => "php vendor/bin/migration db:migrate " . escapeshellarg($sqlFile),
+					'package' => $migrationPackage,
+					'urgent' => true
+				];
+			}
+		}
+	} catch (\Throwable $e) {
+		// If DB is not reachable or Bootstrap fails, we just skip detection
+		echo "{$yellow}Note: Could not connect to database for migration check.{$reset}\n";
+	}
+}
+
+/**
+ * 2. Scan all installed packages and collect commands
  */
 foreach (InstalledVersions::getInstalledPackages() as $packageName) {
-    $path = InstalledVersions::getInstallPath($packageName);
-    
-    if ($path && is_file($path . '/composer.json')) {
-        $composer = json_decode(file_get_contents($path . '/composer.json'), true);
-        
-        // Fetch commands from extra.drago-project.commands
-        $cmds = $composer['extra']['drago-project']['commands'] ?? [];
-        
-        foreach ($cmds as $label => $bin) {
-            $availableCommands[$label] = [
-                'bin' => $bin,
-                'package' => $packageName
-            ];
-        }
-    }
+	$path = InstalledVersions::getInstallPath($packageName);
+
+	if ($path && is_file($path . '/composer.json')) {
+		$composer = json_decode(file_get_contents($path . '/composer.json'), true);
+
+		// Fetch commands from extra.drago-project.commands
+		$cmds = $composer['extra']['drago-project']['commands'] ?? [];
+
+		foreach ($cmds as $label => $bin) {
+			$availableCommands[$label] = [
+				'bin' => $bin,
+				'package' => $packageName
+			];
+		}
+	}
 }
 
 // Exit if no commands are found
 if (empty($availableCommands)) {
-    echo "{$yellow}No available commands found in extra.drago-project.commands section.{$reset}\n";
-    exit;
+	echo "{$yellow}No available commands found in extra.drago-project.commands section.{$reset}\n";
+	exit;
 }
 
 // Display UI Header
@@ -54,9 +96,10 @@ echo "Available operations for the current package setup:\n\n";
 $i = 1;
 $map = [];
 foreach ($availableCommands as $label => $data) {
-    printf("  [%2d] %-30s %s(%s)%s\n", $i, $label, $blue, $data['package'], $reset);
-    $map[$i] = ['bin' => $data['bin'], 'label' => $label];
-    $i++;
+	$prefix = isset($data['urgent']) ? "{$red}![REQUIRED]{$reset} " : "  ";
+	printf("%s[%2d] %-30s %s(%s)%s\n", $prefix, $i, $label, $blue, $data['package'], $reset);
+	$map[$i] = ['bin' => $data['bin'], 'label' => $label];
+	$i++;
 }
 
 echo "\n  [ a] Run ALL (sequential)";
@@ -71,62 +114,62 @@ $input = '';
 
 // Check if arguments were passed (e.g., composer control 1,2)
 if (isset($argv[1])) {
-    $input = trim((string)$argv[1]);
-    echo "Running with arguments: {$green}$input{$reset}\n";
+	$input = trim((string)$argv[1]);
+	echo "Running with arguments: {$green}$input{$reset}\n";
 } else {
-    // Fallback to manual input
-    echo "Select numbers (e.g., 1,3) or action: ";
-    $handle = fopen("php://stdin", "r");
-    $line = fgets($handle);
-    fclose($handle);
-    $input = ($line !== false) ? trim((string)$line) : '';
+	// Fallback to manual input
+	echo "Select numbers (e.g., 1,3) or action: ";
+	$handle = fopen("php://stdin", "r");
+	$line = fgets($handle);
+	fclose($handle);
+	$input = ($line !== false) ? trim((string)$line) : '';
 }
 
 // Quit if requested or empty
 if ($input === 'q' || $input === '') {
-    echo "Exiting...\n";
-    exit;
+	echo "Exiting...\n";
+	exit;
 }
 
 // Prepare queue of commands to execute
 if ($input === 'a') {
-    $choices = array_keys($map);
+	$choices = array_keys($map);
 } else {
-    $choices = explode(',', $input);
+	$choices = explode(',', $input);
 }
 
 foreach ($choices as $choice) {
-    // Cast to string to prevent TypeError on PHP 8+ when using array_keys
-    $choice = trim((string)$choice);
-    
-    if (is_numeric($choice) && isset($map[(int)$choice])) {
-        $cmd = $map[(int)$choice];
-        
-        echo "\n{$green}▶ Executing: {$cmd['label']}{$reset}\n";
-        echo "{$yellow}{$cmd['bin']}{$reset}\n";
+	// Cast to string to prevent TypeError on PHP 8+ when using array_keys
+	$choice = trim((string)$choice);
 
-        // Execute the command and pipe output to terminal
-        passthru($cmd['bin'], $returnCode);
+	if (is_numeric($choice) && isset($map[(int)$choice])) {
+		$cmd = $map[(int)$choice];
 
-        // Error handling for failed commands
-        if ($returnCode !== 0) {
-            echo "{$red}❌ Command failed with exit code $returnCode{$reset}\n";
-            
-            // Ask for confirmation to continue (only in interactive mode)
-            if (!isset($argv[1])) {
-                echo "Continue to the next command? (y/n): ";
-                $h = fopen("php://stdin", "r");
-                $confirm = trim((string)fgets($h));
-                fclose($h);
-                if (strtolower($confirm) !== 'y') {
-                    echo "Aborted by user.\n";
-                    break;
-                }
-            }
-        }
-    } elseif ($choice !== '') {
-        echo "{$red}⚠️  Invalid selection: $choice{$reset}\n";
-    }
+		echo "\n{$green}▶ Executing: {$cmd['label']}{$reset}\n";
+		echo "{$yellow}{$cmd['bin']}{$reset}\n";
+
+		// Execute the command and pipe output to terminal
+		passthru($cmd['bin'], $returnCode);
+
+		// Error handling for failed commands
+		if ($returnCode !== 0) {
+			echo "{$red}❌ Command failed with exit code $returnCode{$reset}\n";
+
+			// Ask for confirmation to continue (only in interactive mode)
+			if (!isset($argv[1])) {
+				echo "Continue to the next command? (y/n): ";
+				$h = fopen("php://stdin", "r");
+				$confirm = trim((string)fgets($h));
+				fclose($h);
+				if (strtolower($confirm) !== 'y') {
+					echo "Aborted by user.\n";
+					break;
+				}
+			}
+		}
+	} elseif ($choice !== '') {
+		echo "{$red}⚠️  Invalid selection: $choice{$reset}\n";
+	}
 }
 
 echo "\n{$green}Done.{$reset}\n";
