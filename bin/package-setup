@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Composer\InstalledVersions;
 
 /**
- * DRAGO PROJECT CONTROL CENTER
  * * This script scans installed packages for custom commands defined in:
  * "extra": { "drago-project": { "commands": { ... } } }
  */
