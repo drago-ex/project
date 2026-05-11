@@ -49,7 +49,6 @@ if (empty($availableCommands)) {
 }
 
 // Display UI Header
-echo "\n{$blue}==== DRAGO PROJECT CONTROL CENTER ===={$reset}\n";
 echo "Available operations for the current package setup:\n\n";
 
 $i = 1;
