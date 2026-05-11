@@ -29,6 +29,7 @@ $migrationPackage = 'drago-ex/migration';
  * exactly like the 'migration' binary does.
  */
 $bootstrapFile = __DIR__ . '/../app/Bootstrap.php';
+$db = null;
 if (is_file($bootstrapFile)) {
 	try {
 		require_once $bootstrapFile;
@@ -51,7 +52,8 @@ if (is_file($bootstrapFile)) {
 
 			if (is_file($sqlFile)) {
 				$availableCommands['db:initialize-migrations'] = [
-					'bin' => "php vendor/bin/migration db:migrate " . escapeshellarg($sqlFile),
+					'bin' => "Direct SQL execution via Dibi",
+					'sql' => $sqlFile,
 					'package' => $migrationPackage,
 					'urgent' => true
 				];
@@ -98,7 +100,11 @@ $map = [];
 foreach ($availableCommands as $label => $data) {
 	$prefix = isset($data['urgent']) ? "{$red}![REQUIRED]{$reset} " : "  ";
 	printf("%s[%2d] %-30s %s(%s)%s\n", $prefix, $i, $label, $blue, $data['package'], $reset);
-	$map[$i] = ['bin' => $data['bin'], 'label' => $label];
+	$map[$i] = [
+		'bin' => $data['bin'],
+		'label' => $label,
+		'sql' => $data['sql'] ?? null,
+	];
 	$i++;
 }
 
@@ -148,8 +154,18 @@ foreach ($choices as $choice) {
 		echo "\n{$green}▶ Executing: {$cmd['label']}{$reset}\n";
 		echo "{$yellow}{$cmd['bin']}{$reset}\n";
 
-		// Execute the command and pipe output to terminal
-		passthru($cmd['bin'], $returnCode);
+		if (isset($cmd['sql']) && $db instanceof Connection) {
+			try {
+				$db->loadFile($cmd['sql']);
+				$returnCode = 0;
+			} catch (\Throwable $e) {
+				echo "{$red}❌ Error: {$e->getMessage()}{$reset}\n";
+				$returnCode = 1;
+			}
+		} else {
+			// Execute the command and pipe output to terminal
+			passthru($cmd['bin'], $returnCode);
+		}
 
 		// Error handling for failed commands
 		if ($returnCode !== 0) {
