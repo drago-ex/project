@@ -94,13 +94,28 @@ if (empty($availableCommands)) {
  * 3. Sorting logic
  * Sort by priority (asc) and then by label (asc)
  */
-ukasort($availableCommands, function ($a, $b) use ($availableCommands) {
-	$pA = $availableCommands[$a]['priority'];
-	$pB = $availableCommands[$b]['priority'];
-	
-	if ($pA !== $pB) {
-		return $pA <=> $pB;
+uksort($availableCommands, function ($a, $b) use ($availableCommands) {
+	$isDbA = str_starts_with($a, 'db:');
+	$isDbB = str_starts_with($b, 'db:');
+
+	// Phase 1: Group all 'db:' commands at the top
+	if ($isDbA && !$isDbB) {
+		return -1;
 	}
+	if (!$isDbA && $isDbB) {
+		return 1;
+	}
+
+	// Phase 2: If both are 'db:', sort by priority
+	if ($isDbA && $isDbB) {
+		$pA = $availableCommands[$a]['priority'];
+		$pB = $availableCommands[$b]['priority'];
+		if ($pA !== $pB) {
+			return $pA <=> $pB;
+		}
+	}
+
+	// Phase 3: Alphabetical sort for everything else (or as a tie-breaker for db:)
 	return strcmp($a, $b);
 });
 
