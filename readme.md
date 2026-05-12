@@ -31,28 +31,32 @@ You can find all commands in `package.json` like running Docker or Vite.
 
 - **Spinner** - Displays a full-page spinner during active Naja AJAX requests. Shows the spinner when a request starts and hides it once all requests are complete.
 
-## We can further expand the package with other basic settings
-- https://github.com/drago-ex/project-docker
-- https://github.com/drago-ex/project-db
-- https://github.com/drago-ex/project-user
-- https://github.com/drago-ex/project-auth
-- https://github.com/drago-ex/project-permission
-- https://github.com/drago-ex/project-backend
+## Available Extensions
+Expand the base package with these ready-to-use modules:
+- [Docker Setup](https://github.com/drago-ex/project-docker)
+- [Database Layer](https://github.com/drago-ex/project-db)
+- [User Management](https://github.com/drago-ex/project-user)
+- [Authentication](https://github.com/drago-ex/project-auth)
+- [Permissions (ACL)](https://github.com/drago-ex/project-permission)
+- [Backend Admin](https://github.com/drago-ex/project-backend)
 
 ## Package Setup Orchestrator
 
-The project includes a specialized tool to automate the initialization of all installed packages. It scans all packages in your `vendor` directory and collects custom commands defined in their `composer.json`.
+The project includes a specialized tool to automate the initialization of all installed packages. It scans all packages in your `vendor` directory and collects custom setup commands defined in their `composer.json`.
 
 ### Usage
-Run the orchestrator:
+Run the orchestrator (inside your Docker container if applicable):
 ```bash
-php bin/package-setup
+docker compose exec server php bin/package-setup
 ```
 
-You can select specific tasks by their number (e.g., `1,3`), run everything sequentially by entering `a`, or quit with `q`.
+**Interactions:**
+- Select specific tasks by number (e.g., `1,3`).
+- Run everything sequentially by entering `a`.
+- Quit by entering `q`.
 
-### How to add commands to your package
-To make your package compatible with the orchestrator, add the `drago-project` section to the `extra` part of your `composer.json`:
+### How to integrate your package
+Add the `drago-project` section to the `extra` part of your package's `composer.json`:
 
 ```json
 {
@@ -61,35 +65,31 @@ To make your package compatible with the orchestrator, add the `drago-project` s
             "priority": 10,
             "commands": {
                 "db:migrate-example": "php vendor/bin/migration db:migrate vendor/vendor-name/package-name/migrations",
-                "create:example-class": "php vendor/bin/create-example"
+                "gen:example-class": "php vendor/bin/create-example"
             }
         }
     }
 }
 ```
 
-### Configuration details
-- **`commands`**: A key-value list of commands.
-    - Use `db:` prefix for database migrations (these are automatically grouped at the top).
-    - Use `create:` or other prefixes for code generation or other tasks.
-    - *Note: Commands like `create:*-permission` are specialized for generating the base AccessControl permission classes required by the `drago-ex/permission` component.*
-- **`priority`**: Controls the execution order (especially important for `Run ALL`).
-    - **Lower numbers** have higher priority (run earlier).
-    - Use `10` for core packages (Auth, Users).
-    - Use `20+` for dependent packages (Permissions, Commerce).
-    - Default priority is `100` if not specified.
+### Command Configuration (`commands`)
+A key-value list where the key is the display name and the value is the shell command.
+- **`db:` prefix**: Used for database migrations. These are automatically grouped at the top of the list.
+- **`gen:` prefix**: Used for code generation tasks.
+- **`gen:*-permission`**: Specialized prefix for generating base AccessControl permission classes required by the `drago-ex/permission` component.
+
+### Execution Priority (`priority`)
+Controls the order in which commands are listed and executed when running all (`a`).
+- **Lower numbers** run earlier (higher priority).
+- **Priority 10**: Recommended for core packages (Auth, Users).
+- **Priority 20+**: Recommended for dependent packages (Permissions, Commerce).
+- **Default 100**: Used if no priority is specified.
 
 ### Features
-- **Intelligent Sorting**: Automatically groups all database migrations at the top while respecting package priorities.
-- **Auto-Initialization**: Detects if the migration system itself needs to be initialized and offers a one-click setup.
-- **Graceful Failure**: If the database is unreachable, it provides a warning but allows non-database tasks to be listed.
+- **Intelligent Sorting**: Database migrations are prioritized and grouped together.
+- **Auto-Initialization**: Detects if the migration system needs initial setup and offers one-click initialization.
+- **Robustness**: If the database is unreachable, the tool skips DB tasks but still allows other setup commands to run.
 
-## Running PHP scripts locally with Docker
-If you are using Docker for local development, all PHP scripts should be executed inside the PHP container.
-```bash
-docker compose exec server php path/to/script
-```
-
-## Useful tools that come in handy during development
-- https://github.com/drago-ex/migration
-- https://github.com/drago-ex/generator
+## Useful Development Tools
+- [Database Migrations](https://github.com/drago-ex/migration)
+- [Code Generator](https://github.com/drago-ex/generator)
