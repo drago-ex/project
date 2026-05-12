@@ -1,0 +1,22 @@
+{templateType Drago\Datagrid\DataGridTemplate}
+{define sortable, bool $sortable, string $name, string $label}
+
+    {do $attr = [
+        'class' => 'ajax text-decoration-none',
+        'data-naja-history' => 'replace'
+    ]}
+
+    {if $sortable}
+        {do $active = $name === $columnName}
+        <a n:href="sort!, column: $name, page: $page, order: $order" n:attr="$attr">
+            {$label}
+            {if $active}
+                {if $order === 'ASC'} ↑{else} ↓{/if}
+            {else}
+                ↕
+            {/if}
+        </a>
+    {else}
+        {$label}
+    {/if}
+{/define}
