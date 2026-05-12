@@ -31,12 +31,12 @@ LiveForm.setOptions({
 });
 
 /* Register Naja extensions */
-export function registerExtensions(...extensions) {
+export function registerNajaExtensions(...extensions) {
 	extensions.forEach(Extension => {
 		naja.registerExtension(new Extension());
 	});
 }
 
-registerExtensions(
+registerNajaExtensions(
 	ErrorsHandler
 );
