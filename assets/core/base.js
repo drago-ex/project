@@ -31,4 +31,12 @@ LiveForm.setOptions({
 });
 
 /* Register Naja extensions */
-naja.registerExtension(new ErrorsHandler());
+export function registerExtensions(...extensions) {
+	extensions.forEach(Extension => {
+		naja.registerExtension(new Extension());
+	});
+}
+
+registerExtensions(
+	ErrorsHandler
+);
