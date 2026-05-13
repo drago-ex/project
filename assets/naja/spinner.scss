@@ -1,5 +1,3 @@
-@use "bootstrap" as *;
-
 //
 // spinner for ajax
 //
@@ -20,7 +18,7 @@
   &:after {
     width: 15rem;
     height: 0.2rem;
-    background: $primary;
+    background: var(--bs-primary);
     box-sizing: border-box;
     animation: anim 1.5s linear infinite;
   }

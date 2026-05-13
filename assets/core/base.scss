@@ -1,16 +1,14 @@
-@use "bootstrap" as *;
-
 //
 // base style
 //
 
 .errors {
-  background-color: $danger;
-  color: white;
+  background-color: var(--bs-danger);
+  color: var(--bs-white);
   font-weight: 600;
   list-style: none;
   padding: 0.25rem 0.5rem;
-  border-radius: 0.188rem;
+  border-radius: var(--bs-border-radius-sm);
 }
 
 .invalid-feedback {
