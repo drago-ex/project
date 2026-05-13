@@ -1,7 +1,6 @@
 import naja from "naja";
 import { LiveForm, Nette } from "live-form-validation";
 import ErrorsHandler from "../naja/errors-handler.js";
-import "bootstrap/scss/bootstrap.scss";
 import "./base.scss";
 
 /* Globals */
