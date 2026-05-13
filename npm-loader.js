@@ -33,7 +33,7 @@ if (packagesToInstall.length > 0) {
 		execSync(`npm install ${packagesToInstall.join(' ')}`, { stdio: "inherit" });
 	} catch (error) {
 		console.error("Failed to install local packages. Falling back to sequential install...");
-		
+
 		// Fallback to sequential if batch fails
 		for (const pkg of packagesToInstall) {
 			try {
