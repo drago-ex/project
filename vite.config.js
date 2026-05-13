@@ -32,9 +32,9 @@ export default defineConfig({
 			scss: {
 				silenceDeprecations: [
 					'import',
-					'if-function',
+					'mixed-decls',
+					'color-functions',
 					'global-builtin',
-					'color-functions'
 				]
 			}
 		}
