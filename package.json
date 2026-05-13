@@ -19,7 +19,7 @@
     "docker:dev": "docker build -t php-server docker/ && docker compose build && docker compose up -d",
     "docker:production": "docker build -t php-server docker/ && docker compose build && docker compose --env-file docker/.env.production up -d",
     "docker:down": "docker compose down --volumes --remove-orphans",
-    "vite:dev": "vite",
+    "vite:watch": "vite build --watch",,
     "vite:build": "vite build",
     "npm-loader": "node npm-loader.js",
     "postinstall": "npm run npm-loader"
