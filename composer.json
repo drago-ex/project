@@ -30,11 +30,11 @@
 	"scripts": {
 		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app",
 		"post-install-cmd": [
-			"php vendor-copy.php",
+			"php vendor-install.php",
 			"php vendor-clean.php"
 		],
 		"post-update-cmd": [
-			"php vendor-copy.php",
+			"php vendor-install.php",
 			"php vendor-clean.php"
 		]
 	}
