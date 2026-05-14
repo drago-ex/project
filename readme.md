@@ -34,7 +34,7 @@ You can find all commands in `package.json` like running Docker or Vite.
 ## Available Extensions
 Expand the base package with these ready-to-use modules:
 - [Docker Setup](https://github.com/drago-ex/project-docker)
-- [Database Layer](https://github.com/drago-ex/project-db)
+- [Database Layer](https://github.com/drago-ex/project-docker-db)
 - [User Management](https://github.com/drago-ex/project-user)
 - [Authentication](https://github.com/drago-ex/project-auth)
 - [Permissions (ACL)](https://github.com/drago-ex/project-permission)
