@@ -38,13 +38,13 @@ function ensureDir(string $dir): void
 }
 
 
-function copyFile(string $source, string $destination): void
+function copyFile(string $source, string $destination, bool $overwrite = false): void
 {
 	global $stats;
 
 	ensureDir(dirname($destination));
 
-	if (file_exists($destination)) {
+	if (!$overwrite && file_exists($destination)) {
 		message($destination, '⚠️ Skipped (exists):');
 		$stats['skipped']++;
 		return;
@@ -56,11 +56,12 @@ function copyFile(string $source, string $destination): void
 	}
 
 	$stats['copied']++;
-	message("$source → $destination", '✅ Copied:');
+	$icon = $overwrite && file_exists($destination) ? '🔄 Replaced:' : '✅ Copied:';
+	message("$source → $destination", $icon);
 }
 
 
-function recursiveCopy(string $source, string $destination): void
+function recursiveCopy(string $source, string $destination, bool $overwrite = false): void
 {
 	$iterator = new RecursiveIteratorIterator(
 		new RecursiveDirectoryIterator($source, FilesystemIterator::SKIP_DOTS),
@@ -75,7 +76,7 @@ function recursiveCopy(string $source, string $destination): void
 		if ($item->isDir()) {
 			ensureDir($targetPath);
 		} else {
-			copyFile($item->getPathname(), $targetPath);
+			copyFile($item->getPathname(), $targetPath, $overwrite);
 		}
 	}
 }
@@ -101,45 +102,54 @@ function installPackageResources(string $packagePath, string $projectRoot, bool 
 	}
 
 	$composer = readComposerJson($composerPath);
-	$copies = $composer['extra']['drago-project']['install']['copy'] ?? null;
-	if (!$copies) {
-		return;
-	}
+	$install = $composer['extra']['drago-project']['install'] ?? [];
+
+	$sections = [
+		'copy' => false,
+		'replace' => true,
+	];
 
 	$type = $composer['type'] ?? 'library';
-	if ($type === 'library' && !$allowLibraryInstall) {
+	if ($type === 'library' && !$allowLibraryInstall && (!empty($install['copy']) || !empty($install['replace']))) {
 		message($composer['name'], '⏭️ Library install disabled:', true);
 		return;
 	}
 
-	foreach ($copies as $srcRel => $dstRel) {
-		$source = $packagePath . '/' . $srcRel;
-
-		if (!file_exists($source)) {
-			message($source, '❌ Source not found:');
-			$stats['errors']++;
+	foreach ($sections as $sectionName => $overwrite) {
+		$items = $install[$sectionName] ?? null;
+		if (!$items) {
 			continue;
 		}
 
-		$destination = $dstRel === '' ? $projectRoot . '/' . basename($source) : $projectRoot . '/' . $dstRel;
+		foreach ($items as $srcRel => $dstRel) {
+			$source = $packagePath . '/' . $srcRel;
 
-		if (is_file($source)) {
-			if (is_dir($destination) || (!pathinfo($destination, PATHINFO_EXTENSION) && !file_exists($destination))) {
-				ensureDir($destination);
-				$destination .= '/' . basename($source);
+			if (!file_exists($source)) {
+				message($source, '❌ Source not found:');
+				$stats['errors']++;
+				continue;
 			}
 
-			copyFile($source, $destination);
-			continue;
-		}
+			$destination = $dstRel === '' ? $projectRoot . '/' . basename($source) : $projectRoot . '/' . $dstRel;
 
-		if (is_dir($source)) {
-			recursiveCopy($source, $destination);
-			continue;
-		}
+			if (is_file($source)) {
+				if (is_dir($destination) || (!pathinfo($destination, PATHINFO_EXTENSION) && !file_exists($destination))) {
+					ensureDir($destination);
+					$destination .= '/' . basename($source);
+				}
 
-		$stats['errors']++;
-		message($source, '❌ Invalid source:', true);
+				copyFile($source, $destination, $overwrite);
+				continue;
+			}
+
+			if (is_dir($source)) {
+				recursiveCopy($source, $destination, $overwrite);
+				continue;
+			}
+
+			$stats['errors']++;
+			message($source, '❌ Invalid source:', true);
+		}
 	}
 }
 
