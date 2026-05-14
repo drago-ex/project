@@ -15,7 +15,8 @@
 	},
 	"minimum-stability": "stable",
 	"require-dev": {
-		"phpstan/phpstan-nette": "^1.2.9"
+		"phpstan/phpstan-nette": "^1.2.9",
+		"drago-ex/project-installer": "@dev"
 	},
 	"autoload": {
 		"psr-4": {
@@ -30,12 +31,12 @@
 	"scripts": {
 		"phpstan": "phpstan analyse --level 5 --configuration phpstan.neon app",
 		"post-install-cmd": [
-			"php vendor-install.php",
-			"php vendor-clean.php"
+			"drago-install",
+			"drago-clean"
 		],
 		"post-update-cmd": [
-			"php vendor-install.php",
-			"php vendor-clean.php"
+			"drago-install",
+			"drago-clean"
 		]
 	}
 }
