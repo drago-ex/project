@@ -7,12 +7,8 @@ namespace App\UI\Error\Error4xx;
 use Nette\Bridges\ApplicationLatte\Template;
 
 
-/**
- * BaseTemplate class for handling 4xx errors.
- * This class extends the base BaseTemplate class and adds an HTTP code property.
- */
+/** Template for 4xx errors. */
 class Error4xxTemplate extends Template
 {
-	/** @var mixed The HTTP status code for the error */
-	public mixed $httpCode;
+	public int $httpCode;
 }
