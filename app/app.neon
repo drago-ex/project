@@ -17,7 +17,8 @@ session:
 application:
 
 	# application mapping
-	mapping: App\UI\*\**Presenter
+	mapping:
+		*: ['App\UI', '*', '*\*Presenter']
 
 
 # enabling system container for Tracy bar
