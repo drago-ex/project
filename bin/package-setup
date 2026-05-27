@@ -191,6 +191,9 @@ foreach ($choices as $choice) {
 			if (!isset($argv[1])) {
 				echo "Continue to the next command? (y/n): ";
 				$h = fopen("php://stdin", "r");
+				if ($h === false) {
+					throw new RuntimeException('Unable to open STDIN.');
+				}
 				$confirm = trim((string)fgets($h));
 				fclose($h);
 				if (strtolower($confirm) !== 'y') {
