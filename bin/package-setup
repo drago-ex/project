@@ -46,7 +46,7 @@ if (is_file($bootstrapFile)) {
 
 		if (!$tableExists) {
 			$migrationPath = InstalledVersions::getInstallPath($migrationPackage);
-			$sqlFile = $migrationPath . '/migrations/001_migrations.sql';
+			$sqlFile = $migrationPath . '/migrations/000_migrations.sql';
 
 			if (is_file($sqlFile)) {
 				$availableCommands['db:initialize-migrations'] = [
