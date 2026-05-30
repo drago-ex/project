@@ -6,7 +6,7 @@ use Composer\InstalledVersions;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$targetDir = __DIR__ . '/../db';
+$targetDir = __DIR__ . '/../migrations';
 
 if (!is_dir($targetDir)) {
 	mkdir($targetDir, 0777, true);
