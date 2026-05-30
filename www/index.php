@@ -8,9 +8,7 @@ use App\Bootstrap;
 require __DIR__ . '/../vendor/autoload.php';
 
 
-/**
- * Application runner class to manage Nette application lifecycle.
- */
+/**  Application runner class to manage Nette application lifecycle. */
 class ApplicationRunner
 {
 	private Bootstrap $bootstrap;
