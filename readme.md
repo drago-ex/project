@@ -107,4 +107,4 @@ Other commands are listed alphabetically.
 
 ## Useful Development Tools
 - [Database Migrations](https://github.com/drago-ex/migration)
-- [Code Generator](https://github.com/drago-ex/generator)
+- [Entity/DataForm Generator](https://github.com/drago-ex/generator)
