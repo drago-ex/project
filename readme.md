@@ -39,6 +39,8 @@ Expand the base package with these ready-to-use modules:
 - [Authentication](https://github.com/drago-ex/project-auth)
 - [Permissions (ACL)](https://github.com/drago-ex/project-permission)
 - [Backend Admin](https://github.com/drago-ex/project-backend)
+- [Backend UI](https://github.com/drago-ex/project-backend-ui)
+- [Application Settings](https://github.com/drago-ex/project-settings)
 
 ## Package Setup Orchestrator
 
