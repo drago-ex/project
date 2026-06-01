@@ -49,7 +49,7 @@ The project includes a specialized tool to automate the initialization of all in
 ### Usage
 Run the orchestrator (inside your Docker container if applicable):
 ```bash
-docker compose exec server php bin/package-setup
+docker compose exec -u www-data server php bin/some-command
 ```
 
 **Interactions:**
