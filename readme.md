@@ -49,7 +49,7 @@ The project includes a specialized tool to automate the initialization of all in
 ### Usage
 Run the orchestrator (inside your Docker container if applicable):
 ```bash
-docker compose exec -u www-data server php bin/some-command
+docker compose exec -u www-data server php bin/package-setup
 ```
 
 **Interactions:**
@@ -81,11 +81,24 @@ A key-value list where the key is the display name and the value is the shell co
 - **`gen:*-permission`**: Specialized prefix for generating base AccessControl permission classes required by the `drago-ex/permission` component.
 
 ### Execution Priority (`priority`)
-Controls the order in which commands are listed and executed when running all (`a`).
-- **Lower numbers** run earlier (higher priority).
+Controls the order of package setup commands when multiple `db:*` migration commands are available.
+- **Lower numbers** run earlier.
 - **Priority 10**: Recommended for core packages (Auth, Users).
-- **Priority 20+**: Recommended for dependent packages (Permissions, Commerce).
+- **Priority 20+**: Recommended for dependent packages.
 - **Default 100**: Used if no priority is specified.
+
+Database commands are always grouped at the top of the list and sorted by priority. This makes it possible to run migrations in the required order, for example authentication tables before permission tables.
+
+Example migration order:
+```text
+priority 10  db:migrate-auth
+priority 20  db:migrate-permission
+priority 100 db:migrate-settings
+```
+
+Other commands are listed alphabetically.
+
+> The same `extra.drago-project.priority` value is also used by `drago-ex/project-installer` when sorting `replace` overlays during resource installation.
 
 ### Features
 - **Intelligent Sorting**: Database migrations are prioritized and grouped together.
