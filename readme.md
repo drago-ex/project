@@ -42,6 +42,9 @@ Expand the base package with these ready-to-use modules:
 - [Backend UI](https://github.com/drago-ex/project-backend-ui)
 - [Application Settings](https://github.com/drago-ex/project-settings)
 
+Each extension documents its required project configuration and post-installation steps in its own README.
+When installing the complete project stack, you can use [Project Preset](https://github.com/drago-ex/project-preset) to apply the required setup automatically.
+
 ## Package Setup Orchestrator
 
 The project includes a specialized tool to automate the initialization of all installed packages. It scans all packages in your `vendor` directory and collects custom setup commands defined in their `composer.json`.
