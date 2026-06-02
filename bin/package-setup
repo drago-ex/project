@@ -189,7 +189,7 @@ foreach ($choices as $choice) {
 
 		$cmd = $map[(int)$choice];
 
-		echo "\n{$green}▶ Executing: {$cmd['label']}{$reset}\n";
+		echo "\n{$green}> Executing: {$cmd['label']}{$reset}\n";
 		echo "{$yellow}{$cmd['bin']}{$reset}\n";
 
 		$returnCode = 0;
@@ -198,7 +198,7 @@ foreach ($choices as $choice) {
 			try {
 				$db->loadFile($cmd['sql']);
 			} catch (\Throwable $e) {
-				echo "{$red}❌ Error: {$e->getMessage()}{$reset}\n";
+				echo "{$red}ERROR: {$e->getMessage()}{$reset}\n";
 				$returnCode = 1;
 			}
 		} else {
@@ -206,11 +206,11 @@ foreach ($choices as $choice) {
 		}
 
 		if ($returnCode !== 0) {
-			echo "{$red}❌ Command failed with exit code $returnCode{$reset}\n";
+			echo "{$red}ERROR: Command failed with exit code $returnCode{$reset}\n";
 		}
 
 	} elseif ($choice !== '') {
-		echo "{$red}⚠ Invalid selection: $choice{$reset}\n";
+		echo "{$red}WARN: Invalid selection: $choice{$reset}\n";
 	}
 }
 
