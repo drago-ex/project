@@ -58,7 +58,7 @@ if (InstalledVersions::isInstalled($migrationPackage)) {
 			}
 
 		} catch (\Throwable $e) {
-			echo "{$yellow}Note: Could not connect to database for migration check.{$reset}\n";
+			echo "{$blue}INFO Could not connect to database for migration check.{$reset}\n";
 		}
 	}
 }
@@ -87,7 +87,7 @@ foreach (InstalledVersions::getInstalledPackages() as $packageName) {
 }
 
 if (empty($availableCommands)) {
-	echo "{$yellow}No available commands found.{$reset}\n";
+	echo "{$yellow}WARN No available commands found.{$reset}\n";
 	exit;
 }
 
@@ -159,7 +159,7 @@ $input = '';
 
 if (isset($argv[1])) {
 	$input = trim((string)$argv[1]);
-	echo "Running with arguments: {$green}{$input}{$reset}\n";
+	echo "{$blue}INFO Running with arguments:{$reset} {$input}\n";
 } else {
 	echo "Select numbers (e.g., 1,3) or action: ";
 	$handle = fopen("php://stdin", "r");
@@ -170,7 +170,7 @@ if (isset($argv[1])) {
 }
 
 if ($input === 'q' || $input === '') {
-	echo "Exiting...\n";
+	echo "{$blue}INFO Exiting...{$reset}\n";
 	exit;
 }
 
@@ -189,7 +189,7 @@ foreach ($choices as $choice) {
 
 		$cmd = $map[(int)$choice];
 
-		echo "\n{$green}> Executing: {$cmd['label']}{$reset}\n";
+		echo "\n{$blue}INFO Executing: {$cmd['label']}{$reset}\n";
 		echo "{$yellow}{$cmd['bin']}{$reset}\n";
 
 		$returnCode = 0;
@@ -214,4 +214,4 @@ foreach ($choices as $choice) {
 	}
 }
 
-echo "\n{$green}Done.{$reset}\n";
+echo "\n{$green}OK Done.{$reset}\n";

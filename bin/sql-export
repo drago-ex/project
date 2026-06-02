@@ -18,11 +18,12 @@ $targetLabel = str_replace('\\', '/', substr($targetDir, strlen($projectDir)));
 $rootPackageName = InstalledVersions::getRootPackage()['name'] ?? null;
 
 $green = "\033[32m";
+$blue = "\033[34m";
 $yellow = "\033[33m";
 $red = "\033[31m";
 $reset = "\033[0m";
 
-echo "Scanning vendor packages for migration SQL files...\n\n";
+echo "{$blue}INFO Scanning vendor packages for migration SQL files...{$reset}\n\n";
 
 $found = 0;
 $copied = 0;
@@ -63,25 +64,25 @@ foreach (InstalledVersions::getInstalledPackages() as $packageName) {
 			$targetFile = $targetDir . '/' . $filename;
 
 			if (file_exists($targetFile)) {
-				echo "{$yellow}-> Skipped (exists){$reset} {$filename}\n";
+				echo "{$yellow}SKIP exists:{$reset} {$filename}\n";
 				$skipped++;
 				continue;
 			}
 
 			if (copy($file, $targetFile)) {
-				echo "{$green}+ Copied{$reset} {$packageName} -> {$filename}\n";
+				echo "{$green}COPIED:{$reset} {$packageName} -> {$filename}\n";
 				$copied++;
 			} else {
-				echo "{$red}! Failed{$reset} {$file}\n";
+				echo "{$red}ERROR:{$reset} Failed copying {$file}\n";
 			}
 		}
 	}
 }
 
 if ($found === 0) {
-	echo "{$yellow}No migration SQL files found.{$reset}\n";
+	echo "{$yellow}WARN No migration SQL files found.{$reset}\n";
 } elseif ($copied === 0) {
-	echo "\n{$yellow}Done. No new files copied into {$targetLabel}. Skipped {$skipped} existing files.{$reset}\n";
+	echo "\n{$yellow}SKIP No new files copied into {$targetLabel}. Skipped {$skipped} existing files.{$reset}\n";
 } else {
-	echo "\n{$green}Done. Copied {$copied} files into {$targetLabel}. Skipped {$skipped} existing files.{$reset}\n";
+	echo "\n{$green}OK Copied {$copied} files into {$targetLabel}. Skipped {$skipped} existing files.{$reset}\n";
 }
