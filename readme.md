@@ -47,7 +47,8 @@ When installing the complete project stack, you can use [Project Preset](https:/
 
 ## Package Setup Orchestrator
 
-The project includes a specialized tool to automate the initialization of all installed packages. It scans all packages in your `vendor` directory and collects custom setup commands defined in their `composer.json`.
+The project includes a setup tool for running initialization commands provided by installed Drago packages.
+It scans installed packages and shows available setup tasks such as database migrations or generated permission classes.
 
 ### Usage
 Run the orchestrator (inside your Docker container if applicable):
@@ -60,53 +61,13 @@ docker compose exec -u www-data server php bin/package-setup
 - Run everything sequentially by entering `a`.
 - Quit by entering `q`.
 
-### How to integrate your package
-Add the `drago-project` section to the `extra` part of your package's `composer.json`:
-
-```json
-{
-    "extra": {
-        "drago-project": {
-            "priority": 10,
-            "commands": {
-                "db:migrate-example": "php vendor/bin/migration db:migrate vendor/vendor-name/package-name/migrations",
-                "gen:example-class": "php vendor/bin/create-example"
-            }
-        }
-    }
-}
-```
-
-### Command Configuration (`commands`)
-A key-value list where the key is the display name and the value is the shell command.
-- **`db:` prefix**: Used for database migrations. These are automatically grouped at the top of the list.
-- **`gen:` prefix**: Used for code generation tasks.
-- **`gen:*-permission`**: Specialized prefix for generating base AccessControl permission classes required by the `drago-ex/permission` component.
-
-### Execution Priority (`priority`)
-Controls the order of package setup commands when multiple `db:*` migration commands are available.
-- **Lower numbers** run earlier.
-- **Priority 10**: Recommended for core packages (Auth, Users).
-- **Priority 20+**: Recommended for dependent packages.
-- **Default 100**: Used if no priority is specified.
-
-Database commands are always grouped at the top of the list and sorted by priority. This makes it possible to run migrations in the required order, for example authentication tables before permission tables.
-
-Example migration order:
-```text
-priority 10  db:migrate-auth
-priority 20  db:migrate-permission
-priority 100 db:migrate-settings
-```
-
-Other commands are listed alphabetically.
-
-> The same `extra.drago-project.priority` value is also used by `drago-ex/project-installer` when sorting `replace` overlays during resource installation.
-
 ### Features
-- **Intelligent Sorting**: Database migrations are prioritized and grouped together.
-- **Auto-Initialization**: Detects if the migration system needs initial setup and offers one-click initialization.
-- **Robustness**: If the database is unreachable, the tool skips DB tasks but still allows other setup commands to run.
+- Shows setup tasks collected from installed packages.
+- Groups database migrations before other setup commands.
+- Detects if the migration table needs initial setup.
+- If the database is unreachable, DB tasks are skipped while other tasks remain available.
+
+Command definitions and priorities are documented in the packages that provide them.
 
 ## Useful Development Tools
 - [Database Migrations](https://github.com/drago-ex/migration)
