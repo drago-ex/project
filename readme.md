@@ -45,27 +45,16 @@ Expand the base package with these ready-to-use modules:
 Each extension documents its required project configuration and post-installation steps in its own README.
 When installing the complete project stack, you can use [Project Preset](https://github.com/drago-ex/project-preset) to apply the required setup automatically.
 
-## Package Setup Orchestrator
+## Package Setup
 
-The project includes a setup tool for running initialization commands provided by installed Drago packages.
-It scans installed packages and shows available setup tasks such as database migrations or generated permission classes.
+Project setup commands are handled by [Project Tools](https://github.com/drago-ex/project-tools).
+After installing extensions, run `vendor/bin/drago-setup` to execute package-defined setup tasks such as database migrations or generated permission classes.
 
-### Usage
-Run the orchestrator (inside your Docker container if applicable):
+Inside Docker, run it as the web user:
+
 ```bash
-docker compose exec -u www-data server php bin/package-setup
+docker compose exec -u www-data server php vendor/bin/drago-setup
 ```
-
-**Interactions:**
-- Select specific tasks by number (e.g., `1,3`).
-- Run everything sequentially by entering `a`.
-- Quit by entering `q`.
-
-### Features
-- Shows setup tasks collected from installed packages.
-- Groups database migrations before other setup commands.
-- Detects if the migration table needs initial setup.
-- If the database is unreachable, DB tasks are skipped while other tasks remain available.
 
 Command definitions and priorities are documented in the packages that provide them.
 
