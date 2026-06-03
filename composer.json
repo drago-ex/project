@@ -16,7 +16,7 @@
 	"minimum-stability": "stable",
 	"require-dev": {
 		"phpstan/phpstan-nette": "^2.0",
-		"drago-ex/project-installer": "@dev"
+		"drago-ex/project-tools": "@dev"
 	},
 	"autoload": {
 		"psr-4": {
