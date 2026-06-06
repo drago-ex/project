@@ -13,7 +13,7 @@ jobs:
           php-version: 8.3
           coverage: none
 
-      - run: composer create-project nette/code-checker temp/code-checker ^3 --no-progress
+      - run: composer create-project nette/code-checker temp/code-checker 3.3.5 --no-progress
       - run: php temp/code-checker/code-checker --strict-types --no-progress
 
   nette_cs:
