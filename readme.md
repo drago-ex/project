@@ -1,6 +1,6 @@
 # Drago Project
 
-Basis for new modules projects on Drago Extension
+Base project skeleton for Drago Extension applications.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/drago-ex/project/blob/main/license)
 [![PHP version](https://badge.fury.io/ph/drago-ex%2Fproject.svg)](https://badge.fury.io/ph/drago-ex%2Fproject)
@@ -21,7 +21,7 @@ composer create-project drago-ex/project
 ```
 
 ## Basic information
-Basic package for applications where the basis for Bootstrap, Vite, Docker, Naja is already prepared.
+Basic package for applications where Bootstrap, Vite, Docker and Naja are already prepared.
 You can find all commands in `package.json` like running Docker or Vite.
 
 ## Basic Naja scripts
