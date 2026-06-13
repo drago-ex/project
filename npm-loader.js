@@ -8,6 +8,11 @@ if (!existsSync("package.json")) {
 	process.exit(0);
 }
 
+if (!existsSync(vendorDir)) {
+	console.log("No vendor/drago-ex directory found, skipping local package install.");
+	process.exit(0);
+}
+
 // Find all packages that are valid npm packages (have package.json with a name)
 const packagesToInstall = readdirSync(vendorDir).filter(name => {
 	const pkgPath = join(vendorDir, name);
