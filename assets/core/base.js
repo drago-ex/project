@@ -24,7 +24,7 @@ LiveForm.setOptions({
 	messageTag: 'span',
 	messageIdPostfix: '_message',
 	messageErrorPrefix: '',
-	showAllErrors: false,
+	showAllErrors: true,
 	showValid: false,
 	wait: false
 });
