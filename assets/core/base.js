@@ -14,7 +14,7 @@ naja.initialize();
 /* Configure LiveForm */
 LiveForm.setOptions({
 	showMessageClassOnParent: false,
-	messageParentClass: false,
+	messageParentClass: 'form-error',
 	controlErrorClass: '',
 	controlValidClass: '',
 	messageErrorClass: 'invalid-feedback fw-semibold',
