@@ -24,6 +24,12 @@ composer create-project drago-ex/project
 Basic package for applications where Bootstrap, Vite, Docker and Naja are already prepared.
 You can find all commands in `package.json` like running Docker or Vite.
 
+## Application structure
+
+- `app/Core` contains shared infrastructure and application services.
+- `app/Presentation` contains presenters, templates and feature modules.
+- `app/Presentation/Accessory` contains reusable presentation helpers and Latte widgets.
+
 ## Basic Naja scripts
 - **ErrorsHandler** - Handles Naja AJAX errors by displaying user-friendly alert messages based on HTTP status codes. Shows a dismissible Bootstrap alert in the page element with ID `snippet--message`.
 

@@ -9,7 +9,6 @@ use Nette\DI\Container;
 use Throwable;
 
 
-/** The Bootstrap class configures the application. */
 final class Bootstrap
 {
 	private ExtraConfigurator $configurator;
@@ -20,7 +19,7 @@ final class Bootstrap
 	{
 		$this->rootDir = dirname(__DIR__);
 		$this->configurator = new ExtraConfigurator;
-		$this->configurator->setTempDirectory($this->rootDir . '/var');
+		$this->configurator->setTempDirectory($this->rootDir . '/temp');
 	}
 
 
@@ -30,7 +29,7 @@ final class Bootstrap
 			$this->configurator->setDebugMode(true);
 		}
 
-		$this->configurator->enableTracy($this->rootDir . '/var/log');
+		$this->configurator->enableTracy($this->rootDir . '/log');
 		$this->configurator->createRobotLoader()
 			->addDirectory(__DIR__)
 			->register();
@@ -49,8 +48,8 @@ final class Bootstrap
 	/** @throws Throwable */
 	public function bootConsoleApplication(): Container
 	{
-		$this->configurator->setDebugMode(false);
 		$this->initializeEnvironment();
+		$this->configurator->setDebugMode(false);
 		$this->setupContainer();
 		return $this->configurator->createContainer();
 	}
