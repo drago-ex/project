@@ -25,7 +25,7 @@
 	},
 	"extra": {
 		"drago-tools": {
-			"vendor-names": ["drago-ex"],
+			"vendor-names": "drago-ex",
 			"allow-library-install": true
 		}
 	},
