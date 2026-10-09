@@ -36,7 +36,7 @@ latte:
 
 # application extensions
 extensions:
-	translator: Drago\Localization\DI\TranslatorExtension(%appDir%, %tempDir%)
+	translator: Drago\Localization\DI\TranslatorExtension
 
 
 # nette asset building
