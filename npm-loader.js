@@ -1,15 +1,15 @@
-import { execSync } from "child_process";
-import { existsSync, readdirSync, statSync, readFileSync } from "fs";
-import { join } from "path";
+import { execSync } from 'child_process';
+import { existsSync, readdirSync, statSync, readFileSync } from 'fs';
+import { join } from 'path';
 
-const vendorDir = "./vendor/drago-ex/";
-if (!existsSync("package.json")) {
-	console.log("No package.json, skipping npm install.");
+const vendorDir = './vendor/drago-ex/';
+if (!existsSync('package.json')) {
+	console.log('No package.json, skipping npm install.');
 	process.exit(0);
 }
 
 if (!existsSync(vendorDir)) {
-	console.log("No vendor/drago-ex directory found, skipping local package install.");
+	console.log('No vendor/drago-ex directory found, skipping local package install.');
 	process.exit(0);
 }
 
@@ -17,10 +17,10 @@ const packagesToInstall = readdirSync(vendorDir).filter(name => {
 	const pkgPath = join(vendorDir, name);
 	if (!statSync(pkgPath).isDirectory()) return false;
 
-	const pkgJsonPath = join(pkgPath, "package.json");
+	const pkgJsonPath = join(pkgPath, 'package.json');
 	if (existsSync(pkgJsonPath)) {
 		try {
-			const pkgJson = JSON.parse(readFileSync(pkgJsonPath, "utf-8"));
+			const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
 			return !!pkgJson.name;
 		} catch (e) {
 			return false;
@@ -38,17 +38,17 @@ if (packagesToInstall.length > 0) {
 
 	try {
 		execSync(`npm install ${packagesToInstall.join(' ')} --ignore-scripts --no-audit --fund false`, {
-			stdio: "inherit",
+			stdio: 'inherit',
 			env: cleanEnv
 		});
 	} catch (error) {
-		console.error("Failed to install local packages. Falling back to sequential install...");
+		console.error('Failed to install local packages. Falling back to sequential install...');
 
 		for (const pkg of packagesToInstall) {
 			try {
 				console.log(`Installing ${pkg}...`);
 				execSync(`npm install ${pkg} --ignore-scripts --no-audit --fund false`, {
-					stdio: "inherit",
+					stdio: 'inherit',
 					env: cleanEnv
 				});
 			} catch (e) {
@@ -57,5 +57,5 @@ if (packagesToInstall.length > 0) {
 		}
 	}
 } else {
-	console.log("No local drago-ex packages found to install.");
+	console.log('No local drago-ex packages found to install.');
 }

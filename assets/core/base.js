@@ -1,6 +1,6 @@
-import naja from "naja";
-import { LiveForm, Nette } from "live-form-validation";
-import ErrorsHandler from "../naja/errors-handler.js";
+import naja from 'naja';
+import { LiveForm, Nette } from 'live-form-validation';
+import ErrorsHandler from '../naja/errors-handler.js';
 
 /* Globals */
 window.LiveForm = LiveForm;
