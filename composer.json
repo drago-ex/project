@@ -1,7 +1,7 @@
 {
 	"name": "drago-ex/project",
-	"type": "project",
 	"description": "The basis for new projects on Drago Extension.",
+	"type": "project",
 	"require": {
 		"php": ">=8.3 <9",
 		"nette/robot-loader": "^4.1",
@@ -12,7 +12,6 @@
 		"drago-ex/project-docker": "^2.0",
 		"drago-ex/project-front": "^2.0"
 	},
-	"minimum-stability": "stable",
 	"require-dev": {
 		"phpstan/phpstan-nette": "^2.0",
 		"drago-ex/project-tools": "^1.0"
@@ -20,12 +19,6 @@
 	"autoload": {
 		"psr-4": {
 			"App\\": "app"
-		}
-	},
-	"extra": {
-		"drago-tools": {
-			"vendor-names": "drago-ex",
-			"allow-library-install": true
 		}
 	},
 	"scripts": {
@@ -38,5 +31,12 @@
 			"drago-install",
 			"drago-clean"
 		]
-	}
+	},
+	"extra": {
+		"drago-tools": {
+			"vendor-names": "drago-ex",
+			"allow-library-install": true
+		}
+	},
+	"minimum-stability": "stable"
 }
