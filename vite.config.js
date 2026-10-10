@@ -14,6 +14,9 @@ const entries = files.map(
 export default defineConfig({
 	root: 'assets',
 	publicDir: 'public',
+	resolve: {
+		preserveSymlinks: true,
+	},
 	server: {
 		cors: {
 			origin: true,
