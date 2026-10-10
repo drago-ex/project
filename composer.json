@@ -32,6 +32,8 @@
 			"drago-clean"
 		]
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"extra": {
 		"drago-tools": {
 			"vendor-names": "drago-ex",
