@@ -21,6 +21,15 @@
 			"App\\": "app"
 		}
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"extra": {
+		"drago-tools": {
+			"vendor-names": "drago-ex",
+			"allow-library-install": true
+		}
+	},
+	"minimum-stability": "stable",
 	"scripts": {
 		"phpstan": "phpstan analyse",
 		"post-install-cmd": [
@@ -31,14 +40,5 @@
 			"drago-install",
 			"drago-clean"
 		]
-	},
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"extra": {
-		"drago-tools": {
-			"vendor-names": "drago-ex",
-			"allow-library-install": true
-		}
-	},
-	"minimum-stability": "stable"
+	}
 }
