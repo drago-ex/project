@@ -3,9 +3,27 @@ import { existsSync, readdirSync, statSync, readFileSync } from 'fs';
 import { join } from 'path';
 
 const vendorDir = './vendor/drago-ex/';
+const frontendEntryFields = ['exports', 'main', 'module', 'browser', 'style', 'sass', 'unpkg', 'jsdelivr'];
+
 if (!existsSync('package.json')) {
 	console.log('No package.json, skipping npm install.');
 	process.exit(0);
+}
+
+function hasFrontendEntry(value) {
+	if (typeof value === 'string') {
+		return /\.(?:[cm]?js|css|s[ac]ss)$/i.test(value);
+	}
+
+	if (Array.isArray(value)) {
+		return value.some(hasFrontendEntry);
+	}
+
+	if (value !== null && typeof value === 'object') {
+		return Object.values(value).some(hasFrontendEntry);
+	}
+
+	return false;
 }
 
 if (!existsSync(vendorDir)) {
@@ -21,7 +39,7 @@ const packagesToInstall = readdirSync(vendorDir).filter(name => {
 	if (existsSync(pkgJsonPath)) {
 		try {
 			const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
-			return !!pkgJson.name;
+			return !!pkgJson.name && frontendEntryFields.some(field => hasFrontendEntry(pkgJson[field]));
 		} catch (e) {
 			return false;
 		}
