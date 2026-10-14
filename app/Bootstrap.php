@@ -39,9 +39,17 @@ final class Bootstrap
 	/** @throws Throwable */
 	public function bootWebApplication(): Container
 	{
+		return $this->bootConfigurator()
+			->createContainer();
+	}
+
+
+	/** @throws Throwable */
+	public function bootConfigurator(): ExtraConfigurator
+	{
 		$this->initializeEnvironment();
 		$this->setupContainer();
-		return $this->configurator->createContainer();
+		return $this->configurator;
 	}
 
 
@@ -51,7 +59,8 @@ final class Bootstrap
 		$this->initializeEnvironment();
 		$this->configurator->setDebugMode(false);
 		$this->setupContainer();
-		return $this->configurator->createContainer();
+		return $this->configurator
+			->createContainer();
 	}
 
 
