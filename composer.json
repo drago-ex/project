@@ -2,6 +2,7 @@
 	"name": "drago-ex/project",
 	"description": "The basis for new projects on Drago Extension.",
 	"type": "project",
+	"license": "MIT"
 	"require": {
 		"php": ">=8.3 <9",
 		"nette/robot-loader": "^4.1",
@@ -39,6 +40,5 @@
 			"drago-install",
 			"drago-clean"
 		]
-	},
-	"license": "MIT"
+	}
 }
