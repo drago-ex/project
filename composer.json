@@ -39,5 +39,6 @@
 			"drago-install",
 			"drago-clean"
 		]
-	}
+	},
+	"license": "MIT"
 }
