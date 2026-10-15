@@ -21,7 +21,7 @@
 			"App\\": "app"
 		}
 	},
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"extra": {
 		"drago-tools": {
@@ -29,7 +29,6 @@
 			"allow-library-install": true
 		}
 	},
-	"minimum-stability": "stable",
 	"scripts": {
 		"phpstan": "phpstan analyse",
 		"post-install-cmd": [
