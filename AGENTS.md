@@ -13,7 +13,7 @@ Use this file as package-specific guidance when working in this repository. Keep
 ## Repository Layout
 - `app/`: project application configuration and code.
 - `assets/`: frontend assets.
-- `docker/`: Docker configuration.
+- `docker/`, `docker-compose.yaml`: Docker configuration copied from `drago-ex/project-docker` by `drago-install` after `composer install`; not part of this repository.
 - `www/`: web root files.
 - `.github/`: CI workflows; keep their PHP versions and commands consistent with Composer and the package scripts.
 - `composer.json`: package metadata, dependency constraints, autoloading, and available Composer scripts.
