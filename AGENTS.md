@@ -38,6 +38,8 @@ Do not claim behavior is covered by tests unless you find and run a relevant sui
 
 Composer install and update hooks invoke Drago project setup/cleanup commands. Inspect those scripts and their effects before invoking Composer operations that trigger them; they may modify generated project files.
 
+Files copied from extensions (`project-*` packages) belong to the project and are meant to be customized. Updates deliberately do not overwrite them, so never replace them with package versions wholesale; when a package fix is needed, merge only the relevant change into the project file.
+
 ## Conventions & Rules
 
 - Preserve backward compatibility unless the task explicitly permits a breaking change. Check callers and public signatures before changing behavior.

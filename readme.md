@@ -55,6 +55,17 @@ Expand the base package with these ready-to-use modules:
 Each extension documents its required project configuration and post-installation steps in its own README.
 When installing the complete project stack, you can use [Project Preset](https://github.com/drago-ex/project-preset) to apply the required setup automatically.
 
+### How extensions work
+
+Extensions are not libraries you call from your code. Each one contains only the essential base of one feature,
+and [Project Tools](https://github.com/drago-ex/project-tools) copies its files into your project, where they become
+your own code. Every project is different, so adapt the copied files to its needs.
+
+A later `composer update` does not overwrite files that already exist in the project, so your changes are never lost.
+This also means that a fix released in an extension does not reach your copies automatically: compare the package
+files with your project and take over the changes you want. See
+[The Idea Behind Drago Packages](https://github.com/drago-ex/project-tools#the-idea-behind-drago-packages) for details.
+
 ## Package Setup
 
 Project setup commands are handled by [Project Tools](https://github.com/drago-ex/project-tools).
