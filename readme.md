@@ -68,24 +68,15 @@ files with your project and take over the changes you want. See
 
 ## Package Setup
 
-After installing extensions, run the migrations of all installed packages and, with
-[drago-ex/permission](https://github.com/drago-ex/permission), generate their permission providers:
+After installing extensions, run the migrations and generate the permission providers of the installed packages:
 
 ```bash
 php vendor/bin/migration db:migrate --packages
 php vendor/bin/create-permission --packages
 ```
 
-Inside Docker, run them as the web user:
-
-```bash
-docker compose exec -u www-data server php vendor/bin/migration db:migrate --packages
-docker compose exec -u www-data server php vendor/bin/create-permission --packages
-```
-
-Both commands, like `drago-install`, record what they did in `.drago-project/`; show it with `vendor/bin/drago-report`.
-Commit `.drago-project/`, except `migration.json`, which depends on the database of each environment
-and is ignored in `.gitignore`.
+Inside Docker, run them as the web user (`docker compose exec -u www-data server php vendor/bin/...`).
+What the tools did is in `.drago-project/`, shown by `vendor/bin/drago-report`.
 
 ## Useful Development Tools
 
