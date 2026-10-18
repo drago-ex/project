@@ -68,16 +68,24 @@ files with your project and take over the changes you want. See
 
 ## Package Setup
 
-Project setup commands are handled by [Project Tools](https://github.com/drago-ex/project-tools).
-After installing extensions, run `vendor/bin/drago-setup` to execute package-defined setup tasks such as database migrations or generated permission classes.
-
-Inside Docker, run it as the web user:
+After installing extensions, run the migrations of all installed packages and, with
+[drago-ex/permission](https://github.com/drago-ex/permission), generate their permission providers:
 
 ```bash
-docker compose exec -u www-data server php vendor/bin/drago-setup
+php vendor/bin/migration db:migrate --packages
+php vendor/bin/create-permission --packages
 ```
 
-Command definitions and priorities are documented in the packages that provide them.
+Inside Docker, run them as the web user:
+
+```bash
+docker compose exec -u www-data server php vendor/bin/migration db:migrate --packages
+docker compose exec -u www-data server php vendor/bin/create-permission --packages
+```
+
+Both commands, like `drago-install`, record what they did in `.drago-project/`; show it with `vendor/bin/drago-report`.
+Commit `.drago-project/`, except `migration.json`, which depends on the database of each environment
+and is ignored in `.gitignore`.
 
 ## Useful Development Tools
 
