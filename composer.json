@@ -15,7 +15,7 @@
 	},
 	"require-dev": {
 		"phpstan/phpstan-nette": "^2.0",
-		"drago-ex/project-tools": "^1.0"
+		"drago-ex/project-tools": "^2.0"
 	},
 	"autoload": {
 		"psr-4": {
