@@ -1,0 +1,13 @@
+{* layout of the error pages (Error4xx); without it they were sent as a bare fragment without a charset *}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex">
+	<title>{ifset title}{include title|stripHtml|trim}{/ifset}</title>
+</head>
+<body>
+	{include content}
+</body>
+</html>

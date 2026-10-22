@@ -50,7 +50,7 @@ const packagesToInstall = readdirSync(vendorDir).filter(name => {
 if (packagesToInstall.length > 0) {
 	console.log(`Installing and registering local packages: ${packagesToInstall.join(', ')}...`);
 
-	// Vyčištění proměnných prostředí, aby npm si nestěžovalo na vnořený běh (EALLOWSCRIPTS)
+	// Clean the environment, so npm does not complain about a nested run (EALLOWSCRIPTS)
 	const cleanEnv = { ...process.env };
 	delete cleanEnv.npm_config_allow_scripts;
 

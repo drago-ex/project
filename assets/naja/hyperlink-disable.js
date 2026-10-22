@@ -10,13 +10,14 @@ export default class HyperlinkDisable {
 			return links;
 		};
 
-		const initialLinks = hyperlinkDisable(document);
+		hyperlinkDisable(document);
 		naja.snippetHandler.addEventListener('afterUpdate', (e) => {
 			hyperlinkDisable(e.detail.snippet);
 		});
 
+		// All of them, also links that came in a snippet after the page was loaded.
 		naja.addEventListener('complete', () => {
-			initialLinks.forEach((link) => {
+			document.querySelectorAll('[data-link-disable].disabled').forEach((link) => {
 				link.classList.remove('disabled');
 			});
 		});

@@ -18,6 +18,10 @@ Use this file as package-specific guidance when working in this repository. Keep
 - `.github/`: CI workflows; keep their PHP versions and commands consistent with Composer and the package scripts.
 - `composer.json`: package metadata, dependency constraints, autoloading, and available Composer scripts.
 
+## Key Parts
+- Error pages: `Error4xxPresenter` renders `Error4xx/<code>.latte` (or `4xx.latte`) inside `Error/@layout.latte`, a minimal layout of its own (charset, noindex), so it does not depend on the modules' layouts; `Error5xxPresenter` logs and prints `500.phtml`. In debug mode Tracy shows the error instead.
+- `assets/core/base.js` sets `window.naja`, initializes Naja and Nette forms; `assets/naja/*` are the basic Naja extensions. project-preset replaces `package.json`, so its shared dependencies must follow the ones here.
+
 ## Dependencies
 
 Composer constraints describe the package contract. Before changing integration behavior, inspect the source and the actual call sites in this package; do not infer runtime usage solely from dependency declarations.
