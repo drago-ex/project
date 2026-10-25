@@ -42,6 +42,9 @@ Všechny příkazy, například pro spuštění Dockeru nebo Vite, najdete v `pa
 
 - **Spinner** - Během probíhajících AJAXových požadavků Naja zobrazí spinner přes celou stránku. Ukáže ho při začátku požadavku a skryje po dokončení všech požadavků.
 
+`assets/core/base.js` registruje jen ErrorsHandler; ostatní zaregistrujte tam, kde je používáte, např.
+`registerNajaExtensions(HyperlinkDisable, Spinner)` ve vstupním bodě (Spinner potřebuje i `naja/spinner.scss`).
+
 ## Dostupná rozšíření
 
 Základní balíček můžete rozšířit o tyto připravené moduly:

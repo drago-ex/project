@@ -42,6 +42,9 @@ You can find all commands in `package.json` like running Docker or Vite.
 
 - **Spinner** - Displays a full-page spinner during active Naja AJAX requests. Shows the spinner when a request starts and hides it once all requests are complete.
 
+`assets/core/base.js` registers only ErrorsHandler; register the others where you use them, e.g.
+`registerNajaExtensions(HyperlinkDisable, Spinner)` in an entry point (Spinner also needs `naja/spinner.scss`).
+
 ## Available Extensions
 
 Expand the base package with these ready-to-use modules:
