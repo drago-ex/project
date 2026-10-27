@@ -1,7 +1,5 @@
 # Drago Project
 
-English | [Čeština](readme.cs.md)
-
 Base project skeleton for Drago Extension applications.
 
 [![PHP version](https://badge.fury.io/ph/drago-ex%2Fproject.svg)](https://badge.fury.io/ph/drago-ex%2Fproject)

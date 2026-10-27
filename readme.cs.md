@@ -1,7 +1,5 @@
 # Drago Project
 
-[English](readme.md) | Čeština
-
 Základní kostra projektu pro aplikace Drago Extension.
 
 [![PHP version](https://badge.fury.io/ph/drago-ex%2Fproject.svg)](https://badge.fury.io/ph/drago-ex%2Fproject)
