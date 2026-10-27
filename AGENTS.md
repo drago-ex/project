@@ -7,7 +7,7 @@ Use this file as package-specific guidance when working in this repository. Keep
 - **Type**: project
 - **Purpose**: The basis for new projects on Drago Extension.
 - **PHP**: >=8.3 <9
-- **Runtime dependencies**: nette/robot-loader (^4.1), nette/assets (^1.0), latte/latte (^3.1), tracy/tracy (^2.11), drago-ex/bootstrap (^2.0), drago-ex/project-docker (^2.0), drago-ex/project-front (^2.0)
+- **Runtime dependencies**: nette/robot-loader (^4.1), nette/assets (^1.0), latte/latte (^3.1), tracy/tracy (^2.11), drago-ex/bootstrap (^2.0), drago-ex/project-docker (^1.0), drago-ex/project-front (^1.0)
 - **License**: MIT
 
 ## Repository Layout
@@ -25,7 +25,7 @@ Use this file as package-specific guidance when working in this repository. Keep
 ## Dependencies
 
 Composer constraints describe the package contract. Before changing integration behavior, inspect the source and the actual call sites in this package; do not infer runtime usage solely from dependency declarations.
-Development dependencies include phpstan/phpstan-nette (^2.0), drago-ex/project-tools (^2.0).
+Development dependencies include phpstan/phpstan-nette (^2.0), drago-ex/project-tools (^1.0).
 
 ## Essential Commands
 
