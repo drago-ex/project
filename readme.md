@@ -71,11 +71,11 @@ files with your project and take over the changes you want. See
 
 ## Package Setup
 
-After installing extensions, run the migrations and generate the permission providers of the installed packages:
+After installing extensions, run the migrations and the commands of the installed packages (e.g. the permission providers):
 
 ```bash
 php vendor/bin/migration db:migrate --packages
-php vendor/bin/create-permission --packages
+php vendor/bin/drago-commands
 ```
 
 Inside Docker, run them as the web user (`docker compose exec -u www-data server php vendor/bin/...`).

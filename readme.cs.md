@@ -71,11 +71,11 @@ s projektem a převezměte změny, které chcete. Podrobnosti najdete v
 
 ## Nastavení balíčků
 
-Po instalaci rozšíření spusťte migrace a vygenerujte providery oprávnění nainstalovaných balíčků:
+Po instalaci rozšíření spusťte migrace a příkazy nainstalovaných balíčků (např. providery oprávnění):
 
 ```bash
 php vendor/bin/migration db:migrate --packages
-php vendor/bin/create-permission --packages
+php vendor/bin/drago-commands
 ```
 
 V Dockeru je spouštějte jako webového uživatele (`docker compose exec -u www-data server php vendor/bin/...`).
