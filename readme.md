@@ -56,7 +56,11 @@ Expand the base package with these ready-to-use modules:
 - [Application Settings](https://github.com/drago-ex/project-settings)
 
 Each extension documents its required project configuration and post-installation steps in its own README.
-When installing the complete project stack, you can use [Project Preset](https://github.com/drago-ex/project-preset) to apply the required setup automatically.
+To install the complete project stack at once, use a preset, which applies the required setup automatically:
+
+- [drago-ex/project-preset](https://github.com/drago-ex/project-preset): the complete stack without permissions,
+- [drago-ex/project-preset-permission](https://github.com/drago-ex/project-preset-permission): adds permissions to it
+  (the administration menu by privileges, write buttons, roles from the database).
 
 ### How extensions work
 

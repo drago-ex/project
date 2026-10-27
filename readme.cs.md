@@ -56,7 +56,11 @@ Základní balíček můžete rozšířit o tyto připravené moduly:
 - [Nastavení aplikace](https://github.com/drago-ex/project-settings)
 
 Každé rozšíření popisuje potřebnou konfiguraci projektu a kroky po instalaci ve svém README.
-Pro instalaci kompletní sestavy projektu můžete použít [Project Preset](https://github.com/drago-ex/project-preset), který potřebné nastavení provede automaticky.
+Pro instalaci kompletní sestavy projektu najednou použijte preset, který potřebné nastavení provede automaticky:
+
+- [drago-ex/project-preset](https://github.com/drago-ex/project-preset): kompletní sestava bez oprávnění,
+- [drago-ex/project-preset-permission](https://github.com/drago-ex/project-preset-permission): přidá do ní oprávnění
+  (menu administrace podle privilegií, tlačítka pro zápis, role z databáze).
 
 ### Jak rozšíření fungují
 
