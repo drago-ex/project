@@ -7,7 +7,6 @@
 !/log/.gitignore
 
 /www/dist/
-/docker/mysql/
 
 # report of the last migration run, different in each environment
 /.drago-project/migration.json

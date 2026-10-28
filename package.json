@@ -15,10 +15,10 @@
 		"vite": "^8.2.0"
 	},
 	"scripts": {
-		"docker:build": "docker build -t php-server docker/ && docker compose build --no-cache",
-		"docker:dev": "docker build -t php-server docker/ && docker compose build && docker compose up -d",
-		"docker:production": "docker build -t php-server docker/ && docker compose build && docker compose --env-file docker/.env.production up -d",
-		"docker:down": "docker compose down --volumes --remove-orphans",
+		"docker:build": "docker compose build --no-cache",
+		"docker:dev": "docker compose up -d --build && docker compose watch --no-up",
+		"docker:production": "docker compose --env-file docker/.env.production up -d --build",
+		"docker:down": "docker compose down --remove-orphans",
 		"vite:dev": "vite",
 		"vite:build": "vite build",
 		"npm-loader": "node npm-loader.js",
