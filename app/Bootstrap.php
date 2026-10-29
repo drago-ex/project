@@ -1,12 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App;
 
 use Drago\Bootstrap\ExtraConfigurator;
 use Nette\DI\Container;
 use Throwable;
+use function dirname;
 
 
 final class Bootstrap
