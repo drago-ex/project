@@ -7,7 +7,7 @@ Use this file as package-specific guidance when working in this repository. Keep
 - **Type**: project
 - **Purpose**: The basis for new projects on Drago Extension.
 - **PHP**: >=8.3 <9
-- **Runtime dependencies**: nette/robot-loader (^4.1), nette/assets (^1.0), latte/latte (^3.1), tracy/tracy (^2.11), drago-ex/bootstrap (^2.0), drago-ex/project-docker (^1.0), drago-ex/project-front (^1.0)
+- **Runtime dependencies**: nette/robot-loader (^4.1), nette/assets (^1.0), latte/latte (^3.1), tracy/tracy (^2.11), drago-ex/bootstrap (^2.0), drago-ex/project-docker (^1.0), drago-ex/project-front (^3.0)
 - **License**: MIT
 
 ## Repository Layout

@@ -11,7 +11,7 @@
 		"tracy/tracy": "^2.11",
 		"drago-ex/bootstrap": "^2.0",
 		"drago-ex/project-docker": "^1.0",
-		"drago-ex/project-front": "^1.0"
+		"drago-ex/project-front": "^3.0"
 	},
 	"require-dev": {
 		"phpstan/phpstan-nette": "^2.0",
