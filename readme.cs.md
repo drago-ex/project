@@ -31,6 +31,8 @@ Všechny příkazy, například pro spuštění Dockeru nebo Vite, najdete v `pa
 - `app/Core` obsahuje sdílenou infrastrukturu a služby aplikace.
 - `app/Presentation` obsahuje presentery, šablony a moduly jednotlivých funkcí.
 - `app/Presentation/Accessory` obsahuje znovupoužitelné pomocníky prezentační vrstvy a widgety Latte.
+- `local/` obsahuje konfiguraci tohoto prostředí v Neonu, která nepatří do gitu, např. připojení k databázi
+  v `local/db.neon`.
 
 ## Základní skripty pro Naja
 

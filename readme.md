@@ -31,6 +31,8 @@ You can find all commands in `package.json` like running Docker or Vite.
 - `app/Core` contains shared infrastructure and application services.
 - `app/Presentation` contains presenters, templates and feature modules.
 - `app/Presentation/Accessory` contains reusable presentation helpers and Latte widgets.
+- `local/` holds the Neon configuration of this environment that stays out of git, e.g. the database connection
+  in `local/db.neon`.
 
 ## Basic Naja scripts
 

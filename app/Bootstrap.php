@@ -63,9 +63,12 @@ final class Bootstrap
 	}
 
 
-	/** @throws Throwable */
+	/**
+	 * The configs of app/ and of this environment in local/ (e.g. db.neon from project-docker-db).
+	 * @throws Throwable
+	 */
 	private function setupContainer(): void
 	{
-		$this->configurator->addFindConfig(__DIR__, 'Translate');
+		$this->configurator->addFindConfig([__DIR__, $this->rootDir . '/local'], 'Translate');
 	}
 }

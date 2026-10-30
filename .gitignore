@@ -6,6 +6,10 @@
 /log/*
 !/log/.gitignore
 
+# files written for this environment (database connection, installation lock)
+/local/*
+!/local/.gitignore
+
 /www/dist/
 
 # report of the last migration run, different in each environment

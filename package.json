@@ -16,7 +16,7 @@
 	},
 	"scripts": {
 		"docker:build": "docker compose build --no-cache",
-		"docker:dev": "docker compose up -d --build && docker compose watch --no-up",
+		"docker:dev": "docker compose --env-file docker/.env.development up -d --build && docker compose --env-file docker/.env.development watch --no-up",
 		"docker:production": "docker compose --env-file docker/.env.production up -d --build",
 		"docker:down": "docker compose down --remove-orphans",
 		"vite:dev": "vite",
