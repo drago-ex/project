@@ -1,6 +1,4 @@
-includes:
-	- vendor/phpstan/phpstan-nette/extension.neon
-
+# phpstan/extension-installer includes the extensions of the installed packages (phpstan-nette, drago-ex/database)
 parameters:
 	level: 8
 	paths:

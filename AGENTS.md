@@ -25,7 +25,7 @@ Use this file as package-specific guidance when working in this repository. Keep
 ## Dependencies
 
 Composer constraints describe the package contract. Before changing integration behavior, inspect the source and the actual call sites in this package; do not infer runtime usage solely from dependency declarations.
-Development dependencies include phpstan/phpstan-nette (^2.0), drago-ex/project-tools (^1.0).
+Development dependencies include phpstan/phpstan-nette (^2.0), phpstan/extension-installer (^1.4), drago-ex/project-tools (^1.0). `phpstan.neon` has no includes: the extension installer includes the extensions of the installed packages (phpstan-nette, drago-ex/database), so a project without drago-ex/database does not fail on a missing file.
 
 ## Essential Commands
 
