@@ -1,4 +1,4 @@
-# phpstan/extension-installer includes the extensions of the installed packages (phpstan-nette, drago-ex/database)
+# phpstan/extension-installer includes the extensions of the installed packages (phpstan-nette)
 parameters:
 	level: 8
 	paths:
