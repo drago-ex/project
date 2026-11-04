@@ -1,0 +1,70 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+/**
+ * Collects the Assets sections of the READMEs of the installed drago-ex packages into .drago-project/assets.md.
+ * Composer runs it after install and update, so the file follows the installed packages.
+ */
+
+const AssetsFile = '.drago-project/assets.md';
+
+$root = getcwd();
+$green = "\033[32m";
+$red = "\033[31m";
+$reset = "\033[0m";
+
+if (in_array($argv[1] ?? '', ['-h', '--help'], true)) {
+	echo <<<'USAGE'
+		Collect the Assets sections of the installed drago-ex packages into .drago-project/assets.md.
+
+		Usage:
+		  php bin/project-assets
+
+		Run it in the project root; Composer runs it after install and update.
+
+		USAGE;
+	exit(0);
+}
+
+if ($root === false || !is_file($root . '/vendor/autoload.php')) {
+	fwrite(STDERR, "{$red}ERROR: vendor/ not found, run composer install in the project root first.{$reset}\n");
+	exit(1);
+}
+
+require $root . '/vendor/autoload.php';
+
+// the "## Assets" section of readme.md of every installed drago-ex package, up to the next "## " heading
+$assets = [];
+foreach (Composer\InstalledVersions::getInstalledPackages() as $name) {
+	$path = Composer\InstalledVersions::getInstallPath($name);
+	if (!str_starts_with($name, 'drago-ex/') || $path === null || realpath($path) === realpath($root)) {
+		continue;
+	}
+
+	$readme = (string) @file_get_contents($path . '/readme.md'); // @ a package may have no readme
+	if (preg_match('~^## Assets\R(.*?)(?=^## |\z)~ms', str_replace("\r\n", "\n", $readme), $m)) {
+		$assets[$name] = trim($m[1]);
+	}
+}
+
+if ($assets === []) {
+	echo "{$green}No installed package has assets.{$reset}\n";
+	exit(0);
+}
+
+ksort($assets);
+$content = "# Assets of the installed packages\n\n"
+	. "Written by bin/project-assets from the Assets sections of the package READMEs. Add what the project uses to\n"
+	. "`assets/admin.js`, `admin.scss`, `front.js` and `front.scss`; the file is written again after every composer\n"
+	. "install and update.\n";
+foreach ($assets as $name => $section) {
+	$content .= "\n## {$name}\n\n{$section}\n";
+}
+
+$file = $root . '/' . AssetsFile;
+if ((!is_dir(dirname($file)) && !@mkdir(dirname($file), 0o777, true)) || @file_put_contents($file, $content) === false) { // @ reported below
+	fwrite(STDERR, "{$red}ERROR: " . AssetsFile . " cannot be written; run the script where the project files belong to you, not in the Docker container.{$reset}\n");
+	exit(1);
+}
+
+echo "{$green}OK " . AssetsFile . ': the assets of ' . implode(', ', array_keys($assets)) . "{$reset}\n";

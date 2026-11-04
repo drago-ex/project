@@ -7,6 +7,7 @@ typeAnalysis: phpstan
 paths:
 	- app
 	- www
+	- bin/project-assets
 	- bin/project-setup
 
 fileExtensions:

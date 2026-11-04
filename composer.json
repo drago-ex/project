@@ -40,11 +40,13 @@
 		"phpstan": "phpstan analyse",
 		"post-install-cmd": [
 			"drago-install",
-			"drago-clean"
+			"drago-clean",
+			"@php bin/project-assets"
 		],
 		"post-update-cmd": [
 			"drago-install",
-			"drago-clean"
+			"drago-clean",
+			"@php bin/project-assets"
 		]
 	}
 }

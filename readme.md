@@ -76,18 +76,20 @@ files with your project and take over the changes you want. See
 
 ## Package Setup
 
-After installing extensions, run:
+After every `composer install` and `composer update`, `bin/project-assets` collects the `## Assets` sections of the
+READMEs of the installed packages into `.drago-project/assets.md`, so the lines to add to `assets/admin.js`,
+`admin.scss`, `front.js` and `front.scss` are in one place.
+
+After installing extensions, set up their database:
 
 ```bash
 php bin/project-setup
 ```
 
-The script first collects the `## Assets` sections of the READMEs of the installed packages into
-`.drago-project/assets.md`, so the lines to add to `assets/admin.js`, `admin.scss`, `front.js` and `front.scss`
-are in one place (written again on every run). Then it checks that [drago-ex/migration](https://github.com/drago-ex/migration) is installed, lists the installed
-packages with migrations (when there are none, it only says so), checks the database connection of `local/db.neon`
-and, when no configuration of the project registers the migration console, writes `app/Core/Console/console.neon`.
-Then it runs `php vendor/bin/migration db:migrate --packages`, which runs the migrations of the packages in their
+The script checks that [drago-ex/migration](https://github.com/drago-ex/migration) is installed, lists the installed
+packages with migrations (when there are none, it only says so), checks that the project has the migration console
+(`app/Core/Console/console.neon`, copied from drago-ex/migration by `drago-install`) and the database connection of
+`local/db.neon`. Then it runs `php vendor/bin/migration db:migrate --packages`, which runs the migrations of the packages in their
 order and the project's own `migrations/`. Running it again runs only the new migrations.
 With [drago-ex/project-auth](https://github.com/drago-ex/project-auth) and no administrator yet, it then asks for the
 name, email and password of the administrator account in the console (an empty name skips it) and creates it by
@@ -95,8 +97,10 @@ name, email and password of the administrator account in the console (an empty n
 [drago-ex/project-settings](https://github.com/drago-ex/project-settings) and no website name yet, it asks for the name
 and the description of the website the same way; both can be changed later in the administration.
 
-The commands of the installed packages run with `php vendor/bin/drago-commands`. Inside Docker, run the scripts as
-the web user (`docker compose exec -u www-data server php bin/project-setup`). What the tools did is in
+The commands of the installed packages run with `php vendor/bin/drago-commands`. `bin/project-setup` writes no files
+of the project, so with Docker it runs in the container as the web user
+(`docker compose exec -u www-data server php bin/project-setup`); Composer and `bin/project-assets` run where the
+project files are. What the tools did is in
 `.drago-project/`, shown by `vendor/bin/drago-report`.
 
 ## Useful Development Tools

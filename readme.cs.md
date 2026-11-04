@@ -76,17 +76,20 @@ s projektem a převezměte změny, které chcete. Podrobnosti najdete v
 
 ## Nastavení balíčků
 
-Po instalaci rozšíření spusťte:
+Po každém `composer install` a `composer update` složí `bin/project-assets` oddíly `## Assets` z README
+nainstalovaných balíčků do `.drago-project/assets.md`, takže řádky, které patří do `assets/admin.js`, `admin.scss`,
+`front.js` a `front.scss`, máte na jednom místě.
+
+Po instalaci rozšíření nastavte jejich databázi:
 
 ```bash
 php bin/project-setup
 ```
 
-Skript nejprve složí oddíly `## Assets` z README nainstalovaných balíčků do `.drago-project/assets.md`,
-takže řádky, které patří do `assets/admin.js`, `admin.scss`, `front.js` a `front.scss`, máte na jednom místě (při
-každém spuštění se zapíše znovu). Pak ověří, že je nainstalovaný [drago-ex/migration](https://github.com/drago-ex/migration), vypíše nainstalované
-balíčky s migracemi (když žádné nejsou, jen to oznámí), ověří připojení k databázi z `local/db.neon` a když konzoli
-migrací neregistruje žádná konfigurace projektu, vytvoří `app/Core/Console/console.neon`. Pak spustí
+Skript ověří, že je nainstalovaný [drago-ex/migration](https://github.com/drago-ex/migration), vypíše nainstalované
+balíčky s migracemi (když žádné nejsou, jen to oznámí), ověří, že projekt má konzoli migrací
+(`app/Core/Console/console.neon`, kterou z drago-ex/migration zkopíruje `drago-install`), a připojení k databázi
+z `local/db.neon`. Pak spustí
 `php vendor/bin/migration db:migrate --packages`, který spustí migrace balíčků v jejich pořadí a vlastní `migrations/`
 projektu. Opakované spuštění provede jen nové migrace.
 S [drago-ex/project-auth](https://github.com/drago-ex/project-auth) a zatím bez administrátora se pak v konzoli zeptá
@@ -95,8 +98,10 @@ na jméno, e-mail a heslo účtu administrátora (prázdné jméno krok přesko�
 [drago-ex/project-settings](https://github.com/drago-ex/project-settings) a zatím bez názvu webu se stejně zeptá na název
 a popis webu; obojí lze později změnit v administraci.
 
-Příkazy nainstalovaných balíčků se spouštějí přes `php vendor/bin/drago-commands`. V Dockeru spouštějte skripty jako
-webový uživatel (`docker compose exec -u www-data server php bin/project-setup`). Co nástroje udělaly, je
+Příkazy nainstalovaných balíčků se spouštějí přes `php vendor/bin/drago-commands`. `bin/project-setup` nezapisuje
+žádné soubory projektu, takže s Dockerem běží v kontejneru jako webový uživatel
+(`docker compose exec -u www-data server php bin/project-setup`); Composer a `bin/project-assets` běží tam, kde jsou
+soubory projektu. Co nástroje udělaly, je
 v `.drago-project/` a zobrazí to `vendor/bin/drago-report`.
 
 ## Užitečné nástroje pro vývoj

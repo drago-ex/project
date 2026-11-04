@@ -2,15 +2,14 @@
 <?php declare(strict_types=1);
 
 /**
- * Sets up the project by the installed packages: collects the Assets sections of their READMEs into
- * .drago-project/assets.md, runs their migrations (checks drago-ex/migration and the database connection of
- * local/db.neon, adds the console configuration of the migrations when the project has none), then asks for
- * the administrator (project-auth) and the website name (project-settings) while they are missing.
+ * Sets up the database of the installed packages: runs their migrations (checks drago-ex/migration, its console
+ * configuration and the database connection of local/db.neon), then asks for the administrator (project-auth) and
+ * the website name (project-settings) while they are missing. It writes no project files, so it runs in the Docker
+ * container too.
  */
 
 const ConsoleConfig = 'app/Core/Console/console.neon';
 const DbConfig = 'local/db.neon';
-const AssetsFile = '.drago-project/assets.md';
 
 $root = getcwd();
 $green = "\033[32m";
@@ -21,7 +20,7 @@ $reset = "\033[0m";
 
 if (in_array($argv[1] ?? '', ['-h', '--help'], true)) {
 	echo <<<'USAGE'
-		Set up the project by the installed packages: assets.md, migrations, administrator, website name.
+		Set up the database of the installed packages: migrations, administrator, website name.
 
 		Usage:
 		  php bin/project-setup
@@ -38,34 +37,6 @@ if ($root === false || !is_file($root . '/vendor/autoload.php')) {
 }
 
 require $root . '/vendor/autoload.php';
-
-// the assets of the installed packages in one file, from the "## Assets" sections of their READMEs
-$assets = [];
-foreach (Composer\InstalledVersions::getInstalledPackages() as $name) {
-	$path = Composer\InstalledVersions::getInstallPath($name);
-	if (!str_starts_with($name, 'drago-ex/') || $path === null || realpath($path) === realpath($root)) {
-		continue;
-	}
-
-	$readme = (string) @file_get_contents($path . '/readme.md'); // @ a package may have no readme
-	if (preg_match('~^## Assets\R(.*?)(?=^## |\z)~ms', str_replace("\r\n", "\n", $readme), $m)) {
-		$assets[$name] = trim($m[1]);
-	}
-}
-
-if ($assets !== []) {
-	ksort($assets);
-	$content = "# Assets of the installed packages\n\n"
-		. "Written by bin/project-setup from the Assets sections of the package READMEs. Add what the project uses to\n"
-		. "`assets/admin.js`, `admin.scss`, `front.js` and `front.scss`; the file is written again on every run.\n";
-	foreach ($assets as $name => $section) {
-		$content .= "\n## {$name}\n\n{$section}\n";
-	}
-
-	@mkdir(dirname($root . '/' . AssetsFile), 0o777, true); // @ the directory may exist
-	file_put_contents($root . '/' . AssetsFile, $content);
-	echo "{$green}OK " . AssetsFile . ': the assets of ' . implode(', ', array_keys($assets)) . "{$reset}\n";
-}
 
 // 1. the package that runs the migrations
 if (!Composer\InstalledVersions::isInstalled('drago-ex/migration')) {
@@ -86,7 +57,13 @@ $packages = array_unique(array_map(
 ));
 echo "{$blue}INFO Migrations of " . implode(', ', $packages) . "{$reset}\n";
 
-// 3. the database connection of local/db.neon
+// 3. the console configuration of the migrations, copied from drago-ex/migration by drago-install
+if (findMigrationConfig($root . '/app') === null) {
+	fwrite(STDERR, "{$red}ERROR: No configuration under app/ registers the migration console; drago-install copies it from drago-ex/migration as " . ConsoleConfig . ".{$reset}\n");
+	exit(1);
+}
+
+// 4. the database connection of local/db.neon
 if (!is_file($root . '/' . DbConfig)) {
 	fwrite(STDERR, "{$red}ERROR: " . DbConfig . " not found, it holds the database connection.{$reset}\n");
 	exit(1);
@@ -107,29 +84,8 @@ try {
 	exit(1);
 }
 
-// 4. the console configuration of the migrations, unless a configuration of the project registers it already
-if (findMigrationConfig($root . '/app') === null) {
-	@mkdir(dirname($root . '/' . ConsoleConfig), 0o777, true); // @ the directory may exist
-	file_put_contents($root . '/' . ConsoleConfig, <<<'NEON'
-		# Console commands of the migrations (vendor/bin/migration), written by bin/project-setup.
-		extensions:
-			migration: Drago\Migration\DI\MigrationExtension(%consoleMode%)
-			console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
-
-
-		console:
-			name: Symfony Console
-			version: '1.0'
-
-		NEON);
-
-	// the console runs in production mode, which keeps the found configuration files and the container in the cache
-	foreach (['_config.search', 'nette.configurator'] as $cache) {
-		deleteDir($root . '/temp/cache/' . $cache);
-	}
-
-	echo "{$green}OK " . ConsoleConfig . " created{$reset}\n";
-}
+// the console runs in production mode, which keeps the list of found configuration files in the cache
+deleteDir($root . '/temp/cache/_config.search');
 
 // 5. the migrations themselves
 echo "{$blue}INFO php vendor/bin/migration db:migrate --packages{$reset}\n";
