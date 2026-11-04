@@ -39,7 +39,9 @@ const packagesToInstall = readdirSync(vendorDir).filter(name => {
 	if (existsSync(pkgJsonPath)) {
 		try {
 			const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
-			return !!pkgJson.name && frontendEntryFields.some(field => hasFrontendEntry(pkgJson[field]));
+			// a library with scripts or styles, or a package that only brings npm dependencies (e.g. project-backend-ui)
+			const hasDependencies = Object.keys(pkgJson.dependencies ?? {}).length > 0;
+			return !!pkgJson.name && (hasDependencies || frontendEntryFields.some(field => hasFrontendEntry(pkgJson[field])));
 		} catch (e) {
 			return false;
 		}

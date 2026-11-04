@@ -60,9 +60,8 @@ Základní balíček můžete rozšířit o tyto připravené moduly:
 Každé rozšíření popisuje potřebnou konfiguraci projektu a kroky po instalaci ve svém README.
 Pro instalaci kompletní sestavy projektu najednou použijte preset, který potřebné nastavení provede automaticky:
 
-- [drago-ex/project-preset](https://github.com/drago-ex/project-preset): kompletní sestava bez oprávnění,
-- [drago-ex/project-preset-permission](https://github.com/drago-ex/project-preset-permission): přidá do ní oprávnění
-  (menu administrace podle privilegií, tlačítka pro zápis, role z databáze).
+- [drago-ex/project-preset](https://github.com/drago-ex/project-preset): kompletní sestava s oprávněními
+  (ACL balíčků, menu a tlačítka administrace podle privilegií, správa rolí).
 
 ### Jak rozšíření fungují
 
@@ -77,15 +76,28 @@ s projektem a převezměte změny, které chcete. Podrobnosti najdete v
 
 ## Nastavení balíčků
 
-Po instalaci rozšíření spusťte migrace a příkazy nainstalovaných balíčků (např. providery oprávnění):
+Po instalaci rozšíření spusťte:
 
 ```bash
-php vendor/bin/migration db:migrate --packages
-php vendor/bin/drago-commands
+php bin/project-setup
 ```
 
-V Dockeru je spouštějte jako webového uživatele (`docker compose exec -u www-data server php vendor/bin/...`).
-Co nástroje udělaly, je v `.drago-project/` a zobrazí to `vendor/bin/drago-report`.
+Skript nejprve složí oddíly `## Assets` z README nainstalovaných balíčků do `.drago-project/assets.md`,
+takže řádky, které patří do `assets/admin.js`, `admin.scss`, `front.js` a `front.scss`, máte na jednom místě (při
+každém spuštění se zapíše znovu). Pak ověří, že je nainstalovaný [drago-ex/migration](https://github.com/drago-ex/migration), vypíše nainstalované
+balíčky s migracemi (když žádné nejsou, jen to oznámí), ověří připojení k databázi z `local/db.neon` a když konzoli
+migrací neregistruje žádná konfigurace projektu, vytvoří `app/Core/Console/console.neon`. Pak spustí
+`php vendor/bin/migration db:migrate --packages`, který spustí migrace balíčků v jejich pořadí a vlastní `migrations/`
+projektu. Opakované spuštění provede jen nové migrace.
+S [drago-ex/project-auth](https://github.com/drago-ex/project-auth) a zatím bez administrátora se pak v konzoli zeptá
+na jméno, e-mail a heslo účtu administrátora (prázdné jméno krok přeskočí) a založí ho přes
+`vendor/bin/create-user --admin`, který e-mail i heslo zkontroluje. S
+[drago-ex/project-settings](https://github.com/drago-ex/project-settings) a zatím bez názvu webu se stejně zeptá na název
+a popis webu; obojí lze později změnit v administraci.
+
+Příkazy nainstalovaných balíčků se spouštějí přes `php vendor/bin/drago-commands`. V Dockeru spouštějte skripty jako
+webový uživatel (`docker compose exec -u www-data server php bin/project-setup`). Co nástroje udělaly, je
+v `.drago-project/` a zobrazí to `vendor/bin/drago-report`.
 
 ## Užitečné nástroje pro vývoj
 

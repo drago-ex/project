@@ -6,7 +6,7 @@
 /log/*
 !/log/.gitignore
 
-# files written for this environment (database connection, installation lock)
+# files written for this environment (database connection)
 /local/*
 !/local/.gitignore
 
