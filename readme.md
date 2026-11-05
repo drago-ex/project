@@ -1,6 +1,7 @@
 # Drago Project
 
-Base project skeleton for Drago Extension applications.
+Base project for Nette applications with Drago Extension: Bootstrap, Naja, Vite and Docker prepared, extended by
+ready-made feature packages.
 
 [![PHP version](https://badge.fury.io/ph/drago-ex%2Fproject.svg)](https://badge.fury.io/ph/drago-ex%2Fproject)
 [![Coding Style](https://github.com/drago-ex/project/actions/workflows/coding-style.yml/badge.svg)](https://github.com/drago-ex/project/actions/workflows/coding-style.yml)
@@ -8,12 +9,9 @@ Base project skeleton for Drago Extension applications.
 ## Requirements
 
 - PHP >= 8.3, < 9
-- Nette Framework
 - Composer
-- Docker
 - Node.js
-- Bootstrap
-- Naja
+- Docker
 
 ## Installation
 
@@ -21,89 +19,82 @@ Base project skeleton for Drago Extension applications.
 composer create-project drago-ex/project
 ```
 
-## Basic information
+```bash
+npm install
+npm run vite:build
+npm run docker:dev
+```
 
-Basic package for applications where Bootstrap, Vite, Docker and Naja are already prepared.
-You can find all commands in `package.json` like running Docker or Vite.
+`docker:dev` starts the server on `http://127.0.0.1:8080` and keeps copying your changes into the container.
+All commands (Docker, Vite) are in `package.json`.
 
-## Application structure
+## Application Structure
 
 - `app/Core` contains shared infrastructure and application services.
 - `app/Presentation` contains presenters, templates and feature modules.
 - `app/Presentation/Accessory` contains reusable presentation helpers and Latte widgets.
-- `local/` holds the Neon configuration of this environment that stays out of git, e.g. the database connection
+- `assets/` contains the entry points of Vite and the basic Naja extensions.
+- `local/` holds the configuration of this environment that stays out of git, e.g. the database connection
   in `local/db.neon`.
 
-## Basic Naja scripts
+## Naja Extensions
 
-- **ErrorsHandler** - Handles Naja AJAX errors by displaying user-friendly alert messages based on HTTP status codes. Shows a dismissible Bootstrap alert in the page element with ID `snippet--message`.
+- **ErrorsHandler** shows an alert with the HTTP error of a failed request in the element `snippet--message`.
+- **HyperlinkDisable** disables links with `data-link-disable` while a request runs.
+- **Spinner** shows a full-page spinner while requests run (needs `naja/spinner.scss`).
 
-- **HyperlinkDisable** - Temporarily disables links with the `data-link-disable` attribute during Naja requests to prevent multiple clicks. Re-enables the links once the request is complete.
+`assets/core/base.js` registers ErrorsHandler; register the others where you use them, e.g.
+`registerNajaExtensions(HyperlinkDisable, Spinner)` in an entry point.
 
-- **Spinner** - Displays a full-page spinner during active Naja AJAX requests. Shows the spinner when a request starts and hides it once all requests are complete.
+## Feature Packages
 
-`assets/core/base.js` registers only ErrorsHandler; register the others where you use them, e.g.
-`registerNajaExtensions(HyperlinkDisable, Spinner)` in an entry point (Spinner also needs `naja/spinner.scss`).
+Each package contains the base of one feature. [Project Tools](https://github.com/drago-ex/project-tools) copies
+its files into the project on `composer require`, where they become your own code to adapt. A later
+`composer update` does not overwrite them; `vendor/bin/drago-diff` shows what changed in a package.
 
-## Available Extensions
+Infrastructure:
+- [Docker Database](https://github.com/drago-ex/project-docker-db): MariaDB in Docker and the connection.
+- [Docker](https://github.com/drago-ex/project-docker): the PHP server image (installed with the project).
 
-Expand the base package with these ready-to-use modules:
-- [Docker Setup](https://github.com/drago-ex/project-docker)
-- [Database Layer](https://github.com/drago-ex/project-docker-db)
-- [User Management](https://github.com/drago-ex/project-user)
-- [Authentication](https://github.com/drago-ex/project-auth)
-- [Permissions (ACL)](https://github.com/drago-ex/project-permission)
-- [Backend Admin](https://github.com/drago-ex/project-backend)
-- [Backend UI](https://github.com/drago-ex/project-backend-ui)
-- [Application Settings](https://github.com/drago-ex/project-settings)
+Website and users:
+- [Front](https://github.com/drago-ex/project-front): the front module (installed with the project).
+- [Front UI](https://github.com/drago-ex/project-front-ui): the website layout and home page.
+- [User](https://github.com/drago-ex/project-user): the signed-in user in presenters and templates.
+- [Authentication](https://github.com/drago-ex/project-auth): sign-in, sign-up and password recovery.
+- [Account](https://github.com/drago-ex/project-account): the user's own account settings.
 
-Each extension documents its required project configuration and post-installation steps in its own README.
-To install the complete project stack at once, use a preset, which applies the required setup automatically:
+Administration:
+- [Backend](https://github.com/drago-ex/project-backend): the administration module.
+- [Backend UI](https://github.com/drago-ex/project-backend-ui): the administration layout and menu.
+- [Settings](https://github.com/drago-ex/project-settings): website name, description and other settings.
+- [Permissions](https://github.com/drago-ex/project-permission): users, roles and their permissions.
 
-- [drago-ex/project-preset](https://github.com/drago-ex/project-preset): the complete stack with permissions
-  (the ACL of the packages, the administration menu and buttons by privileges, the administration of roles).
+Content:
+- [Blog](https://github.com/drago-ex/project-blog): articles, categories and comments.
+- [Static Pages](https://github.com/drago-ex/project-static-page): pages with their own URL and menu item.
+- [Gallery](https://github.com/drago-ex/project-gallery): images for the content of articles and pages.
+- [Commerce](https://github.com/drago-ex/project-commerce): e-shop administration.
 
-### How extensions work
-
-Extensions are not libraries you call from your code. Each one contains only the essential base of one feature,
-and [Project Tools](https://github.com/drago-ex/project-tools) copies its files into your project, where they become
-your own code. Every project is different, so adapt the copied files to its needs.
-
-A later `composer update` does not overwrite files that already exist in the project, so your changes are never lost.
-This also means that a fix released in an extension does not reach your copies automatically: compare the package
-files with your project and take over the changes you want. See
-[The Idea Behind Drago Packages](https://github.com/drago-ex/project-tools#the-idea-behind-drago-packages) for details.
+[Project Preset](https://github.com/drago-ex/project-preset) installs the website and the administration with
+all of them except commerce, with assets ready for all packages.
 
 ## Package Setup
 
-After every `composer install` and `composer update`, `bin/project-assets` collects the `## Assets` sections of the
-READMEs of the installed packages into `.drago-project/assets.md`, so the lines to add to `assets/admin.js`,
-`admin.scss`, `front.js` and `front.scss` are in one place.
-
-After installing extensions, set up their database:
+After installing packages with a database, run the migrations:
 
 ```bash
-php bin/project-setup
+docker compose exec -u www-data server php bin/project-setup
 ```
 
-The script checks that [drago-ex/migration](https://github.com/drago-ex/migration) is installed, lists the installed
-packages with migrations (when there are none, it only says so), checks that the project has the migration console
-(`app/Core/Console/console.neon`, copied from drago-ex/migration by `drago-install`) and the database connection of
-`local/db.neon`. Then it runs `php vendor/bin/migration db:migrate --packages`, which runs the migrations of the packages in their
-order and the project's own `migrations/`. Running it again runs only the new migrations.
-With [drago-ex/project-auth](https://github.com/drago-ex/project-auth) and no administrator yet, it then asks for the
-name, email and password of the administrator account in the console (an empty name skips it) and creates it by
-`vendor/bin/create-user --admin`, which checks the email and the password. With
-[drago-ex/project-settings](https://github.com/drago-ex/project-settings) and no website name yet, it asks for the name
-and the description of the website the same way; both can be changed later in the administration.
+It runs the migrations of the installed packages and of the project's `migrations/` (only new ones on the next
+run). With project-auth and no administrator yet it asks for the administrator account, with project-settings and
+no website name yet for the name and the description of the website.
 
-The commands of the installed packages run with `php vendor/bin/drago-commands`. `bin/project-setup` writes no files
-of the project, so with Docker it runs in the container as the web user
-(`docker compose exec -u www-data server php bin/project-setup`); Composer and `bin/project-assets` run where the
-project files are. What the tools did is in
-`.drago-project/`, shown by `vendor/bin/drago-report`.
+After every `composer install` and `composer update`, `bin/project-assets` writes the `## Assets` sections of
+the installed packages into `.drago-project/assets.md`: the lines to add to `assets/admin.js`, `admin.scss`,
+`front.js` and `front.scss`.
 
-## Useful Development Tools
+## Development Tools
 
-- [Database Migrations](https://github.com/drago-ex/migration)
-- [Entity & DataForm Generator](https://github.com/drago-ex/generator)
+- [Migrations](https://github.com/drago-ex/migration)
+- [Entity Generator](https://github.com/drago-ex/generator)
