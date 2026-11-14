@@ -17,7 +17,10 @@
 - Error pages: `Error4xxPresenter` renders `Error4xx/<code>.latte` (or `4xx.latte`) inside `Error/@layout.latte`,
   a minimal layout of its own, so it does not depend on the layouts of the modules; `Error5xxPresenter` logs and
   prints `500.phtml`. In debug mode Tracy shows the error instead.
-- `assets/core/base.js` sets `window.naja`, initializes Naja and Nette forms and registers ErrorsHandler.
+- `assets/core/base.js` sets `window.naja`, initializes Naja and Nette forms and registers ErrorsHandler. It also
+  hides the LiveForm message of a field on every `input` event: LiveForm does it only on a keydown, so a pasted or
+  autofilled value kept its message until the blur, and that blur on the press of the submit button moved the button
+  from under the mouse (the click missed it).
 - `npm-loader.js` (npm `postinstall`) installs the packages of `vendor/drago-ex/*` that have a `package.json` with
   `name` and a script or style entry, or with `dependencies`. That is how project-backend-ui, project-front-ui,
   project-auth and project-account bring their npm dependencies; no package replaces the project's `package.json`.

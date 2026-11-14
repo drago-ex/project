@@ -29,6 +29,21 @@ LiveForm.setOptions({
 	wait: false
 });
 
+/*
+ * LiveForm hides the message of a field only on a keydown. A value pasted, chosen from the autofill of the browser
+ * or written by some phone keyboards fires none, so the message stayed until the blur, and the blur on the press of
+ * the submit button removed it, the button moved up from under the mouse and the click missed it. Any new value
+ * hides the message as typing does; the blur validates the field again.
+ */
+document.addEventListener('input', (event) => {
+	const id = event.target instanceof Element ? event.target.getAttribute('data-lfv-message-id') : null;
+	const messageEl = id ? document.getElementById(id) : null;
+	if (messageEl) {
+		messageEl.innerHTML = '';
+		messageEl.className = '';
+	}
+});
+
 /* Register Naja extensions */
 export function registerNajaExtensions(...extensions) {
 	extensions.forEach(Extension => {
