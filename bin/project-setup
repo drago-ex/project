@@ -59,7 +59,11 @@ echo "{$blue}INFO Migrations of " . implode(', ', $packages) . "{$reset}\n";
 
 // 3. the console configuration of the migrations, copied from drago-ex/migration by drago-install
 if (findMigrationConfig($root . '/app') === null) {
-	fwrite(STDERR, "{$red}ERROR: No configuration under app/ registers the migration console; drago-install copies it from drago-ex/migration as " . ConsoleConfig . ".{$reset}\n");
+	fwrite(
+		STDERR,
+		"{$red}ERROR: No configuration under app/ registers the migration console; drago-install copies it from"
+		. ' drago-ex/migration as ' . ConsoleConfig . ".{$reset}\n",
+	);
 	exit(1);
 }
 

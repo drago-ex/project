@@ -7,6 +7,7 @@
 	{* the remembered theme (auto = the theme of the system) before the page is drawn, so a dark page does not flash light *}
 	<script>try { let theme = localStorage.getItem('bootstrap-theme') || 'auto'; if (theme === 'auto') { theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } if (theme === 'light' || theme === 'dark') { document.documentElement.setAttribute('data-bs-theme', theme); } } catch (e) { }</script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="{$basePath}/favicon.svg" type="image/svg+xml">
 	<meta name="robots" content="noindex">
 	<title>{ifset title}{include title|stripHtml|trim}{/ifset}</title>
 	{asset 'error.js'}

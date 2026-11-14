@@ -63,7 +63,11 @@ foreach ($assets as $name => $section) {
 
 $file = $root . '/' . AssetsFile;
 if ((!is_dir(dirname($file)) && !@mkdir(dirname($file), 0o777, true)) || @file_put_contents($file, $content) === false) { // @ reported below
-	fwrite(STDERR, "{$red}ERROR: " . AssetsFile . " cannot be written; run the script where the project files belong to you, not in the Docker container.{$reset}\n");
+	fwrite(
+		STDERR,
+		"{$red}ERROR: " . AssetsFile . ' cannot be written; run the script where the project files belong to you,'
+		. ' not in the Docker container.' . "{$reset}\n",
+	);
 	exit(1);
 }
 
