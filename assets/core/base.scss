@@ -1,17 +1,9 @@
-@import 'bootstrap/scss/bootstrap';
+// Bootstrap in the theme of compostrap (its variables, Bootstrap itself, then the changes of its components)
+@import 'compostrap/src/scss/theme';
 
 //
 // base style
 //
-
-.errors {
-	background-color: var(--bs-danger);
-	color: var(--bs-white);
-	font-weight: 600;
-	list-style: none;
-	padding: 0.25rem 0.5rem;
-	border-radius: var(--bs-border-radius-sm);
-}
 
 .invalid-feedback {
 	display: block;

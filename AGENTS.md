@@ -6,7 +6,10 @@
 
 ## Layout
 - `app/`: `Bootstrap.php`, `app.neon`, `Presentation/Error` (error presenters). Feature packages add their files here.
-- `assets/`: `core/base.js` + `base.scss` and the basic Naja extensions in `naja/`.
+- `assets/`: `core/base.js` + `base.scss` and the basic Naja extensions in `naja/`. `base.scss` builds Bootstrap in the
+  theme of compostrap (`compostrap/src/scss/theme`), so every entry point (admin, website, sign-in, account) has it;
+  the errors of a form are an alert of the `@form` widget of drago-ex/form, not a style here. `naja/spinner.js` calls
+  `Spinner` of compostrap on the Naja events `start` and `complete`, `spinner.scss` imports its module.
 - `bin/project-setup`, `bin/project-assets`: setup scripts (below).
 - `npm-loader.js`, `package.json`, `vite.config.js`: frontend build.
 - `local/`: configuration of the environment outside git (`db.neon` from project-docker-db).

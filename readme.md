@@ -41,7 +41,8 @@ All commands (Docker, Vite) are in `package.json`.
 
 - **ErrorsHandler** shows an alert with the HTTP error of a failed request in the element `snippet--message`.
 - **HyperlinkDisable** disables links with `data-link-disable` while a request runs.
-- **Spinner** shows a full-page spinner while requests run (needs `naja/spinner.scss`).
+- **Spinner** shows a line at the top of the window while requests run: `Spinner` of
+  [compostrap](https://github.com/compostrap/compostrap) (needs `naja/spinner.scss`).
 
 `assets/core/base.js` registers ErrorsHandler; register the others where you use them, e.g.
 `registerNajaExtensions(HyperlinkDisable, Spinner)` in an entry point.

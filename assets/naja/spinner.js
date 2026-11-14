@@ -1,25 +1,11 @@
+import { Spinner as PageSpinner } from 'compostrap/spinner';
+
+/* The line at the top of the window while an AJAX request runs */
 export default class Spinner {
 	initialize(naja) {
-		let activeRequests = 0;
-		const el = document.createElement('div');
-		el.classList.add('spinner');
-		document.body.appendChild(el);
-		el.style.display = 'none';
+		const spinner = new PageSpinner();
 
-		// Show the spinner when a request starts
-		naja.addEventListener('start', () => {
-			if (activeRequests === 0) {
-				el.style.display = 'block';
-			}
-			activeRequests++;
-		});
-
-		// Hide the spinner when the last request completes
-		naja.addEventListener('complete', () => {
-			activeRequests--;
-			if (activeRequests === 0) {
-				el.style.display = 'none';
-			}
-		});
+		naja.addEventListener('start', () => spinner.show());
+		naja.addEventListener('complete', () => spinner.hide());
 	}
 }
