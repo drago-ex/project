@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" role="img" aria-label="Page not found">
+	<!-- soft background shape -->
+	<path style="fill: var(--cs-illustration-bg, #ededed)" d="M38 112c-14-30 4-66 38-78 26-9 44 4 70 0 28-4 54 6 62 32 9 30-6 62-36 74-28 11-52 2-78 6-26 4-44-6-56-34z"/>
+	<!-- shadow -->
+	<ellipse style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="120" cy="160" rx="70" ry="5"/>
+	<!-- browser window -->
+	<rect style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" x="52" y="40" width="124" height="96" rx="8" stroke-width="2.5"/>
+	<path style="stroke: var(--cs-illustration-line, #525252)" d="M52 58h124" stroke-width="2.5"/>
+	<circle style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="63" cy="49" r="3"/>
+	<circle style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="73" cy="49" r="3"/>
+	<circle style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="83" cy="49" r="3"/>
+	<!-- page skeleton with a broken part -->
+	<rect style="fill: var(--cs-illustration-muted, #d4d4d4)" x="66" y="72" width="54" height="7" rx="3.5"/>
+	<rect style="fill: var(--cs-illustration-muted, #d4d4d4)" x="66" y="87" width="38" height="7" rx="3.5"/>
+	<rect style="fill: var(--cs-illustration-muted, #d4d4d4)" x="66" y="102" width="46" height="7" rx="3.5"/>
+	<path style="stroke: var(--cs-illustration-muted, #d4d4d4)" d="M66 120h20m6 0h14" stroke-width="7" stroke-linecap="round" stroke-dasharray="0"/>
+	<!-- magnifier with a question mark -->
+	<circle style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-accent, #0089d7)" cx="150" cy="104" r="24" stroke-width="5"/>
+	<path style="stroke: var(--cs-illustration-accent, #0089d7)" d="M167 121l20 20" stroke-width="9" stroke-linecap="round"/>
+	<path style="stroke: var(--cs-illustration-line, #525252)" d="M143 97a7 7 0 1 1 10 6c-2 1-3 3-3 5v2" stroke-width="3.5" stroke-linecap="round"/>
+	<circle style="fill: var(--cs-illustration-line, #525252)" cx="150" cy="117" r="2.25"/>
+</svg>

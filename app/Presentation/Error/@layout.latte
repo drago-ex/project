@@ -1,13 +1,24 @@
-{* layout of the error pages (Error4xx); without it they were sent as a bare fragment without a charset *}
+{* layout of the error pages (Error4xx): the empty state of compostrap in the middle of the page (module empty, entry
+   error.js), no menu or navbar, so it does not depend on the layouts of the modules *}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	{* the remembered theme (auto = the theme of the system) before the page is drawn, so a dark page does not flash light *}
+	<script>try { let theme = localStorage.getItem('bootstrap-theme') || 'auto'; if (theme === 'auto') { theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } if (theme === 'light' || theme === 'dark') { document.documentElement.setAttribute('data-bs-theme', theme); } } catch (e) { }</script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="robots" content="noindex">
 	<title>{ifset title}{include title|stripHtml|trim}{/ifset}</title>
+	{asset 'error.js'}
 </head>
 <body>
-	{include content}
+	<main class="empty-page">
+		<div class="empty">
+			{include content}
+			<div class="empty-action">
+				<a href="{$basePath}/" class="btn btn-primary">Back to the home page</a>
+			</div>
+		</div>
+	</main>
 </body>
 </html>

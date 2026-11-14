@@ -1,8 +1,5 @@
 {block content}
-<h1 n:block="title">Page Not Found</h1>
-
-<p>The page you requested could not be found. It is possible that the address is
-	incorrect, or that the page no longer exists. Please use a search engine to find
-	what you are looking for.</p>
-
-<p><small>error 404</small></p>
+<div class="empty-img">{include '../illustrations/not-found.svg'}</div>
+<p class="empty-header">404</p>
+<h1 n:block="title" class="empty-title">Page not found</h1>
+<p class="empty-subtitle">The page you are looking for does not exist or has been moved.</p>

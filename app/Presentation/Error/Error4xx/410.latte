@@ -1,6 +1,5 @@
 {block content}
-<h1 n:block="title">Page Not Found</h1>
-
-<p>The page you requested has been taken off the site. We apologize for the inconvenience.</p>
-
-<p><small>error 410</small></p>
+<div class="empty-img">{include '../illustrations/not-found.svg'}</div>
+<p class="empty-header">410</p>
+<h1 n:block="title" class="empty-title">Page removed</h1>
+<p class="empty-subtitle">The page has been taken off the site and will not come back.</p>

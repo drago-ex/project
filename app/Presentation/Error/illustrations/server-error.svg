@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" role="img" aria-label="Server error">
+	<!-- soft background shape -->
+	<path style="fill: var(--cs-illustration-bg, #ededed)" d="M36 104c-8-32 16-60 48-70 26-8 42 6 66 2 30-4 56 10 58 40 2 34-24 60-56 66-26 5-46-4-70-2-24 2-40-10-46-36z"/>
+	<!-- shadow -->
+	<ellipse style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="116" cy="160" rx="66" ry="5"/>
+	<!-- server rack -->
+	<rect style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" x="64" y="40" width="96" height="34" rx="6" stroke-width="2.5"/>
+	<rect style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" x="64" y="82" width="96" height="34" rx="6" stroke-width="2.5"/>
+	<rect style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" x="64" y="124" width="96" height="34" rx="6" stroke-width="2.5"/>
+	<rect style="fill: var(--cs-illustration-muted, #d4d4d4)" x="76" y="53" width="40" height="8" rx="4"/>
+	<rect style="fill: var(--cs-illustration-muted, #d4d4d4)" x="76" y="95" width="40" height="8" rx="4"/>
+	<rect style="fill: var(--cs-illustration-muted, #d4d4d4)" x="76" y="137" width="40" height="8" rx="4"/>
+	<circle style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="146" cy="57" r="4"/>
+	<circle style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="146" cy="141" r="4"/>
+	<!-- the failing unit -->
+	<circle style="fill: var(--cs-illustration-danger, #e5484d)" cx="146" cy="99" r="4"/>
+	<!-- warning sign -->
+	<path style="fill: var(--cs-illustration-accent, #0089d7)" d="M176 66a6 6 0 0 1 10.4 0l22 38a6 6 0 0 1-5.2 9h-44a6 6 0 0 1-5.2-9z"/>
+	<path style="stroke: var(--cs-illustration-surface, #fff)" d="M181.2 80v14" stroke-width="5" stroke-linecap="round"/>
+	<circle style="fill: var(--cs-illustration-surface, #fff)" cx="181.2" cy="103" r="3"/>
+</svg>

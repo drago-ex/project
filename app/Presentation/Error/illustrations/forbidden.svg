@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" role="img" aria-label="Access denied">
+	<!-- soft background shape -->
+	<path style="fill: var(--cs-illustration-bg, #ededed)" d="M44 96c-6-34 22-62 56-66 22-3 34 8 58 6 28-2 50 14 52 42 2 32-20 58-52 66-26 7-44-2-68 0-28 2-40-18-46-48z"/>
+	<!-- shadow -->
+	<ellipse style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="120" cy="160" rx="62" ry="5"/>
+	<!-- door -->
+	<rect style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" x="70" y="34" width="68" height="124" rx="6" stroke-width="2.5"/>
+	<rect style="fill: var(--cs-illustration-muted, #d4d4d4)" x="82" y="48" width="44" height="34" rx="4"/>
+	<rect style="fill: var(--cs-illustration-muted, #d4d4d4)" x="82" y="92" width="44" height="52" rx="4"/>
+	<circle style="fill: var(--cs-illustration-line, #525252)" cx="128" cy="100" r="3"/>
+	<!-- padlock -->
+	<path style="stroke: var(--cs-illustration-line, #525252)" d="M146 98v-12a16 16 0 0 1 32 0v12" stroke-width="5" stroke-linecap="round"/>
+	<rect style="fill: var(--cs-illustration-accent, #0089d7)" x="136" y="96" width="52" height="42" rx="8"/>
+	<circle style="fill: var(--cs-illustration-surface, #fff)" cx="162" cy="113" r="5"/>
+	<path style="stroke: var(--cs-illustration-surface, #fff)" d="M162 116v9" stroke-width="4" stroke-linecap="round"/>
+</svg>

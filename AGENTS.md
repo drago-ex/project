@@ -18,8 +18,14 @@
 
 ## Key Parts
 - Error pages: `Error4xxPresenter` renders `Error4xx/<code>.latte` (or `4xx.latte`) inside `Error/@layout.latte`,
-  a minimal layout of its own, so it does not depend on the layouts of the modules; `Error5xxPresenter` logs and
-  prints `500.phtml`. In debug mode Tracy shows the error instead.
+  a layout of its own, so it does not depend on the layouts of the modules: the empty state of compostrap (module
+  `empty`, entry `assets/error.js` + `error.scss`) with an illustration, the code, a title (the `<h1>`), a sentence
+  and a link to the home page; a head script sets the remembered theme. The illustrations are copies of
+  `compostrap/src/illustrations` in `Error/illustrations/*.svg`, inlined by `{include}` (Latte) or `readfile()`, so
+  they take the colors of the theme. `Error5xxPresenter` logs and prints `500.phtml`; it and `503.phtml`
+  (maintenance) depend on nothing (no Latte, no built assets: the error may come after a part of a page was sent)
+  and carry their styles inline in the look of the empty state, light or dark by `prefers-color-scheme`. In debug
+  mode Tracy shows the error instead.
 - `assets/core/base.js` sets `window.naja`, initializes Naja and Nette forms and registers ErrorsHandler. It also
   hides the LiveForm message of a field on every `input` event: LiveForm does it only on a keydown, so a pasted or
   autofilled value kept its message until the blur, and that blur on the press of the submit button moved the button

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" role="img" aria-label="No items">
+	<!-- soft background shape -->
+	<path style="fill: var(--cs-illustration-bg, #ededed)" d="M42 98c-6-32 20-58 52-64 24-5 40 6 62 4 28-3 50 12 52 38 2 30-20 56-50 62-26 5-44-4-68-2-26 2-42-10-48-38z"/>
+	<!-- shadow -->
+	<ellipse style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="120" cy="158" rx="64" ry="5"/>
+	<!-- open box -->
+	<path style="fill: var(--cs-illustration-muted, #d4d4d4)" d="M72 84l48-18 48 18-48 18z"/>
+	<path style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" stroke-width="2.5" stroke-linejoin="round" d="M72 84v52l48 18V102z"/>
+	<path style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" stroke-width="2.5" stroke-linejoin="round" d="M168 84v52l-48 18V102z"/>
+	<!-- flaps -->
+	<path style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" stroke-width="2.5" stroke-linejoin="round" d="M72 84l-14 18 48 18 14-18z"/>
+	<path style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" stroke-width="2.5" stroke-linejoin="round" d="M168 84l14 18-48 18-14-18z"/>
+	<!-- sparkles of emptiness -->
+	<path style="stroke: var(--cs-illustration-accent, #0089d7)" d="M120 36v14M113 43h14M86 52v8M82 56h8M156 50v10M151 55h10" stroke-width="3" stroke-linecap="round"/>
+</svg>

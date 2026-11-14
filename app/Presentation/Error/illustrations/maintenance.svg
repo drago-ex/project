@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" fill="none" role="img" aria-label="Maintenance">
+	<!-- soft background shape -->
+	<path style="fill: var(--cs-illustration-bg, #ededed)" d="M40 100c-6-34 20-62 54-68 24-4 38 8 62 4 28-4 52 12 54 40 2 32-22 60-54 64-26 4-44-4-68-2-26 2-42-12-48-38z"/>
+	<!-- shadow -->
+	<ellipse style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="120" cy="160" rx="68" ry="5"/>
+	<!-- big gear -->
+	<path style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" stroke-width="2.5" stroke-linejoin="round" d="M106 52h16l3 12 9 4 11-6 11 11-6 11 4 9 12 3v16l-12 3-4 9 6 11-11 11-11-6-9 4-3 12h-16l-3-12-9-4-11 6-11-11 6-11-4-9-12-3V96l12-3 4-9-6-11 11-11 11 6 9-4z"/>
+	<circle style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="114" cy="104" r="16"/>
+	<!-- wrench -->
+	<path style="fill: var(--cs-illustration-accent, #0089d7)" d="M190 44a20 20 0 0 0-26 25l-46 46a7 7 0 0 0 10 10l46-46a20 20 0 0 0 25-26l-11 11-10-2-2-10z"/>
+	<!-- small gear -->
+	<path style="fill: var(--cs-illustration-surface, #fff); stroke: var(--cs-illustration-line, #525252)" stroke-width="2.5" stroke-linejoin="round" d="M170 112h8l1.5 6 4.5 2 5.5-3 5.5 5.5-3 5.5 2 4.5 6 1.5v8l-6 1.5-2 4.5 3 5.5-5.5 5.5-5.5-3-4.5 2-1.5 6h-8l-1.5-6-4.5-2-5.5 3-5.5-5.5 3-5.5-2-4.5-6-1.5v-8l6-1.5 2-4.5-3-5.5 5.5-5.5 5.5 3 4.5-2z"/>
+	<circle style="fill: var(--cs-illustration-muted, #d4d4d4)" cx="174" cy="138" r="7"/>
+</svg>

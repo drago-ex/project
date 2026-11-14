@@ -1,8 +1,7 @@
 {templateType App\Presentation\Error\Error4xx\Error4xxTemplate}
 
 {block content}
-<h1 n:block="title">Oops...</h1>
-
-<p>Your browser sent a request that this server could not understand or process.</p>
-
-<p><small>error {$httpCode}</small></p>
+<div class="empty-img">{include '../illustrations/empty.svg'}</div>
+<p class="empty-header">{$httpCode}</p>
+<h1 n:block="title" class="empty-title">Something is not right</h1>
+<p class="empty-subtitle">Your browser sent a request that this server could not understand or process.</p>
