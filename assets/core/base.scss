@@ -1,5 +1,7 @@
 // Bootstrap in the theme of compostrap (its variables, Bootstrap itself, then the changes of its components)
 @import 'compostrap/src/scss/theme';
+// every layout shows the flash messages as toasts (@toast of drago-ex/application) and may open a modal
+@import 'compostrap/src/scss/dialogs';
 
 //
 // base style
