@@ -39,16 +39,22 @@
   and fails when it cannot write. It runs on the host: in the Docker image `app/` and `.drago-project/` belong to
   root and `compose watch` copies only host → container. Netis removes it from the scripts.
 - `bin/project-setup` sets up the database and writes no project files (it only clears
-  `temp/cache/_config.search`). It checks drago-ex/migration, lists the packages with migrations by
+  `temp/cache/_config.search`). Without drago-ex/migration (every package with migrations requires it, so a bare
+  project with front or backend has none) it prints "Nothing to migrate" and ends, like when no installed package
+  has migrations. It lists the packages with migrations by
   `Drago\Migration\MigrationFiles::forProject()` (order and `migrations/` discovery belong to drago-ex/migration),
   checks the connection of the `dibi` section of `local/db.neon`, requires a neon under `app/` registering
   `MigrationExtension` (`app/Core/Console/console.neon`, copied from drago-ex/migration), then runs
   `vendor/bin/migration db:migrate --packages`. With drago-ex/project-auth and no `admin` in `user_roles` it asks
   for the administrator (an empty name skips; it asks again when `vendor/bin/create-user --admin` rejects the
   input; without a terminal it only prints the command). With drago-ex/project-settings and no `website` row it asks
-  for the name and the description and inserts both rows. A failed connection is reported as not available,
+  for the name and the description and inserts both rows (the settings form shows only existing rows, so this is
+  where they come from; without a terminal it says to run it in one). A failed connection is reported as not available,
   without guessing where the database runs.
 - project-setup must not edit layouts, assets or configs by the package READMEs; the user adds those lines.
+- `phpstan.neon` ignores `trait.unused`: feature packages ship traits for the presenters of the project
+  (`RequireLogged` of project-auth) that nothing may use yet, e.g. with project-auth alone; `reportUnmatched: false`,
+  because with project-account the trait is used and an unmatched ignore would be an error.
 
 ## README
 "Feature Packages" lists every `project-*` package (not the dropped project-install). Update it when a feature

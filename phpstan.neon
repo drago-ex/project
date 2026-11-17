@@ -3,3 +3,10 @@ parameters:
 	level: 8
 	paths:
 		- app
+
+	# feature packages ship traits for your presenters (e.g. RequireLogged of project-auth) that may be unused yet;
+	# not reported when every trait is used
+	ignoreErrors:
+		-
+			identifier: trait.unused
+			reportUnmatched: false

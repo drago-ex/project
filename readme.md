@@ -81,7 +81,8 @@ all of them except commerce, with assets ready for all packages.
 
 ## Package Setup
 
-After installing packages with a database, run the migrations:
+After installing packages with a database, run their migrations and fill in what they need. Each package describes
+these steps by hand in its README; `bin/project-setup` does them for you:
 
 ```bash
 docker compose exec -u www-data server php bin/project-setup

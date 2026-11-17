@@ -38,9 +38,9 @@ if ($root === false || !is_file($root . '/vendor/autoload.php')) {
 
 require $root . '/vendor/autoload.php';
 
-// 1. the package that runs the migrations
+// 1. the package that runs the migrations; every package with migrations requires it, so without it there are none
 if (!Composer\InstalledVersions::isInstalled('drago-ex/migration')) {
-	echo "{$yellow}drago-ex/migration is not installed, so no migrations can run. Install it: composer require drago-ex/migration{$reset}\n";
+	echo "{$green}Nothing to migrate: no installed package has migrations.{$reset}\n";
 	exit(0);
 }
 
@@ -136,7 +136,8 @@ if (Composer\InstalledVersions::isInstalled('drago-ex/project-settings')) {
 		echo "{$green}OK The website name is set.{$reset}\n";
 
 	} elseif (!stream_isatty(STDIN)) {
-		echo "{$yellow}No website name; set it in the administration (Settings).{$reset}\n";
+		// the settings form shows only existing rows, so the name cannot be set in the administration yet
+		echo "{$yellow}No website name; run bin/project-setup in a terminal to set it.{$reset}\n";
 
 	} else {
 		echo "{$blue}INFO The website (leave the name empty to skip){$reset}\n";
